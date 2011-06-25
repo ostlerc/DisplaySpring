@@ -31,34 +31,38 @@ namespace GMA.Menus
         /// Amount of time in milliseconds the menu will fade from StartAlpha to EndAlpha
         /// </summary>
         public const float FadeTime = 750;
-        protected bool m_stayAlive = false;
-        protected bool m_keepState = true;
-        protected int m_framesRun = 0;
-        protected int m_framesToActivate = 10;
-        protected float m_startAlpha = 0;
+        internal bool m_stayAlive = false;
+        internal bool m_keepState = true;
+        internal int m_framesRun = 0;
+        internal int m_framesToActivate = 10;
+        internal float m_startAlpha = 0;
         private MenuFrame m_baseFrame;
+
+        /// <summary>
+        /// The main frame of the menu that spans the boudns of the menu.
+        /// </summary>
         public MenuFrame BaseFrame
         {
             get { return m_baseFrame; }
         }
-        protected MenuAction m_cancelMenu;
+        internal MenuAction m_cancelMenu;
         internal static GraphicsDevice m_graphicsDevice;
 
         /// <summary>
         /// List of controllers the menu uses for input
         /// </summary>
-        protected MultiController m_controllers;
+        internal MultiController m_controllers;
         /// <summary>
         /// List of sprites to draw for the background. These are static
         /// images, no interactions or animations. Draws in order given in list
         /// </summary>
-        protected List<Sprite> m_bgs;
-        protected SoundEffect m_closeSound;
+        internal List<Sprite> m_bgs;
+        internal SoundEffect m_closeSound;
         /// <summary>
         /// Represents the middle position of the menu 
         /// </summary>
-        protected Vector2 m_position;
-        protected Rectangle m_bounds;
+        internal Vector2 m_position;
+        internal Rectangle m_bounds;
         internal AnimHelper m_alpha;
         private bool m_isAlive = true;
         private Menu m_activeSubMenu;
@@ -79,7 +83,8 @@ namespace GMA.Menus
             get { return m_graphicsDevice; }
         }
         /// <summary>
-        /// Property that tells menu to keep it's state when an active sub menu is given priority if true
+        /// If true the menu will skip Reset() between sub menu calls
+        /// Default true
         /// </summary>
         public bool KeepState
         {
@@ -109,7 +114,8 @@ namespace GMA.Menus
             }
         }
         /// <summary>
-        /// If this is null, this is active. Otherwise another menu will get all the updates
+        /// The sub menu to recieve updates.
+        /// When there is a sub menu, the parent menu will not recieve updates
         /// </summary>
         protected virtual Menu ActiveSubMenu
         {
@@ -294,7 +300,7 @@ namespace GMA.Menus
 
         /// <summary>
         /// Exits the given menu.
-        /// Does nothing if StayAlive is false
+        /// Does nothing if StayAlive is true
         /// </summary>
         public virtual void Close()
         {
@@ -310,7 +316,7 @@ namespace GMA.Menus
         }
 
         /// <summary>
-        /// Draws menu onto spriteBatch
+        /// Draws the menu
         /// </summary>
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {

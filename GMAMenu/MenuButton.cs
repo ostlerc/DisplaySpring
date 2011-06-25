@@ -21,12 +21,20 @@ namespace GMA.Menus
         protected float m_textureHeight;
         protected float m_textureWidth;
 
+        /// <summary>
+        /// The focus background of the button.
+        /// This texture is shown when the item has focus
+        /// </summary>
         public Texture2D FocusTexture
         {
             get { return m_focused; }
             set { m_focused = value; }
         }
 
+        /// <summary>
+        /// The main background of the button.
+        /// This texture is shown when the item does not have focus
+        /// </summary>
         public Texture2D Background
         {
             get { return m_bg; }
@@ -45,6 +53,7 @@ namespace GMA.Menus
 
         /// <summary>
         /// Gets the scaled height of the object
+        /// Layout space is not included
         /// </summary>
         public override float MeasureHeight 
         { 
@@ -59,6 +68,7 @@ namespace GMA.Menus
 
         /// <summary>
         /// Gets the scaled StaticWidth of the object
+        /// Layout space is not included
         /// </summary>
         public override float  MeasureWidth
         { 

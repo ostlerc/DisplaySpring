@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Audio;
-
-namespace GMA.Menus
+﻿namespace GMA.Menus
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Audio;
+
+    using VAlign = MenuItem.VerticalAlignmentType;
+    using HAlign = MenuItem.HorizontalAlignmentType;
+    using Layout = MenuFrame.LayoutType;
     /// <summary>
     /// A menuItem is any sub menu area that needs to interact with other menu parts. All menuitems are shown in one menu
     /// MenuItem types so far are TextMenuItem, BoxMenuItem and VideoMenuItem
@@ -15,23 +18,61 @@ namespace GMA.Menus
     public abstract class MenuItem
     {
         #region Member variables
+
+        /// <summary>
+        /// Horizontal alignment types
+        /// </summary>
         public enum HorizontalAlignmentType
         {
+            /// <summary>
+            /// Left align
+            /// </summary>
             Left,
+
+            /// <summary>
+            /// Right align
+            /// </summary>
             Right,
+
+            /// <summary>
+            /// Center align
+            /// </summary>
             Center,
+
+            /// <summary>
+            /// Stretch contents Width to fit in given space
+            /// </summary>
             Stretch
         };
+
+        /// <summary>
+        /// Vertical alignment types
+        /// </summary>
         public enum VerticalAlignmentType
         {
+            /// <summary>
+            /// Top align
+            /// </summary>
             Top,
+
+            /// <summary>
+            /// Bottom align
+            /// </summary>
             Bottom,
+
+            /// <summary>
+            /// Center align
+            /// </summary>
             Center,
+
+            /// <summary>
+            /// Stretch contents Height to fit in given space
+            /// </summary>
             Stretch
         };
         private uint m_layoutStretch = 1;
-        private HorizontalAlignmentType m_horizontalAlignment = HorizontalAlignmentType.Center;
-        private VerticalAlignmentType m_verticalAlignment = VerticalAlignmentType.Center;
+        private HorizontalAlignmentType m_horizontalAlignment = HAlign.Center;
+        private VerticalAlignmentType m_verticalAlignment = VAlign.Center;
 
         public static SoundEffect DefaultSelectSound;
         public static SoundEffect DefaultCancelSound;
@@ -124,6 +165,7 @@ namespace GMA.Menus
 
         /// <summary>
         /// This delegate is called when the MenuItem with Focus receives a button press of 'Back'
+        /// ('Back' is also known as 'Select')
         /// </summary>
         public MenuAction OnBack;
 
@@ -148,8 +190,9 @@ namespace GMA.Menus
         private Color debug_color = Color.White;
 
         /// <summary>
-        /// A debug only functionality. Shows a rectangle around the object. Helpful for
-        /// understanding layouts and easily showing width and height of items
+        /// A debug only functionality. Shows a rectangle around the objects different sizes. 
+        /// Useful for understanding layouts and easily showing width and height of items
+        /// Only available in debug mode, put #if DEBUG blocks around Debug calls
         /// </summary>
         public void Debug(Color c, int thickness)
         {
@@ -182,6 +225,11 @@ namespace GMA.Menus
             forceRefresh();
         }
 
+        /// <summary>
+        /// Will force a refresh on this item.
+        /// If it has a parent, the parent will
+        /// be refreshed as well
+        /// </summary>
         protected void forceRefresh()
         {
             if(Parent != null)
@@ -197,7 +245,7 @@ namespace GMA.Menus
         private MenuItem m_parent;
 
         /// <summary>
-        /// Parent item of the object. The highest parent will always be the Menu the MenuItem is in.
+        /// Parent item of the object. The highest parent will always be the BaseFrame of the Menu.
         /// </summary>
         public MenuItem Parent
         {
@@ -249,7 +297,7 @@ namespace GMA.Menus
             get { return m_horizontalAlignment; } 
             set 
             {
-                if (m_horizontalAlignment == HorizontalAlignmentType.Stretch)
+                if (m_horizontalAlignment == HAlign.Stretch)
                     m_scale.X = 1f;
 
                 m_horizontalAlignment = value;
@@ -348,6 +396,7 @@ namespace GMA.Menus
 
         /// <summary>
         /// Toggles the fading behavior of the MenuItem. If set to true the item will fade in
+        /// Default is true
         /// </summary>
         public bool Fade
         {
@@ -363,8 +412,16 @@ namespace GMA.Menus
 
         /// <summary>
         /// Scale of the object
+        /// Default of 1
         /// </summary>
-        public virtual Vector2 Scale { get { return m_scale; } set { m_scale = value; } }
+        public virtual Vector2 Scale 
+        { 
+            get { return m_scale; } 
+            set 
+            {
+                m_scale = value;
+            }
+        }
 
         /// <summary>
         /// Rotation of the object in radians
@@ -379,7 +436,7 @@ namespace GMA.Menus
         /// <summary>
         /// Position of the object. Default is Vector2.Zero, which is center based.
         /// </summary>
-        public virtual Vector2 Position { get { return m_pos; } set { m_pos = value; } }
+        public virtual Vector2 Position { get { return m_pos; } set { m_pos = value;  } }
 
         /// <summary>
         /// Animation type of the item
@@ -753,26 +810,26 @@ namespace GMA.Menus
 #endif
             switch (HorizontalAlignment)
             {
-                case HorizontalAlignmentType.Left:
+                case HAlign.Left:
                     pos.X += (StaticWidth - Width) / 2;
                     break;
-                case HorizontalAlignmentType.Right:
+                case HAlign.Right:
                     pos.X += (Width - StaticWidth) / 2;
                     break;
-                case HorizontalAlignmentType.Stretch:
+                case HAlign.Stretch:
                     ScaleImageToWidth(Width);
                     break;
             }
 
             switch (VerticalAlignment)
             {
-                case VerticalAlignmentType.Top:
+                case VAlign.Top:
                     pos.Y += (StaticHeight - Height) / 2;
                     break;
-                case VerticalAlignmentType.Bottom:
+                case VAlign.Bottom:
                     pos.Y += (Height - StaticHeight) / 2;
                     break;
-                case VerticalAlignmentType.Stretch:
+                case VAlign.Stretch:
                     ScaleImageToHeight(Height);
                     break;
             }
