@@ -91,7 +91,7 @@ namespace GMA.Menus
         /// If true the menu will skip Reset() between sub menu calls
         /// Default true
         /// </summary>
-        public bool KeepState
+        public virtual bool KeepState
         {
             get { return m_keepState; }
             set { m_keepState = value; }
@@ -99,7 +99,7 @@ namespace GMA.Menus
         /// <summary>
         /// If set to true, menu will not close/die 
         /// </summary>
-        public bool StayAlive
+        public virtual bool StayAlive
         {
             get { return m_stayAlive; }
             set { m_stayAlive = value; }
@@ -150,7 +150,7 @@ namespace GMA.Menus
         /// <summary>
         /// When Fade is set to true, this is the starting alpha value
         /// </summary>
-        public float StartAlpha
+        public virtual float StartAlpha
         {
             get { return m_alpha.StartVal; }
             set { m_alpha.StartVal = value; }
@@ -158,7 +158,7 @@ namespace GMA.Menus
         /// <summary>
         /// When Fade is set to true, this is the ending alpha value
         /// </summary>
-        public float EndAlpha
+        public virtual float EndAlpha
         {
             get { return m_alpha.EndVal; }
             set { m_alpha.EndVal = value; }
@@ -354,6 +354,25 @@ namespace GMA.Menus
         {
             if (action != null)
                 action();
+        }
+
+        /// <summary>
+        /// Adds a background sprite to the menu.
+        /// Backgrounds are special in that they recieve no
+        /// updates, and are faded in by the menus fade
+        /// </summary>
+        /// <param name="background"></param>
+        public virtual void AddBackground(Sprite background)
+        {
+            m_bgs.Add(background);
+        }
+
+        /// <summary>
+        /// Clear all background sprites for this Menu
+        /// </summary>
+        public virtual void ClearBackgrounds()
+        {
+            m_bgs.Clear();
         }
 
         /// <summary>
