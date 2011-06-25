@@ -163,19 +163,27 @@ namespace GMA.Menus
             if (m_rectSize != null)
             {
                 Children.Remove(m_rectSize);
+            }
+            if(m_rectStaticSize != null)
+            {
                 Children.Remove(m_rectStaticSize);
+            }
+            if(m_rectCenter != null)
+            {
                 Children.Remove(m_rectCenter);
             }
 
-            if(Parent != null)
-                Parent.refreshItem();
-            else
-                refreshItem();
+            forceRefresh();
 
             m_rectSize = new MenuButton(ScrollBar.CreateRectangleBorder((int)Width, (int)Height, debug_thickness, debug_color), this) { Scale = Vector2.One / Scale };
             m_rectStaticSize = new MenuButton(ScrollBar.CreateRectangleBorder((int)MeasureWidth, (int)MeasureHeight, debug_thickness, debug_color), this) { Scale = Vector2.One / Scale };
             m_rectCenter = new MenuButton(ScrollBar.CreateFilledRectangle((int)5, (int)5, Color.White), this) { Scale = Vector2.One / Scale };
 
+            forceRefresh();
+        }
+
+        protected void forceRefresh()
+        {
             if(Parent != null)
                 Parent.refreshItem();
             else
@@ -228,10 +236,7 @@ namespace GMA.Menus
             { 
                 m_layoutStretch = value;
 
-                if(Parent != null)
-                    Parent.refreshItem();
-                else
-                    refreshItem();
+                forceRefresh();
             }
         }
 
@@ -250,10 +255,6 @@ namespace GMA.Menus
                 m_horizontalAlignment = value;
 
                 Width = MeasureWidth;
-                if (Parent != null)
-                    Parent.refreshItem();
-                else
-                    refreshItem();
             }
         }
 
@@ -272,10 +273,6 @@ namespace GMA.Menus
                 m_verticalAlignment = value;
 
                 Height = MeasureHeight;
-                if (Parent != null)
-                    Parent.refreshItem();
-                else
-                    refreshItem();
             }
         }
 
@@ -398,6 +395,7 @@ namespace GMA.Menus
             set 
             {
                 m_height = value;
+                forceRefresh();
             } 
         }
 
@@ -410,6 +408,7 @@ namespace GMA.Menus
             set 
             { 
                 m_width = value;
+                forceRefresh();
             } 
         }
 
@@ -569,12 +568,12 @@ namespace GMA.Menus
             if(Menu.Font == null)
                 throw new Exception("Error: Cannot construct a menu item without calling Menu.LoadContent()");
 
+            m_menuItemCollection = new MenuItemCollection(this);
             Position = Vector2.Zero;
             m_activateSound = DefaultSelectSound;
             m_cancelSound = DefaultCancelSound;
             m_focusSound = DefaultFocusSound;
             m_alpha = new AnimHelper(0, 1, Menu.FadeTime);
-            m_menuItemCollection = new MenuItemCollection(this);
             Parent = parent;
         }
         #endregion
@@ -741,13 +740,12 @@ namespace GMA.Menus
             foreach (var v in Children)
                 v.refreshItem();
 
-             //TODO: fix with new width and height
             if ((Width == 0 && Height == 0) || Parent == null)
                 return;
 
             Vector2 pos = Position;
 #if DEBUG
-            if (m_rectSize != null)
+            if (m_rectSize != null && m_rectCenter != null)
             {
                 m_rectSize.Position = Position;
                 m_rectCenter.Position = Position;
@@ -755,26 +753,19 @@ namespace GMA.Menus
 #endif
             switch (HorizontalAlignment)
             {
-                case HorizontalAlignmentType.Center:
-                    break;
-
                 case HorizontalAlignmentType.Left:
                     pos.X += (StaticWidth - Width) / 2;
                     break;
-
                 case HorizontalAlignmentType.Right:
                     pos.X += (Width - StaticWidth) / 2;
                     break;
                 case HorizontalAlignmentType.Stretch:
                     ScaleImageToWidth(Width);
-                    goto case HorizontalAlignmentType.Center; //icky goto :(
+                    break;
             }
 
             switch (VerticalAlignment)
             {
-                case VerticalAlignmentType.Center:
-                    pos.Y += 0;
-                    break;
                 case VerticalAlignmentType.Top:
                     pos.Y += (StaticHeight - Height) / 2;
                     break;
@@ -783,11 +774,11 @@ namespace GMA.Menus
                     break;
                 case VerticalAlignmentType.Stretch:
                     ScaleImageToHeight(Height);
-                    goto case VerticalAlignmentType.Center; //icky goto :(
+                    break;
             }
 
 #if DEBUG
-            if (m_rectSize != null)
+            if (m_rectSize != null && m_rectCenter != null)
             {
                 m_rectSize.Position = Position - pos;
                 m_rectCenter.Position = Position - pos;

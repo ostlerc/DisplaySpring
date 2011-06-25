@@ -28,13 +28,14 @@ namespace GMA.Menus
             { 
                 m_layout = value;
 
-                if(Parent != null)
-                    Parent.refreshItem();
-                else
-                    refreshItem();
+                forceRefresh();
             }
         }
 
+        /// <summary>
+        /// The layout type represents how the items will be
+        /// organized in the space the frame has.
+        /// </summary>
         public enum LayoutType
         {
             None,
@@ -82,6 +83,34 @@ namespace GMA.Menus
         }
 
         /// <summary>
+        /// Set the size of a frame. This is helpful for not needing
+        /// to use all of the available space given from the parent.
+        /// </summary>
+        public void SetSize(Vector2 size)
+        {
+            Width = size.X;
+            Height = size.Y;
+        }
+
+        /// <summary>
+        /// Position of the object. Default is Vector2.Zero, which is center based.
+        /// </summary>
+        public virtual Vector2 Position 
+        { 
+            get { return base.Position; } 
+            set
+            {
+                base.Position = value;
+
+                //This stops the frame from being
+                //able to change its position when
+                //in a layout. naughty naughty
+                if (Layout != LayoutType.None)
+                    forceRefresh();
+            }
+        }
+
+        /// <summary>
         /// Create a menu frame with specified bounds.
         /// This is only for the menu class to use as the super parent node
         /// </summary>
@@ -102,6 +131,8 @@ namespace GMA.Menus
         #region Layout helpers
         internal override void refreshItem()
         {
+            //refreshItem can be called from within this function to this object again.
+            //Don't allow this
             if (_lockRefresh)
                 return;
 
@@ -146,11 +177,11 @@ namespace GMA.Menus
         }
         internal void childAdded(MenuItem mi)
         {
-            refreshItem();
+            forceRefresh();
         }
         internal void childRemoved(MenuItem mi)
         {
-            refreshItem();
+            forceRefresh();
         }
         #endregion
     }
