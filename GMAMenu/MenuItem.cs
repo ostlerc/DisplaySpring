@@ -167,6 +167,9 @@ namespace GMA.Menus
                 Children.Remove(m_rectCenter);
             }
 
+            if(Parent != null)
+                Parent.refreshItem();
+
             m_rectSize = new MenuButton(ScrollBar.CreateRectangleBorder((int)Width, (int)Height, debug_thickness, debug_color), this) { Scale = Vector2.One / Scale };
             m_rectStaticSize = new MenuButton(ScrollBar.CreateRectangleBorder((int)MeasureWidth, (int)MeasureHeight, debug_thickness, debug_color), this) { Scale = Vector2.One / Scale };
             m_rectCenter = new MenuButton(ScrollBar.CreateFilledRectangle((int)5, (int)5, Color.White), this) { Scale = Vector2.One / Scale };

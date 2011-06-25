@@ -89,7 +89,7 @@ namespace GMA.Menus
         /// <summary>
         /// Get's or sets the focused font color of the object
         /// </summary>
-        public virtual Color fontFocusColor { get { return m_focusColor; } set { m_focusColor = value; } }
+        public virtual Color FontFocusColor { get { return m_focusColor; } set { m_focusColor = value; } }
 
         /// <summary>
         /// Gets or sets the scale value for the Text
@@ -316,7 +316,7 @@ namespace GMA.Menus
             if(tempTexture != null)//draw background
                 spriteBatch.Draw(tempTexture, position, null, Tint * Alpha, rotation, center, scale, SpriteEffects.None, Depth);
 
-            Color textColor = (Focus ? fontFocusColor : FontColor) * Alpha;
+            Color textColor = (Focus ? FontFocusColor : FontColor) * Alpha;
 
             Vector2 textScale = TextScale * scale; //TODO: fix text scale to have parent -> child like stuff...
 

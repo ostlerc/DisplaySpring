@@ -36,10 +36,10 @@ namespace GMA.Menus
         protected int m_framesRun = 0;
         protected int m_framesToActivate = 10;
         protected float m_startAlpha = 0;
-        private MenuFrame m_frame;
-        public MenuFrame Frame
+        private MenuFrame m_baseFrame;
+        public MenuFrame BaseFrame
         {
-            get { return m_frame; }
+            get { return m_baseFrame; }
         }
         protected MenuAction m_cancelMenu;
         internal static GraphicsDevice m_graphicsDevice;
@@ -195,7 +195,7 @@ namespace GMA.Menus
             m_bounds = bounds;
             m_controllers = c;
             m_alpha = new AnimHelper(0, 1, FadeTime);
-            m_frame = new MenuFrame(m_bounds);
+            m_baseFrame = new MenuFrame(m_bounds);
         }
         #endregion
 
@@ -206,7 +206,7 @@ namespace GMA.Menus
         /// </summary>
         public static implicit operator MenuItem(Menu m)
         {
-            return m.m_frame;
+            return m.m_baseFrame;
         }
         /// <summary>
         /// Loads default content for All Menus and MenuItems
@@ -289,7 +289,7 @@ namespace GMA.Menus
                     Close();
             }
 
-            m_frame.Update(gameTime);
+            m_baseFrame.Update(gameTime);
         }
 
         /// <summary>
@@ -326,7 +326,7 @@ namespace GMA.Menus
                 spriteBatch.Draw(s.m_texture, rect, null, Color.White * m_alpha.Val, 0f, new Vector2(s.Width / 2, s.Height / 2), SpriteEffects.None, MenuBackgroundDrawDepth);
             }
 
-            m_frame.Draw(gameTime, spriteBatch);
+            m_baseFrame.Draw(gameTime, spriteBatch);
         }
 
         internal virtual void Invoke(MenuAction action)
@@ -356,7 +356,7 @@ namespace GMA.Menus
             m_framesRun = 0;
             m_alpha.Reset();
 
-            m_frame.Reset(false);
+            m_baseFrame.Reset(false);
 
             item.Reset(true);
 
@@ -375,7 +375,7 @@ namespace GMA.Menus
         /// </summary>
         public virtual void Reset()
         {
-            Reset(m_frame);
+            Reset(m_baseFrame);
         }
         #endregion
     }
