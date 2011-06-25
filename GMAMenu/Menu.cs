@@ -26,11 +26,16 @@ namespace GMA.Menus
         internal static SpriteFont m_font;
         private static float m_menuItemDrawDepth = 0.3f;
         private static float m_menuBackgroundDrawDepth = 0.4f;
+
+        /// <summary>
+        /// Default sound played when a menu is closed
+        /// </summary>
         public static SoundEffect DefaultCloseSound;
+
         /// <summary>
         /// Amount of time in milliseconds the menu will fade from StartAlpha to EndAlpha
         /// </summary>
-        public const float FadeTime = 750;
+        public const int DefaultFadeTime = 750;
         internal bool m_stayAlive = false;
         internal bool m_keepState = true;
         internal int m_framesRun = 0;
@@ -200,7 +205,7 @@ namespace GMA.Menus
             m_position = new Vector2(bounds.Center.X, bounds.Center.Y);
             m_bounds = bounds;
             m_controllers = c;
-            m_alpha = new AnimHelper(0, 1, FadeTime);
+            m_alpha = new AnimHelper(0, 1, DefaultFadeTime);
             m_baseFrame = new MenuFrame(m_bounds);
         }
         #endregion

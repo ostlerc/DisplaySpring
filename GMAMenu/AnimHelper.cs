@@ -10,7 +10,7 @@ namespace GMA.Menus
     {
         protected float m_startVal;
         protected float m_endVal;
-        protected float m_timeoutMS;
+        protected int m_timeoutMS = Menu.DefaultFadeTime;
         protected float m_totalElapsedTime;
         protected float m_val;
         public float Val
@@ -31,7 +31,16 @@ namespace GMA.Menus
             set { m_endVal = value; }
         }
 
-        public AnimHelper(float startVal, float endVal, float timeoutMS)
+        /// <summary>
+        /// Time in MS animation will last
+        /// </summary>
+        public int TimeoutMS
+        {
+            get { return m_timeoutMS; }
+            set { m_timeoutMS = value; }
+        }
+
+        public AnimHelper(float startVal, float endVal, int timeoutMS)
         {
             m_startVal = startVal;
             m_endVal = endVal;

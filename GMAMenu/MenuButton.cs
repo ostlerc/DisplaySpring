@@ -324,9 +324,9 @@ namespace GMA.Menus
                 tempTexture = FocusTexture;
 
             if(tempTexture != null)//draw background
-                spriteBatch.Draw(tempTexture, position, null, Tint * Alpha, rotation, center, scale, SpriteEffects.None, Depth);
+                spriteBatch.Draw(tempTexture, position, null, Tint * ScreenAlpha, rotation, center, scale, SpriteEffects.None, Depth);
 
-            Color textColor = (Focus ? FontFocusColor : FontColor) * Alpha;
+            Color textColor = (Focus ? FontFocusColor : FontColor) * ScreenAlpha;
 
             Vector2 textScale = TextScale * scale; //TODO: fix text scale to have parent -> child like stuff...
 

@@ -407,7 +407,18 @@
 
                 if (!value)
                     m_alpha.Val = EndAlpha;
+                else
+                    m_alpha.Val = StartAlpha;
             }
+        }
+
+        /// <summary>
+        /// Time item will fade in milliseconds if Fade is true
+        /// </summary>
+        public int FadeTime
+        {
+            get { if (m_alpha != null) return m_alpha.TimeoutMS; return Menu.DefaultFadeTime; }
+            set { m_alpha.TimeoutMS = value; }
         }
 
         /// <summary>
@@ -431,7 +442,12 @@
         /// <summary>
         /// Transparency of the object. 0 -> 1 = transparent -> visible
         /// </summary>
-        public virtual float Alpha { get { return m_alpha.Val * (Parent == null ? 1 : Parent.Alpha); } set { m_alpha.Val = value; } }
+        public virtual float Alpha { get { return m_alpha.Val; } set { m_alpha.Val = value; } }
+
+        /// <summary>
+        /// Transparency of the object with parents alpha taken into account
+        /// </summary>
+        public virtual float ScreenAlpha { get { return m_alpha.Val * (Parent == null ? 1 : Parent.ScreenAlpha); } }
 
         /// <summary>
         /// Position of the object. Default is Vector2.Zero, which is center based.
@@ -630,7 +646,7 @@
             m_activateSound = DefaultSelectSound;
             m_cancelSound = DefaultCancelSound;
             m_focusSound = DefaultFocusSound;
-            m_alpha = new AnimHelper(0, 1, Menu.FadeTime);
+            m_alpha = new AnimHelper(0, 1, FadeTime);
             Parent = parent;
         }
         #endregion
