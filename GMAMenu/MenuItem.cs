@@ -169,6 +169,8 @@ namespace GMA.Menus
 
             if(Parent != null)
                 Parent.refreshItem();
+            else
+                refreshItem();
 
             m_rectSize = new MenuButton(ScrollBar.CreateRectangleBorder((int)Width, (int)Height, debug_thickness, debug_color), this) { Scale = Vector2.One / Scale };
             m_rectStaticSize = new MenuButton(ScrollBar.CreateRectangleBorder((int)MeasureWidth, (int)MeasureHeight, debug_thickness, debug_color), this) { Scale = Vector2.One / Scale };
@@ -176,6 +178,8 @@ namespace GMA.Menus
 
             if(Parent != null)
                 Parent.refreshItem();
+            else
+                refreshItem();
         }
 #endif
 
@@ -226,6 +230,8 @@ namespace GMA.Menus
 
                 if(Parent != null)
                     Parent.refreshItem();
+                else
+                    refreshItem();
             }
         }
 
@@ -243,11 +249,11 @@ namespace GMA.Menus
 
                 m_horizontalAlignment = value;
 
+                Width = MeasureWidth;
                 if (Parent != null)
-                {
-                    Width = MeasureWidth;
                     Parent.refreshItem();
-                }
+                else
+                    refreshItem();
             }
         }
 
@@ -265,11 +271,11 @@ namespace GMA.Menus
 
                 m_verticalAlignment = value;
 
+                Height = MeasureHeight;
                 if (Parent != null)
-                {
-                    Height = MeasureHeight;
                     Parent.refreshItem();
-                }
+                else
+                    refreshItem();
             }
         }
 

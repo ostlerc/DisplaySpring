@@ -30,6 +30,8 @@ namespace GMA.Menus
 
                 if(Parent != null)
                     Parent.refreshItem();
+                else
+                    refreshItem();
             }
         }
 
