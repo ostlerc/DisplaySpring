@@ -9,7 +9,7 @@
     using Microsoft.Xna.Framework.Audio;
 
     /// <summary>
-    /// MenuButton is basically a text button with callbacks
+    /// Button is basically a text button with callbacks
     /// You can give the button no background and no foreground with just text
     /// </summary>
     public class Button : Item
@@ -60,7 +60,7 @@
         }
 
         /// <summary>
-        /// Depth of the button. Default is Menu.MenuButtonDrawDepth
+        /// Depth of the button. Default is Menu.ButtonDrawDepth
         /// By default 0 = front -> 1 = back
         /// </summary>
         public override float Depth
@@ -81,7 +81,9 @@
         /// <summary>
         /// Internal debugging constructor
         /// </summary>
-        internal Button(Texture2D debugTexture, Item parent) : base()
+        
+        internal Button(Texture2D debugTexture, Item parent) 
+            : base()
         {
             //TODO: make debug not a Button but a sprite
             LayoutStretch = 0;
@@ -91,7 +93,7 @@
         }
 
         /// <summary>
-        /// Create a menu item with specific background
+        /// Create a menu button with specific background
         /// </summary>
         public Button(Item parent, MultiController c, Texture2D background) 
             : base(parent, c)

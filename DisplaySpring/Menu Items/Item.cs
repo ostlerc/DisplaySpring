@@ -490,10 +490,10 @@
         /// <summary>
         /// Height of the item. Layout space is included. Scale is not included.
         /// </summary>
-        internal virtual float Height 
+        public virtual float Height 
         { 
             get { return m_height; } 
-            set 
+            internal set 
             {
                 m_height = value;
                 forceRefresh();
@@ -503,10 +503,10 @@
         /// <summary>
         /// Width of the item. Layout space is included. Scale is not included.
         /// </summary>
-        internal virtual float Width 
+        public virtual float Width 
         { 
             get { return m_width; } 
-            set 
+            internal set 
             { 
                 m_width = value;
                 forceRefresh();

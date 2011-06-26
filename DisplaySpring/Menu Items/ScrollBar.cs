@@ -7,6 +7,9 @@ using Microsoft.Xna.Framework;
 
 namespace DisplaySpring
 {
+    /// <summary>
+    /// Class that handles creating / using textures that represent a ScrollBar
+    /// </summary>
     public class ScrollBar : Item
     {
         private Texture2D m_bg;
@@ -22,16 +25,16 @@ namespace DisplaySpring
         private Color m_borderColor = new Color(55,200,0,175);
         private Color m_color = new Color(0,0,0,0);
 
-        public int VisibleCount
+        internal int VisibleCount
         {
             get { return m_visibleCount; }
-            set { m_visibleCount = value; Init(); }
+            set { m_visibleCount = value; forceRefresh(); }
         }
 
-        public int ObjectCount
+        internal int ObjectCount
         {
             get { return m_objectCount; }
-            set { m_objectCount = value; Init(); }
+            set { m_objectCount = value; forceRefresh(); }
         }
 
         /// <summary>
@@ -42,24 +45,6 @@ namespace DisplaySpring
         {
             get { return m_selectedIndex; }
             set { m_selectedIndex = value; }
-        }
-
-        internal override float Width
-        {
-            set
-            {
-                base.Width = value;
-                Init();
-            }
-        }
-
-        internal override float Height
-        {
-            set
-            {
-                base.Height = value;
-                Init();
-            }
         }
 
         internal override float StaticHeight
@@ -86,10 +71,10 @@ namespace DisplaySpring
             Height = height;
             m_visibleCount = visibleUnits;
 
-            Init();
+            forceRefresh();
         }
 
-        private void Init()
+        internal override void  refreshItem()
         {
             if (m_objectCount < 1 || m_visibleCount < 1)
                 return;
@@ -105,7 +90,7 @@ namespace DisplaySpring
             m_slider = CreateSliderTexture();
         }
 
-        internal override void  Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix parentTransform)
+        internal override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix parentTransform)
         {
             if (m_slider == null || m_bg == null || !m_visible)
                 return;
@@ -131,24 +116,6 @@ namespace DisplaySpring
                 position += Vector2.UnitY * len;
 
             spriteBatch.Draw(m_slider, position, null, Color.White*Alpha, rotation, center, scale, SpriteEffects.None, Depth + .0001f);
-        }
-
-        private void SetBorderColor(Color[] colors)
-        {
-            //top
-            for (int x = 0; x < (int)Width; x++)
-                colors[x] = m_borderColor;
-
-            //left and right edges
-            for (int x = (int)Width; x < Width * Height; x+=(int)Width)
-            {
-                colors[x] = m_borderColor;
-                colors[x + (int)Width - 1] = m_borderColor;
-            }
-
-            //bottom
-            for (int x = (int)Width * ((int)Height - 1); x < Width * Height; x++)
-                colors[x] = m_borderColor;
         }
 
         private Texture2D CreateBackgroundTexture()
@@ -185,6 +152,10 @@ namespace DisplaySpring
             return sliderTexture;
         }
 
+        /// <summary>
+        /// Create a texture that has a border of 'thickness' pixels. 
+        /// All inside pixels are Color(0,0,0,0)
+        /// </summary>
         public static Texture2D CreateRectangleBorder(int width, int height, int thickness, Color col)
         {  
             if ( width == 0 || height == 0 || thickness < 0 || col == null)
@@ -218,6 +189,9 @@ namespace DisplaySpring
             return border;
         }
 
+        /// <summary>
+        /// Create a texture that has each pixel filled with color 'col'
+        /// </summary>
         public static Texture2D CreateFilledRectangle(int width, int height, Color col)
         {
             if ( width == 0 || height == 0 || col == null)

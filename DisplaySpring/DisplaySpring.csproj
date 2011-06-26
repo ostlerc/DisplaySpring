@@ -114,22 +114,22 @@
     <Compile Include="Utility\UpdateEvent.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Content\Buttons\menuButton.png" />
+    <EmbeddedResource Include="Content\Buttons\button.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Content\Buttons\menuYellowArrowRight.png" />
+    <EmbeddedResource Include="Content\Buttons\yellowArrowRight.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Content\Buttons\menuButtonHighlighted.png" />
+    <EmbeddedResource Include="Content\Buttons\buttonHighlighted.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Content\Buttons\menuGrayArrowLeft.png" />
+    <EmbeddedResource Include="Content\Buttons\grayArrowLeft.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Content\Buttons\menuGrayArrowRight.png" />
+    <EmbeddedResource Include="Content\Buttons\grayArrowRight.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Content\Buttons\menuYellowArrowLeft.png" />
+    <EmbeddedResource Include="Content\Buttons\yellowArrowLeft.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Content\Sound\menuBack.wav" />

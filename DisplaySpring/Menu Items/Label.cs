@@ -37,7 +37,7 @@
         {
             Font = Menu.Font;
             if (Font == null)
-                throw new Exception("You must call Menu.LoadContent() to use a MenuButton");
+                throw new Exception("You must call Menu.LoadContent() to use a Button");
             m_textSize = Font.MeasureString(text);
             m_text = text;
         }

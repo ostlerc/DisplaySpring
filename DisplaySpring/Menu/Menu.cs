@@ -246,17 +246,17 @@ namespace DisplaySpring
             Item.DefaultCancelSound = Menu.DefaultCloseSound;
 
             //Textures
-            _stream = _assembly.GetManifestResourceStream("DisplaySpring.Content.Buttons.menuButton.png");
+            _stream = _assembly.GetManifestResourceStream("DisplaySpring.Content.Buttons.button.png");
             Item.DefaultButtonTexture = Texture2D.FromStream(gd, _stream);
-            _stream = _assembly.GetManifestResourceStream("DisplaySpring.Content.Buttons.menuButtonHighlighted.png");
+            _stream = _assembly.GetManifestResourceStream("DisplaySpring.Content.Buttons.buttonHighlighted.png");
             Item.DefaultButtonHighlightTexture = Texture2D.FromStream(gd, _stream);
-            _stream = _assembly.GetManifestResourceStream("DisplaySpring.Content.Buttons.menuGrayArrowLeft.png");
+            _stream = _assembly.GetManifestResourceStream("DisplaySpring.Content.Buttons.grayArrowLeft.png");
             Item.DefaultArrowLeft = Texture2D.FromStream(gd, _stream);
-            _stream = _assembly.GetManifestResourceStream("DisplaySpring.Content.Buttons.menuGrayArrowRight.png");
+            _stream = _assembly.GetManifestResourceStream("DisplaySpring.Content.Buttons.grayArrowRight.png");
             Item.DefaultArrowRight = Texture2D.FromStream(gd, _stream);
-            _stream = _assembly.GetManifestResourceStream("DisplaySpring.Content.Buttons.menuYellowArrowLeft.png");
+            _stream = _assembly.GetManifestResourceStream("DisplaySpring.Content.Buttons.yellowArrowLeft.png");
             Item.DefaultArrowLeftHighlight = Texture2D.FromStream(gd, _stream);
-            _stream = _assembly.GetManifestResourceStream("DisplaySpring.Content.Buttons.menuYellowArrowRight.png");
+            _stream = _assembly.GetManifestResourceStream("DisplaySpring.Content.Buttons.yellowArrowRight.png");
             Item.DefaultArrowRightHighlight = Texture2D.FromStream(gd, _stream);
         }
 
