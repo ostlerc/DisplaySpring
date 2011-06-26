@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace GMA.Menus
+namespace DisplaySpring.Menus
 {
     /// <summary>
     /// Standard menu animation types

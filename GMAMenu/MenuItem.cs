@@ -1,4 +1,4 @@
-﻿namespace GMA.Menus
+﻿namespace DisplaySpring.Menus
 {
     using System;
     using System.Collections.Generic;

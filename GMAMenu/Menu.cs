@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Content;
 using System.Reflection;
 using System.IO;
 
-namespace GMA.Menus
+namespace DisplaySpring.Menus
 {
     /// <summary>
     /// A Delegate to represent specific callback events in a menu
@@ -235,28 +235,28 @@ namespace GMA.Menus
             Stream _stream = null;
 
             //Sounds
-            _stream =  _assembly.GetManifestResourceStream("GMAMenu.Content.Sound.menuHighlight.wav");
+            _stream =  _assembly.GetManifestResourceStream("DisplaySpring.Content.Sound.menuHighlight.wav");
             MenuItem.DefaultFocusSound = SoundEffect.FromStream(_stream);
 
-            _stream =  _assembly.GetManifestResourceStream("GMAMenu.Content.Sound.menuSelect.wav");
+            _stream =  _assembly.GetManifestResourceStream("DisplaySpring.Content.Sound.menuSelect.wav");
             MenuItem.DefaultSelectSound = SoundEffect.FromStream(_stream);
 
-            _stream =  _assembly.GetManifestResourceStream("GMAMenu.Content.Sound.menuBack.wav");
+            _stream =  _assembly.GetManifestResourceStream("DisplaySpring.Content.Sound.menuBack.wav");
             Menu.DefaultCloseSound = SoundEffect.FromStream(_stream);
             MenuItem.DefaultCancelSound = Menu.DefaultCloseSound;
 
             //Textures
-            _stream = _assembly.GetManifestResourceStream("GMAMenu.Content.Buttons.menuButton.png");
+            _stream = _assembly.GetManifestResourceStream("DisplaySpring.Content.Buttons.menuButton.png");
             MenuItem.DefaultButtonTexture = Texture2D.FromStream(gd, _stream);
-            _stream = _assembly.GetManifestResourceStream("GMAMenu.Content.Buttons.menuButtonHighlighted.png");
+            _stream = _assembly.GetManifestResourceStream("DisplaySpring.Content.Buttons.menuButtonHighlighted.png");
             MenuItem.DefaultButtonHighlightTexture = Texture2D.FromStream(gd, _stream);
-            _stream = _assembly.GetManifestResourceStream("GMAMenu.Content.Buttons.menuGrayArrowLeft.png");
+            _stream = _assembly.GetManifestResourceStream("DisplaySpring.Content.Buttons.menuGrayArrowLeft.png");
             MenuItem.DefaultArrowLeft = Texture2D.FromStream(gd, _stream);
-            _stream = _assembly.GetManifestResourceStream("GMAMenu.Content.Buttons.menuGrayArrowRight.png");
+            _stream = _assembly.GetManifestResourceStream("DisplaySpring.Content.Buttons.menuGrayArrowRight.png");
             MenuItem.DefaultArrowRight = Texture2D.FromStream(gd, _stream);
-            _stream = _assembly.GetManifestResourceStream("GMAMenu.Content.Buttons.menuYellowArrowLeft.png");
+            _stream = _assembly.GetManifestResourceStream("DisplaySpring.Content.Buttons.menuYellowArrowLeft.png");
             MenuItem.DefaultArrowLeftHighlight = Texture2D.FromStream(gd, _stream);
-            _stream = _assembly.GetManifestResourceStream("GMAMenu.Content.Buttons.menuYellowArrowRight.png");
+            _stream = _assembly.GetManifestResourceStream("DisplaySpring.Content.Buttons.menuYellowArrowRight.png");
             MenuItem.DefaultArrowRightHighlight = Texture2D.FromStream(gd, _stream);
         }
 

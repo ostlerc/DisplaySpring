@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GMA.Menus
+namespace DisplaySpring.Menus
 {
     /// <summary>
     /// List of delegates to invoke on an update loop
