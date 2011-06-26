@@ -31,7 +31,7 @@ namespace GMA.Menus
             return visibles;
         }
 
-        internal float MeasureWidth()
+        /*internal float MeasureWidth()
         {
             float left = 0, right = 0;
             foreach (var v in Items)
@@ -66,13 +66,10 @@ namespace GMA.Menus
                 return Math.Abs(bot * 2);
             else
                 return Math.Abs(top * 2);
-        }
+        }*/
 
         protected override void InsertItem(int index, MenuItem item)
         {
-            //if(item.Parent != m_parent)
-                //item.Parent = m_parent;
-
             base.InsertItem(index, item);
 
             if (m_parent is MenuFrame)

@@ -54,7 +54,10 @@ namespace GMA.Menus
             m_totalElapsedTime += gameTIme.ElapsedGameTime.Milliseconds;
 
             if (m_totalElapsedTime > m_timeoutMS || m_val == m_endVal)
+            {
+                m_val = m_endVal;
                 return;
+            }
 
             float dx = m_endVal - m_startVal;
             float ratio = m_totalElapsedTime / m_timeoutMS;
