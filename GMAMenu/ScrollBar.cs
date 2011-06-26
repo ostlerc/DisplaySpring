@@ -36,7 +36,7 @@ namespace DisplaySpring.Menus
 
         /// <summary>
         /// This is the primary way to scroll the scrollbar
-        /// The SelectedIndex is 0 based</param>
+        /// The SelectedIndex is 0 based
         /// </summary>
         public int SelectedIndex
         {
@@ -75,7 +75,6 @@ namespace DisplaySpring.Menus
         /// <summary>
         /// A simple scrollbar that can be vertical or horizontal with a few custom options
         /// </summary>
-        /// <param name="pos">position of the scrollbar</param>
         /// <param name="width">width of the scrollbar</param>
         /// <param name="height">height of the scrollbar</param>
         /// <param name="objCount">amount of items in the container</param>

@@ -87,18 +87,18 @@
         private float m_width;
         private float m_height;
 
-        protected Vector2 m_pos = Vector2.Zero;
-        protected AnimateType m_animation = AnimateType.Size;
-        protected bool m_fade = true;
+        internal Vector2 m_pos = Vector2.Zero;
+        internal AnimateType m_animation = AnimateType.Size;
+        internal bool m_fade = true;
         internal AnimHelper m_alpha;
-        protected SoundEffect m_focusSound;
-        protected SoundEffect m_cancelSound;
-        protected SoundEffect m_activateSound;
-        protected bool m_visible = true;
-        protected Color m_tint = Color.White;
-        protected object m_tag = null;
-        protected bool m_keepFocus = false;
-        protected bool m_forceCancelSound = false;
+        internal SoundEffect m_focusSound;
+        internal SoundEffect m_cancelSound;
+        internal SoundEffect m_activateSound;
+        internal bool m_visible = true;
+        internal Color m_tint = Color.White;
+        internal object m_tag = null;
+        internal bool m_keepFocus = false;
+        internal bool m_forceCancelSound = false;
         private double m_animCycleTime = 950; //this is in milliseconds
         internal MenuItemCollection m_menuItemCollection;
 
@@ -619,6 +619,9 @@
             Initialize(null);
         }
 
+        /// <summary>
+        /// Create a MenuItem with a parent and a controller
+        /// </summary>
         public MenuItem(MenuItem parent, MultiController c) 
         {
             if (parent == null)
@@ -628,6 +631,9 @@
             m_controller = c;
         }
 
+        /// <summary>
+        /// Create a MenuItem with a parent
+        /// </summary>
         public MenuItem(MenuItem parent) 
         {
             if (parent == null)

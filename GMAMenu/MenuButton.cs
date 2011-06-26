@@ -191,7 +191,6 @@ namespace DisplaySpring.Menus
         /// <summary>
         /// Creates a text label. Cannot receive focus from user
         /// </summary>
-        /// <param name="text"></param>
         public MenuButton(MenuItem parent, string text) 
             : base(parent)
         {
@@ -232,7 +231,6 @@ namespace DisplaySpring.Menus
         /// <summary>
         /// Creates a static image element
         /// </summary>
-        /// <param name="background"></param>
         public MenuButton(MenuItem parent, Texture2D background) 
             : base(parent)
         {

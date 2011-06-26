@@ -403,7 +403,6 @@ namespace DisplaySpring.Menus
         /// <summary>
         /// Create a new controller class
         /// </summary>
-        /// <param name="currentPlayer">The index of the player using the controller</param>
         public Controller(PlayerIndex currentPlayer, UpdateEvent update)
         {
             m_oldKeyboardState = new KeyboardState();
