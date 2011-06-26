@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
 
-namespace DisplaySpring.Menus
+namespace DisplaySpring
 {
     /// <summary>
     /// A MenuItemCollection is a list of items that when added parents and children are handled for the user

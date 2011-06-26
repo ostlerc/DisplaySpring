@@ -1,4 +1,4 @@
-﻿namespace DisplaySpring.Menus
+﻿namespace DisplaySpring
 {
     using System;
     using System.Collections.Generic;
@@ -503,12 +503,12 @@
         /// <summary>
         /// Measures the Width of the item. Layout space is not included. Scale is included.
         /// </summary>
-        public virtual float MeasureWidth { get { return Width * Scale.X; } }
+        public virtual float MeasureWidth { get { return StaticWidth * Scale.X; } }
 
         /// <summary>
         /// Measures the Height of the item. Layout space is not included. Scale is included.
         /// </summary>
-        public virtual float MeasureHeight { get { return Height * Scale.Y; } }
+        public virtual float MeasureHeight { get { return StaticHeight * Scale.Y; } }
 
         /// <summary>
         /// The matrix transform of the item.
@@ -601,7 +601,7 @@
         /// Depth of the button. Default is Menu.MenuButtonDrawDepth
         /// By default 0 = front -> 1 = back
         /// </summary>
-        public float Depth
+        public virtual float Depth
         {
             get { return m_depth; }
             set { m_depth = value; }
@@ -724,42 +724,42 @@
         }
 
         #region Delegate Extraction Layer
-        protected virtual bool Up()
+        internal virtual bool Up()
         {
             return Invoke(OnUp);
         }
 
-        protected virtual bool Down()
+        internal virtual bool Down()
         {
             return Invoke(OnDown);
         }
 
-        protected virtual bool Left()
+        internal virtual bool Left()
         {
             return Invoke(OnLeft);
         }
 
-        protected virtual bool Right()
+        internal virtual bool Right()
         {
             return Invoke(OnRight);
         }
 
-        protected virtual bool A()
+        internal virtual bool A()
         {
             return Invoke(OnA);
         }
 
-        protected virtual bool B()
+        internal virtual bool B()
         {
             return Invoke(OnB);
         }
 
-        protected virtual bool Start()
+        internal virtual bool Start()
         {
             return Invoke(OnStart);
         }
 
-        protected virtual bool Back()
+        internal virtual bool Back()
         {
             return Invoke(OnBack);
         }

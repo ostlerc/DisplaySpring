@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
 
-namespace DisplaySpring.Menus
+namespace DisplaySpring
 {
     public class Controller
     {

@@ -1,4 +1,4 @@
-﻿namespace DisplaySpring.Menus
+﻿namespace DisplaySpring
 {
     using System;
     using System.Collections.Generic;

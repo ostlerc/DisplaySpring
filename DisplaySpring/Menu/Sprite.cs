@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
-
-namespace DisplaySpring.Menus
+﻿namespace DisplaySpring
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework;
+
     /// <summary>
     /// Standard menu animation types
     /// </summary>
@@ -19,8 +19,8 @@ namespace DisplaySpring.Menus
 
     public class Sprite
     {
-        private float m_width;
-        private float m_height;
+        internal float m_width;
+        internal float m_height;
 
         public float Width { get { return m_texture.Width; } }
         public float Height { get { return m_texture.Height; } }
@@ -33,13 +33,13 @@ namespace DisplaySpring.Menus
         /// <summary>
         /// Texture for the sprite
         /// </summary>
-        public Texture2D m_texture;
+        internal Texture2D m_texture;
 
         /// <summary>
         /// pos of this Sprite. This value should be used not as an absolute pos
         /// but as an offset value from its container class
         /// </summary>
-        public Vector2 pos;
+        internal Vector2 pos;
 
         public Sprite(Texture2D texture, Vector2 Pos)
         {
@@ -49,7 +49,7 @@ namespace DisplaySpring.Menus
             m_height = m_texture.Height;
         }
 
-        public Rectangle destRect()
+        internal Rectangle destRect()
         {
             return new Rectangle((int)pos.X, (int)pos.Y, (int)m_width, (int)m_height);
         }

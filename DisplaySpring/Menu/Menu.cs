@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Content;
 using System.Reflection;
 using System.IO;
 
-namespace DisplaySpring.Menus
+namespace DisplaySpring
 {
     /// <summary>
     /// A Delegate to represent specific callback events in a menu

@@ -1,4 +1,4 @@
-﻿namespace DisplaySpring.Menus
+﻿namespace DisplaySpring
 {
     using System;
     using System.Collections.Generic;
@@ -19,6 +19,7 @@
         internal Texture2D m_focused;
         internal float m_textureHeight;
         internal float m_textureWidth;
+        internal Label m_label;
 
         /// <summary>
         /// The focus background of the button.
@@ -40,99 +41,35 @@
             set { m_bg = value; }
         }
 
-        internal String m_label;
-        internal SpriteFont m_font;
-        internal Color m_color = Color.Gold;
-        internal Color m_focusColor = Color.Black;
-        private Vector2 fontSize;
-        private float m_textScale = 1.0f;
+        /// <summary>
+        /// Label of the Button
+        /// </summary>
+        public Label ButtonLabel { get { return m_label; } set { m_label = value; } }
+
         #endregion
 
         #region Properties
-
-        /// <summary>
-        /// Gets the scaled height of the object
-        /// Layout space is not included
-        /// </summary>
-        public override float MeasureHeight 
-        { 
-            get 
-            {
-                if (m_bg == null)
-                    return StaticHeight * TextScale;
-                else
-                    return StaticHeight * Scale.Y;
-            } 
-        }
-
-        /// <summary>
-        /// Gets the scaled StaticWidth of the object
-        /// Layout space is not included
-        /// </summary>
-        public override float  MeasureWidth
-        { 
-            get 
-            {
-                if (m_bg == null)
-                    return StaticWidth * TextScale;
-                else
-                    return StaticWidth * Scale.X;
-            } 
-        }
 
         internal override float StaticWidth
         {
             get { return m_textureWidth; }
         }
-
         internal override float StaticHeight
         {
             get { return m_textureHeight; }
         }
 
-        /// <summary>
-        /// Get's or sets the default font color for the object, when object is not focused
-        /// </summary>
-        public virtual Color FontColor { get { return m_color; } set { m_color = value; } }
-
-        /// <summary>
-        /// Get's or sets the focused font color of the object
-        /// </summary>
-        public virtual Color FontFocusColor { get { return m_focusColor; } set { m_focusColor = value; } }
-
-        /// <summary>
-        /// Gets or sets the scale value for the Text
-        /// </summary>
-        public virtual float TextScale { get { return m_textScale; } set { m_textScale = value; } }
-
-        /// <summary>
-        /// Get's or sets the text for the object
-        /// </summary>
-        public virtual string Text 
-        { 
-            get { return m_label; } 
-            set 
-            { 
-                m_label = value; 
-                fontSize =  Font.MeasureString(m_label);
-                if (m_bg == null)
-                {
-                    m_textureWidth = fontSize.X * TextScale;
-                    m_textureHeight = fontSize.Y * TextScale;
-                }
-            } 
-        }
-        /// <summary>
-        /// Get's or sets the font value for the object
-        /// </summary>
-        public virtual SpriteFont Font 
-        { 
-            get 
+        public override float Depth
+        {
+            get { return base.Depth; }
+            set
             {
-                return m_font;
-            }
-            set { m_font = value; } }
+                base.Depth = value;
 
+                if (m_label != null)
+                    m_label.Depth = value - .01f;
+            }
+        }
         #endregion
 
         #region Constructors
@@ -142,30 +79,11 @@
         /// </summary>
         internal Button(Texture2D debugTexture, Item parent) : base()
         {
+            //TODO: make debug not a Button but a sprite
             LayoutStretch = 0;
             Depth = 0;
             Parent = parent;
-            Initialize(debugTexture, null);
-        }
-
-        /// <summary>
-        /// Create a menu item with specific background and focus background with text
-        /// </summary>
-        public Button(Item parent, MultiController c, Texture2D background, Texture2D focused, string label)
-            : base(parent, c)
-        {
-            Initialize(label);
-            Initialize(background, focused);
-        }
-
-        /// <summary>
-        /// Create a menu item with specific background and highlight textures
-        /// </summary>
-        public Button(Item parent, MultiController c, Texture2D background, Texture2D focused) 
-            : base(parent, c)
-        {
-            Initialize();
-            Initialize(background, focused);
+            Initialize(debugTexture, null, "");
         }
 
         /// <summary>
@@ -174,57 +92,34 @@
         public Button(Item parent, MultiController c, Texture2D background) 
             : base(parent, c)
         {
-            Initialize();
-            Initialize(background, null);
+            Initialize(background, null, "");
         }
 
         /// <summary>
-        /// Creates a text label with user input
+        /// Create a menu item with specific background and text label
         /// </summary>
-        public Button(Item parent, MultiController c, string text)
-            : base (parent, c)
+        public Button(Item parent, MultiController c, Texture2D background, string text) 
+            : base(parent, c)
         {
-            Initialize(text);
+            Initialize(background, null, text);
         }
 
         /// <summary>
-        /// Creates a text label. Cannot receive focus from user
+        /// Create a menu item with specific background and highlight textures
         /// </summary>
-        public Button(Item parent, string text) 
-            : base(parent)
+        public Button(Item parent, MultiController c, Texture2D background, Texture2D focused) 
+            : base(parent, c)
         {
-            Initialize(text);
+            Initialize(background, focused, "");
         }
 
         /// <summary>
-        /// Creates a text label at position Pos. Cannot receive focus from user
+        /// Create a menu item with specific background and focus background with text
         /// </summary>
-        public Button(Item parent, string text, Vector2 Pos) 
-            : base(parent)
+        public Button(Item parent, MultiController c, Texture2D background, Texture2D focused, string text)
+            : base(parent, c)
         {
-            Initialize(text);
-            Position = Pos;
-        }
-
-        /// <summary>
-        /// Creates a scaled text label at position Pos. Cannot receive focus from user
-        /// </summary>
-        public Button(Item parent, string text, Vector2 Pos, float scale) 
-            : base(parent)
-        {
-            Initialize(text);
-            TextScale = scale;
-            Position = Pos;
-        }
-
-        /// <summary>
-        /// Creates a scaled text label. Cannot receive focus from user
-        /// </summary>
-        public Button(Item parent, string text, float scale) 
-            : base(parent)
-        {
-            Initialize(text);
-            TextScale = scale;
+            Initialize(background, focused, text);
         }
 
         /// <summary>
@@ -233,7 +128,7 @@
         public Button(Item parent, Texture2D background) 
             : base(parent)
         {
-            Initialize(background, null);
+            Initialize(background, null, "");
         }
 
         /// <summary>
@@ -242,33 +137,36 @@
         public Button(Item parent, Texture2D background, string text) 
             : base(parent)
         {
-            Initialize(text);
-            Initialize(background, null);
+            Initialize(background, null, text);
+        }
+
+        /// <summary>
+        /// Create menu button with specific background and focus background
+        /// </summary>
+        public Button(Item parent, Texture2D background, Texture2D focused) 
+            : base(parent)
+        {
+            Initialize(background, focused, "");
+        }
+
+        /// <summary>
+        /// Create menu button with specific background, focus background and label text
+        /// </summary>
+        public Button(Item parent, Texture2D background, Texture2D focused, string text) 
+            : base(parent)
+        {
+            Initialize(background, focused, text);
         }
 
         #region subInitialize Helpers
-        private void Initialize()
-        {
-            Font = Menu.Font;
-            if (Font == null)
-                throw new Exception("You must call Menu.LoadContent() to use a MenuButton");
-            refreshItem();
-        }
 
-        private void Initialize(string text)
+        private void Initialize(Texture2D background, Texture2D focused, string text)
         {
-            Initialize();
-            Text = text;
-            fontSize = Font.MeasureString(text);
-            m_textureWidth = fontSize.X;
-            m_textureHeight = fontSize.Y;
-        }
+            if (background == null && focused == null)
+                throw new Exception("Cannot create a button with no background or focus background");
 
-        private void Initialize(Texture2D background, Texture2D focused)
-        {
-            Initialize();
-            Background = background;
-            FocusTexture = focused;
+            m_bg = background;
+            m_focused = focused;
 
             if (Background != null)
             {
@@ -283,6 +181,12 @@
                 m_textureWidth = 0;
                 m_textureHeight = 0;
             }
+
+            //TODO: make sure height and width of button are correct with label
+            m_label = new Label(this, text);
+            m_label.Depth = Depth - .01f;
+
+            refreshItem();
         }
         #endregion
         #endregion
@@ -290,9 +194,9 @@
         #region Class Functions
 
         /// <summary>
-        /// Transform of button with animation transforming included. (scale, grow / shrink)
+        /// Transform of button with animation transform included. (scale, grow / shrink)
         /// </summary>
-        internal virtual Matrix AnimatedItemTransform(GameTime gameTime)
+        internal virtual Matrix AnimationTransform(GameTime gameTime)
         {
             Matrix animScale, local;
             local = ItemTransform;
@@ -305,14 +209,13 @@
         {
             //create transform matrix and multiply them backwards order, then decompose
             //to get out info we want
-            Matrix local = Item.CombineMatrix(AnimatedItemTransform(gameTime), ref parentTransform);
+            Matrix local = Item.CombineMatrix(AnimationTransform(gameTime), ref parentTransform);
 
             Vector2 position, scale;
             float rotation;
             DecomposeMatrix(ref local, out position, out rotation, out scale);
 
             Vector2 center = new Vector2(m_textureWidth, m_textureHeight) / 2f;
-            Vector2 fontCenter = fontSize / 2f;
 
             Texture2D tempTexture = null;
 
@@ -323,13 +226,6 @@
 
             if(tempTexture != null)//draw background
                 spriteBatch.Draw(tempTexture, position, null, Tint * ScreenAlpha, rotation, center, scale, SpriteEffects.None, Depth);
-
-            Color textColor = (Focus ? FontFocusColor : FontColor) * ScreenAlpha;
-
-            Vector2 textScale = TextScale * scale; //TODO: fix text scale to have parent -> child like stuff...
-
-            if (!String.IsNullOrEmpty(Text))//label
-                spriteBatch.DrawString(Font, Text, position, textColor, rotation, fontCenter, textScale, SpriteEffects.None, Depth - .01f);
 
             foreach (Item child in Children)
                 child.Draw(gameTime, spriteBatch, local);
