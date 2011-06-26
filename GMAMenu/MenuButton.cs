@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-
-namespace DisplaySpring.Menus
+﻿namespace DisplaySpring.Menus
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Audio;
 
     /// <summary>
     /// MenuButton is basically a text button with callbacks
@@ -288,6 +287,8 @@ namespace DisplaySpring.Menus
         #endregion
         #endregion
 
+        #region Class Functions
+
         /// <summary>
         /// Transform of button with animation transforming included. (scale, grow / shrink)
         /// </summary>
@@ -333,5 +334,7 @@ namespace DisplaySpring.Menus
             foreach (MenuItem child in Children)
                 child.Draw(gameTime, spriteBatch, local);
         }
+
+        #endregion
     }
 }
