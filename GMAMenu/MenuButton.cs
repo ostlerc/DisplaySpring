@@ -141,7 +141,6 @@ namespace GMA.Menus
         /// <summary>
         /// Internal debugging constructor
         /// </summary>
-        /// <param name="debugTexture"></param>
         internal MenuButton(Texture2D debugTexture, MenuItem parent) : base()
         {
             LayoutStretch = 0;

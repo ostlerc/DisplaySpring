@@ -642,7 +642,7 @@
                 throw new Exception("Error: Cannot construct a menu item without calling Menu.LoadContent()");
 
             m_menuItemCollection = new MenuItemCollection(this);
-            Position = Vector2.Zero;
+            m_pos = Vector2.Zero;
             m_activateSound = DefaultSelectSound;
             m_cancelSound = DefaultCancelSound;
             m_focusSound = DefaultFocusSound;
@@ -915,19 +915,6 @@
         }
 
         /// <summary>
-        /// TODO: remove this code.
-        /// </summary>
-        internal static List<MenuItem> flattenChildren(MenuItem mi)
-        {
-            List<MenuItem> children = new List<MenuItem>();
-            foreach (MenuItem _mi in mi.Children)
-                foreach(MenuItem _mi2 in flattenChildren(_mi))
-                    children.Add(_mi2);
-
-            return children;
-        }
-
-        /// <summary>
         /// Combine matrix together via matrix multiply
         /// </summary>
         internal static Matrix CombineMatrix(Matrix lhs, ref Matrix rhs)
@@ -947,8 +934,6 @@
             {
                 switch (m_animation)
                 {
-                    case AnimateType.None:
-                        break;
                     case AnimateType.Size:
                         double ms = gameTime.TotalGameTime.TotalMilliseconds;
                         double halfRemainder =  doubleMod(ms, m_animCycleTime) - (m_animCycleTime / 2);
