@@ -102,7 +102,7 @@
     <Compile Include="Menu Items\Button.cs" />
     <Compile Include="Menu Items\Frame.cs" />
     <Compile Include="Menu Items\Item.cs" />
-    <Compile Include="Utility\MenuItemCollection.cs">
+    <Compile Include="Utility\ItemCollection.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Utility\MultiController.cs" />

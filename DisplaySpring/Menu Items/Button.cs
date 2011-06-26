@@ -59,6 +59,10 @@
             get { return m_textureHeight; }
         }
 
+        /// <summary>
+        /// Depth of the button. Default is Menu.MenuButtonDrawDepth
+        /// By default 0 = front -> 1 = back
+        /// </summary>
         public override float Depth
         {
             get { return base.Depth; }

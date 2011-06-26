@@ -8,7 +8,7 @@
     using Microsoft.Xna.Framework;
 
     /// <summary>
-    /// Class that draws a MenuItem as a text object
+    /// Class that draws a Item as a text object
     /// </summary>
     public class Label : Item
     {
@@ -23,6 +23,10 @@
         #endregion
 
         #region Constructors
+
+        /// <summary>
+        /// Create a label with text
+        /// </summary>
         public Label(Item parent, string text)
             : base(parent)
         {
@@ -46,6 +50,7 @@
         {
             get { return m_textSize.X * Scale.X; }
         }
+
         internal override float StaticHeight
         {
             get { return m_textSize.Y * Scale.Y; }

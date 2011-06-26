@@ -24,7 +24,7 @@ namespace DisplaySpring
     {
         #region Member variables
         internal static SpriteFont m_font;
-        private static float m_menuItemDrawDepth = 0.3f;
+        private static float m_ItemDrawDepth = 0.3f;
         private static float m_menuBackgroundDrawDepth = 0.4f;
 
         /// <summary>
@@ -174,10 +174,10 @@ namespace DisplaySpring
         /// <summary>
         /// Default draw depth for menu items
         /// </summary>
-        public static float MenuItemDrawDepth
+        public static float ItemDrawDepth
         {
-            get { return m_menuItemDrawDepth; }
-            set { m_menuItemDrawDepth = value; }
+            get { return m_ItemDrawDepth; }
+            set { m_ItemDrawDepth = value; }
         }
         /// <summary>
         /// Default draw depth for backgrounds
@@ -213,14 +213,14 @@ namespace DisplaySpring
         #region Functions
 
         /// <summary>
-        /// convert from Menu to MenuItem
+        /// convert from Menu to Item
         /// </summary>
         public static implicit operator Item(Menu m)
         {
             return m.m_baseFrame;
         }
         /// <summary>
-        /// Loads default content for All Menus and MenuItems
+        /// Loads default content for All Menus and Items
         /// </summary>
         /// <param name="gd">Graphics Device of the Game</param>
         /// <param name="DefaultFont">Default Font the menus will use for drawing text</param>
@@ -279,7 +279,7 @@ namespace DisplaySpring
                 {
                     ActiveSubMenu = null;
 
-                    /*foreach (MenuItem mi in m_items)
+                    /*foreach (Item mi in m_items)
                     {
                         mi.KeepFocus = false;
                         mi.StartAlpha = m_alpha.StartVal;

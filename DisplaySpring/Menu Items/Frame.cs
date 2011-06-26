@@ -8,7 +8,7 @@
     using Microsoft.Xna.Framework.Graphics;
 
     /// <summary>
-    /// A collection of MenuItems that can be handled layouts
+    /// A collection of Items that can be handled layouts
     /// </summary>
     public class Frame : Item
     {

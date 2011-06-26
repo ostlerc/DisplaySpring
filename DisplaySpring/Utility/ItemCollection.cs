@@ -7,11 +7,11 @@ using System.Collections.ObjectModel;
 namespace DisplaySpring
 {
     /// <summary>
-    /// A MenuItemCollection is a list of items that when added parents and children are handled for the user
+    /// A ItemCollection is a list of items that when added parents and children are handled for the user
     /// </summary>
-    public class MenuItemCollection : Collection<Item>
+    public class ItemCollection : Collection<Item>
     {
-        internal MenuItemCollection(Item parent) { m_parent = parent; }
+        internal ItemCollection(Item parent) { m_parent = parent; }
 
         protected override void ClearItems()
         {

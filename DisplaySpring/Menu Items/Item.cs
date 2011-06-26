@@ -12,8 +12,8 @@
     using HAlign = Item.HorizontalAlignmentType;
     using Layout = Frame.LayoutType;
     /// <summary>
-    /// A menuItem is any sub menu area that needs to interact with other menu parts. All menuitems are shown in one menu
-    /// MenuItem types so far are TextMenuItem, BoxMenuItem and VideoMenuItem
+    /// An Item is any sub menu area that needs to interact with other menu parts.
+    /// All items are shown in one menu
     /// </summary>
     public abstract class Item
     {
@@ -70,18 +70,46 @@
             /// </summary>
             Stretch
         };
+
         private uint m_layoutStretch = 1;
         private HorizontalAlignmentType m_horizontalAlignment = HAlign.Center;
         private VerticalAlignmentType m_verticalAlignment = VAlign.Center;
 
+        /// <summary>
+        /// Default SelectSound
+        /// </summary>
         public static SoundEffect DefaultSelectSound;
+        /// <summary>
+        /// Default CancelSound
+        /// </summary>
         public static SoundEffect DefaultCancelSound;
+        /// <summary>
+        /// Default FocusSound
+        /// </summary>
         public static SoundEffect DefaultFocusSound;
+        /// <summary>
+        /// Default Background for Buttons
+        /// </summary>
         public static Texture2D DefaultButtonTexture;
+        /// <summary>
+        /// Default Focus Background (Highlight background) for Buttons
+        /// </summary>
         public static Texture2D DefaultButtonHighlightTexture;
+        /// <summary>
+        /// Default Left Arrow for OptionButton
+        /// </summary>
         public static Texture2D DefaultArrowLeft;
+        /// <summary>
+        /// Default Right Arrow for OptionButtons
+        /// </summary>
         public static Texture2D DefaultArrowRight;
+        /// <summary>
+        /// Default Left Highlight (Focused) Arrow for OptionButtons
+        /// </summary>
         public static Texture2D DefaultArrowLeftHighlight;
+        /// <summary>
+        /// Default Right Highlight (Focused) Arrow for OptionButtons
+        /// </summary>
         public static Texture2D DefaultArrowRightHighlight;
 
         private float m_width;
@@ -100,13 +128,13 @@
         internal bool m_keepFocus = false;
         internal bool m_forceCancelSound = false;
         private double m_animCycleTime = 950; //this is in milliseconds
-        internal MenuItemCollection m_menuItemCollection;
+        internal ItemCollection m_ItemCollection;
 
         private MultiController m_controller;
         private Vector2 m_scale = Vector2.One;
         private int m_framesToActivate = 5;
         private int m_framesRun = 0;
-        private float m_depth = Menu.MenuItemDrawDepth;
+        private float m_depth = Menu.ItemDrawDepth;
         private float m_rotation = 0;
 
         /// <summary>
@@ -119,63 +147,63 @@
 
         #region Delegates
         /// <summary>
-        /// This delegate is called when the MenuItem with Focus receives a 'Right' motion
+        /// This delegate is called when the Item with Focus receives a 'Right' motion
         /// </summary>
         public MenuAction OnRight;
 
         /// <summary>
-        /// This delegate is called when the MenuItem with Focus receives a 'Left' motion
+        /// This delegate is called when the Item with Focus receives a 'Left' motion
         /// </summary>
         public MenuAction OnLeft;
 
         /// <summary>
-        /// This delegate is called when the MenuItem with Focus receives a 'Up' motion
+        /// This delegate is called when the Item with Focus receives a 'Up' motion
         /// </summary>
         public MenuAction OnUp;
 
         /// <summary>
-        /// This delegate is called when the MenuItem with Focus receives a 'Down' motion
+        /// This delegate is called when the Item with Focus receives a 'Down' motion
         /// </summary>
         public MenuAction OnDown;
 
         /// <summary>
-        /// This delegate is called when the MenuItem with Focus receives a button press of 'A'
+        /// This delegate is called when the Item with Focus receives a button press of 'A'
         /// </summary>
         public MenuAction OnA;
 
         /// <summary>
-        /// This delegate is called when the MenuItem with Focus receives a button press of 'B'
+        /// This delegate is called when the Item with Focus receives a button press of 'B'
         /// </summary>
         public MenuAction OnB;
 
         /// <summary>
-        /// This delegate is called when the MenuItem with Focus receives a button press of 'X'
+        /// This delegate is called when the Item with Focus receives a button press of 'X'
         /// </summary>
         public MenuAction OnX;
 
         /// <summary>
-        /// This delegate is called when the MenuItem with Focus receives a button press of 'Y'
+        /// This delegate is called when the Item with Focus receives a button press of 'Y'
         /// </summary>
         public MenuAction OnY;
 
         /// <summary>
-        /// This delegate is called when the MenuItem with Focus receives a button press of 'Start'
+        /// This delegate is called when the Item with Focus receives a button press of 'Start'
         /// </summary>
         public MenuAction OnStart;
 
         /// <summary>
-        /// This delegate is called when the MenuItem with Focus receives a button press of 'Back'
+        /// This delegate is called when the Item with Focus receives a button press of 'Back'
         /// ('Back' is also known as 'Select')
         /// </summary>
         public MenuAction OnBack;
 
         /// <summary>
-        /// This delegate is called when the menuItem receives Focus
+        /// This delegate is called when the Item receives Focus
         /// </summary>
         public MenuAction OnFocus;
 
         /// <summary>
-        /// This delegate is called when the menuItem loses Focus
+        /// This delegate is called when the Item loses Focus
         /// </summary>
         public MenuAction OnLoseFocus;
         #endregion
@@ -268,11 +296,11 @@
                 }
             }
         }
-        internal MenuItemCollection Children { get { return m_menuItemCollection; } private set { m_menuItemCollection = value; } }
+        internal ItemCollection Children { get { return m_ItemCollection; } private set { m_ItemCollection = value; } }
 
         /// <summary>
-        /// Used to know the stretch percentage of a MenuItem.
-        /// Default is 1. This number is taken relative to other MenuItems in a layout.
+        /// Used to know the stretch percentage of a Item.
+        /// Default is 1. This number is taken relative to other Items in a layout.
         /// It determines the percentage of space given to the item.
         /// Example: a layout of two items with stretch 1 and 2 would receive 33% and 66%
         /// of the space respectively
@@ -395,7 +423,7 @@
         }
 
         /// <summary>
-        /// Toggles the fading behavior of the MenuItem. If set to true the item will fade in
+        /// Toggles the fading behavior of the Item. If set to true the item will fade in
         /// Default is true
         /// </summary>
         public bool Fade
@@ -598,7 +626,7 @@
         public object Tag { get { return m_tag; } set { m_tag = value; } }
 
         /// <summary>
-        /// Depth of the button. Default is Menu.MenuButtonDrawDepth
+        /// Depth of the Item. Default is Menu.ItemDrawDepth
         /// By default 0 = front -> 1 = back
         /// </summary>
         public virtual float Depth
@@ -620,24 +648,24 @@
         }
 
         /// <summary>
-        /// Create a MenuItem with a parent and a controller
+        /// Create a Item with a parent and a controller
         /// </summary>
         public Item(Item parent, MultiController c) 
         {
             if (parent == null)
-                throw new Exception("MenuItem cannot have a null parent");
+                throw new Exception("Item cannot have a null parent");
 
             Initialize(parent);
             m_controller = c;
         }
 
         /// <summary>
-        /// Create a MenuItem with a parent
+        /// Create a Item with a parent
         /// </summary>
         public Item(Item parent) 
         {
             if (parent == null)
-                throw new Exception("MenuItem cannot have a null parent");
+                throw new Exception("Item cannot have a null parent");
 
             Initialize(parent);
         }
@@ -647,7 +675,7 @@
             if(Menu.Font == null)
                 throw new Exception("Error: Cannot construct a menu item without calling Menu.LoadContent()");
 
-            m_menuItemCollection = new MenuItemCollection(this);
+            m_ItemCollection = new ItemCollection(this);
             m_pos = Vector2.Zero;
             m_activateSound = DefaultSelectSound;
             m_cancelSound = DefaultCancelSound;
@@ -660,7 +688,7 @@
         #region methods
 
         /// <summary>
-        /// Updates the MenuItem
+        /// Updates the Item
         /// </summary>
         public virtual void Update(GameTime gameTime)
         {
@@ -766,7 +794,7 @@
         #endregion
 
         /// <summary>
-        /// Draws the MenuItem
+        /// Draws the Item
         /// </summary>
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
@@ -782,7 +810,7 @@
         internal abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix transform);
 
         /// <summary>
-        /// Reset the MenuItem to a fresh state
+        /// Reset the Item to a fresh state
         /// </summary>
         public virtual void Reset(bool isFocus)
         {
