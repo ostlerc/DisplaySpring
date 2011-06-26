@@ -16,10 +16,10 @@ namespace DisplaySpring.Menus
     public class MenuButton : MenuItem
     {
         #region Member Variables
-        protected Texture2D m_bg;
-        protected Texture2D m_focused;
-        protected float m_textureHeight;
-        protected float m_textureWidth;
+        internal Texture2D m_bg;
+        internal Texture2D m_focused;
+        internal float m_textureHeight;
+        internal float m_textureWidth;
 
         /// <summary>
         /// The focus background of the button.
@@ -41,10 +41,10 @@ namespace DisplaySpring.Menus
             set { m_bg = value; }
         }
 
-        protected String m_label;
+        internal String m_label;
         internal SpriteFont m_font;
-        protected Color m_color = Color.Gold;
-        protected Color m_focusColor = Color.Black;
+        internal Color m_color = Color.Gold;
+        internal Color m_focusColor = Color.Black;
         private Vector2 fontSize;
         private float m_textScale = 1.0f;
         #endregion
