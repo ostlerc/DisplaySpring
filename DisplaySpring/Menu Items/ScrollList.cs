@@ -239,12 +239,56 @@
 
         internal override float StaticHeight
         {
-            get { return 0; }
+            get 
+            {
+                if (m_items.Count == 0)
+                    return 0;
+
+                float h = 0;
+                List<Item> vb = visibleItems();
+
+                foreach( Item item in vb)
+                {
+                    if (m_direction == Orientation.Horizontal)
+                        h = Math.Max(h, item.StaticHeight);
+                    else
+                        h += item.StaticHeight;
+                }
+
+                if (m_direction == Orientation.Horizontal)
+                    return h;
+
+                h += Spacing * (vb.Count - 1);
+
+                return Math.Max(h,0);
+            }
         }
 
         internal override float StaticWidth
         {
-            get { return 0; }
+            get
+            {
+                if (m_items.Count == 0)
+                    return 0;
+
+                float w = 0;
+                List<Item> items = visibleItems();
+
+                foreach( Item item in items)
+                {
+                    if (m_direction == Orientation.Vertical)
+                        w = Math.Max(w, item.StaticWidth);
+                    else
+                        w += item.StaticWidth;
+                }
+
+                if (m_direction == Orientation.Vertical)
+                    return w;
+
+                w += Spacing * (items.Count - 1);
+
+                return Math.Max(w,0);
+            }
         }
 
         /// <summary>
@@ -372,7 +416,7 @@
                     visibleItems++;
 
             m_scroll.ObjectCount = visibleItems;
-            m_scroll.VisibleCount = m_viewCount;
+            m_scroll.VisibleCount = Math.Min(m_viewCount, visibleItems);
             int invis = 0;
             for (int x = 0; x < m_startIndex; x++)
                 if (!m_items[x].Visible)
