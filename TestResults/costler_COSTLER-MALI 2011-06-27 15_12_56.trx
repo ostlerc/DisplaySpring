@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="f6902df3-2dd7-4c9f-bc15-e9f1c1ca42bd" name="costler@COSTLER-MALI 2011-06-27 15:12:56" runUser="costler-mali\costler" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Local" id="eb018efc-5fa8-4894-bbc4-5a79bd0fd617">
+    <Description>These are default test settings for a local test run.</Description>
+    <Deployment enabled="false" runDeploymentRoot="costler_COSTLER-MALI 2011-06-27 15_12_56">
+      <DeploymentItem filename="C:\src\GMAUtils\DisplaySpring\DisplaySpring.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2011-06-27T15:12:56.9455786-06:00" queuing="2011-06-27T15:12:57.9136340-06:00" start="2011-06-27T15:12:57.9816378-06:00" finish="2011-06-27T15:13:50.3066307-06:00" />
+  <ResultSummary outcome="Error">
+    <Counters total="1" executed="1" error="0" failed="0" timeout="0" aborted="1" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+    <RunInfos>
+      <RunInfo computerName="COSTLER-MALI" outcome="Error" timestamp="2011-06-27T15:13:50.3066307-06:00">
+        <Text>Test host process exited unexpectedly.</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="TestMethod1" storage="c:\src\gmautils\displayspring\displayspringtest\bin\release\displayspringtest.dll" id="a47e2238-04a1-bf49-10d3-aaecbf444bb5">
+      <Execution id="5ec89939-c845-4fc3-9cbf-d3f7d7e516cd" />
+      <TestMethod codeBase="C:/src/GMAUtils/DisplaySpring/DisplaySpringTest/bin/Release/DisplaySpringTest.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="DisplaySpringTest.UnitTest1, DisplaySpringTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestMethod1" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="a47e2238-04a1-bf49-10d3-aaecbf444bb5" executionId="5ec89939-c845-4fc3-9cbf-d3f7d7e516cd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="5ec89939-c845-4fc3-9cbf-d3f7d7e516cd" testId="a47e2238-04a1-bf49-10d3-aaecbf444bb5" testName="TestMethod1" computerName="COSTLER-MALI" duration="00:00:52.2869907" startTime="2011-06-27T15:12:58.0196400-06:00" endTime="2011-06-27T15:13:50.3066307-06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Aborted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5ec89939-c845-4fc3-9cbf-d3f7d7e516cd">
+    </UnitTestResult>
+  </Results>
+</TestRun>

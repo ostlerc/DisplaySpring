@@ -1,0 +1,6 @@
+C:\src\GMAUtils\GMAMenu\GMAMenu\bin\Xbox 360\Debug\GMAMenu.dll
+C:\src\GMAUtils\GMAMenu\GMAMenu\bin\Xbox 360\Debug\GMAMenu.pdb
+C:\src\GMAUtils\GMAMenu\GMAMenu\obj\Xbox 360\Debug\ResolveAssemblyReference.cache
+C:\src\GMAUtils\GMAMenu\GMAMenu\obj\Xbox 360\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\src\GMAUtils\GMAMenu\GMAMenu\obj\Xbox 360\Debug\GMAMenu.dll
+C:\src\GMAUtils\GMAMenu\GMAMenu\obj\Xbox 360\Debug\GMAMenu.pdb

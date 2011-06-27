@@ -107,6 +107,7 @@
 
             Vector2 center = new Vector2(Width, Height) / 2f;
 
+            //TODO: this hack must be fixed, rotation breaks this
             int len = m_unitLength * m_selectedIndex;
 
             spriteBatch.Draw(m_bg, position, null, Color.White*Alpha, rotation, center, scale, SpriteEffects.None, 0);

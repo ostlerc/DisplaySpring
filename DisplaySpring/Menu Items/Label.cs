@@ -102,11 +102,11 @@
             float rotation;
             DecomposeMatrix(ref local, out position, out rotation, out scale);
 
-            Vector2 fontCenter = m_textSize / 2f;
+            Vector2 center = m_textSize / 2f;
             Color textColor = (Focus ? FontFocusColor : FontColor) * ScreenAlpha;
 
             if (!String.IsNullOrEmpty(Text))//label
-                spriteBatch.DrawString(Font, Text, position, textColor, rotation, fontCenter, scale, SpriteEffects.None, Depth);
+                spriteBatch.DrawString(Font, Text, position, textColor, rotation, center, scale, SpriteEffects.None, Depth);
 
             foreach (Item child in Children)
                 child.Draw(gameTime, spriteBatch, local);

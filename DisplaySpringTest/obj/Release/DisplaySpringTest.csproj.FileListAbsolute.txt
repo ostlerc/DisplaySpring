@@ -1,0 +1,8 @@
+C:\src\GMAUtils\DisplaySpring\DisplaySpringTest\bin\Release\DisplaySpringTest.dll
+C:\src\GMAUtils\DisplaySpring\DisplaySpringTest\bin\Release\DisplaySpringTest.pdb
+C:\src\GMAUtils\DisplaySpring\DisplaySpringTest\bin\Release\DisplaySpring.dll
+C:\src\GMAUtils\DisplaySpring\DisplaySpringTest\bin\Release\DisplaySpring.pdb
+C:\src\GMAUtils\DisplaySpring\DisplaySpringTest\bin\Release\DisplaySpring.xml
+C:\src\GMAUtils\DisplaySpring\DisplaySpringTest\obj\Release\ResolveAssemblyReference.cache
+C:\src\GMAUtils\DisplaySpring\DisplaySpringTest\obj\Release\DisplaySpringTest.dll
+C:\src\GMAUtils\DisplaySpring\DisplaySpringTest\obj\Release\DisplaySpringTest.pdb

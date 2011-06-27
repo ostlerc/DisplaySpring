@@ -1,0 +1,13 @@
+C:\src\GMAUtils\GMAMenu\GMAMenu\bin\x86\Debug\DisplaySpring.dll
+C:\src\GMAUtils\GMAMenu\GMAMenu\bin\x86\Debug\DisplaySpring.pdb
+C:\src\GMAUtils\GMAMenu\GMAMenu\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\src\GMAUtils\GMAMenu\GMAMenu\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\src\GMAUtils\GMAMenu\GMAMenu\obj\x86\Debug\DisplaySpring.dll
+C:\src\GMAUtils\GMAMenu\GMAMenu\obj\x86\Debug\DisplaySpring.pdb
+C:\src\GMAUtils\DisplaySpring\DisplaySpring\bin\x86\Debug\DisplaySpring.dll
+C:\src\GMAUtils\DisplaySpring\DisplaySpring\bin\x86\Debug\DisplaySpring.pdb
+C:\src\GMAUtils\DisplaySpring\DisplaySpring\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\src\GMAUtils\DisplaySpring\DisplaySpring\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\src\GMAUtils\DisplaySpring\DisplaySpring\obj\x86\Debug\DisplaySpring.dll
+C:\src\GMAUtils\DisplaySpring\DisplaySpring\obj\x86\Debug\DisplaySpring.pdb
+C:\src\GMAUtils\DisplaySpring\DisplaySpring\bin\x86\Debug\DisplaySpring.xml

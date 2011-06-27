@@ -1,0 +1,6 @@
+C:\src\GMAUtils\DisplaySpring\DisplaySpring\obj\Xbox 360\Release\ResolveAssemblyReference.cache
+C:\src\GMAUtils\DisplaySpring\DisplaySpring\obj\Xbox 360\Release\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\src\GMAUtils\DisplaySpring\DisplaySpring\obj\Xbox 360\Release\GMAMenu.dll
+C:\src\GMAUtils\DisplaySpring\DisplaySpring\bin\Xbox 360\Release\GMAMenu.dll
+C:\src\GMAUtils\DisplaySpring\DisplaySpring\bin\Xbox 360\Release\GMAMenu.pdb
+C:\src\GMAUtils\DisplaySpring\DisplaySpring\obj\Xbox 360\Release\GMAMenu.pdb
