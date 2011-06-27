@@ -16,15 +16,36 @@
 
         #region Member variables
 
+        /// <summary>
+        /// Orientation of the ScrollList
+        /// </summary>
         public enum Orientation
         {
+            /// <summary>
+            /// Items will be layed out horizontally
+            /// </summary>
             Horizontal,
+
+            /// <summary>
+            /// Items will be layed out Vertically
+            /// </summary>
             Vertical
         }
 
+        /// <summary>
+        /// Defines on which side of the list the scroll bar will appear
+        /// Note: For Horizontal, Left signifies Top and Right signifies Bottom
+        /// </summary>
         public enum ScrollBarPosition
         {
+            /// <summary>
+            /// ScrolLBar will be on the left side of the ScrollList
+            /// </summary>
             Left,
+
+            /// <summary>
+            /// ScrolLBar will be on the right side of the ScrollList
+            /// </summary>
             Right
         };
 
@@ -35,8 +56,17 @@
         internal float m_scrollSpacing = 15f;
         internal bool m_wrap = true;
         internal bool m_ignoreEvents = false; 
+
+        /// <summary>
+        /// Delegate that comes with a index parameter
+        /// </summary>
         public delegate void MenuActionInt(int idx);
+
+        /// <summary>
+        /// This is a delegate that is invoked when the index of the ScrollList changes
+        /// </summary>
         public MenuActionInt IndexChanged;
+
         internal ScrollBar m_scroll;
         internal List<Item> m_items = new List<Item>();
         internal Orientation m_direction = Orientation.Vertical;
@@ -82,6 +112,9 @@
 
         internal int StartIndex { get { return m_startIndex; } }
 
+        /// <summary>
+        /// Stores the orientation of the object
+        /// </summary>
         public Orientation Direction
         {
             get { return m_direction; }
@@ -92,6 +125,9 @@
             }
         }
 
+        /// <summary>
+        /// ScrollBarPosition for the ScrollList's ScrollBar
+        /// </summary>
         public ScrollBarPosition ScrollPosition
         {
             get { return m_scrollPosition; }
@@ -333,12 +369,19 @@
         #endregion
 
         #region Constructors
+        /// <summary>
+        /// Create an empty scroll list that can only show up to 'viewCount' items at one time
+        /// without needing a ScrollBar present.
+        /// </summary>
         public ScrollList(Item parent, MultiController c, int viewCount)
             : base(parent, c)
         {
             Initialize(viewCount);
         }
 
+        /// <summary>
+        /// Create and empty ScrollList
+        /// </summary>
         public ScrollList(Item parent, MultiController c)
             : base(parent, c)
         {
@@ -443,6 +486,9 @@
             }
         }
 
+        /// <summary>
+        /// Reset the ScrollList to a fresh state
+        /// </summary>
         public override void Reset(bool isFocus)
         {
             for ( int x = 1; x < m_items.Count; x ++)
@@ -628,6 +674,9 @@
 
         #endregion
 
+        /// <summary>
+        /// Updates the ScrollList
+        /// </summary>
         public override void Update(GameTime gameTime)
         {
             foreach( Item item in m_items)

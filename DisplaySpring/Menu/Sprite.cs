@@ -13,7 +13,14 @@
     [Flags]
     public enum AnimateType
     {
+        /// <summary>
+        /// No Animation Type
+        /// </summary>
         None,
+
+        /// <summary>
+        /// The object will animate on its size. Growing and Shrinking over a period of time
+        /// </summary>
         Size
     }
 
