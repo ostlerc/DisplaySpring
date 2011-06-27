@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using System.Reflection;
-using System.IO;
-
-namespace DisplaySpring
+﻿namespace DisplaySpring
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Audio;
+    using Microsoft.Xna.Framework.Content;
+    using System.Reflection;
+    using System.IO;
+
     /// <summary>
     /// A Delegate to represent specific callback events in a menu
     /// </summary>

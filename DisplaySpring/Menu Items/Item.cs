@@ -116,7 +116,7 @@
         private float m_height;
 
         internal Vector2 m_pos = Vector2.Zero;
-        internal AnimateType m_animation = AnimateType.Size;
+        internal AnimateType m_animation = AnimateType.None;
         internal bool m_fade = true;
         internal Animation m_alpha;
         internal SoundEffect m_focusSound;
@@ -243,8 +243,6 @@
             {
                 Children.Remove(m_rectCenter);
             }
-
-            forceRefresh();
 
             m_rectSize = new Button(ScrollBar.CreateRectangleBorder((int)Width, (int)Height, debug_thickness, debug_color), this) { Scale = Vector2.One / Scale };
             m_rectStaticSize = new Button(ScrollBar.CreateRectangleBorder((int)MeasureWidth, (int)MeasureHeight, debug_thickness, debug_color), this) { Scale = Vector2.One / Scale };
@@ -1009,11 +1007,33 @@
         }
 
         /// <summary>
+        /// Transform of button with animation transform included. (scale, grow / shrink)
+        /// </summary>
+        internal virtual Matrix AnimationTransform(GameTime gameTime)
+        {
+            Matrix animScale, local;
+            local = ItemTransform;
+            float fAnimVal = AnimationValue(gameTime);
+            Matrix.CreateScale(fAnimVal, fAnimVal, 1, out animScale);
+            return Item.CombineMatrix(animScale, ref local);
+        }
+
+        /// <summary>
         /// helper function used for animation
         /// </summary>
         internal double doubleMod(double lhs, double rhs)
         {
             return Convert.ToDouble(Convert.ToDecimal(lhs) % Convert.ToDecimal(rhs));
+        }
+
+        internal virtual void childAdded(Item mi)
+        {
+            forceRefresh();
+        }
+
+        internal virtual void childRemoved(Item mi)
+        {
+            forceRefresh();
         }
 
         #endregion

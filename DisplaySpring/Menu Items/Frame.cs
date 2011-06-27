@@ -124,10 +124,13 @@
             Height = size.Y;
         }
 
-        internal override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix transform) 
+        internal override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix parentTransform) 
         {
+            if (!Visible)
+                return;
+
             foreach (Item child in Children)
-                child.Draw(gameTime, spriteBatch, CombineMatrix(ItemTransform, ref transform));
+                child.Draw(gameTime, spriteBatch, CombineMatrix(AnimationTransform(gameTime), ref parentTransform));
         }
 
         #endregion
@@ -184,14 +187,6 @@
         }
 
 
-        internal void childAdded(Item mi)
-        {
-            forceRefresh();
-        }
-        internal void childRemoved(Item mi)
-        {
-            forceRefresh();
-        }
         #endregion
     }
 }

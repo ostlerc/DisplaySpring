@@ -40,6 +40,7 @@
                 throw new Exception("You must call Menu.LoadContent() to use a Button");
             m_textSize = Font.MeasureString(text);
             m_text = text;
+            Animation = AnimateType.Size;
         }
 
         #endregion
@@ -90,9 +91,12 @@
 
         internal override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix parentTransform)
         {
+            if (!Visible)
+                return;
+
             //create transform matrix and multiply them backwards order, then decompose
             //to get out info we want
-            Matrix local = Item.CombineMatrix(ItemTransform, ref parentTransform);
+            Matrix local = Item.CombineMatrix(AnimationTransform(gameTime), ref parentTransform);
 
             Vector2 position, scale;
             float rotation;

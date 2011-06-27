@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
-
-namespace DisplaySpring
+﻿namespace DisplaySpring
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework;
+
     /// <summary>
     /// Class that handles creating / using textures that represent a ScrollBar
     /// </summary>
@@ -60,11 +60,12 @@ namespace DisplaySpring
         /// <summary>
         /// A simple scrollbar that can be vertical or horizontal with a few custom options
         /// </summary>
+        /// <param name="parent">parent of the scrollbar</param>
         /// <param name="width">width of the scrollbar</param>
         /// <param name="height">height of the scrollbar</param>
         /// <param name="objCount">amount of items in the container</param>
         /// <param name="visibleUnits">amount of items that can be seen before scrolling is necessary</param>
-        public ScrollBar(int width, int height, int objCount, int visibleUnits) : base(null) //TODO fix this base call with a parent
+        public ScrollBar(Item parent, int width, int height, int objCount, int visibleUnits) : base(parent) //TODO fix this base call with a parent
         {
             m_objectCount = objCount;
             Width = width;
@@ -92,7 +93,7 @@ namespace DisplaySpring
 
         internal override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix parentTransform)
         {
-            if (m_slider == null || m_bg == null || !m_visible)
+            if (m_slider == null || m_bg == null || !Visible)
                 return;
 
             if (m_visibleCount >= m_objectCount)

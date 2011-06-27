@@ -192,9 +192,15 @@
             m_label = new Label(this, text);
             m_label.Depth = Depth - .01f;
 
+            Animation = AnimateType.Size;
+
             refreshItem();
         }
 
+        /// <summary>
+        /// Gets or sets the focus for the menu item
+        /// On set to true the OnFocus delegate will be called and FocusSound will play
+        /// </summary>
         public override bool Focus
         {
             get { return base.Focus; }
@@ -209,20 +215,11 @@
 
         #region Class Functions
 
-        /// <summary>
-        /// Transform of button with animation transform included. (scale, grow / shrink)
-        /// </summary>
-        internal virtual Matrix AnimationTransform(GameTime gameTime)
-        {
-            Matrix animScale, local;
-            local = ItemTransform;
-            float fAnimVal = AnimationValue(gameTime);
-            Matrix.CreateScale(fAnimVal, fAnimVal, 1, out animScale);
-            return Item.CombineMatrix(animScale, ref local);
-        }
-
         internal override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix parentTransform)
         {
+            if (!Visible)
+                return;
+
             //create transform matrix and multiply them backwards order, then decompose
             //to get out info we want
             Matrix local = Item.CombineMatrix(AnimationTransform(gameTime), ref parentTransform);
