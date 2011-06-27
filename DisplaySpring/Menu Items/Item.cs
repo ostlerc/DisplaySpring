@@ -74,6 +74,7 @@
         private uint m_layoutStretch = 1;
         private HorizontalAlignmentType m_horizontalAlignment = HAlign.Center;
         private VerticalAlignmentType m_verticalAlignment = VAlign.Center;
+        private Vector2 m_center = Vector2.Zero;
 
         /// <summary>
         /// Default SelectSound
@@ -544,13 +545,17 @@
         {
             get
             {
-                Matrix rotM, scaleM, posM, temp, local;
+                Matrix rotM, scaleM, posM, temp, centerMp, centerMn, local;
 
+                Matrix.CreateTranslation(Center.X - Position.X, Center.Y - Position.Y, 0, out centerMp);
+                Matrix.CreateTranslation(-Center.X + Position.X, -Center.Y + Position.Y, 0, out centerMn);
                 Matrix.CreateRotationZ(Rotation, out rotM);
                 Matrix.CreateScale(Scale.X, Scale.Y, 1, out scaleM);
                 Matrix.CreateTranslation(Position.X, Position.Y, 0, out posM);
 
-                Matrix.Multiply(ref scaleM, ref rotM, out temp);
+                Matrix.Multiply(ref scaleM, ref centerMn, out temp);
+                Matrix.Multiply(ref temp, ref rotM, out temp);
+                Matrix.Multiply(ref temp, ref centerMp, out local);
                 Matrix.Multiply(ref temp, ref posM, out local);
                 return local;
             }
@@ -604,7 +609,7 @@
         /// <summary>
         /// Center position of Item. By default it is the items position.
         /// </summary>
-        public virtual Vector2 Center { get { return m_pos; } }
+        public virtual Vector2 Center { get { return m_pos + m_center; } set { m_center = value; } }
 
         /// <summary>
         /// Starting alpha value. Default value of 0
@@ -838,6 +843,9 @@
                 m_Focus = false;
         }
 
+        /// <summary>
+        /// Used to change parents of an Item
+        /// </summary>
         internal virtual void Migrate(Item newParent)
         {
             if(Parent != null)
