@@ -251,6 +251,8 @@
             forceRefresh();
         }
 
+#endif
+
         /// <summary>
         /// Will force a refresh on this item.
         /// If it has a parent, the parent will
@@ -263,7 +265,6 @@
             else
                 refreshItem();
         }
-#endif
 
         /// <summary>
         /// Used in association with Parent
@@ -944,7 +945,7 @@
         /// Primary way of finding exactly where an object is on the screen
         /// Position is relative to parents, this way you can see the absolute position
         /// </summary>
-        public Vector2 screenCoords()
+        public virtual Vector2 screenCoords()
         {
             Vector2 pos = Position;
             Item p = Parent;
@@ -1021,7 +1022,7 @@
         /// <summary>
         /// helper function used for animation
         /// </summary>
-        internal double doubleMod(double lhs, double rhs)
+        internal static double doubleMod(double lhs, double rhs)
         {
             return Convert.ToDouble(Convert.ToDecimal(lhs) % Convert.ToDecimal(rhs));
         }
