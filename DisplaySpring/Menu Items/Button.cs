@@ -44,7 +44,7 @@
         /// <summary>
         /// Label of the Button
         /// </summary>
-        public Label ButtonLabel { get { return m_label; } set { m_label = value; } }
+        public Label TextLabel { get { return m_label; } set { m_label = value; } }
 
         #endregion
 
@@ -193,6 +193,16 @@
             m_label.Depth = Depth - .01f;
 
             refreshItem();
+        }
+
+        public override bool Focus
+        {
+            get { return base.Focus; }
+            set
+            {
+                base.Focus = value;
+                m_label.Focus = value;
+            }
         }
         #endregion
         #endregion

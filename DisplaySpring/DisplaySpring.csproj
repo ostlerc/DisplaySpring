@@ -95,6 +95,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Menu Items\MenuItemContainer.cs" />
     <Compile Include="Utility\Animation.cs" />
     <Compile Include="Utility\Controller.cs" />
     <Compile Include="Menu Items\Label.cs" />

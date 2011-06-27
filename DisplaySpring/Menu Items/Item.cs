@@ -480,7 +480,7 @@
         /// <summary>
         /// Position of the object. Default is Vector2.Zero, which is center based.
         /// </summary>
-        public virtual Vector2 Position { get { return m_pos; } set { m_pos = value;  } }
+        public virtual Vector2 Position { get { return m_pos; } set { m_pos = value; } }
 
         /// <summary>
         /// Animation type of the item
@@ -590,10 +590,20 @@
         /// <summary>
         /// The item will listen for input on this controller
         /// </summary>
-        public virtual MultiController ItemController { get { return m_controller; } set { m_controller = value; } }
+        public virtual MultiController ItemController 
+        { 
+            get { return m_controller; }
+            set 
+            {
+                m_controller = value;
+
+                foreach (var v in Children)
+                    v.ItemController = value;
+            }
+        }
 
         /// <summary>
-        /// Center position of Item. By default it is the item position.
+        /// Center position of Item. By default it is the items position.
         /// </summary>
         public virtual Vector2 Center { get { return m_pos; } }
 
