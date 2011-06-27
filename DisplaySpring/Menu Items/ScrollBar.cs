@@ -99,7 +99,7 @@
             if (m_visibleCount >= m_objectCount)
                 return;
 
-            Matrix local = Item.CombineMatrix(ItemTransform, ref parentTransform);
+            Matrix local = Item.CombineMatrix(AnimationTransform(gameTime), ref parentTransform);
 
             Vector2 position, scale;
             float rotation;

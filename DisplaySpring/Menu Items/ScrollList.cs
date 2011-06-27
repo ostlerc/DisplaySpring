@@ -150,7 +150,8 @@
             get { return base.Focus; }
             set
             {
-                m_items[m_selectedIndex].Focus = value;
+                if(m_selectedIndex >= 0)
+                    m_items[m_selectedIndex].Focus = value;
 
                 base.Focus = value;
             }
@@ -165,7 +166,9 @@
             get { return base.KeepFocus; }
             set
             {
-                m_items[m_selectedIndex].KeepFocus = value;
+                if(m_selectedIndex >= 0)
+                    m_items[m_selectedIndex].KeepFocus = value;
+
                 base.KeepFocus = value;
             }
         }
@@ -616,7 +619,7 @@
                 return;
 
             float offset;
-            Matrix local = Item.CombineMatrix(ItemTransform, ref parentTransform);
+            Matrix local = Item.CombineMatrix(AnimationTransform(gameTime), ref parentTransform);
 
             if (m_direction == Orientation.Horizontal)
                 offset = -MeasureWidth / 2f;
@@ -645,7 +648,7 @@
                 item.Draw(gameTime, spriteBatch, local);
             }
 
-            m_scroll.Draw(gameTime, spriteBatch);
+            m_scroll.Draw(gameTime, spriteBatch, local);
         }
 
         internal override void childAdded(Item mi)

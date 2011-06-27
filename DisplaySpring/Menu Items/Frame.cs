@@ -89,13 +89,23 @@
         #region Constructors
 
         /// <summary>
-        /// Default constructor, sets position to Vector2.Zero
+        /// Create a Frame with parents size.
         /// </summary>
         public Frame(Item parent) 
             : base(parent)
         {
             Width = parent.Width;
             Height = parent.Height;
+        }
+
+        /// <summary>
+        /// Create a Frame with given size.
+        /// </summary>
+        public Frame(Item parent, Vector2 size) 
+            : base(parent)
+        {
+            Width = size.X;
+            Height = size.Y;
         }
 
         /// <summary>
