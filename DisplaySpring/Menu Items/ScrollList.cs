@@ -53,7 +53,7 @@
         internal int m_selectedIndex = -1;
         internal int m_startIndex = 0;
         internal float m_spacing = 20f;
-        internal float m_scrollSpacing = 15f;
+        internal float m_scrollSpacing = 35f;
         internal bool m_wrap = true;
         internal bool m_ignoreEvents = false; 
 
@@ -131,15 +131,12 @@
         public ScrollBarPosition ScrollPosition
         {
             get { return m_scrollPosition; }
-            set { m_scrollPosition = value; UpdateScrollBar(true); }
+            set { m_scrollPosition = value; UpdateScrollBar(true); forceRefresh(); }
         }
 
         private void CreateScrollBar()
         {
             int dir = m_scrollPosition == ScrollBarPosition.Left ? 1 : -1;
-
-            if (m_scroll != null)
-                Children.Remove(m_scroll);
 
             if (m_scroll != null)
             {
@@ -673,17 +670,6 @@
         }
 
         #endregion
-
-        /// <summary>
-        /// Updates the ScrollList
-        /// </summary>
-        public override void Update(GameTime gameTime)
-        {
-            foreach( Item item in m_items)
-                item.Update(gameTime);
-
-            base.Update(gameTime);
-        }
 
         private List<Item> visibleItems()
         {

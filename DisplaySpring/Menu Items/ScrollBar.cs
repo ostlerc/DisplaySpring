@@ -127,12 +127,14 @@
 
             spriteBatch.Draw(m_bg, position, null, Color.White*Alpha, rotation, center, scale, SpriteEffects.None, 0);
 
-            int len = m_unitLength * (m_selectedIndex+1);
+            int offset = m_unitLength * (m_selectedIndex);
+            int len = m_unitLength * m_visibleCount;
 
-            if (StaticWidth > StaticHeight) //horizontal
-                m_slider.Position = Vector2.UnitX * (len - m_bg.Width / 2);
+            /*if (StaticWidth > StaticHeight) //horizontal
+                m_slider.Position = Vector2.UnitX * (len);
             else
-                m_slider.Position = Vector2.UnitY * (len - m_bg.Height / 2);
+                m_slider.Position = Vector2.UnitY * (m_slider.Height - m_bg.Height);*/
+            m_slider.Position = Vector2.UnitY * ((len - m_bg.Height) / 2 + offset);
 
             m_slider.Draw(gameTime, spriteBatch, CombineMatrix(AnimationTransform(gameTime), ref parentTransform));
         }

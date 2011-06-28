@@ -191,6 +191,7 @@
             //TODO: make sure height and width of button are correct with label
             m_label = new Label(this, text);
             m_label.Depth = Depth - .01f;
+            m_label.Animation = AnimateType.None;
 
             Animation = AnimateType.Size;
 
@@ -206,9 +207,17 @@
             get { return base.Focus; }
             set
             {
+                if(m_label != null)
+                    m_label.Focus = value;
+
                 base.Focus = value;
-                m_label.Focus = value;
             }
+        }
+
+        public override void Reset(bool isFocus)
+        {
+            m_label.Reset(isFocus);
+            base.Reset(isFocus);
         }
         #endregion
         #endregion
@@ -222,7 +231,7 @@
 
             //create transform matrix and multiply them backwards order, then decompose
             //to get out info we want
-            Matrix local = Item.CombineMatrix(AnimationTransform(gameTime), ref parentTransform);
+            Matrix local = CombineMatrix(AnimationTransform(gameTime), ref parentTransform);
 
             Vector2 position, scale;
             float rotation;
