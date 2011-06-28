@@ -10,4 +10,3 @@ C:\src\GMAUtils\DisplaySpring\DisplaySpring\obj\x86\Debug\ResolveAssemblyReferen
 C:\src\GMAUtils\DisplaySpring\DisplaySpring\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\src\GMAUtils\DisplaySpring\DisplaySpring\obj\x86\Debug\DisplaySpring.dll
 C:\src\GMAUtils\DisplaySpring\DisplaySpring\obj\x86\Debug\DisplaySpring.pdb
-C:\src\GMAUtils\DisplaySpring\DisplaySpring\bin\x86\Debug\DisplaySpring.xml

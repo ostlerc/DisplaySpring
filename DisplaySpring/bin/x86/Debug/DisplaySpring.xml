@@ -416,11 +416,6 @@
             The item will listen for input on this controller
             </summary>
         </member>
-        <member name="P:DisplaySpring.Item.Center">
-            <summary>
-            Center position of Item. By default it is the items position.
-            </summary>
-        </member>
         <member name="P:DisplaySpring.Item.StartAlpha">
             <summary>
             Starting alpha value. Default value of 0

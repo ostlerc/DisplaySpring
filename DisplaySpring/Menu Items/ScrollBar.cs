@@ -13,7 +13,7 @@
     public class ScrollBar : Item
     {
         private Texture2D m_bg;
-        private Texture2D m_slider;
+        private Button m_slider = null;
 
         private int m_objectCount;
         private int m_visibleCount; //This represents the amount of objects shown on the screen before scrolling is necessary
@@ -75,10 +75,14 @@
             forceRefresh();
         }
 
+        bool lockRefresh = false;
+
         internal override void  refreshItem()
         {
-            if (m_objectCount < 1 || m_visibleCount < 1)
+            if (m_objectCount < 1 || m_visibleCount < 1 || lockRefresh)
                 return;
+
+            lockRefresh = true;
 
             if (Height > Width)
                 m_unitLength = (int)(Height / m_objectCount);
@@ -88,7 +92,29 @@
             m_length = m_unitLength * m_visibleCount;
 
             m_bg = CreateBackgroundTexture();
-            m_slider = CreateSliderTexture();
+
+            if (m_slider != null)
+                Children.Remove(m_slider);
+
+            Texture2D bg = CreateSliderTexture();
+
+            if (bg != null)
+            {
+                m_slider = new Button(this, bg);
+                m_slider.Fade = false;
+            }
+
+            base.refreshItem();
+
+            lockRefresh = false;
+        }
+
+        internal override void childAdded(Item mi)
+        {
+        }
+
+        internal override void childRemoved(Item mi)
+        {
         }
 
         internal override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix parentTransform)
@@ -105,19 +131,18 @@
             float rotation;
             DecomposeMatrix(ref local, out position, out rotation, out scale);
 
-            Vector2 center = new Vector2(Width, Height) / 2f;
-
-            //TODO: this hack must be fixed, rotation breaks this
-            int len = m_unitLength * m_selectedIndex;
+            Vector2 center = new Vector2(StaticWidth, StaticHeight) / 2f;
 
             spriteBatch.Draw(m_bg, position, null, Color.White*Alpha, rotation, center, scale, SpriteEffects.None, 0);
 
-            if (Width > Height) //horizontal
-                position += Vector2.UnitX * len;
-            else
-                position += Vector2.UnitY * len;
+            int len = m_unitLength * (m_selectedIndex+1);
 
-            spriteBatch.Draw(m_slider, position, null, Color.White*Alpha, rotation, center, scale, SpriteEffects.None, Depth + .0001f);
+            if (StaticWidth > StaticHeight) //horizontal
+                m_slider.Position = Vector2.UnitX * (len - m_bg.Width / 2);
+            else
+                m_slider.Position = Vector2.UnitY * (len - m_bg.Height / 2);
+
+            m_slider.Draw(gameTime, spriteBatch, CombineMatrix(AnimationTransform(gameTime), ref parentTransform));
         }
 
         private Texture2D CreateBackgroundTexture()
