@@ -1,6 +1,0 @@
-C:\src\GMAUtils\GMAMenu\GMAMenu\bin\x86\Release\GMAMenu.dll
-C:\src\GMAUtils\GMAMenu\GMAMenu\bin\x86\Release\GMAMenu.pdb
-C:\src\GMAUtils\GMAMenu\GMAMenu\obj\x86\Release\ResolveAssemblyReference.cache
-C:\src\GMAUtils\GMAMenu\GMAMenu\obj\x86\Release\Microsoft.Xna.Framework.RuntimeProfile.txt
-C:\src\GMAUtils\GMAMenu\GMAMenu\obj\x86\Release\GMAMenu.dll
-C:\src\GMAUtils\GMAMenu\GMAMenu\obj\x86\Release\GMAMenu.pdb

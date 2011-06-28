@@ -109,14 +109,6 @@
             lockRefresh = false;
         }
 
-        internal override void childAdded(Item mi)
-        {
-        }
-
-        internal override void childRemoved(Item mi)
-        {
-        }
-
         internal override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix parentTransform)
         {
             if (m_slider == null || m_bg == null || !Visible)

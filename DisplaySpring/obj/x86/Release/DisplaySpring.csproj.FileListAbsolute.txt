@@ -1,7 +1,0 @@
-C:\src\GMAUtils\DisplaySpring\DisplaySpring\obj\x86\Release\ResolveAssemblyReference.cache
-C:\src\GMAUtils\DisplaySpring\DisplaySpring\obj\x86\Release\Microsoft.Xna.Framework.RuntimeProfile.txt
-C:\src\GMAUtils\DisplaySpring\DisplaySpring\obj\x86\Release\DisplaySpring.dll
-C:\src\GMAUtils\DisplaySpring\DisplaySpring\obj\x86\Release\DisplaySpring.pdb
-C:\src\GMAUtils\DisplaySpring\DisplaySpring.dll
-C:\src\GMAUtils\DisplaySpring\DisplaySpring.pdb
-C:\src\GMAUtils\DisplaySpring\DisplaySpring.XML

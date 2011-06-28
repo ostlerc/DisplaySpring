@@ -133,13 +133,13 @@
                 {
                     if (KeepState)
                     {
-                        /*foreach (var mi in m_items)
+                        foreach (var mi in BaseFrame.Children)
                         {
                             if (mi.Focus)
                             {
                                 mi.KeepFocus = true; //sub menus to keep state
                             }
-                        }*/
+                        }
                         m_activeSubMenu.Reset();
                     }
 
@@ -278,12 +278,6 @@
                 if (!ActiveSubMenu.IsAlive)
                 {
                     ActiveSubMenu = null;
-
-                    /*foreach (Item mi in m_items)
-                    {
-                        mi.KeepFocus = false;
-                        mi.StartAlpha = m_alpha.StartVal;
-                    }*/
 
                     m_alpha.Reset();
                 }
