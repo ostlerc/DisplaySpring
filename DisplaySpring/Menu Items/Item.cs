@@ -232,22 +232,9 @@
 
         private void Debug()
         {
-            if (m_rectSize != null)
-            {
-                Children.Remove(m_rectSize);
-            }
-            if(m_rectStaticSize != null)
-            {
-                Children.Remove(m_rectStaticSize);
-            }
-            if(m_rectCenter != null)
-            {
-                Children.Remove(m_rectCenter);
-            }
-
-            m_rectSize = new Button(ScrollBar.CreateRectangleBorder((int)Width, (int)Height, debug_thickness, debug_color), this) { Scale = Vector2.One / Scale };
-            m_rectStaticSize = new Button(ScrollBar.CreateRectangleBorder((int)MeasureWidth, (int)MeasureHeight, debug_thickness, debug_color), this) { Scale = Vector2.One / Scale };
-            m_rectCenter = new Button(ScrollBar.CreateFilledRectangle((int)5, (int)5, Color.White), this) { Scale = Vector2.One / Scale };
+            m_rectSize = new Button(ScrollBar.CreateRectangleBorder((int)Width, (int)Height, debug_thickness, debug_color), null) { Fade = false };
+            m_rectStaticSize = new Button(ScrollBar.CreateRectangleBorder((int)StaticWidth, (int)StaticHeight, debug_thickness, debug_color), null) { Fade = false };
+            m_rectCenter = new Button(ScrollBar.CreateFilledRectangle((int)debug_thickness, (int)debug_thickness, Color.White), null) { Fade = false };
 
             forceRefresh();
         }
@@ -279,14 +266,13 @@
         {
             get { return m_parent; }
 
-            internal set
+            set
             {
                 m_parent = value;
 
-                if (value != null)
+                if (m_parent != null)
                 {
-                    Width = value.Width;
-                    Height = value.Height;
+                    m_parent.Children.Remove(this);
                 }
 
                 if (value != null && !value.Children.Contains(this))
@@ -329,8 +315,6 @@
                     m_scale.X = 1f;
 
                 m_horizontalAlignment = value;
-
-                Width = MeasureWidth;
             }
         }
 
@@ -347,8 +331,6 @@
                     m_scale.Y = 1f;
 
                 m_verticalAlignment = value;
-
-                Height = MeasureHeight;
             }
         }
 
@@ -459,6 +441,16 @@
             set 
             {
                 m_scale = value;
+#if DEBUG
+                /*if (m_rectSize != null)
+                    m_rectSize.Scale = Vector2.One / Scale;
+
+                if (m_rectStaticSize != null)
+                    m_rectStaticSize.Scale = Vector2.One / Scale;
+
+                if (m_rectCenter != null)
+                    m_rectCenter.Scale = Vector2.One / Scale;*/
+#endif
             }
         }
 
@@ -645,33 +637,19 @@
         #region Constructors
 
         /// <summary>
-        /// This is only allowed for the Menu to create the first base frame that is the adam parent
-        /// </summary>
-        internal Item() 
-        { 
-            Initialize(null);
-        }
-
-        /// <summary>
-        /// Create a Item with a parent and a controller
+        /// Create an Item with a parent and a controller
         /// </summary>
         public Item(Item parent, MultiController c) 
         {
-            if (parent == null)
-                throw new Exception("Item cannot have a null parent");
-
             Initialize(parent);
             m_controller = c;
         }
 
         /// <summary>
-        /// Create a Item with a parent
+        /// Create an Item with a parent
         /// </summary>
         public Item(Item parent) 
         {
-            if (parent == null)
-                throw new Exception("Item cannot have a null parent");
-
             Initialize(parent);
         }
 
@@ -807,7 +785,37 @@
                 return;
 
             Draw(gameTime, spriteBatch, Matrix.Identity);
+
+#if DEBUG
+            Matrix m = ItemTransform;
+            debugDraw(gameTime, spriteBatch, Matrix.Identity);
+#endif
         }
+
+#if DEBUG
+
+        internal void debugDraw(GameTime gameTime, SpriteBatch spriteBatch, Matrix parentTransform)
+        {
+#if DEBUG
+            debugDrawItem(gameTime, spriteBatch, m_rectSize, parentTransform, Size);
+            debugDrawItem(gameTime, spriteBatch, m_rectStaticSize, parentTransform, StaticSize);
+            debugDrawItem(gameTime, spriteBatch, m_rectCenter, parentTransform, new Vector2(debug_thickness, debug_thickness));
+
+            Matrix m = CombineMatrix(AnimationTransform(gameTime), ref parentTransform);
+            foreach (var v in Children)
+                v.debugDraw(gameTime, spriteBatch, m);
+#endif
+        }
+        internal void debugDrawItem(GameTime gameTime, SpriteBatch spriteBatch, Item item, Matrix parentTransform, Vector2 newSize)
+        {
+            if(item == null)
+                return;
+
+            item.Width = newSize.X;
+            item.Height = newSize.Y;
+            item.Draw(gameTime, spriteBatch, CombineMatrix(AnimationTransform(gameTime), ref parentTransform));
+        }
+#endif
 
         /// <summary>
         /// Internal Draw with matrix transform. Used for parent->child scale, rotation, position transformations
@@ -835,17 +843,6 @@
         }
 
         /// <summary>
-        /// Used to change parents of an Item
-        /// </summary>
-        internal virtual void Migrate(Item newParent)
-        {
-            if(Parent != null)
-                Parent.Children.Remove(this);
-
-            Parent = newParent;
-        }
-
-        /// <summary>
         /// Refreshes the items properties.
         /// This is to be called when specific child properties change
         /// that cause content alignment to change
@@ -859,13 +856,6 @@
                 return;
 
             Vector2 pos = Position;
-#if DEBUG
-            if (m_rectSize != null && m_rectCenter != null)
-            {
-                m_rectSize.Position = Position;
-                m_rectCenter.Position = Position;
-            }
-#endif
             switch (HorizontalAlignment)
             {
                 case HAlign.Left:
@@ -891,14 +881,6 @@
                     ScaleImageToHeight(Height);
                     break;
             }
-
-#if DEBUG
-            if (m_rectSize != null && m_rectCenter != null)
-            {
-                m_rectSize.Position = Position - pos;
-                m_rectCenter.Position = Position - pos;
-            }
-#endif
 
             Position = pos;
         }

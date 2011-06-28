@@ -330,19 +330,14 @@
             Used in association with Parent
             </summary>
         </member>
-        <member name="M:DisplaySpring.Item.#ctor">
-            <summary>
-            This is only allowed for the Menu to create the first base frame that is the adam parent
-            </summary>
-        </member>
         <member name="M:DisplaySpring.Item.#ctor(DisplaySpring.Item,DisplaySpring.MultiController)">
             <summary>
-            Create a Item with a parent and a controller
+            Create an Item with a parent and a controller
             </summary>
         </member>
         <member name="M:DisplaySpring.Item.#ctor(DisplaySpring.Item)">
             <summary>
-            Create a Item with a parent
+            Create an Item with a parent
             </summary>
         </member>
         <member name="M:DisplaySpring.Item.Update(Microsoft.Xna.Framework.GameTime)">
@@ -363,11 +358,6 @@
         <member name="M:DisplaySpring.Item.Reset(System.Boolean)">
             <summary>
             Reset the Item to a fresh state
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Item.Migrate(DisplaySpring.Item)">
-            <summary>
-            Used to change parents of an Item
             </summary>
         </member>
         <member name="M:DisplaySpring.Item.refreshItem">
@@ -1101,11 +1091,6 @@
         <member name="M:DisplaySpring.ScrollList.Reset(System.Boolean)">
             <summary>
             Reset the ScrollList to a fresh state
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.ScrollList.Update(Microsoft.Xna.Framework.GameTime)">
-            <summary>
-            Updates the ScrollList
             </summary>
         </member>
         <member name="P:DisplaySpring.ScrollList.ViewCount">

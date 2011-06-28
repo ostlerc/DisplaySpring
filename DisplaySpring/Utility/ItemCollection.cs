@@ -51,9 +51,11 @@
         protected override void RemoveItem(int index)
         {
             if (Items[index] != null)
+            {
                 Items[index].childRemoved(Items[index]);
+                Items[index].Parent = null;
+            }
 
-            Items[index].Parent = null;
             base.RemoveItem(index);
         }
 

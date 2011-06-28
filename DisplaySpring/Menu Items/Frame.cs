@@ -93,10 +93,7 @@
         /// </summary>
         public Frame(Item parent) 
             : base(parent)
-        {
-            Width = parent.Width;
-            Height = parent.Height;
-        }
+        { }
 
         /// <summary>
         /// Create a Frame with given size.
@@ -113,7 +110,7 @@
         /// This is only for the menu class to use as the super parent of a Menu
         /// </summary>
         internal Frame(Rectangle bounds)
-            : base()
+            : base(null)
         {
             Width = bounds.Width;
             Height = bounds.Height;
@@ -123,16 +120,6 @@
         #endregion
 
         #region Class Functions
-
-        /// <summary>
-        /// Set the size of a frame. This is helpful for not needing
-        /// to use all of the available space given from the parent.
-        /// </summary>
-        public void SetSize(Vector2 size)
-        {
-            Width = size.X;
-            Height = size.Y;
-        }
 
         internal override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix parentTransform) 
         {

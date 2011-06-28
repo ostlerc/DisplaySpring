@@ -83,7 +83,7 @@
         /// </summary>
         
         internal Button(Texture2D debugTexture, Item parent) 
-            : base()
+            : base(null)
         {
             //TODO: make debug not a Button but a sprite
             LayoutStretch = 0;
