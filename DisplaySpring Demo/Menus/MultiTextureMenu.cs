@@ -21,6 +21,8 @@
             : base(controllers, bounds)
         {
             multiFrame = new Frame(BaseFrame, new Vector2(400, 200));
+            multiFrame.Animation = AnimateType.Size;
+
             Button b = new Button(multiFrame, Item.ButtonTexture);
             b.Depth += .1f;
             b.HorizontalAlignment = HAlign.Stretch;

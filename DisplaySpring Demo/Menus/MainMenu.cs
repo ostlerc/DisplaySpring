@@ -40,6 +40,8 @@
             lbl.OnA = delegate() { ActiveSubMenu = new MultiTextureMenu(controllers, allControllers, bounds); };
             lbl = new Label(sl, "Stacked Item Menu");
             lbl.OnA = delegate() { ActiveSubMenu = new StackedItemMenu(controllers, allControllers, bounds); };
+            lbl = new Label(sl, "Option Button Menu");
+            lbl.OnA = delegate() { ActiveSubMenu = new OptionButtonMenu(controllers, allControllers, bounds); };
             lbl = new Label(sl, "Exit");
             lbl.OnA = delegate() { Close(); };
             Reset();

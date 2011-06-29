@@ -318,10 +318,10 @@
 
                 m_horizontalAlignment = value;
 
-                if (value != HAlign.Center && Parent is Frame)
+                if ((value != HAlign.Center && Parent is Frame) || !(Parent is Frame))
                 {
-                    Width = Parent.Width;
-                    Height = Parent.Height;
+                    Width = Parent.StaticWidth;
+                    Height = Parent.StaticHeight;
                     refreshItem();
                 }
             }
@@ -872,7 +872,8 @@
                 return;
 
             Vector2 pos = Position;
-            if (Parent is Frame && (Parent as Frame).Layout == Layout.None)
+
+            if (!(Parent is Frame) || (Parent is Frame && (Parent as Frame).Layout == Layout.None))
             {
                 if (HorizontalAlignment != HAlign.Center)
                     pos.X = 0;

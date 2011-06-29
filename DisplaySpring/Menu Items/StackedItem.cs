@@ -10,16 +10,19 @@
     /// <summary>
     /// A collection of Items, with only one visible or in focus at a time
     /// </summary>
-    public class StackedItem : Frame
+    public class StackedItem : Item
     {
         #region Member Variables
         private int m_currentIndex = -1;
+        private List<Item> m_items;
         #endregion
 
         #region Properties
 
         internal override void childAdded(Item mi)
         {
+            Items.Add(mi);
+
             if (m_currentIndex == -1)
             {
                 mi.Visible = true;
@@ -41,10 +44,10 @@
             get { return m_currentIndex; }
             set 
             {
-                if (value < Children.Count && value >= 0)
+                if (value < Items.Count && value >= 0)
                 {
                     m_currentIndex = value;
-                    SetCurrentItem(Children[m_currentIndex]);
+                    SetCurrentItem(Items[m_currentIndex]);
                 }
             }
         }
@@ -52,10 +55,10 @@
         /// <summary>
         /// Gets or sets the current Item list of the stack
         /// </summary>
-        public virtual ItemCollection Items
+        public virtual List<Item> Items
         {
-            get { return Children; }
-            set { m_ItemCollection = value; }
+            get { return m_items; }
+            set { m_items = value; }
         }
 
         /// <summary>
@@ -125,24 +128,27 @@
         /// <summary>
         /// Create a StackedItem with parents size.
         /// </summary>
-        public StackedItem(Item parent) 
+        public StackedItem(Frame parent) 
             : base(parent)
-        { }
+        {
+            Initialize();
+        }
 
         /// <summary>
         /// Create a StackedItem with given size.
         /// </summary>
-        public StackedItem(Item parent, Vector2 size) 
-            : base(parent, size)
-        { }
+        public StackedItem(Frame parent, Vector2 size) 
+            : base(parent)
+        {
+            Width = size.X;
+            Height = size.Y;
+            Initialize();
+        }
 
-        /// <summary>
-        /// Create a menu frame with specified bounds.
-        /// This is only for the menu class to use as the super parent of a Menu
-        /// </summary>
-        internal StackedItem(Rectangle bounds)
-            : base(bounds)
-        { }
+        void Initialize()
+        {
+            m_items = new List<Item>();
+        }
 
         #endregion
 
@@ -162,12 +168,15 @@
         /// </summary>
         public virtual void SetCurrentItem(Item item)
         {
-            if(!Children.Contains(item))
+            if(!Items.Contains(item))
                 return;
 
-            m_currentIndex = Children.IndexOf(item);
+            m_currentIndex = Items.IndexOf(item);
 
-            foreach (var v in Children)
+            Width = item.StaticWidth;
+            Height = item.StaticHeight;
+
+            foreach (var v in Items)
             {
                 v.Visible = false;
                 v.Enabled = false;
@@ -182,8 +191,8 @@
         /// </summary>
         public virtual Item CurrentItem()
         {
-            if (m_currentIndex >= 0 && m_currentIndex < Children.Count)
-                return Children[m_currentIndex];
+            if (m_currentIndex >= 0 && m_currentIndex < Items.Count)
+                return Items[m_currentIndex];
 
             return null;
         }

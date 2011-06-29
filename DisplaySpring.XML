@@ -1208,20 +1208,14 @@
             A collection of Items, with only one visible or in focus at a time
             </summary>
         </member>
-        <member name="M:DisplaySpring.StackedItem.#ctor(DisplaySpring.Item)">
+        <member name="M:DisplaySpring.StackedItem.#ctor(DisplaySpring.Frame)">
             <summary>
             Create a StackedItem with parents size.
             </summary>
         </member>
-        <member name="M:DisplaySpring.StackedItem.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Vector2)">
+        <member name="M:DisplaySpring.StackedItem.#ctor(DisplaySpring.Frame,Microsoft.Xna.Framework.Vector2)">
             <summary>
             Create a StackedItem with given size.
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.StackedItem.#ctor(Microsoft.Xna.Framework.Rectangle)">
-            <summary>
-            Create a menu frame with specified bounds.
-            This is only for the menu class to use as the super parent of a Menu
             </summary>
         </member>
         <member name="M:DisplaySpring.StackedItem.SetCurrentItem(DisplaySpring.Item)">
@@ -1252,6 +1246,16 @@
         <member name="P:DisplaySpring.StackedItem.StaticWidth">
             <summary>
             Width of the item. Layout space is not included. Scale is not included.
+            </summary>
+        </member>
+        <member name="T:DisplaySpring.OptionButton">
+            <summary>
+            A collection of Items, with only one visible or in focus at a time
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.OptionButton.#ctor(DisplaySpring.Frame,DisplaySpring.MultiController)">
+            <summary>
+            Create a StackedItem with parents size.
             </summary>
         </member>
     </members>

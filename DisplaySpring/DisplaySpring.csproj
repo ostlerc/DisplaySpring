@@ -96,6 +96,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Menu Items\OptionButton.cs" />
     <Compile Include="Menu Items\ScrollList.cs" />
     <Compile Include="Menu Items\StackedItem.cs" />
     <Compile Include="Utility\Animation.cs" />

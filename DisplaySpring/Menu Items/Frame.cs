@@ -183,7 +183,6 @@
             m_lockRefresh = false;
         }
 
-
         #endregion
     }
 }
