@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Menu Items\ScrollList.cs" />
+    <Compile Include="Menu Items\StackedItem.cs" />
     <Compile Include="Utility\Animation.cs" />
     <Compile Include="Utility\Controller.cs" />
     <Compile Include="Menu Items\Label.cs" />

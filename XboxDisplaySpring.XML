@@ -1036,16 +1036,16 @@
             Label of the Button
             </summary>
         </member>
-        <member name="P:DisplaySpring.Button.Depth">
-            <summary>
-            Depth of the button. Default is Menu.ButtonDrawDepth
-            By default 0 = front -> 1 = back
-            </summary>
-        </member>
         <member name="P:DisplaySpring.Button.Focus">
             <summary>
             Gets or sets the focus for the menu item
             On set to true the OnFocus delegate will be called and FocusSound will play
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Button.Depth">
+            <summary>
+            Depth of the button. Default is Menu.ButtonDrawDepth
+            By default 0 = front -> 1 = back
             </summary>
         </member>
         <member name="M:DisplaySpring.Controller.#ctor(Microsoft.Xna.Framework.PlayerIndex,DisplaySpring.UpdateEvent)">
@@ -1201,6 +1201,57 @@
         <member name="M:DisplaySpring.ItemCollection.SetItem(System.Int32,DisplaySpring.Item)">
             <summary>
             Set the specific item in the list to a new value
+            </summary>
+        </member>
+        <member name="T:DisplaySpring.StackedItem">
+            <summary>
+            A collection of Items, with only one visible or in focus at a time
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.StackedItem.#ctor(DisplaySpring.Item)">
+            <summary>
+            Create a StackedItem with parents size.
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.StackedItem.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Create a StackedItem with given size.
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.StackedItem.#ctor(Microsoft.Xna.Framework.Rectangle)">
+            <summary>
+            Create a menu frame with specified bounds.
+            This is only for the menu class to use as the super parent of a Menu
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.StackedItem.SetCurrentItem(DisplaySpring.Item)">
+            <summary>
+            Sets the current item for the stack
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.StackedItem.CurrentItem">
+            <summary>
+            Get's the currently visible item
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.StackedItem.CurrentIndex">
+            <summary>
+            Height of the item. Layout space is not included. Scale is not included.
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.StackedItem.Items">
+            <summary>
+            Gets or sets the current Item list of the stack
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.StackedItem.StaticHeight">
+            <summary>
+            Height of the item. Layout space is not included. Scale is not included.
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.StackedItem.StaticWidth">
+            <summary>
+            Width of the item. Layout space is not included. Scale is not included.
             </summary>
         </member>
     </members>

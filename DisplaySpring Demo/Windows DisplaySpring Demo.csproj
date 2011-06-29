@@ -94,6 +94,7 @@
     <Compile Include="Menus\FrameMenu.cs" />
     <Compile Include="Menus\MainMenu.cs" />
     <Compile Include="Menus\MultiTextureMenu.cs" />
+    <Compile Include="Menus\StackedItemMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

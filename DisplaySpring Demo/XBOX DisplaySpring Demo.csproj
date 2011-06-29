@@ -88,7 +88,6 @@
     <Reference Include="System.Net">
       <Private>False</Private>
     </Reference>
-    <Reference Include="XBOXDisplaySpring, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
@@ -98,6 +97,7 @@
     <Compile Include="Menus\FrameMenu.cs" />
     <Compile Include="Menus\MainMenu.cs" />
     <Compile Include="Menus\MultiTextureMenu.cs" />
+    <Compile Include="Menus\StackedItemMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +105,10 @@
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DisplaySpring\Xbox 360 Copy of DisplaySpring.csproj">
+      <Project>{A772DB77-BE80-45D0-BB11-D4B1D4A40AD3}</Project>
+      <Name>Xbox 360 Copy of DisplaySpring</Name>
+    </ProjectReference>
     <ProjectReference Include="Demo Content\DisplaySpring DemoContent.contentproj">
       <Project>{5B4A97D3-6B72-4606-9A95-8DFF1CEBA6FA}</Project>
       <Name>DisplaySpring DemoContent</Name>

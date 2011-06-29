@@ -50,6 +50,34 @@
 
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the focus for the menu item
+        /// On set to true the OnFocus delegate will be called and FocusSound will play
+        /// </summary>
+        public override bool Focus
+        {
+            get { return base.Focus; }
+            set
+            {
+                if(m_label != null)
+                    m_label.Enabled = value;
+
+                base.Focus = value;
+            }
+        }
+
+        public override bool Enabled
+        {
+            get { return base.Enabled; }
+            set
+            {
+                if(m_label != null)
+                    m_label.Enabled = value;
+
+                base.Enabled = value;
+            }
+        }
+
         internal override float StaticWidth
         {
             get { return m_textureWidth; }
@@ -197,22 +225,6 @@
             Animation = AnimateType.Size;
 
             refreshItem();
-        }
-
-        /// <summary>
-        /// Gets or sets the focus for the menu item
-        /// On set to true the OnFocus delegate will be called and FocusSound will play
-        /// </summary>
-        public override bool Focus
-        {
-            get { return base.Focus; }
-            set
-            {
-                if(m_label != null)
-                    m_label.Focus = value;
-
-                base.Focus = value;
-            }
         }
 
         public override void Reset(bool isFocus)

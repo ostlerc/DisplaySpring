@@ -48,6 +48,7 @@
     <Compile Include="Menu Items\Label.cs" />
     <Compile Include="Menu Items\ScrollBar.cs" />
     <Compile Include="Menu Items\ScrollList.cs" />
+    <Compile Include="Menu Items\StackedItem.cs" />
     <Compile Include="Menu\Menu.cs" />
     <Compile Include="Menu\Sprite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
