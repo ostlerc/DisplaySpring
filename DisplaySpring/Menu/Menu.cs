@@ -247,13 +247,13 @@
 
             //Textures
             _stream = _assembly.GetManifestResourceStream("DisplaySpring.Content.Buttons.button.png");
-            Item.DefaultButtonTexture = Texture2D.FromStream(gd, _stream);
+            Item.ButtonTexture = Texture2D.FromStream(gd, _stream);
             _stream = _assembly.GetManifestResourceStream("DisplaySpring.Content.Buttons.buttonHighlighted.png");
-            Item.DefaultButtonHighlightTexture = Texture2D.FromStream(gd, _stream);
+            Item.ButtonHighlightTexture = Texture2D.FromStream(gd, _stream);
             _stream = _assembly.GetManifestResourceStream("DisplaySpring.Content.Buttons.grayArrowLeft.png");
-            Item.DefaultArrowLeft = Texture2D.FromStream(gd, _stream);
+            Item.ArrowLeft = Texture2D.FromStream(gd, _stream);
             _stream = _assembly.GetManifestResourceStream("DisplaySpring.Content.Buttons.grayArrowRight.png");
-            Item.DefaultArrowRight = Texture2D.FromStream(gd, _stream);
+            Item.ArrowRight = Texture2D.FromStream(gd, _stream);
             _stream = _assembly.GetManifestResourceStream("DisplaySpring.Content.Buttons.yellowArrowLeft.png");
             Item.DefaultArrowLeftHighlight = Texture2D.FromStream(gd, _stream);
             _stream = _assembly.GetManifestResourceStream("DisplaySpring.Content.Buttons.yellowArrowRight.png");

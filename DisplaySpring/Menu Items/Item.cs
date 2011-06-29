@@ -88,22 +88,24 @@
         /// Default FocusSound
         /// </summary>
         public static SoundEffect DefaultFocusSound;
+        
         /// <summary>
         /// Default Background for Buttons
+        /// You still have to set this in your Button constructor
         /// </summary>
-        public static Texture2D DefaultButtonTexture;
+        public static Texture2D ButtonTexture;
         /// <summary>
         /// Default Focus Background (Highlight background) for Buttons
         /// </summary>
-        public static Texture2D DefaultButtonHighlightTexture;
+        public static Texture2D ButtonHighlightTexture;
         /// <summary>
         /// Default Left Arrow for OptionButton
         /// </summary>
-        public static Texture2D DefaultArrowLeft;
+        public static Texture2D ArrowLeft;
         /// <summary>
         /// Default Right Arrow for OptionButtons
         /// </summary>
-        public static Texture2D DefaultArrowRight;
+        public static Texture2D ArrowRight;
         /// <summary>
         /// Default Left Highlight (Focused) Arrow for OptionButtons
         /// </summary>

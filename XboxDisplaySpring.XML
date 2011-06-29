@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>DisplaySpring</name>
+        <name>XBOXDisplaySpring</name>
     </assembly>
     <members>
         <member name="T:DisplaySpring.MenuAction">
@@ -847,41 +847,6 @@
             Time in MS animation will last
             </summary>
         </member>
-        <member name="T:DisplaySpring.UpdateEvent">
-            <summary>
-            List of delegates to invoke on an update loop
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.UpdateEvent.#ctor">
-            <summary>
-            Default Constructor
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.UpdateEvent.AddEvent(DisplaySpring.UpdateEvent.UpdateDelegate)">
-            <summary>
-            Add an event to delegate
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.UpdateEvent.Update">
-            <summary>
-            Invoke event for all delegates registered with the event
-            </summary>
-        </member>
-        <member name="T:DisplaySpring.UpdateEvent.UpdateDelegate">
-            <summary>
-            Delegates for running in an update event
-            </summary>
-        </member>
-        <member name="T:DisplaySpring.MultiController">
-            <summary>
-            A MultiController handles finding input from multiple controllers.
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.MultiController.op_Implicit(DisplaySpring.Controller)~DisplaySpring.MultiController">
-            <summary>
-            code to convert from Controller to MultiController
-            </summary>
-        </member>
         <member name="M:DisplaySpring.Controller.#ctor(Microsoft.Xna.Framework.PlayerIndex,DisplaySpring.UpdateEvent)">
             <summary>
             Create a new controller class
@@ -1010,6 +975,41 @@
         <member name="P:DisplaySpring.Controller.D">
             <summary>
             True if the D key on the keyboard is pressed (used for entering debug mode)
+            </summary>
+        </member>
+        <member name="T:DisplaySpring.MultiController">
+            <summary>
+            A MultiController handles finding input from multiple controllers.
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.MultiController.op_Implicit(DisplaySpring.Controller)~DisplaySpring.MultiController">
+            <summary>
+            code to convert from Controller to MultiController
+            </summary>
+        </member>
+        <member name="T:DisplaySpring.UpdateEvent">
+            <summary>
+            List of delegates to invoke on an update loop
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.UpdateEvent.#ctor">
+            <summary>
+            Default Constructor
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.UpdateEvent.AddEvent(DisplaySpring.UpdateEvent.UpdateDelegate)">
+            <summary>
+            Add an event to delegate
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.UpdateEvent.Update">
+            <summary>
+            Invoke event for all delegates registered with the event
+            </summary>
+        </member>
+        <member name="T:DisplaySpring.UpdateEvent.UpdateDelegate">
+            <summary>
+            Delegates for running in an update event
             </summary>
         </member>
         <member name="T:DisplaySpring.ItemCollection">

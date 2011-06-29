@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace DisplaySpring
+﻿namespace DisplaySpring
 {
+    using System.Collections.Generic;
     /// <summary>
     /// List of delegates to invoke on an update loop
     /// </summary>

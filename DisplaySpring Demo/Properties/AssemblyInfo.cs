@@ -5,9 +5,9 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DisplaySpringXBOX")]
-[assembly: AssemblyProduct("DisplaySpring")]
-[assembly: AssemblyDescription("XNA Menu Creator Framework")]
+[assembly: AssemblyTitle("DisplaySpring Demo")]
+[assembly: AssemblyProduct("DisplaySpring Demo")]
+[assembly: AssemblyDescription("Display Spring Demo")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyCopyright("Copyright © Chad Ostler")]
 [assembly: AssemblyTrademark("")]
@@ -22,7 +22,7 @@ using System.Runtime.InteropServices;
 // On Windows, the following GUID is for the ID of the typelib if this
 // project is exposed to COM. On other platforms, it unique identifies the
 // title storage container when deploying this assembly to the device.
-[assembly: Guid("f5ac17b1-2487-42ea-9cfa-33cea855ae70")]
+[assembly: Guid("0b0b7fc0-73f5-4c2e-b298-1b7a6c05f62e")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -31,4 +31,4 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("0.1.0.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
