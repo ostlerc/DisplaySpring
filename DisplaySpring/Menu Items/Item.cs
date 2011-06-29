@@ -318,7 +318,7 @@
 
                 m_horizontalAlignment = value;
 
-                if ((value != HAlign.Center && Parent is Frame) || !(Parent is Frame))
+                if ((value != HAlign.Center && Parent is Frame) || (Parent != null && !(Parent is Frame)))
                 {
                     Width = Parent.StaticWidth;
                     Height = Parent.StaticHeight;
