@@ -11,6 +11,7 @@ Contents
   II.  Installation
   III. Examples
   IV.  Help 
+  V.   License
 
 I - Getting started
 ---------------------
@@ -74,17 +75,16 @@ III - Examples
 IV. - Help
 ---------------------
 
-  For more help, reference the API help file 
-  found in the root of the project.
-
-  DisplaySpringHelp.chm
-
-  Or you can go online to displayspring.com 
+  For help you can go online to displayspring.com 
   and see if anyone else has had the same
   problems as you.
 
-  Last but not least, you can email me!
+  Or, you can email me!
   ostler.c@gmail.com
 
   Please explain in detail your problem. It is
   always helpful to provide a code sample.
+
+IV. - License
+---------------------
+  DisplaySpring is released under the LGPL License.
