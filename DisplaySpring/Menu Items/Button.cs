@@ -192,6 +192,7 @@
             m_label = new Label(this, text);
             m_label.Depth = Depth - .01f;
             m_label.Animation = AnimateType.None;
+            m_label.FocusSound = null;
 
             Animation = AnimateType.Size;
 
