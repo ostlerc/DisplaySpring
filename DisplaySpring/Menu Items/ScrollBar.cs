@@ -10,7 +10,7 @@
     /// <summary>
     /// Class that handles creating / using textures that represent a ScrollBar
     /// </summary>
-    public class ScrollBar : Item
+    internal class ScrollBar : Item
     {
         private Texture2D m_bg;
         private Button m_slider = null;
