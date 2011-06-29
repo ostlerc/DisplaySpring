@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisplaySpring DemoContent", "Content1\DisplaySpring DemoContent.contentproj", "{5B4A97D3-6B72-4606-9A95-8DFF1CEBA6FA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XBOX DisplaySpring Demo", "DisplaySpring Demo\XBOX DisplaySpring Demo.csproj", "{88AF6263-F3F4-40DA-AF85-D24188211044}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windows DisplaySpring Demo", "DisplaySpring Demo\Windows DisplaySpring Demo.csproj", "{E8C44BA4-F7D6-4CAD-92A6-8076EA7CF392}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisplaySpring DemoContent", "DisplaySpring Demo\Demo Content\DisplaySpring DemoContent.contentproj", "{5B4A97D3-6B72-4606-9A95-8DFF1CEBA6FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +19,6 @@ Global
 		Release|Xbox 360 = Release|Xbox 360
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5B4A97D3-6B72-4606-9A95-8DFF1CEBA6FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5B4A97D3-6B72-4606-9A95-8DFF1CEBA6FA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{5B4A97D3-6B72-4606-9A95-8DFF1CEBA6FA}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{5B4A97D3-6B72-4606-9A95-8DFF1CEBA6FA}.Debug|Xbox 360.ActiveCfg = Debug|Any CPU
-		{5B4A97D3-6B72-4606-9A95-8DFF1CEBA6FA}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{5B4A97D3-6B72-4606-9A95-8DFF1CEBA6FA}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{5B4A97D3-6B72-4606-9A95-8DFF1CEBA6FA}.Release|x86.ActiveCfg = Debug|Any CPU
-		{5B4A97D3-6B72-4606-9A95-8DFF1CEBA6FA}.Release|Xbox 360.ActiveCfg = Debug|Any CPU
 		{88AF6263-F3F4-40DA-AF85-D24188211044}.Debug|Any CPU.ActiveCfg = Debug|Xbox 360
 		{88AF6263-F3F4-40DA-AF85-D24188211044}.Debug|Mixed Platforms.ActiveCfg = Debug|Xbox 360
 		{88AF6263-F3F4-40DA-AF85-D24188211044}.Debug|Mixed Platforms.Build.0 = Debug|Xbox 360
@@ -56,6 +48,14 @@ Global
 		{E8C44BA4-F7D6-4CAD-92A6-8076EA7CF392}.Release|x86.ActiveCfg = Release|x86
 		{E8C44BA4-F7D6-4CAD-92A6-8076EA7CF392}.Release|x86.Build.0 = Release|x86
 		{E8C44BA4-F7D6-4CAD-92A6-8076EA7CF392}.Release|Xbox 360.ActiveCfg = Release|x86
+		{5B4A97D3-6B72-4606-9A95-8DFF1CEBA6FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B4A97D3-6B72-4606-9A95-8DFF1CEBA6FA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5B4A97D3-6B72-4606-9A95-8DFF1CEBA6FA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5B4A97D3-6B72-4606-9A95-8DFF1CEBA6FA}.Debug|Xbox 360.ActiveCfg = Debug|Any CPU
+		{5B4A97D3-6B72-4606-9A95-8DFF1CEBA6FA}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B4A97D3-6B72-4606-9A95-8DFF1CEBA6FA}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5B4A97D3-6B72-4606-9A95-8DFF1CEBA6FA}.Release|x86.ActiveCfg = Debug|Any CPU
+		{5B4A97D3-6B72-4606-9A95-8DFF1CEBA6FA}.Release|Xbox 360.ActiveCfg = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

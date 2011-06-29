@@ -148,7 +148,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Content1\DisplaySpring DemoContent.contentproj">
+    <ProjectReference Include="Demo Content\DisplaySpring DemoContent.contentproj">
       <Project>{5B4A97D3-6B72-4606-9A95-8DFF1CEBA6FA}</Project>
       <Name>DisplaySpring DemoContent</Name>
       <XnaReferenceType>Content</XnaReferenceType>
