@@ -32,27 +32,24 @@
             horizontalFrame.LayoutStretch = 4;
 
             btn  = new Button(horizontalFrame, controllers, App.Button, "One");
-            btn.VerticalAlignment = VAlign.Stretch;
-            btn.HorizontalAlignment = HAlign.Stretch;
-            btn.TextLabel.Scale = Vector2.One / 2;
+            btn.VerticalAlignment = VAlign.Top;
+            btn.HorizontalAlignment = HAlign.Left;
 
             btn  = new Button(horizontalFrame, controllers, App.Button, "Two");
-            btn.VerticalAlignment = VAlign.Stretch;
-            btn.HorizontalAlignment = HAlign.Stretch;
-            btn.TextLabel.Scale = Vector2.One / 2;
+            btn.VerticalAlignment = VAlign.Top;
+            btn.HorizontalAlignment = HAlign.Right;
 
             horizontalFrame = new Frame(BaseFrame);
             horizontalFrame.LayoutStretch = 4;
             horizontalFrame.Layout = Layout.Horizontal;
 
             btn  = new Button(horizontalFrame, controllers, App.Button, "Three");
-            btn.VerticalAlignment = VAlign.Stretch;
-            btn.HorizontalAlignment = HAlign.Stretch;
-            btn.TextLabel.Scale = Vector2.One / 2;
+            btn.VerticalAlignment = VAlign.Bottom;
+            btn.HorizontalAlignment = HAlign.Left;
 
             btn = new Button(null, controllers, App.Button, "Four");
-            btn.VerticalAlignment = VAlign.Stretch;
-            btn.HorizontalAlignment = HAlign.Stretch; btn.TextLabel.Scale = Vector2.One / 2;
+            btn.VerticalAlignment = VAlign.Bottom;
+            btn.HorizontalAlignment = HAlign.Right;
             btn.Parent = horizontalFrame;
 
             Reset();

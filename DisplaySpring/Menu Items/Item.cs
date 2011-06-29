@@ -317,6 +317,13 @@
                     m_scale.X = 1f;
 
                 m_horizontalAlignment = value;
+
+                if (value != HAlign.Center && Parent is Frame)
+                {
+                    Width = Parent.Width;
+                    Height = Parent.Height;
+                    refreshItem();
+                }
             }
         }
 
@@ -333,6 +340,13 @@
                     m_scale.Y = 1f;
 
                 m_verticalAlignment = value;
+
+                if (value != VAlign.Center && Parent is Frame)
+                {
+                    Width = Parent.Width;
+                    Height = Parent.Height;
+                    refreshItem();
+                }
             }
         }
 
@@ -858,6 +872,15 @@
                 return;
 
             Vector2 pos = Position;
+            if (Parent is Frame && (Parent as Frame).Layout == Layout.None)
+            {
+                if (HorizontalAlignment != HAlign.Center)
+                    pos.X = 0;
+
+                if (VerticalAlignment != VAlign.Center)
+                    pos.Y = 0;
+            }
+
             switch (HorizontalAlignment)
             {
                 case HAlign.Left:

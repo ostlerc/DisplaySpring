@@ -36,6 +36,8 @@
             lbl.OnA = delegate() { ActiveSubMenu = new MainMenu(controllers, allControllers, bounds); };
             lbl = new Label(sl, "Scroll List Menu");
             lbl.OnA = delegate() { ActiveSubMenu = new ButtonScrollListMenu(controllers, allControllers, bounds); };
+            lbl = new Label(sl, "Multi Texture Menu");
+            lbl.OnA = delegate() { ActiveSubMenu = new MultiTextureMenu(controllers, allControllers, bounds); };
             lbl = new Label(sl, "Exit");
             lbl.OnA = delegate() { Close(); };
             Reset();

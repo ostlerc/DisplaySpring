@@ -93,6 +93,7 @@
     <Compile Include="Menus\ButtonScrollListMenu.cs" />
     <Compile Include="Menus\FrameMenu.cs" />
     <Compile Include="Menus\MainMenu.cs" />
+    <Compile Include="Menus\MultiTextureMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -100,9 +101,6 @@
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="DisplaySpring">
-      <HintPath>..\DisplaySpring.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
       <Private>False</Private>
     </Reference>
@@ -148,6 +146,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DisplaySpring\DisplaySpring.csproj">
+      <Project>{07E0A1B8-FBAF-4CA5-853B-5F3A2CF0B4C6}</Project>
+      <Name>DisplaySpring</Name>
+    </ProjectReference>
     <ProjectReference Include="Demo Content\DisplaySpring DemoContent.contentproj">
       <Project>{5B4A97D3-6B72-4606-9A95-8DFF1CEBA6FA}</Project>
       <Name>DisplaySpring DemoContent</Name>
