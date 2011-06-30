@@ -27,23 +27,23 @@
             title.FontColor = Color.Gold;
 
             BaseFrame.Scale /= 1.25f;
-            sl = new ScrollList(BaseFrame, controllers);
+            sl = new ScrollList(BaseFrame);
             sl.Direction = ScrollList.Orientation.Horizontal;
             sl.LayoutStretch = 2;
 
-            ScrollList _sl = new ScrollList(sl, controllers);
+            ScrollList _sl = new ScrollList(sl);
             _sl.ViewCount = 2;
 
             Button btn = new Button(_sl, App.Button, "Button texture");
             btn = new Button(_sl, App.Button, App.menuButtonHighlighted, "Highlight texture");
-            btn.Scale *= 2;
+            btn.Scale *= 1.35f;
             btn = new Button(_sl, App.Button, "White Font");
-            btn.Scale *= 2;
+            btn.Scale *= 1.35f;
             btn.TextLabel.FontFocusColor = Color.White;
             btn = new Button(_sl, App.Button, App.menuButtonHighlighted, "Swap Scroll Position");
             btn.OnA = delegate() 
             {
-                btn.KeepFocus = true; //This prevents button from losing focus in a delegate invoke cycle
+                _sl.KeepFocus = true; //This prevents button from losing focus in a delegate invoke cycle
 
                 if (_sl.ScrollPosition == ScrollList.ScrollBarPosition.Left)
                     _sl.ScrollPosition = ScrollList.ScrollBarPosition.Right;
@@ -51,24 +51,24 @@
                     _sl.ScrollPosition = ScrollList.ScrollBarPosition.Left;
             };
 
-            _sl = new ScrollList(sl, controllers);
-            _sl.ViewCount = 2;
+            ScrollList _sl2 = new ScrollList(sl);
+            _sl2.ViewCount = 2;
 
-            btn = new Button(_sl, App.Button, "Button texture");
-            btn = new Button(_sl, App.Button, App.menuButtonHighlighted, "Highlight texture");
-            btn.Scale *= 2;
-            btn = new Button(_sl, App.Button, "White Font");
-            btn.Scale *= 2;
+            btn = new Button(_sl2, App.Button, "Button texture");
+            btn = new Button(_sl2, App.Button, App.menuButtonHighlighted, "Highlight texture");
+            btn.Scale *= 1.35f;
+            btn = new Button(_sl2, App.Button, "White Font");
+            btn.Scale *= 1.35f;
             btn.TextLabel.FontFocusColor = Color.White;
-            btn = new Button(_sl, App.Button, App.menuButtonHighlighted, "Swap Scroll Position");
+            btn = new Button(_sl2, App.Button, App.menuButtonHighlighted, "Swap Scroll Position");
             btn.OnA = delegate() 
             {
-                btn.KeepFocus = true; //This prevents button from losing focus in a delegate invoke cycle
+                _sl2.KeepFocus = true; //This prevents button from losing focus in a delegate invoke cycle
 
-                if (_sl.ScrollPosition == ScrollList.ScrollBarPosition.Left)
-                    _sl.ScrollPosition = ScrollList.ScrollBarPosition.Right;
+                if (_sl2.ScrollPosition == ScrollList.ScrollBarPosition.Left)
+                    _sl2.ScrollPosition = ScrollList.ScrollBarPosition.Right;
                 else
-                    _sl.ScrollPosition = ScrollList.ScrollBarPosition.Left;
+                    _sl2.ScrollPosition = ScrollList.ScrollBarPosition.Left;
             };
 
             Reset();

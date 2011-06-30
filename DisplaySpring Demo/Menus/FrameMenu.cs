@@ -31,11 +31,11 @@
             horizontalFrame.Layout = Layout.Horizontal;
             horizontalFrame.LayoutStretch = 4;
 
-            btn  = new Button(horizontalFrame, controllers, App.Button, "One");
+            btn  = new Button(horizontalFrame, App.Button, "One");
             btn.VerticalAlignment = VAlign.Top;
             btn.HorizontalAlignment = HAlign.Left;
 
-            btn  = new Button(horizontalFrame, controllers, App.Button, "Two");
+            btn  = new Button(horizontalFrame, App.Button, "Two");
             btn.VerticalAlignment = VAlign.Top;
             btn.HorizontalAlignment = HAlign.Right;
 
@@ -43,11 +43,11 @@
             horizontalFrame.LayoutStretch = 4;
             horizontalFrame.Layout = Layout.Horizontal;
 
-            btn  = new Button(horizontalFrame, controllers, App.Button, "Three");
+            btn  = new Button(horizontalFrame, App.Button, "Three");
             btn.VerticalAlignment = VAlign.Bottom;
             btn.HorizontalAlignment = HAlign.Left;
 
-            btn = new Button(null, controllers, App.Button, "Four");
+            btn = new Button(null, App.Button, "Four");
             btn.VerticalAlignment = VAlign.Bottom;
             btn.HorizontalAlignment = HAlign.Right;
             btn.Parent = horizontalFrame;

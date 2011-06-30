@@ -41,6 +41,15 @@
             Initialize();
         }
 
+        /// <summary>
+        /// Create a StackedItem with parents size.
+        /// </summary>
+        public OptionButton(Item parent) 
+            : base(parent)
+        {
+            Initialize();
+        }
+
         void Initialize()
         {
             if (m_leftArrow == null)

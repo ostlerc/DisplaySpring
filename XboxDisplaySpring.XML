@@ -648,7 +648,18 @@
             without needing a ScrollBar present.
             </summary>
         </member>
+        <member name="M:DisplaySpring.ScrollList.#ctor(DisplaySpring.Item,System.Int32)">
+            <summary>
+            Create an empty scroll list that can only show up to 'viewCount' items at one time
+            without needing a ScrollBar present.
+            </summary>
+        </member>
         <member name="M:DisplaySpring.ScrollList.#ctor(DisplaySpring.Item,DisplaySpring.MultiController)">
+            <summary>
+            Create and empty ScrollList
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.ScrollList.#ctor(DisplaySpring.Item)">
             <summary>
             Create and empty ScrollList
             </summary>
@@ -1016,6 +1027,11 @@
             </summary>
         </member>
         <member name="M:DisplaySpring.OptionButton.#ctor(DisplaySpring.Item,DisplaySpring.MultiController)">
+            <summary>
+            Create a StackedItem with parents size.
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.OptionButton.#ctor(DisplaySpring.Item)">
             <summary>
             Create a StackedItem with parents size.
             </summary>

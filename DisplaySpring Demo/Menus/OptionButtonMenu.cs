@@ -24,10 +24,10 @@
             Label lbl = new Label(BaseFrame, "Left, Right controls index of OptionButton");
             lbl.VerticalAlignment = VAlign.Bottom;
 
-            sl = new ScrollList(BaseFrame, controllers);
+            sl = new ScrollList(BaseFrame);
             sl.LayoutStretch = 3;
 
-            OptionButton options = new OptionButton(sl, controllers);
+            OptionButton options = new OptionButton(sl);
             options.ArrowsOut = true;
 
             Button btn = new Button(options, Item.ButtonTexture, "one");

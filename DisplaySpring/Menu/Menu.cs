@@ -207,6 +207,7 @@
             m_controllers = c;
             m_alpha = new Animation(0, 1, DefaultFadeTime);
             m_baseFrame = new Frame(m_bounds);
+            m_baseFrame.ItemController = m_controllers;
         }
         #endregion
 

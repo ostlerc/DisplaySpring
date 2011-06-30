@@ -53,7 +53,7 @@
         internal int m_selectedIndex = -1;
         internal int m_startIndex = 0;
         internal float m_spacing = 20f;
-        internal float m_scrollSpacing = 35f;
+        internal float m_scrollSpacing = 5f;
         internal bool m_wrap = true;
         internal bool m_ignoreEvents = false; 
 
@@ -378,10 +378,29 @@
         }
 
         /// <summary>
+        /// Create an empty scroll list that can only show up to 'viewCount' items at one time
+        /// without needing a ScrollBar present.
+        /// </summary>
+        public ScrollList(Item parent, int viewCount)
+            : base(parent)
+        {
+            Initialize(viewCount);
+        }
+
+        /// <summary>
         /// Create and empty ScrollList
         /// </summary>
         public ScrollList(Item parent, MultiController c)
             : base(parent, c)
+        {
+            Initialize(-1);
+        }
+
+        /// <summary>
+        /// Create and empty ScrollList
+        /// </summary>
+        public ScrollList(Item parent)
+            : base(parent)
         {
             Initialize(-1);
         }

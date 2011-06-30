@@ -284,6 +284,10 @@
                     value.Children.Add(this);
                     //re-evaluate height and width
                 }
+
+                if (ItemController == null && value != null && value.ItemController != null)
+                    ItemController = value.ItemController;
+
                 forceRefresh();
             }
         }
@@ -525,7 +529,16 @@
         /// <summary>
         /// Measures the Width of the item. Layout space is not included. Scale is included.
         /// </summary>
-        public virtual float MeasureWidth { get { return StaticWidth * Scale.X; } }
+        public virtual float MeasureWidth 
+        { 
+            get 
+            {
+                if (Animation == AnimateType.Size)
+                    return StaticWidth * Scale.X * 1.18f;
+
+                return StaticWidth * Scale.X;
+            }
+        }
 
         /// <summary>
         /// Measures the Height of the item. Layout space is not included. Scale is included.

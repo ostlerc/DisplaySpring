@@ -26,7 +26,7 @@
             lbl.Scale = new Vector2(2, 2);
             lbl.FontColor = Color.Black;
 
-            sl = new ScrollList(BaseFrame, controllers, 4);
+            sl = new ScrollList(BaseFrame, 4);
             sl.Focus = true;
             sl.LayoutStretch = 4;
 
