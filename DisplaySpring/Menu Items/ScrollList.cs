@@ -229,10 +229,11 @@
                         h += item.MeasureHeight;
                 }
 
-                if (m_direction == Orientation.Horizontal)
-                    return h;
 
-                h += Spacing * (vb.Count - 1) * Scale.Y;
+                if (m_direction == Orientation.Horizontal)
+                    h += ScrollSpacing + m_scroll.Height;
+                else
+                    h += Spacing * (vb.Count - 1) * Scale.Y;
 
                 return Math.Max(h,0);
             }
@@ -262,9 +263,9 @@
                 }
 
                 if (m_direction == Orientation.Vertical)
-                    return w;
-
-                w += Spacing * (items.Count - 1) * Scale.X;
+                    w += ScrollSpacing + m_scroll.Width;
+                else
+                    w += Spacing * (items.Count - 1) * Scale.X;
 
                 return Math.Max(w,0);
             }
@@ -472,13 +473,13 @@
                 {
                     m_scroll.Width = (int)MeasureWidth;
                     m_scroll.Height = 20;
-                    m_scroll.Position = new Vector2(0, ((MeasureHeight / 2) + m_scrollSpacing)*dir);
+                    m_scroll.Position = new Vector2(0, (MeasureHeight / 2)*dir);
                 }
                 else
                 {
                     m_scroll.Height = (int)MeasureHeight;
                     m_scroll.Width = 20;
-                    m_scroll.Position = -new Vector2(((MeasureWidth / 2) + m_scrollSpacing)*dir, 0);
+                    m_scroll.Position = -new Vector2((MeasureWidth / 2) *dir, 0);
                 }
             }
         }
