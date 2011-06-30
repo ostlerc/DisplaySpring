@@ -17,9 +17,15 @@
         private Button m_leftArrow;
         private Button m_rightArrow;
         private float m_highlightTimer = -1;
+        private bool m_arrowsOut = false;
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Defines if the arrows for the option button are outside the items boundaries
+        /// </summary>
+        public bool ArrowsOut { get { return m_arrowsOut; } set { m_arrowsOut = value; } }
 
         #endregion
 
@@ -28,7 +34,7 @@
         /// <summary>
         /// Create a StackedItem with parents size.
         /// </summary>
-        public OptionButton(Frame parent, MultiController controllers) 
+        public OptionButton(Item parent, MultiController controllers) 
             : base(parent)
         {
             ItemController = controllers;
@@ -66,6 +72,12 @@
                 m_rightArrow.Parent = cur;
                 m_rightArrow.Width = cur.StaticWidth;
                 m_rightArrow.Height = cur.StaticHeight;
+
+                if (ArrowsOut)
+                {
+                    m_leftArrow.Position = new Vector2(m_leftArrow.Position.X - m_leftArrow.StaticWidth * 1.15f, m_leftArrow.Position.Y);
+                    m_rightArrow.Position = new Vector2(m_rightArrow.Position.X + m_rightArrow.StaticWidth * 1.15f, m_rightArrow.Position.Y);
+                }
             }
 
             base.Draw(gameTime, spriteBatch, parentTransform);

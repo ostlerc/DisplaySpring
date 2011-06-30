@@ -4,9 +4,9 @@
         <name>DisplaySpring</name>
     </assembly>
     <members>
-        <member name="T:DisplaySpring.Label">
+        <member name="T:DisplaySpring.Frame">
             <summary>
-            Class that draws a Item as a text object
+            A collection of Items that can be handled layouts
             </summary>
         </member>
         <member name="T:DisplaySpring.Item">
@@ -483,6 +483,294 @@
             Stretch contents Height to fit in given space
             </summary>
         </member>
+        <member name="M:DisplaySpring.Frame.#ctor(DisplaySpring.Item)">
+            <summary>
+            Create a Frame with parents size.
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Frame.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Create a Frame with given size.
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Frame.#ctor(Microsoft.Xna.Framework.Rectangle)">
+            <summary>
+            Create a menu frame with specified bounds.
+            This is only for the menu class to use as the super parent of a Menu
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Frame.Layout">
+            <summary>
+            Defines the LayoutType of the frame.
+            </summary>
+            <seealso cref="T:DisplaySpring.Frame.LayoutType"/>
+        </member>
+        <member name="P:DisplaySpring.Frame.StaticHeight">
+            <summary>
+            Height of the item. Layout space is not included. Scale is not included.
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Frame.StaticWidth">
+            <summary>
+            Width of the item. Layout space is not included. Scale is not included.
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Frame.Position">
+            <summary>
+            Position of the object. Default is Vector2.Zero, which is center based.
+            </summary>
+        </member>
+        <member name="T:DisplaySpring.Frame.LayoutType">
+            <summary>
+            The layout type represents how the Children will be
+            organized in the space the frame has.
+            None is the default type
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Frame.LayoutType.None">
+            <summary>
+            No layout, Children will not be arranged. This is the default
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Frame.LayoutType.Horizontal">
+            <summary>
+            Horizontally layout Children
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Frame.LayoutType.Vertical">
+            <summary>
+            Vertically layout Children
+            </summary>
+        </member>
+        <member name="T:DisplaySpring.Button">
+            <summary>
+            Button is basically a text button with callbacks
+            You can give the button no background and no foreground with just text
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Button.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,DisplaySpring.Item)">
+            <summary>
+            Internal debugging constructor
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,DisplaySpring.MultiController,Microsoft.Xna.Framework.Graphics.Texture2D)">
+            <summary>
+            Create a menu button with specific background
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,DisplaySpring.MultiController,Microsoft.Xna.Framework.Graphics.Texture2D,System.String)">
+            <summary>
+            Create a menu item with specific background and text label
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,DisplaySpring.MultiController,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Graphics.Texture2D)">
+            <summary>
+            Create a menu item with specific background and highlight textures
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,DisplaySpring.MultiController,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Graphics.Texture2D,System.String)">
+            <summary>
+            Create a menu item with specific background and focus background with text
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Graphics.Texture2D)">
+            <summary>
+            Creates a static image element
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Graphics.Texture2D,System.String)">
+            <summary>
+            Create menu button with specific background and label text
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Graphics.Texture2D)">
+            <summary>
+            Create menu button with specific background and focus background
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Graphics.Texture2D,System.String)">
+            <summary>
+            Create menu button with specific background, focus background and label text
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Button.FocusTexture">
+            <summary>
+            The focus background of the button.
+            This texture is shown when the item has focus
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Button.Background">
+            <summary>
+            The main background of the button.
+            This texture is shown when the item does not have focus
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Button.TextLabel">
+            <summary>
+            Label of the Button
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Button.Focus">
+            <summary>
+            Gets or sets the focus for the menu item
+            On set to true the OnFocus delegate will be called and FocusSound will play
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Button.Depth">
+            <summary>
+            Depth of the button. Default is Menu.ButtonDrawDepth
+            By default 0 = front -> 1 = back
+            </summary>
+        </member>
+        <member name="T:DisplaySpring.MultiController">
+            <summary>
+            A MultiController handles finding input from multiple controllers.
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.MultiController.op_Implicit(DisplaySpring.Controller)~DisplaySpring.MultiController">
+            <summary>
+            code to convert from Controller to MultiController
+            </summary>
+        </member>
+        <member name="T:DisplaySpring.ScrollList">
+            <summary>
+            A class to make scrollable viewable lists of Items
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.ScrollList.IndexChanged">
+            <summary>
+            This is a delegate that is invoked when the index of the ScrollList changes
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.ScrollList.#ctor(DisplaySpring.Item,DisplaySpring.MultiController,System.Int32)">
+            <summary>
+            Create an empty scroll list that can only show up to 'viewCount' items at one time
+            without needing a ScrollBar present.
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.ScrollList.#ctor(DisplaySpring.Item,DisplaySpring.MultiController)">
+            <summary>
+            Create and empty ScrollList
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.ScrollList.Reset(System.Boolean)">
+            <summary>
+            Reset the ScrollList to a fresh state
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.ScrollList.ViewCount">
+            <summary>
+            The max amount of items in the list to show. Items not visible do not count
+            This is a scrolling functionality
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.ScrollList.SelectedIndex">
+            <summary>
+            The currently selected index
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.ScrollList.Direction">
+            <summary>
+            Stores the orientation of the object
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.ScrollList.ScrollPosition">
+            <summary>
+            ScrollBarPosition for the ScrollList's ScrollBar
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.ScrollList.Items">
+            <summary>
+            Items in the ScrollList
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.ScrollList.Wrap">
+            <summary>
+            Boolean toggle to define if the container wraps at the ends of the list or does not.
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.ScrollList.Focus">
+            <summary>
+            Gets or sets the focus for the menu item
+            On set to true the OnFocus delegate will be called and FocusSound will play
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.ScrollList.KeepFocus">
+            <summary>
+            If set to true, object will keep Focus in an invoke cycle
+            This property resets itself to false at the end of the cycle
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.ScrollList.MeasureHeight">
+            <summary>
+            total Height of all visible buttons
+            if Width oritentation, Height of first available item is returned
+            otherwise it is summed for all items including spacing
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.ScrollList.MeasureWidth">
+            <summary>
+            Total width of all visible buttons
+            if Vertical oritentation, width of first available item is returned
+            otherwise it is summed for all items including spacing
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.ScrollList.Spacing">
+            <summary>
+            Amount of spacing in pixels between objects
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.ScrollList.ScrollSpacing">
+            <summary>
+            Spacing between the scrollbar and the items in the list
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.ScrollList.SelectedItem">
+            <summary>
+            gets selected item
+            </summary>
+        </member>
+        <member name="T:DisplaySpring.ScrollList.Orientation">
+            <summary>
+            Orientation of the ScrollList
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.ScrollList.Orientation.Horizontal">
+            <summary>
+            Items will be layed out horizontally
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.ScrollList.Orientation.Vertical">
+            <summary>
+            Items will be layed out Vertically
+            </summary>
+        </member>
+        <member name="T:DisplaySpring.ScrollList.ScrollBarPosition">
+            <summary>
+            Defines on which side of the list the scroll bar will appear
+            Note: For Horizontal, Left signifies Top and Right signifies Bottom
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.ScrollList.ScrollBarPosition.Left">
+            <summary>
+            ScrolLBar will be on the left side of the ScrollList
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.ScrollList.ScrollBarPosition.Right">
+            <summary>
+            ScrolLBar will be on the right side of the ScrollList
+            </summary>
+        </member>
+        <member name="T:DisplaySpring.ScrollList.MenuActionInt">
+            <summary>
+            Delegate that comes with a index parameter
+            </summary>
+        </member>
+        <member name="T:DisplaySpring.Label">
+            <summary>
+            Class that draws a Item as a text object
+            </summary>
+        </member>
         <member name="M:DisplaySpring.Label.#ctor(DisplaySpring.Item,System.String)">
             <summary>
             Create a label with text
@@ -506,37 +794,6 @@
         <member name="P:DisplaySpring.Label.Font">
             <summary>
             Get's or sets the font value for the object
-            </summary>
-        </member>
-        <member name="T:DisplaySpring.AnimateType">
-            <summary>
-            Standard menu animation types
-            </summary>
-        </member>
-        <member name="F:DisplaySpring.AnimateType.None">
-            <summary>
-            No Animation Type
-            </summary>
-        </member>
-        <member name="F:DisplaySpring.AnimateType.Size">
-            <summary>
-            The object will animate on its size. Growing and Shrinking over a period of time
-            </summary>
-        </member>
-        <member name="F:DisplaySpring.Sprite.m_texture">
-            <summary>
-            Texture for the sprite
-            </summary>
-        </member>
-        <member name="F:DisplaySpring.Sprite.pos">
-            <summary>
-            pos of this Sprite. This value should be used not as an absolute pos
-            but as an offset value from its container class
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Animation.TimeoutMS">
-            <summary>
-            Time in MS animation will last
             </summary>
         </member>
         <member name="T:DisplaySpring.MenuAction">
@@ -703,237 +960,100 @@
             Default draw depth for backgrounds
             </summary>
         </member>
-        <member name="T:DisplaySpring.ScrollList">
+        <member name="T:DisplaySpring.StackedItem">
             <summary>
-            A class to make scrollable viewable lists of Items
+            A collection of Items, with only one visible or in focus at a time
             </summary>
         </member>
-        <member name="F:DisplaySpring.ScrollList.IndexChanged">
+        <member name="M:DisplaySpring.StackedItem.#ctor(DisplaySpring.Item)">
             <summary>
-            This is a delegate that is invoked when the index of the ScrollList changes
+            Create a StackedItem with parents size.
             </summary>
         </member>
-        <member name="M:DisplaySpring.ScrollList.#ctor(DisplaySpring.Item,DisplaySpring.MultiController,System.Int32)">
+        <member name="M:DisplaySpring.StackedItem.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Vector2)">
             <summary>
-            Create an empty scroll list that can only show up to 'viewCount' items at one time
-            without needing a ScrollBar present.
+            Create a StackedItem with given size.
             </summary>
         </member>
-        <member name="M:DisplaySpring.ScrollList.#ctor(DisplaySpring.Item,DisplaySpring.MultiController)">
+        <member name="M:DisplaySpring.StackedItem.SetCurrentItem(DisplaySpring.Item)">
             <summary>
-            Create and empty ScrollList
+            Sets the current item for the stack
             </summary>
         </member>
-        <member name="M:DisplaySpring.ScrollList.Reset(System.Boolean)">
+        <member name="M:DisplaySpring.StackedItem.CurrentItem">
             <summary>
-            Reset the ScrollList to a fresh state
+            Get's the currently visible item
             </summary>
         </member>
-        <member name="P:DisplaySpring.ScrollList.ViewCount">
-            <summary>
-            The max amount of items in the list to show. Items not visible do not count
-            This is a scrolling functionality
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.ScrollList.SelectedIndex">
-            <summary>
-            The currently selected index
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.ScrollList.Direction">
-            <summary>
-            Stores the orientation of the object
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.ScrollList.ScrollPosition">
-            <summary>
-            ScrollBarPosition for the ScrollList's ScrollBar
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.ScrollList.Items">
-            <summary>
-            Items in the ScrollList
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.ScrollList.Wrap">
-            <summary>
-            Boolean toggle to define if the container wraps at the ends of the list or does not.
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.ScrollList.Focus">
-            <summary>
-            Gets or sets the focus for the menu item
-            On set to true the OnFocus delegate will be called and FocusSound will play
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.ScrollList.KeepFocus">
-            <summary>
-            If set to true, object will keep Focus in an invoke cycle
-            This property resets itself to false at the end of the cycle
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.ScrollList.MeasureHeight">
-            <summary>
-            total Height of all visible buttons
-            if Width oritentation, Height of first available item is returned
-            otherwise it is summed for all items including spacing
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.ScrollList.MeasureWidth">
-            <summary>
-            Total width of all visible buttons
-            if Vertical oritentation, width of first available item is returned
-            otherwise it is summed for all items including spacing
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.ScrollList.Spacing">
-            <summary>
-            Amount of spacing in pixels between objects
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.ScrollList.ScrollSpacing">
-            <summary>
-            Spacing between the scrollbar and the items in the list
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.ScrollList.SelectedItem">
-            <summary>
-            gets selected item
-            </summary>
-        </member>
-        <member name="T:DisplaySpring.ScrollList.Orientation">
-            <summary>
-            Orientation of the ScrollList
-            </summary>
-        </member>
-        <member name="F:DisplaySpring.ScrollList.Orientation.Horizontal">
-            <summary>
-            Items will be layed out horizontally
-            </summary>
-        </member>
-        <member name="F:DisplaySpring.ScrollList.Orientation.Vertical">
-            <summary>
-            Items will be layed out Vertically
-            </summary>
-        </member>
-        <member name="T:DisplaySpring.ScrollList.ScrollBarPosition">
-            <summary>
-            Defines on which side of the list the scroll bar will appear
-            Note: For Horizontal, Left signifies Top and Right signifies Bottom
-            </summary>
-        </member>
-        <member name="F:DisplaySpring.ScrollList.ScrollBarPosition.Left">
-            <summary>
-            ScrolLBar will be on the left side of the ScrollList
-            </summary>
-        </member>
-        <member name="F:DisplaySpring.ScrollList.ScrollBarPosition.Right">
-            <summary>
-            ScrolLBar will be on the right side of the ScrollList
-            </summary>
-        </member>
-        <member name="T:DisplaySpring.ScrollList.MenuActionInt">
-            <summary>
-            Delegate that comes with a index parameter
-            </summary>
-        </member>
-        <member name="T:DisplaySpring.UpdateEvent">
-            <summary>
-            List of delegates to invoke on an update loop
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.UpdateEvent.#ctor">
-            <summary>
-            Default Constructor
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.UpdateEvent.AddEvent(DisplaySpring.UpdateEvent.UpdateDelegate)">
-            <summary>
-            Add an event to delegate
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.UpdateEvent.Update">
-            <summary>
-            Invoke event for all delegates registered with the event
-            </summary>
-        </member>
-        <member name="T:DisplaySpring.UpdateEvent.UpdateDelegate">
-            <summary>
-            Delegates for running in an update event
-            </summary>
-        </member>
-        <member name="T:DisplaySpring.MultiController">
-            <summary>
-            A MultiController handles finding input from multiple controllers.
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.MultiController.op_Implicit(DisplaySpring.Controller)~DisplaySpring.MultiController">
-            <summary>
-            code to convert from Controller to MultiController
-            </summary>
-        </member>
-        <member name="T:DisplaySpring.Frame">
-            <summary>
-            A collection of Items that can be handled layouts
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Frame.#ctor(DisplaySpring.Item)">
-            <summary>
-            Create a Frame with parents size.
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Frame.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Vector2)">
-            <summary>
-            Create a Frame with given size.
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Frame.#ctor(Microsoft.Xna.Framework.Rectangle)">
-            <summary>
-            Create a menu frame with specified bounds.
-            This is only for the menu class to use as the super parent of a Menu
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Frame.Layout">
-            <summary>
-            Defines the LayoutType of the frame.
-            </summary>
-            <seealso cref="T:DisplaySpring.Frame.LayoutType"/>
-        </member>
-        <member name="P:DisplaySpring.Frame.StaticHeight">
+        <member name="P:DisplaySpring.StackedItem.CurrentIndex">
             <summary>
             Height of the item. Layout space is not included. Scale is not included.
             </summary>
         </member>
-        <member name="P:DisplaySpring.Frame.StaticWidth">
+        <member name="P:DisplaySpring.StackedItem.Items">
+            <summary>
+            Gets or sets the current Item list of the stack
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.StackedItem.StaticHeight">
+            <summary>
+            Height of the item. Layout space is not included. Scale is not included.
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.StackedItem.MeasureHeight">
+            <summary>
+            Measures the Height of the item. Layout space is not included. Scale is included.
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.StackedItem.StaticWidth">
             <summary>
             Width of the item. Layout space is not included. Scale is not included.
             </summary>
         </member>
-        <member name="P:DisplaySpring.Frame.Position">
+        <member name="T:DisplaySpring.OptionButton">
             <summary>
-            Position of the object. Default is Vector2.Zero, which is center based.
+            A collection of Items, with only one visible or in focus at a time
             </summary>
         </member>
-        <member name="T:DisplaySpring.Frame.LayoutType">
+        <member name="M:DisplaySpring.OptionButton.#ctor(DisplaySpring.Item,DisplaySpring.MultiController)">
             <summary>
-            The layout type represents how the Children will be
-            organized in the space the frame has.
-            None is the default type
+            Create a StackedItem with parents size.
             </summary>
         </member>
-        <member name="F:DisplaySpring.Frame.LayoutType.None">
+        <member name="P:DisplaySpring.OptionButton.ArrowsOut">
             <summary>
-            No layout, Children will not be arranged. This is the default
+            Defines if the arrows for the option button are outside the items boundaries
             </summary>
         </member>
-        <member name="F:DisplaySpring.Frame.LayoutType.Horizontal">
+        <member name="P:DisplaySpring.Animation.TimeoutMS">
             <summary>
-            Horizontally layout Children
+            Time in MS animation will last
             </summary>
         </member>
-        <member name="F:DisplaySpring.Frame.LayoutType.Vertical">
+        <member name="T:DisplaySpring.AnimateType">
             <summary>
-            Vertically layout Children
+            Standard menu animation types
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.AnimateType.None">
+            <summary>
+            No Animation Type
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.AnimateType.Size">
+            <summary>
+            The object will animate on its size. Growing and Shrinking over a period of time
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Sprite.m_texture">
+            <summary>
+            Texture for the sprite
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Sprite.pos">
+            <summary>
+            pos of this Sprite. This value should be used not as an absolute pos
+            but as an offset value from its container class
             </summary>
         </member>
         <member name="T:DisplaySpring.ScrollBar">
@@ -966,131 +1086,6 @@
             <summary>
             This is the primary way to scroll the scrollbar
             The SelectedIndex is 0 based
-            </summary>
-        </member>
-        <member name="T:DisplaySpring.Button">
-            <summary>
-            Button is basically a text button with callbacks
-            You can give the button no background and no foreground with just text
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Button.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,DisplaySpring.Item)">
-            <summary>
-            Internal debugging constructor
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,DisplaySpring.MultiController,Microsoft.Xna.Framework.Graphics.Texture2D)">
-            <summary>
-            Create a menu button with specific background
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,DisplaySpring.MultiController,Microsoft.Xna.Framework.Graphics.Texture2D,System.String)">
-            <summary>
-            Create a menu item with specific background and text label
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,DisplaySpring.MultiController,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Graphics.Texture2D)">
-            <summary>
-            Create a menu item with specific background and highlight textures
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,DisplaySpring.MultiController,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Graphics.Texture2D,System.String)">
-            <summary>
-            Create a menu item with specific background and focus background with text
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Graphics.Texture2D)">
-            <summary>
-            Creates a static image element
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Graphics.Texture2D,System.String)">
-            <summary>
-            Create menu button with specific background and label text
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Graphics.Texture2D)">
-            <summary>
-            Create menu button with specific background and focus background
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Graphics.Texture2D,System.String)">
-            <summary>
-            Create menu button with specific background, focus background and label text
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Button.FocusTexture">
-            <summary>
-            The focus background of the button.
-            This texture is shown when the item has focus
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Button.Background">
-            <summary>
-            The main background of the button.
-            This texture is shown when the item does not have focus
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Button.TextLabel">
-            <summary>
-            Label of the Button
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Button.Focus">
-            <summary>
-            Gets or sets the focus for the menu item
-            On set to true the OnFocus delegate will be called and FocusSound will play
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Button.Depth">
-            <summary>
-            Depth of the button. Default is Menu.ButtonDrawDepth
-            By default 0 = front -> 1 = back
-            </summary>
-        </member>
-        <member name="T:DisplaySpring.StackedItem">
-            <summary>
-            A collection of Items, with only one visible or in focus at a time
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.StackedItem.#ctor(DisplaySpring.Frame)">
-            <summary>
-            Create a StackedItem with parents size.
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.StackedItem.#ctor(DisplaySpring.Frame,Microsoft.Xna.Framework.Vector2)">
-            <summary>
-            Create a StackedItem with given size.
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.StackedItem.SetCurrentItem(DisplaySpring.Item)">
-            <summary>
-            Sets the current item for the stack
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.StackedItem.CurrentItem">
-            <summary>
-            Get's the currently visible item
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.StackedItem.CurrentIndex">
-            <summary>
-            Height of the item. Layout space is not included. Scale is not included.
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.StackedItem.Items">
-            <summary>
-            Gets or sets the current Item list of the stack
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.StackedItem.StaticHeight">
-            <summary>
-            Height of the item. Layout space is not included. Scale is not included.
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.StackedItem.StaticWidth">
-            <summary>
-            Width of the item. Layout space is not included. Scale is not included.
             </summary>
         </member>
         <member name="M:DisplaySpring.Controller.#ctor(Microsoft.Xna.Framework.PlayerIndex,DisplaySpring.UpdateEvent)">
@@ -1223,6 +1218,31 @@
             True if the D key on the keyboard is pressed (used for entering debug mode)
             </summary>
         </member>
+        <member name="T:DisplaySpring.UpdateEvent">
+            <summary>
+            List of delegates to invoke on an update loop
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.UpdateEvent.#ctor">
+            <summary>
+            Default Constructor
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.UpdateEvent.AddEvent(DisplaySpring.UpdateEvent.UpdateDelegate)">
+            <summary>
+            Add an event to delegate
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.UpdateEvent.Update">
+            <summary>
+            Invoke event for all delegates registered with the event
+            </summary>
+        </member>
+        <member name="T:DisplaySpring.UpdateEvent.UpdateDelegate">
+            <summary>
+            Delegates for running in an update event
+            </summary>
+        </member>
         <member name="T:DisplaySpring.ItemCollection">
             <summary>
             A ItemCollection is a list/collection of items that when added parents and children are handled for the user
@@ -1246,16 +1266,6 @@
         <member name="M:DisplaySpring.ItemCollection.SetItem(System.Int32,DisplaySpring.Item)">
             <summary>
             Set the specific item in the list to a new value
-            </summary>
-        </member>
-        <member name="T:DisplaySpring.OptionButton">
-            <summary>
-            A collection of Items, with only one visible or in focus at a time
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.OptionButton.#ctor(DisplaySpring.Frame,DisplaySpring.MultiController)">
-            <summary>
-            Create a StackedItem with parents size.
             </summary>
         </member>
     </members>

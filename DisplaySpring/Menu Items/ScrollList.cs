@@ -224,9 +224,9 @@
                 foreach( Item item in vb)
                 {
                     if (m_direction == Orientation.Horizontal)
-                        h = Math.Max(h, item.MeasureHeight * Scale.Y);
+                        h = Math.Max(h, item.MeasureHeight);
                     else
-                        h += item.MeasureHeight * Scale.Y;
+                        h += item.MeasureHeight;
                 }
 
                 if (m_direction == Orientation.Horizontal)
@@ -256,9 +256,9 @@
                 foreach( Item item in items)
                 {
                     if (m_direction == Orientation.Vertical)
-                        w = Math.Max(w, item.MeasureWidth * Scale.X);
+                        w = Math.Max(w, item.MeasureWidth);
                     else
-                        w += item.MeasureWidth * Scale.X;
+                        w += item.MeasureWidth;
                 }
 
                 if (m_direction == Orientation.Vertical)
@@ -710,16 +710,16 @@
                 switch (m_direction)
                 {
                     case Orientation.Horizontal:
-                        offset += item.MeasureWidth / 2f * Scale.X;
+                        offset += item.MeasureWidth / 2f;
                         item.Position = new Vector2(offset, 0);
-                        offset += item.MeasureWidth / 2f * Scale.X;
+                        offset += item.MeasureWidth / 2f;
                         offset += Spacing * Scale.X;
                         break;
                     case Orientation.Vertical:
                     default:
-                        offset += item.MeasureHeight / 2f * Scale.Y;
+                        offset += item.MeasureHeight / 2f;
                         item.Position = new Vector2(0, offset);
-                        offset += item.MeasureHeight / 2f * Scale.Y;
+                        offset += item.MeasureHeight / 2f;
                         offset += Spacing * Scale.Y;
                         break;
                 }

@@ -31,7 +31,9 @@
             sl.ViewCount = 3;
             Button btn = new Button(sl, App.Button, "Button texture");
             btn = new Button(sl, App.Button, App.menuButtonHighlighted, "Highlight texture");
+            btn.Scale *= 2;
             btn = new Button(sl, App.Button, "White Font");
+            btn.Scale *= 2;
             btn.TextLabel.FontFocusColor = Color.White;
             btn = new Button(sl, App.Button, App.menuButtonHighlighted, "Swap Scroll Position");
             btn.OnA = delegate() 

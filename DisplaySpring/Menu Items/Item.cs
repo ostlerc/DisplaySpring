@@ -284,6 +284,7 @@
                     value.Children.Add(this);
                     //re-evaluate height and width
                 }
+                forceRefresh();
             }
         }
         internal ItemCollection Children { get { return m_ItemCollection; } private set { m_ItemCollection = value; } }
@@ -453,24 +454,7 @@
         /// Scale of the object
         /// Default of 1
         /// </summary>
-        public virtual Vector2 Scale 
-        { 
-            get { return m_scale; } 
-            set 
-            {
-                m_scale = value;
-#if DEBUG
-                /*if (m_rectSize != null)
-                    m_rectSize.Scale = Vector2.One / Scale;
-
-                if (m_rectStaticSize != null)
-                    m_rectStaticSize.Scale = Vector2.One / Scale;
-
-                if (m_rectCenter != null)
-                    m_rectCenter.Scale = Vector2.One / Scale;*/
-#endif
-            }
-        }
+        public virtual Vector2 Scale { get { return m_scale; } set { m_scale = value; } }
 
         /// <summary>
         /// Rotation of the object in radians

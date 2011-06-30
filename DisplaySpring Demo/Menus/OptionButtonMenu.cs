@@ -12,7 +12,7 @@
 
     class OptionButtonMenu : Menu
     {
-        OptionButton options;
+        ScrollList sl;
 
         /// <summary>
         /// Sample Button Scroll List Menu
@@ -24,8 +24,11 @@
             Label lbl = new Label(BaseFrame, "Left, Right controls index of OptionButton");
             lbl.VerticalAlignment = VAlign.Bottom;
 
-            options = new OptionButton(BaseFrame, controllers);
-            options.LayoutStretch = 2;
+            sl = new ScrollList(BaseFrame, controllers);
+            sl.LayoutStretch = 3;
+
+            OptionButton options = new OptionButton(sl, controllers);
+            options.ArrowsOut = true;
 
             Button btn = new Button(options, Item.ButtonTexture, "one");
             btn.TextLabel.FontFocusColor = Color.White;
@@ -38,6 +41,8 @@
             btn.TextLabel.FontFocusColor = Color.White;
             lbl = new Label(options, "a long text");
 
+            btn = new Button(sl, Item.ButtonTexture);
+
             Reset();
         }
 
@@ -47,7 +52,7 @@
         /// </summary>
         public override void Reset()
         {
-            base.Reset(options);
+            base.Reset(sl);
         }
     }
 }

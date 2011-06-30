@@ -77,7 +77,36 @@
 
                 return Height;
             }
-        } 
+        }
+
+        /// <summary>
+        /// Measures the Height of the item. Layout space is not included. Scale is included.
+        /// </summary>
+        public override float MeasureHeight
+        {
+            get
+            {
+                Item current = CurrentItem();
+
+                if (current != null)
+                    return current.MeasureHeight;
+
+                return base.MeasureHeight;
+            }
+        }
+
+        public override float MeasureWidth
+        {
+            get
+            {
+                Item current = CurrentItem();
+
+                if (current != null)
+                    return current.MeasureWidth;
+
+                return base.MeasureWidth;
+            }
+        }
 
         /// <summary>
         /// Width of the item. Layout space is not included. Scale is not included.
@@ -130,7 +159,7 @@
         /// <summary>
         /// Create a StackedItem with parents size.
         /// </summary>
-        public StackedItem(Frame parent) 
+        public StackedItem(Item parent) 
             : base(parent)
         {
             Initialize();
@@ -139,7 +168,7 @@
         /// <summary>
         /// Create a StackedItem with given size.
         /// </summary>
-        public StackedItem(Frame parent, Vector2 size) 
+        public StackedItem(Item parent, Vector2 size) 
             : base(parent)
         {
             Width = size.X;
