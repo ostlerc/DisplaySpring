@@ -14,9 +14,9 @@
     {
         #region Member Variables
         private int m_currentIndex = -1;
-        private bool m_ignorechildAdded = false;
         private Button m_leftArrow;
         private Button m_rightArrow;
+        private float m_highlightTimer = -1;
         #endregion
 
         #region Properties
@@ -37,43 +37,86 @@
 
         void Initialize()
         {
-            m_ignorechildAdded = true;
-            m_leftArrow = new Button(this, Item.ArrowLeft, Item.DefaultArrowLeftHighlight);
-            m_leftArrow.HorizontalAlignment = HorizontalAlignmentType.Left;
-            m_leftArrow.Depth = 0;
+            if (m_leftArrow == null)
+            {
+                m_leftArrow = new Button(null, Item.ArrowLeft, Item.DefaultArrowLeftHighlight);
+                m_leftArrow.HorizontalAlignment = HorizontalAlignmentType.Left;
+                m_leftArrow.Animation = AnimateType.None;
 
-            m_rightArrow = new Button(this, Item.ArrowRight, Item.DefaultArrowRightHighlight);
-            m_rightArrow.HorizontalAlignment = HorizontalAlignmentType.Right;
-            m_rightArrow.Depth = 0;
-            m_ignorechildAdded = false;
-
-            OnLeft += delegate() { KeepFocus = true; CurrentIndex--; };
-            OnRight += delegate() { KeepFocus = true; CurrentIndex++; };
+                m_rightArrow = new Button(null, Item.ArrowRight, Item.DefaultArrowRightHighlight);
+                m_rightArrow.HorizontalAlignment = HorizontalAlignmentType.Right;
+                m_rightArrow.Animation = AnimateType.None;
+            }
         }
 
         #endregion
 
         #region Class Functions
 
-        internal override void childAdded(Item mi)
+        internal override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix parentTransform)
         {
-            if (m_ignorechildAdded)
-                return;
+            if (m_leftArrow.Parent == null || m_rightArrow.Parent == null)
+            {
+                Item cur = CurrentItem();
 
-            base.childAdded(mi);
-        }
+                m_leftArrow.Parent = cur;
+                m_leftArrow.Width = cur.StaticWidth;
+                m_leftArrow.Height = cur.StaticHeight;
 
-        internal override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix parentTransform) 
-        {
-            if (!Visible)
-                return;
-
-            Matrix m = CombineMatrix(AnimationTransform(gameTime), ref parentTransform);
+                m_rightArrow.Parent = cur;
+                m_rightArrow.Width = cur.StaticWidth;
+                m_rightArrow.Height = cur.StaticHeight;
+            }
 
             base.Draw(gameTime, spriteBatch, parentTransform);
+        }
 
-            m_leftArrow.Draw(gameTime, spriteBatch, m);
-            m_rightArrow.Draw(gameTime, spriteBatch, m);
+        public override void Update(GameTime gameTime)
+        {
+            if (m_highlightTimer == 0)
+            {
+                m_highlightTimer = -1;
+                m_leftArrow.Enabled = false;
+                m_rightArrow.Enabled = false;
+            }
+            else if (m_highlightTimer > 0)
+            {
+                m_highlightTimer = Math.Max(m_highlightTimer - gameTime.ElapsedGameTime.Milliseconds, 0);
+            }
+
+            base.Update(gameTime);
+        }
+
+        internal override bool Left()
+        {
+            CurrentIndex--;
+            m_leftArrow.Enabled = true;
+            m_highlightTimer = 60;
+            return base.Left();
+        }
+
+        internal override bool Right()
+        {
+            CurrentIndex++;
+            m_rightArrow.Enabled = true;
+            m_highlightTimer = 60;
+            return base.Right();
+        }
+
+        public override void SetCurrentItem(Item item)
+        {
+            if (m_leftArrow != null)
+                m_leftArrow.Parent = null;
+
+            if (m_rightArrow != null)
+                m_rightArrow.Parent = null;
+
+            base.SetCurrentItem(item);
+        }
+
+        internal override void  childAdded(Item mi)
+        {
+            base.childAdded(mi);
         }
 
         #endregion

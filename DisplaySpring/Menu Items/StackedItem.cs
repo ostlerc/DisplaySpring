@@ -23,17 +23,19 @@
         {
             Items.Add(mi);
 
+            base.childAdded(mi);
+
             if (m_currentIndex == -1)
             {
                 mi.Visible = true;
-                m_currentIndex = 0;
+                CurrentIndex = 0;
             }
             else if (CurrentItem() == mi)
                 SetCurrentItem(mi);
             else
                 mi.Visible = false;
 
-            base.childAdded(mi);
+            forceRefresh();
         }
 
         /// <summary>

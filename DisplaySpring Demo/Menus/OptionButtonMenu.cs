@@ -31,10 +31,12 @@
             btn.TextLabel.FontFocusColor = Color.White;
             btn = new Button(options, Item.ButtonTexture, "two");
             btn.TextLabel.FontFocusColor = Color.White;
+            btn.Scale *= 2;
             btn = new Button(options, Item.ButtonTexture, "three");
             btn.TextLabel.FontFocusColor = Color.White;
             btn = new Button(options, Item.ButtonTexture, "four");
             btn.TextLabel.FontFocusColor = Color.White;
+            lbl = new Label(options, "a long text");
 
             Reset();
         }

@@ -270,11 +270,13 @@
 
             set
             {
+                Item oldParent = m_parent;
+
                 m_parent = value;
 
-                if (m_parent != null)
+                if (oldParent != null)
                 {
-                    m_parent.Children.Remove(this);
+                    oldParent.Children.Remove(this);
                 }
 
                 if (value != null && !value.Children.Contains(this))

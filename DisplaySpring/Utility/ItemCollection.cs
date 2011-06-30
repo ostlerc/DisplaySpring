@@ -39,10 +39,10 @@
         /// </summary>
         protected override void InsertItem(int index, Item item)
         {
-            base.InsertItem(index, item);
-
             if(m_parent != null)
                 m_parent.childAdded(item);
+
+            base.InsertItem(index, item);
         }
 
         /// <summary>
@@ -50,12 +50,6 @@
         /// </summary>
         protected override void RemoveItem(int index)
         {
-            if (Items[index] != null)
-            {
-                Items[index].childRemoved(Items[index]);
-                Items[index].Parent = null;
-            }
-
             base.RemoveItem(index);
         }
 
