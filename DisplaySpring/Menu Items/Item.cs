@@ -242,6 +242,9 @@
             {
                 Item oldParent = m_parent;
 
+                if (m_parent == value)
+                    return;
+
                 m_parent = value;
 
                 if (oldParent != null)
@@ -275,10 +278,12 @@
         { 
             get { return m_layoutStretch; } 
             set 
-            { 
-                m_layoutStretch = value;
-
-                forceRefresh();
+            {
+                if (m_layoutStretch != value)
+                {
+                    m_layoutStretch = value;
+                    forceRefresh();
+                }
             }
         }
 
@@ -469,8 +474,11 @@
             get { return m_height; } 
             internal set 
             {
-                m_height = value;
-                forceRefresh();
+                if (m_height != value)
+                {
+                    m_height = value;
+                    forceRefresh();
+                }
             } 
         }
 
@@ -481,9 +489,12 @@
         { 
             get { return m_width; } 
             internal set 
-            { 
-                m_width = value;
-                forceRefresh();
+            {
+                if (m_width != value)
+                {
+                    m_width = value;
+                    forceRefresh();
+                }
             } 
         }
 

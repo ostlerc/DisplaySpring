@@ -28,6 +28,7 @@
             lbl.VerticalAlignment = VAlign.Top;
 
             stack = new StackedItem(BaseFrame);
+            stack.LayoutStretch = 10;
 
             Button btn = new Button(stack, Item.ButtonTexture, "one");
             btn.TextLabel.FontFocusColor = Color.White;

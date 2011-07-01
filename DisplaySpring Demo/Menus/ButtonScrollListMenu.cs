@@ -28,7 +28,7 @@
 
             BaseFrame.Scale /= 1.25f;
             sl = new ScrollList(BaseFrame);
-            sl.ViewCount = 2;
+            sl.ViewCount = 3;
             sl.Direction = ScrollList.Orientation.Horizontal;
             sl.LayoutStretch = 2;
             sl.ScrollPosition = ScrollList.ScrollBarPosition.Left;
@@ -93,6 +93,8 @@
                 else
                     _sl3.ScrollPosition = ScrollList.ScrollBarPosition.Left;
             };
+
+            sl.ScaleImageToWidth(BaseFrame.Width);
 
             Reset();
         }

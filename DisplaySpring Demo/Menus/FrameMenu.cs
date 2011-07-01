@@ -52,7 +52,9 @@
             horizontalFrame = new Frame(BaseFrame);
             horizontalFrame.Layout = Layout.Horizontal;
 
-            new Button(horizontalFrame, Item.ButtonTexture, "third");
+            btn = new Button(horizontalFrame, Item.ButtonTexture, "Third");
+            btn.HorizontalAlignment = HAlign.Stretch;
+            btn.TextLabel.Scale = Vector2.One / btn.Scale;
 
             horizontalFrame = new Frame(BaseFrame);
             horizontalFrame.Layout = Layout.Horizontal;
