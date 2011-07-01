@@ -52,45 +52,18 @@
 
         void Initialize()
         {
-            if (m_leftArrow == null)
-            {
-                m_leftArrow = new Button(null, Item.ArrowLeft, Item.DefaultArrowLeftHighlight);
-                m_leftArrow.HorizontalAlignment = HorizontalAlignmentType.Left;
-                m_leftArrow.Animation = AnimateType.None;
+            m_leftArrow = new Button(null, Item.ArrowLeft, Item.DefaultArrowLeftHighlight);
+            m_leftArrow.HorizontalAlignment = HorizontalAlignmentType.Left;
+            m_leftArrow.Animation = AnimateType.None;
 
-                m_rightArrow = new Button(null, Item.ArrowRight, Item.DefaultArrowRightHighlight);
-                m_rightArrow.HorizontalAlignment = HorizontalAlignmentType.Right;
-                m_rightArrow.Animation = AnimateType.None;
-            }
+            m_rightArrow = new Button(null, Item.ArrowRight, Item.DefaultArrowRightHighlight);
+            m_rightArrow.HorizontalAlignment = HorizontalAlignmentType.Right;
+            m_rightArrow.Animation = AnimateType.None;
         }
 
         #endregion
 
         #region Class Functions
-
-        internal override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix parentTransform)
-        {
-            if (m_leftArrow.Parent == null || m_rightArrow.Parent == null)
-            {
-                Item cur = CurrentItem();
-
-                m_leftArrow.Parent = cur;
-                m_leftArrow.Width = cur.StaticWidth;
-                m_leftArrow.Height = cur.StaticHeight;
-
-                m_rightArrow.Parent = cur;
-                m_rightArrow.Width = cur.StaticWidth;
-                m_rightArrow.Height = cur.StaticHeight;
-
-                if (ArrowsOut)
-                {
-                    m_leftArrow.Position = new Vector2(m_leftArrow.Position.X - m_leftArrow.StaticWidth * 1.15f, m_leftArrow.Position.Y);
-                    m_rightArrow.Position = new Vector2(m_rightArrow.Position.X + m_rightArrow.StaticWidth * 1.15f, m_rightArrow.Position.Y);
-                }
-            }
-
-            base.Draw(gameTime, spriteBatch, parentTransform);
-        }
 
         public override void Update(GameTime gameTime)
         {
@@ -110,34 +83,62 @@
 
         internal override bool Left()
         {
+            int oldIndex = CurrentIndex;
             CurrentIndex--;
-            m_leftArrow.Enabled = true;
-            m_highlightTimer = 90;
+            if (oldIndex != CurrentIndex)
+            {
+                m_leftArrow.Enabled = true;
+                m_highlightTimer = 90;
+            }
             return base.Left();
         }
 
         internal override bool Right()
         {
+            int oldIndex = CurrentIndex;
             CurrentIndex++;
-            m_rightArrow.Enabled = true;
-            m_highlightTimer = 90;
+            if (oldIndex != CurrentIndex)
+            {
+                m_rightArrow.Enabled = true;
+                m_highlightTimer = 90;
+            }
+
             return base.Right();
+        }
+
+        internal override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix parentTransform)
+        {
+            Item cur = CurrentItem();
+
+            m_leftArrow.Width = cur.StaticWidth;
+            m_leftArrow.Height = cur.StaticHeight;
+
+            m_rightArrow.Width = cur.StaticWidth;
+            m_rightArrow.Height = cur.StaticHeight;
+
+            base.Draw(gameTime, spriteBatch, parentTransform);
         }
 
         public override void SetCurrentItem(Item item)
         {
-            if (m_leftArrow != null)
-                m_leftArrow.Parent = null;
+            m_leftArrow.Parent = item;
+            m_leftArrow.Width = item.StaticWidth;
+            m_leftArrow.Height = item.StaticHeight;
+            if (ArrowsOut)
+            {
+                m_leftArrow.Position = new Vector2(m_leftArrow.Position.X - m_leftArrow.StaticWidth * 1.15f, m_leftArrow.Position.Y);
+            }
 
-            if (m_rightArrow != null)
-                m_rightArrow.Parent = null;
+            m_rightArrow.Parent = item;
+            m_rightArrow.Width = item.StaticWidth;
+            m_rightArrow.Height = item.StaticHeight;
+
+            if (ArrowsOut)
+            {
+                m_rightArrow.Position = new Vector2(m_rightArrow.Position.X + m_rightArrow.StaticWidth * 1.15f, m_rightArrow.Position.Y);
+            }
 
             base.SetCurrentItem(item);
-        }
-
-        internal override void  childAdded(Item mi)
-        {
-            base.childAdded(mi);
         }
 
         #endregion
