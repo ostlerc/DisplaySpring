@@ -301,6 +301,7 @@
                     Width = Parent.StaticWidth;
                     Height = Parent.StaticHeight;
                 }
+
                 refreshItem();
             }
         }

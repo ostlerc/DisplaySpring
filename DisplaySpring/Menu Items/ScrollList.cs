@@ -131,7 +131,7 @@
         public ScrollBarPosition ScrollPosition
         {
             get { return m_scrollPosition; }
-            set { m_scrollPosition = value; UpdateScrollBar(true); forceRefresh(); }
+            set { m_scrollPosition = value; UpdateScrollBar(true); }
         }
 
         private void CreateScrollBar()
@@ -233,7 +233,7 @@
                 if (m_direction == Orientation.Horizontal)
                     h += ScrollSpacing + m_scroll.MeasureHeight;
                 else
-                    h += Spacing * (vb.Count - 1) * Scale.Y;
+                    h += Spacing * vb.Count * Scale.Y;
 
                 return Math.Max(h,0);
             }
@@ -265,7 +265,7 @@
                 if (m_direction == Orientation.Vertical)
                     w += ScrollSpacing + m_scroll.MeasureWidth;
                 else
-                    w += Spacing * (items.Count - 1) * Scale.X;
+                    w += Spacing * items.Count * Scale.X;
 
                 return Math.Max(w,0);
             }
@@ -490,17 +490,19 @@
 
                 if (Direction == Orientation.Horizontal)
                 {
-                    m_scroll.Width = (int)MeasureWidth;
+                    m_scroll.Width = (int)StaticWidth;
                     m_scroll.Height = 20;
                     m_scroll.LayoutPosition = new Vector2(0, ((MeasureHeight / 2) + ScrollSpacing)*dir);
                 }
                 else
                 {
-                    m_scroll.Height = (int)MeasureHeight;
+                    m_scroll.Height = (int)StaticHeight;
                     m_scroll.Width = 20;
                     m_scroll.LayoutPosition = -new Vector2(((MeasureWidth / 2) + ScrollSpacing) * dir, 0);
                 }
             }
+
+            forceRefresh();
         }
 
         /// <summary>
@@ -673,8 +675,9 @@
             if (m_scroll.VisibleCount > 0)
             {
                 updateStartIndex();
-                UpdateScrollBar(true);
             }
+
+            UpdateScrollBar(true);
         }
 
         private int previousVisible(int from)

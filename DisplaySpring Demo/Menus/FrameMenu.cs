@@ -30,35 +30,35 @@
             Frame horizontalFrame = new Frame(BaseFrame);
             horizontalFrame.Layout = Layout.Horizontal;
 
+            Button btn = new Button(horizontalFrame, Item.ButtonTexture, "One");
+            btn.VerticalAlignment = VAlign.Top;
+            btn.HorizontalAlignment = HAlign.Left;
+
+            btn = new Button(horizontalFrame, Item.ButtonTexture, "Two");
+            btn.VerticalAlignment = VAlign.Top;
+            btn.HorizontalAlignment = HAlign.Right;
+
+            horizontalFrame = new Frame(BaseFrame);
+            horizontalFrame.Layout = Layout.Horizontal;
+
+            btn = new Button(horizontalFrame, Item.ButtonTexture, "Three");
+            btn.VerticalAlignment = VAlign.Stretch;
+            btn.HorizontalAlignment = HAlign.Left;
+
+            btn = new Button(horizontalFrame, Item.ButtonTexture, "Four");
+            btn.VerticalAlignment = VAlign.Top;
+            btn.HorizontalAlignment = HAlign.Right;
+
+            horizontalFrame = new Frame(BaseFrame);
+            horizontalFrame.Layout = Layout.Horizontal;
+
+            new Button(horizontalFrame, Item.ButtonTexture, "third");
+
+            horizontalFrame = new Frame(BaseFrame);
+            horizontalFrame.Layout = Layout.Horizontal;
+
             Label lbl = new Label(horizontalFrame, "One");
-            lbl.VerticalAlignment = VAlign.Top;
-            lbl.HorizontalAlignment = HAlign.Left;
-
-            lbl = new Label(horizontalFrame, "Two");
-            lbl.VerticalAlignment = VAlign.Top;
-            lbl.HorizontalAlignment = HAlign.Right;
-
-            horizontalFrame = new Frame(BaseFrame);
-            horizontalFrame.Layout = Layout.Horizontal;
-
-            lbl = new Label(horizontalFrame, "Three");
-            lbl.VerticalAlignment = VAlign.Bottom;
-            lbl.HorizontalAlignment = HAlign.Left;
-
-            lbl = new Label(horizontalFrame, "Four");
-            lbl.VerticalAlignment = VAlign.Bottom;
-            lbl.HorizontalAlignment = HAlign.Right;
-
-            horizontalFrame = new Frame(BaseFrame);
-            horizontalFrame.Layout = Layout.Horizontal;
-            lbl = new Label(horizontalFrame, "third");
-
-            horizontalFrame = new Frame(BaseFrame);
-            horizontalFrame.Layout = Layout.Horizontal;
-
-            lbl = new Label(horizontalFrame, "One");
-            lbl.VerticalAlignment = VAlign.Top;
-            lbl.HorizontalAlignment = HAlign.Left;
+            lbl.HorizontalAlignment = HAlign.Stretch;
 
             lbl = new Label(horizontalFrame, "Two");
             lbl.VerticalAlignment = VAlign.Top;
