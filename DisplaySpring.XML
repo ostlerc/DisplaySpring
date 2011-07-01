@@ -700,20 +700,6 @@
             This property resets itself to false at the end of the cycle
             </summary>
         </member>
-        <member name="P:DisplaySpring.ScrollList.MeasureHeight">
-            <summary>
-            total Height of all visible buttons
-            if Width oritentation, Height of first available item is returned
-            otherwise it is summed for all items including spacing
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.ScrollList.MeasureWidth">
-            <summary>
-            Total width of all visible buttons
-            if Vertical oritentation, width of first available item is returned
-            otherwise it is summed for all items including spacing
-            </summary>
-        </member>
         <member name="P:DisplaySpring.ScrollList.Spacing">
             <summary>
             Amount of spacing in pixels between objects
@@ -1065,7 +1051,7 @@
             Class that handles creating / using textures that represent a ScrollBar
             </summary>
         </member>
-        <member name="M:DisplaySpring.ScrollBar.#ctor(DisplaySpring.Item,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:DisplaySpring.ScrollBar.#ctor(DisplaySpring.Item,System.Single,System.Single,System.Int32,System.Int32)">
             <summary>
             A simple scrollbar that can be vertical or horizontal with a few custom options
             </summary>

@@ -49,12 +49,12 @@
 
         internal override float StaticHeight
         {
-            get { return Height; }
+            get { if (m_bg != null) return m_bg.Height; return Height; }
         }
 
         internal override float StaticWidth
         {
-            get { return Width; }
+            get { if (m_bg != null) return m_bg.Width; return Width; }
         }
 
         /// <summary>
@@ -65,7 +65,7 @@
         /// <param name="height">height of the scrollbar</param>
         /// <param name="objCount">amount of items in the container</param>
         /// <param name="visibleUnits">amount of items that can be seen before scrolling is necessary</param>
-        public ScrollBar(Item parent, int width, int height, int objCount, int visibleUnits) : base(parent) //TODO fix this base call with a parent
+        public ScrollBar(Item parent, float width, float height, int objCount, int visibleUnits) : base(parent) //TODO fix this base call with a parent
         {
             m_objectCount = objCount;
             Width = width;
@@ -101,6 +101,7 @@
             if (bg != null)
             {
                 m_slider = new Button(this, bg);
+                m_slider.Depth += .01f;
                 m_slider.Fade = false;
             }
 
@@ -125,18 +126,18 @@
 
             Vector2 center = new Vector2(StaticWidth, StaticHeight) / 2f;
 
-            spriteBatch.Draw(m_bg, position, null, Color.White*Alpha, rotation, center, scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(m_bg, position, null, Tint*Alpha, rotation, center, scale, SpriteEffects.None, Depth);
 
             int offset = m_unitLength * (m_selectedIndex);
             int len = m_unitLength * m_visibleCount;
 
             if (Width > Height) //horizontal
             {
-                m_slider.Position = Vector2.UnitX * ((len - m_bg.Width) / 2 + offset * Scale.X);
+                m_slider.Position = Vector2.UnitX * ((len - m_bg.Width) / 2 + offset);
             }
             else
             {
-                m_slider.Position = Vector2.UnitY * ((len - m_bg.Height * Scale.Y) / 2 + offset * Scale.Y);
+                m_slider.Position = Vector2.UnitY * ((len - m_bg.Height) / 2 + offset);
             }
 
             m_slider.Draw(gameTime, spriteBatch, CombineMatrix(AnimationTransform(gameTime), ref parentTransform));

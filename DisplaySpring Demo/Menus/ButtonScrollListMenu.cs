@@ -75,6 +75,7 @@
 
             ScrollList _sl3 = new ScrollList(sl);
             _sl3.ViewCount = 2;
+            _sl3.Scale *= 1.5f;
 
             btn = new Button(_sl3, App.Button, "Button texture");
             btn = new Button(_sl3, App.Button, App.menuButtonHighlighted, "Highlight texture");

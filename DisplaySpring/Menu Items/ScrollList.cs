@@ -89,15 +89,13 @@
 
                 m_viewCount = value;
 
-                UpdateScrollBar(true);
-
                 if (visibleButtons(m_startIndex).Count < value)
                 {
                     int prev = previousVisible(m_startIndex);
                     if (prev != -1)
                     {
                         m_startIndex = prev;
-                        UpdateScrollBar(true);
+                        UpdateScrollBar();
                     }
                 }
                 else
@@ -121,7 +119,7 @@
             set 
             { 
                 m_direction = value;
-                UpdateScrollBar(true);
+                UpdateScrollBar();
             }
         }
 
@@ -131,7 +129,7 @@
         public ScrollBarPosition ScrollPosition
         {
             get { return m_scrollPosition; }
-            set { m_scrollPosition = value; UpdateScrollBar(true); }
+            set { m_scrollPosition = value; UpdateScrollBar(); }
         }
 
         private void CreateScrollBar()
@@ -147,17 +145,11 @@
             m_ignoreEvents = true;
             if (m_direction == Orientation.Horizontal)
             {
-                m_scroll = new ScrollBar(this, (int)StaticWidth, 20, 0, 0)
-                {
-                    Position = Vector2.UnitY * ((StaticHeight / 2) + 25) * dir,
-                };
+                m_scroll = new ScrollBar(this, StaticWidth, 20, 0, 0);
             }
             else
             {
-                m_scroll = new ScrollBar(this, 20, (int)StaticHeight, 0, 0)
-                {
-                    Position = -Vector2.UnitX * ((StaticWidth / 2) - 25) * dir,
-                };
+                m_scroll = new ScrollBar(this, 20, StaticHeight, 0, 0);
             }
             m_ignoreEvents = false;
 
@@ -206,13 +198,8 @@
             }
         }
 
-        /// <summary>
-        /// total Height of all visible buttons
-        /// if Width oritentation, Height of first available item is returned
-        /// otherwise it is summed for all items including spacing
-        /// </summary>
-        public override float MeasureHeight
-        { 
+        internal override float  StaticHeight
+        {
             get 
             {
                 if (m_items.Count == 0)
@@ -231,68 +218,9 @@
 
 
                 if (m_direction == Orientation.Horizontal)
-                    h += ScrollSpacing + m_scroll.MeasureHeight;
+                    h += ScrollSpacing + 20;
                 else
-                    h += Spacing * vb.Count * Scale.Y;
-
-                return Math.Max(h,0);
-            }
-        }
-
-        /// <summary>
-        /// Total width of all visible buttons
-        /// if Vertical oritentation, width of first available item is returned
-        /// otherwise it is summed for all items including spacing
-        /// </summary>
-        public override float MeasureWidth
-        {
-            get
-            {
-                if (m_items.Count == 0)
-                    return 0;
-
-                float w = 0;
-                List<Item> items = visibleItems();
-
-                foreach( Item item in items)
-                {
-                    if (m_direction == Orientation.Vertical)
-                        w = Math.Max(w, item.MeasureWidth);
-                    else
-                        w += item.MeasureWidth;
-                }
-
-                if (m_direction == Orientation.Vertical)
-                    w += ScrollSpacing + m_scroll.MeasureWidth;
-                else
-                    w += Spacing * items.Count * Scale.X;
-
-                return Math.Max(w,0);
-            }
-        }
-
-        internal override float StaticHeight
-        {
-            get 
-            {
-                if (m_items.Count == 0)
-                    return 0;
-
-                float h = 0;
-                List<Item> vb = visibleItems();
-
-                foreach( Item item in vb)
-                {
-                    if (m_direction == Orientation.Horizontal)
-                        h = Math.Max(h, item.StaticHeight);
-                    else
-                        h += item.StaticHeight;
-                }
-
-                if (m_direction == Orientation.Horizontal)
-                    return h;
-
-                h += Spacing * (vb.Count - 1);
+                    h += Spacing * (vb.Count-1);
 
                 return Math.Max(h,0);
             }
@@ -306,23 +234,24 @@
                     return 0;
 
                 float w = 0;
-                List<Item> items = visibleItems();
+                List<Item> vb = visibleItems();
 
-                foreach( Item item in items)
+                foreach( Item item in vb)
                 {
                     if (m_direction == Orientation.Vertical)
-                        w = Math.Max(w, item.StaticWidth);
+                        w = Math.Max(w, item.MeasureWidth);
                     else
-                        w += item.StaticWidth;
+                        w += item.MeasureWidth;
                 }
 
                 if (m_direction == Orientation.Vertical)
-                    return w;
-
-                w += Spacing * (items.Count - 1);
+                    w += ScrollSpacing + 20;
+                else
+                    w += Spacing * (vb.Count-1);
 
                 return Math.Max(w,0);
             }
+
         }
 
         /// <summary>
@@ -334,7 +263,7 @@
             set 
             { 
                 m_spacing = value;
-                UpdateScrollBar(true);
+                UpdateScrollBar();
             }
         }
 
@@ -347,7 +276,7 @@
             set 
             { 
                 m_scrollSpacing = value;
-                UpdateScrollBar(true);
+                UpdateScrollBar();
             }
         }
 
@@ -429,7 +358,7 @@
             m_items.Insert(index, item);
             if (m_viewCount != -1)
             {
-                UpdateScrollBar(true);
+                UpdateScrollBar();
             }
         }
 
@@ -448,7 +377,7 @@
             m_items.Remove(item);
             if (m_viewCount != -1)
             {
-                UpdateScrollBar(true);
+                UpdateScrollBar();
             }
         }
 
@@ -461,11 +390,11 @@
 
             if (m_viewCount != -1)
             {
-                UpdateScrollBar(true);
+                UpdateScrollBar();
             }
         }
 
-        private void UpdateScrollBar(bool resize)
+        protected void UpdateScrollBar()
         {
             if (m_items.Count < 1)
                 return;
@@ -484,23 +413,22 @@
 
             m_scroll.SelectedIndex = m_startIndex - invis;
 
-            if (resize)
+            if (Direction == Orientation.Horizontal)
             {
-                int dir = m_scrollPosition == ScrollBarPosition.Left ? 1 : -1;
+                m_scroll.Width = StaticWidth;
+                m_scroll.Height = 20;
 
-                if (Direction == Orientation.Horizontal)
-                {
-                    m_scroll.Width = (int)StaticWidth;
-                    m_scroll.Height = 20;
-                    m_scroll.LayoutPosition = new Vector2(0, ((MeasureHeight / 2) + ScrollSpacing)*dir);
-                }
-                else
-                {
-                    m_scroll.Height = (int)StaticHeight;
-                    m_scroll.Width = 20;
-                    m_scroll.LayoutPosition = -new Vector2(((MeasureWidth / 2) + ScrollSpacing) * dir, 0);
-                }
+                m_scroll.LayoutPosition = new Vector2(0, StaticHeight/2 - 10);
             }
+            else
+            {
+                m_scroll.Height = StaticHeight;
+                m_scroll.Width = 20;
+                m_scroll.LayoutPosition = new Vector2(StaticWidth/2 - 10, 0);
+            }
+
+            if (m_scrollPosition == ScrollBarPosition.Left)
+                m_scroll.LayoutPosition *= -1;
 
             forceRefresh();
         }
@@ -528,7 +456,7 @@
 
             base.Reset(isFocus);
 
-            UpdateScrollBar(true);
+            UpdateScrollBar();
         }
 
         #region Movement functions
@@ -677,7 +605,11 @@
                 updateStartIndex();
             }
 
-            UpdateScrollBar(true);
+            UpdateScrollBar();
+            if (Parent != null && Parent is ScrollList)
+            {
+                (Parent as ScrollList).UpdateScrollBar();
+            }
         }
 
         private int previousVisible(int from)
@@ -721,29 +653,28 @@
                 return;
 
             float offset;
-            int dir = m_scrollPosition == ScrollBarPosition.Right ? 1 : -1;
+            float offset2 = 0;
             Matrix local = Item.CombineMatrix(AnimationTransform(gameTime), ref parentTransform);
 
             if (m_direction == Orientation.Horizontal)
-                offset = -MeasureWidth / 2f;
+                offset = -StaticWidth / 2f;
             else
-                offset = -MeasureHeight / 2f;
+                offset = -StaticHeight / 2f;
+
+            if (m_scrollPosition == ScrollBarPosition.Left)
+                offset2 = (ScrollSpacing + 20);
 
             foreach (Item item in visibleItems())
             {
                 switch (m_direction)
                 {
                     case Orientation.Horizontal:
-                        offset += item.MeasureWidth / 2f;
-                        item.Position = new Vector2(offset, 0);
-                        offset += item.MeasureWidth / 2f;
-                        offset += Spacing * Scale.X;
+                        item.Position = new Vector2(offset + item.MeasureWidth / 2, offset2);
+                        offset += item.MeasureWidth + Spacing;
                         break;
                     case Orientation.Vertical:
-                        offset += item.MeasureHeight / 2f;
-                        item.Position = new Vector2(0 , offset);
-                        offset += item.MeasureHeight / 2f;
-                        offset += Spacing * Scale.Y;
+                        item.Position = new Vector2(offset2 , offset + item.MeasureHeight/2);
+                        offset += item.MeasureHeight + Spacing;
                         break;
                 }
 
