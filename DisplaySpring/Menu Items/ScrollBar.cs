@@ -130,7 +130,14 @@
             int offset = m_unitLength * (m_selectedIndex);
             int len = m_unitLength * m_visibleCount;
 
-            m_slider.Position = Vector2.UnitY * ((len - m_bg.Height) / 2 + offset);
+            if (Width > Height) //horizontal
+            {
+                m_slider.Position = Vector2.UnitX * ((len - m_bg.Width) / 2 + offset * Scale.X);
+            }
+            else
+            {
+                m_slider.Position = Vector2.UnitY * ((len - m_bg.Height * Scale.Y) / 2 + offset * Scale.Y);
+            }
 
             m_slider.Draw(gameTime, spriteBatch, CombineMatrix(AnimationTransform(gameTime), ref parentTransform));
         }

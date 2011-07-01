@@ -231,7 +231,7 @@
 
 
                 if (m_direction == Orientation.Horizontal)
-                    h += ScrollSpacing + m_scroll.Height;
+                    h += ScrollSpacing + m_scroll.MeasureHeight;
                 else
                     h += Spacing * (vb.Count - 1) * Scale.Y;
 
@@ -263,7 +263,7 @@
                 }
 
                 if (m_direction == Orientation.Vertical)
-                    w += ScrollSpacing + m_scroll.Width;
+                    w += ScrollSpacing + m_scroll.MeasureWidth;
                 else
                     w += Spacing * (items.Count - 1) * Scale.X;
 
@@ -492,13 +492,13 @@
                 {
                     m_scroll.Width = (int)MeasureWidth;
                     m_scroll.Height = 20;
-                    m_scroll.LayoutPosition = new Vector2(0, (MeasureHeight / 2)*dir);
+                    m_scroll.LayoutPosition = new Vector2(0, ((MeasureHeight / 2) + ScrollSpacing)*dir);
                 }
                 else
                 {
                     m_scroll.Height = (int)MeasureHeight;
                     m_scroll.Width = 20;
-                    m_scroll.LayoutPosition = -new Vector2((MeasureWidth / 2) *dir, 0);
+                    m_scroll.LayoutPosition = -new Vector2(((MeasureWidth / 2) + ScrollSpacing) * dir, 0);
                 }
             }
         }
@@ -718,6 +718,7 @@
                 return;
 
             float offset;
+            int dir = m_scrollPosition == ScrollBarPosition.Right ? 1 : -1;
             Matrix local = Item.CombineMatrix(AnimationTransform(gameTime), ref parentTransform);
 
             if (m_direction == Orientation.Horizontal)
@@ -736,9 +737,8 @@
                         offset += Spacing * Scale.X;
                         break;
                     case Orientation.Vertical:
-                    default:
                         offset += item.MeasureHeight / 2f;
-                        item.Position = new Vector2(0, offset);
+                        item.Position = new Vector2(0 , offset);
                         offset += item.MeasureHeight / 2f;
                         offset += Spacing * Scale.Y;
                         break;
