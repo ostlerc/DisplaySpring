@@ -161,7 +161,7 @@
                     case LayoutType.Horizontal:
                         float width = percentage * dimensions.X;
 
-                        v.Position = new Vector2((width - dimensions.X) / 2 + pos, 0);
+                        v.LayoutPosition = new Vector2((width - dimensions.X) / 2 + pos, 0);
                         v.Width = width;
                         v.Height = dimensions.Y;
 
@@ -170,7 +170,7 @@
                     case LayoutType.Vertical:
                         float height = percentage * dimensions.Y;
 
-                        v.Position = new Vector2(0, (height - dimensions.Y) / 2 + pos);
+                        v.LayoutPosition = new Vector2(0, (height - dimensions.Y) / 2 + pos);
                         v.Width = dimensions.X;
                         v.Height = height;
 
@@ -179,7 +179,11 @@
                 }
 
                 v.refreshItem();
+
             }
+
+            base.refreshItem();
+
             m_lockRefresh = false;
         }
 

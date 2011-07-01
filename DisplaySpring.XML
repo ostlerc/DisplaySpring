@@ -128,13 +128,6 @@
             This delegate is called when the Item loses Focus
             </summary>
         </member>
-        <member name="M:DisplaySpring.Item.Debug(Microsoft.Xna.Framework.Color,System.Int32)">
-            <summary>
-            A debug only functionality. Shows a rectangle around the objects different sizes. 
-            Useful for understanding layouts and easily showing width and height of items
-            Only available in debug mode, put #if DEBUG blocks around Debug calls
-            </summary>
-        </member>
         <member name="M:DisplaySpring.Item.forceRefresh">
             <summary>
             Will force a refresh on this item.
@@ -546,11 +539,6 @@
             <summary>
             Button is basically a text button with callbacks
             You can give the button no background and no foreground with just text
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Button.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,DisplaySpring.Item)">
-            <summary>
-            Internal debugging constructor
             </summary>
         </member>
         <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,DisplaySpring.MultiController,Microsoft.Xna.Framework.Graphics.Texture2D)">

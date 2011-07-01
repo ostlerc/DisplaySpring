@@ -492,13 +492,13 @@
                 {
                     m_scroll.Width = (int)MeasureWidth;
                     m_scroll.Height = 20;
-                    m_scroll.Position = new Vector2(0, (MeasureHeight / 2)*dir);
+                    m_scroll.LayoutPosition = new Vector2(0, (MeasureHeight / 2)*dir);
                 }
                 else
                 {
                     m_scroll.Height = (int)MeasureHeight;
                     m_scroll.Width = 20;
-                    m_scroll.Position = -new Vector2((MeasureWidth / 2) *dir, 0);
+                    m_scroll.LayoutPosition = -new Vector2((MeasureWidth / 2) *dir, 0);
                 }
             }
         }

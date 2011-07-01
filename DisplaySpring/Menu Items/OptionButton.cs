@@ -112,7 +112,7 @@
         {
             CurrentIndex--;
             m_leftArrow.Enabled = true;
-            m_highlightTimer = 60;
+            m_highlightTimer = 90;
             return base.Left();
         }
 
@@ -120,7 +120,7 @@
         {
             CurrentIndex++;
             m_rightArrow.Enabled = true;
-            m_highlightTimer = 60;
+            m_highlightTimer = 90;
             return base.Right();
         }
 

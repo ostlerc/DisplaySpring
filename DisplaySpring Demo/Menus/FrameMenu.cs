@@ -29,28 +29,55 @@
 
             Frame horizontalFrame = new Frame(BaseFrame);
             horizontalFrame.Layout = Layout.Horizontal;
-            horizontalFrame.LayoutStretch = 4;
 
-            btn  = new Button(horizontalFrame, App.Button, "One");
-            btn.VerticalAlignment = VAlign.Top;
-            btn.HorizontalAlignment = HAlign.Left;
+            Label lbl = new Label(horizontalFrame, "One");
+            lbl.VerticalAlignment = VAlign.Top;
+            lbl.HorizontalAlignment = HAlign.Left;
 
-            btn  = new Button(horizontalFrame, App.Button, "Two");
-            btn.VerticalAlignment = VAlign.Top;
-            btn.HorizontalAlignment = HAlign.Right;
+            lbl = new Label(horizontalFrame, "Two");
+            lbl.VerticalAlignment = VAlign.Top;
+            lbl.HorizontalAlignment = HAlign.Right;
 
             horizontalFrame = new Frame(BaseFrame);
-            horizontalFrame.LayoutStretch = 4;
             horizontalFrame.Layout = Layout.Horizontal;
 
-            btn  = new Button(horizontalFrame, App.Button, "Three");
-            btn.VerticalAlignment = VAlign.Bottom;
-            btn.HorizontalAlignment = HAlign.Left;
+            lbl = new Label(horizontalFrame, "Three");
+            lbl.VerticalAlignment = VAlign.Bottom;
+            lbl.HorizontalAlignment = HAlign.Left;
 
-            btn = new Button(null, App.Button, "Four");
-            btn.VerticalAlignment = VAlign.Bottom;
-            btn.HorizontalAlignment = HAlign.Right;
-            btn.Parent = horizontalFrame;
+            lbl = new Label(horizontalFrame, "Four");
+            lbl.VerticalAlignment = VAlign.Bottom;
+            lbl.HorizontalAlignment = HAlign.Right;
+
+            horizontalFrame = new Frame(BaseFrame);
+            horizontalFrame.Layout = Layout.Horizontal;
+            lbl = new Label(horizontalFrame, "third");
+
+            horizontalFrame = new Frame(BaseFrame);
+            horizontalFrame.Layout = Layout.Horizontal;
+
+            lbl = new Label(horizontalFrame, "One");
+            lbl.VerticalAlignment = VAlign.Top;
+            lbl.HorizontalAlignment = HAlign.Left;
+
+            lbl = new Label(horizontalFrame, "Two");
+            lbl.VerticalAlignment = VAlign.Top;
+            lbl.HorizontalAlignment = HAlign.Right;
+
+            horizontalFrame = new Frame(BaseFrame);
+            horizontalFrame.Layout = Layout.Horizontal;
+
+            lbl = new Label(horizontalFrame, "Three");
+            lbl.VerticalAlignment = VAlign.Bottom;
+            lbl.HorizontalAlignment = HAlign.Left;
+
+            lbl = new Label(horizontalFrame, "Four");
+            lbl.VerticalAlignment = VAlign.Bottom;
+            lbl.HorizontalAlignment = HAlign.Right;
+
+            horizontalFrame = new Frame(BaseFrame);
+            horizontalFrame.Layout = Layout.Horizontal;
+            lbl = new Label(horizontalFrame, "third");
 
             Reset();
         }

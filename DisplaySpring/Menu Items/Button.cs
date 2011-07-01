@@ -107,20 +107,6 @@
         #region Constructors
 
         /// <summary>
-        /// Internal debugging constructor
-        /// </summary>
-        
-        internal Button(Texture2D debugTexture, Item parent) 
-            : base(null)
-        {
-            //TODO: make debug not a Button but a sprite
-            LayoutStretch = 0;
-            Depth = 0;
-            Parent = parent;
-            Initialize(debugTexture, null, "");
-        }
-
-        /// <summary>
         /// Create a menu button with specific background
         /// </summary>
         public Button(Item parent, MultiController c, Texture2D background) 

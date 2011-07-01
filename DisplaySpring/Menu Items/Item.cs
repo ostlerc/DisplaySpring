@@ -213,36 +213,6 @@
 
         #region Properties
 
-#if DEBUG
-        private Button m_rectSize;
-        private Button m_rectCenter;
-        private Button m_rectStaticSize;
-        private int debug_thickness = 0;
-        private Color debug_color = Color.White;
-
-        /// <summary>
-        /// A debug only functionality. Shows a rectangle around the objects different sizes. 
-        /// Useful for understanding layouts and easily showing width and height of items
-        /// Only available in debug mode, put #if DEBUG blocks around Debug calls
-        /// </summary>
-        public void Debug(Color c, int thickness)
-        {
-            debug_thickness = thickness;
-            debug_color = c;
-            Debug();
-        }
-
-        private void Debug()
-        {
-            m_rectSize = new Button(ScrollBar.CreateRectangleBorder((int)Width, (int)Height, debug_thickness, debug_color), null) { Fade = false };
-            m_rectStaticSize = new Button(ScrollBar.CreateRectangleBorder((int)StaticWidth, (int)StaticHeight, debug_thickness, debug_color), null) { Fade = false };
-            m_rectCenter = new Button(ScrollBar.CreateFilledRectangle((int)debug_thickness, (int)debug_thickness, Color.White), null) { Fade = false };
-
-            forceRefresh();
-        }
-
-#endif
-
         /// <summary>
         /// Will force a refresh on this item.
         /// If it has a parent, the parent will
@@ -277,6 +247,7 @@
                 if (oldParent != null)
                 {
                     oldParent.Children.Remove(this);
+                    oldParent.forceRefresh();
                 }
 
                 if (value != null && !value.Children.Contains(this))
@@ -329,8 +300,8 @@
                 {
                     Width = Parent.StaticWidth;
                     Height = Parent.StaticHeight;
-                    refreshItem();
                 }
+                refreshItem();
             }
         }
 
@@ -479,6 +450,10 @@
         /// Position of the object. Default is Vector2.Zero, which is center based.
         /// </summary>
         public virtual Vector2 Position { get { return m_pos; } set { m_pos = value; } }
+
+        private Vector2 m_layoutPosition = Vector2.Zero;
+
+        public virtual Vector2 LayoutPosition { get { return m_layoutPosition; } set { m_layoutPosition = value; } }
 
         /// <summary>
         /// Animation type of the item
@@ -800,37 +775,7 @@
                 return;
 
             Draw(gameTime, spriteBatch, Matrix.Identity);
-
-#if DEBUG
-            Matrix m = ItemTransform;
-            debugDraw(gameTime, spriteBatch, Matrix.Identity);
-#endif
         }
-
-#if DEBUG
-
-        internal void debugDraw(GameTime gameTime, SpriteBatch spriteBatch, Matrix parentTransform)
-        {
-#if DEBUG
-            debugDrawItem(gameTime, spriteBatch, m_rectSize, parentTransform, Size);
-            debugDrawItem(gameTime, spriteBatch, m_rectStaticSize, parentTransform, StaticSize);
-            debugDrawItem(gameTime, spriteBatch, m_rectCenter, parentTransform, new Vector2(debug_thickness, debug_thickness));
-
-            Matrix m = CombineMatrix(AnimationTransform(gameTime), ref parentTransform);
-            foreach (var v in Children)
-                v.debugDraw(gameTime, spriteBatch, m);
-#endif
-        }
-        internal void debugDrawItem(GameTime gameTime, SpriteBatch spriteBatch, Item item, Matrix parentTransform, Vector2 newSize)
-        {
-            if(item == null)
-                return;
-
-            item.Width = newSize.X;
-            item.Height = newSize.Y;
-            item.Draw(gameTime, spriteBatch, CombineMatrix(AnimationTransform(gameTime), ref parentTransform));
-        }
-#endif
 
         /// <summary>
         /// Internal Draw with matrix transform. Used for parent->child scale, rotation, position transformations
@@ -870,16 +815,7 @@
             if ((Width == 0 && Height == 0) || Parent == null)
                 return;
 
-            Vector2 pos = Position;
-
-            if (!(Parent is Frame) || (Parent is Frame && (Parent as Frame).Layout == Layout.None))
-            {
-                if (HorizontalAlignment != HAlign.Center)
-                    pos.X = 0;
-
-                if (VerticalAlignment != VAlign.Center)
-                    pos.Y = 0;
-            }
+            Vector2 pos = LayoutPosition;
 
             switch (HorizontalAlignment)
             {
