@@ -106,6 +106,23 @@
             return base.Right();
         }
 
+        internal override float StaticWidth
+        {
+            get
+            {
+                float arrowWidth = 0;
+                if (ArrowsOut)
+                {
+                    if (m_leftArrow != null)
+                        arrowWidth += m_leftArrow.StaticWidth;
+
+                    if (m_rightArrow != null)
+                        arrowWidth += m_rightArrow.StaticWidth;
+                }
+                return base.StaticWidth + arrowWidth;
+            }
+        }
+
         internal override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix parentTransform)
         {
             Item cur = CurrentItem();
@@ -126,7 +143,7 @@
             m_leftArrow.Height = item.StaticHeight;
             if (ArrowsOut)
             {
-                m_leftArrow.Position = new Vector2(m_leftArrow.Position.X - m_leftArrow.StaticWidth * 1.15f, m_leftArrow.Position.Y);
+                m_leftArrow.LayoutPosition = new Vector2(-m_leftArrow.StaticWidth * 1.08f, 0);
             }
 
             m_rightArrow.Parent = item;
@@ -135,7 +152,7 @@
 
             if (ArrowsOut)
             {
-                m_rightArrow.Position = new Vector2(m_rightArrow.Position.X + m_rightArrow.StaticWidth * 1.15f, m_rightArrow.Position.Y);
+                m_rightArrow.LayoutPosition = new Vector2(m_rightArrow.StaticWidth * 1.08f, 0);
             }
 
             base.SetCurrentItem(item);

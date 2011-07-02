@@ -30,7 +30,7 @@
             OptionButton options = new OptionButton(sl);
             options.ArrowsOut = true;
 
-            Button btn = new Button(options, Item.ButtonTexture, "one");
+            Button btn = new Button(options, Item.ButtonTexture, "Arrows Out");
             btn.TextLabel.FontFocusColor = Color.White;
             btn = new Button(options, Item.ButtonTexture, "two");
             btn.TextLabel.FontFocusColor = Color.White;
@@ -41,7 +41,18 @@
             btn.TextLabel.FontFocusColor = Color.White;
             lbl = new Label(options, "a long text");
 
-            btn = new Button(sl, Item.ButtonTexture);
+            options = new OptionButton(sl);
+
+            btn = new Button(options, Item.ButtonTexture, "Arrows In");
+            btn.TextLabel.FontFocusColor = Color.White;
+            btn = new Button(options, Item.ButtonTexture, "two");
+            btn.TextLabel.FontFocusColor = Color.White;
+            btn.Scale *= 2;
+            btn = new Button(options, Item.ButtonTexture, "three");
+            btn.TextLabel.FontFocusColor = Color.White;
+            btn = new Button(options, Item.ButtonTexture, "four");
+            btn.TextLabel.FontFocusColor = Color.White;
+            lbl = new Label(options, "a long text");
 
             Reset();
         }
