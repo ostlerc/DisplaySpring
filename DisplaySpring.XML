@@ -260,7 +260,7 @@
         </member>
         <member name="P:DisplaySpring.Item.ReadyInput">
             <summary>
-            This is true if the item is not ready for user input
+            This is true if the item is ready for user input
             </summary>
         </member>
         <member name="P:DisplaySpring.Item.ForceCancelSound">
@@ -983,11 +983,6 @@
         <member name="P:DisplaySpring.StackedItem.StaticHeight">
             <summary>
             Height of the item. Layout space is not included. Scale is not included.
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.StackedItem.MeasureHeight">
-            <summary>
-            Measures the Height of the item. Layout space is not included. Scale is included.
             </summary>
         </member>
         <member name="P:DisplaySpring.StackedItem.StaticWidth">

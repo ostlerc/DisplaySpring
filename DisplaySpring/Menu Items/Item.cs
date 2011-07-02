@@ -345,9 +345,9 @@
         }
 
         /// <summary>
-        /// This is true if the item is not ready for user input
+        /// This is true if the item is ready for user input
         /// </summary>
-        protected bool ReadyInput { get { return m_framesRun < m_framesToActivate; } }
+        protected bool ReadyInput { get { return m_framesRun >= m_framesToActivate; } }
 
         /// <summary>
         /// If set to true, object will force a cancel sound even if focus is still true
@@ -473,9 +473,6 @@
         { 
             get 
             {
-                if (m_height == 0)
-                    return StaticHeight;
-
                 return m_height;
             } 
             internal set 
@@ -495,9 +492,6 @@
         { 
             get 
             {
-                if (m_width == 0)
-                    return StaticWidth;
-
                 return m_width; 
             } 
 
@@ -529,7 +523,7 @@
         /// <summary>
         /// Measures the Width of the item. Layout space is not included. Scale is included.
         /// </summary>
-        public virtual float MeasureWidth 
+        public float MeasureWidth 
         { 
             get 
             {
@@ -543,7 +537,16 @@
         /// <summary>
         /// Measures the Height of the item. Layout space is not included. Scale is included.
         /// </summary>
-        public virtual float MeasureHeight { get { return StaticHeight * Scale.Y; } }
+        public float MeasureHeight 
+        { 
+            get 
+            {
+                if (Animation == AnimateType.Size)
+                    return StaticHeight * Scale.Y * 1.18f;
+
+                return StaticHeight * Scale.Y;
+            }
+        }
 
         /// <summary>
         /// The matrix transform of the item.
@@ -695,7 +698,7 @@
             foreach (var child in Children)
                 child.Update(gameTime);
 
-            if (ReadyInput)
+            if (!ReadyInput)
             {
                 m_framesRun++;
                 return;

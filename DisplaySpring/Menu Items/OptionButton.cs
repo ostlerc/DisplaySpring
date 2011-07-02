@@ -55,10 +55,12 @@
             m_leftArrow = new Button(null, Item.ArrowLeft, Item.DefaultArrowLeftHighlight);
             m_leftArrow.HorizontalAlignment = HorizontalAlignmentType.Left;
             m_leftArrow.Animation = AnimateType.None;
+            m_leftArrow.Depth = Depth - .01f;
 
             m_rightArrow = new Button(null, Item.ArrowRight, Item.DefaultArrowRightHighlight);
             m_rightArrow.HorizontalAlignment = HorizontalAlignmentType.Right;
             m_rightArrow.Animation = AnimateType.None;
+            m_rightArrow.Depth = Depth - .01f;
         }
 
         #endregion
@@ -114,26 +116,44 @@
                 if (ArrowsOut)
                 {
                     if (m_leftArrow != null)
-                        arrowWidth += m_leftArrow.StaticWidth;
+                        arrowWidth += m_leftArrow.MeasureWidth;
 
                     if (m_rightArrow != null)
-                        arrowWidth += m_rightArrow.StaticWidth;
+                        arrowWidth += m_rightArrow.MeasureWidth;
                 }
                 return base.StaticWidth + arrowWidth;
             }
         }
 
-        internal override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix parentTransform)
+        internal override float StaticHeight
+        {
+            get
+            {
+                float height = 0;
+
+                if (m_leftArrow != null)
+                    height = m_leftArrow.MeasureHeight;
+
+                if (m_rightArrow != null)
+                    height = Math.Max(m_rightArrow.MeasureHeight, height);
+
+                return Math.Max(base.StaticHeight, height);
+            }
+        }
+
+        public override void Reset(bool isFocus)
         {
             Item cur = CurrentItem();
+            if (cur != null)
+            {
+                m_leftArrow.Width = cur.StaticWidth;
+                m_leftArrow.Height = cur.StaticHeight;
 
-            m_leftArrow.Width = cur.StaticWidth;
-            m_leftArrow.Height = cur.StaticHeight;
+                m_rightArrow.Height = cur.StaticHeight;
+                m_rightArrow.Width = cur.StaticWidth;
+            }
 
-            m_rightArrow.Width = cur.StaticWidth;
-            m_rightArrow.Height = cur.StaticHeight;
-
-            base.Draw(gameTime, spriteBatch, parentTransform);
+            base.Reset(isFocus);
         }
 
         public override void SetCurrentItem(Item item)
@@ -141,6 +161,7 @@
             m_leftArrow.Parent = item;
             m_leftArrow.Width = item.StaticWidth;
             m_leftArrow.Height = item.StaticHeight;
+
             if (ArrowsOut)
             {
                 m_leftArrow.LayoutPosition = new Vector2(-m_leftArrow.StaticWidth * 1.08f, 0);

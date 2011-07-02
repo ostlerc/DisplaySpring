@@ -73,38 +73,9 @@
                 Item current = CurrentItem();
 
                 if (current != null)
-                    return current.StaticHeight;
-
-                return Height;
-            }
-        }
-
-        /// <summary>
-        /// Measures the Height of the item. Layout space is not included. Scale is included.
-        /// </summary>
-        public override float MeasureHeight
-        {
-            get
-            {
-                Item current = CurrentItem();
-
-                if (current != null)
                     return current.MeasureHeight;
 
-                return base.MeasureHeight;
-            }
-        }
-
-        public override float MeasureWidth
-        {
-            get
-            {
-                Item current = CurrentItem();
-
-                if (current != null)
-                    return current.MeasureWidth;
-
-                return base.MeasureWidth;
+                return Height;
             }
         }
 
@@ -118,7 +89,7 @@
                 Item current = CurrentItem();
 
                 if (current != null)
-                    return current.StaticWidth;
+                    return current.MeasureWidth;
 
                 return Width;
             } 
