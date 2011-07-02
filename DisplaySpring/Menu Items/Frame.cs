@@ -30,7 +30,7 @@
         {
             get { return m_layout; }
             set 
-            { 
+            {
                 m_layout = value;
                 forceRefresh();
             }
@@ -93,6 +93,36 @@
             }
         }
 
+        public override float Height
+        {
+            get
+            {
+                if (m_forcedSize != Vector2.Zero)
+                    return m_forcedSize.Y;
+
+                return base.Height;
+            }
+            internal set
+            {
+                base.Height = value;
+            }
+        }
+
+        public override float Width
+        {
+            get
+            {
+                if (m_forcedSize != Vector2.Zero)
+                    return m_forcedSize.X;
+
+                return base.Width;
+            }
+            internal set
+            {
+                base.Width = value;
+            }
+        }
+
         /// <summary>
         /// Position of the object. Default is Vector2.Zero, which is center based.
         /// </summary>
@@ -136,14 +166,37 @@
         internal Frame(Rectangle bounds)
             : base(null)
         {
-            m_forcedSize.X = bounds.Width;
-            m_forcedSize.Y = bounds.Height;
+            Width = bounds.Width;
+            Height = bounds.Height;
             Position = new Vector2(bounds.Center.X, bounds.Center.Y);
         }
 
         #endregion
 
         #region Class Functions
+
+        private float m_padding = 5;
+
+        public virtual float Padding
+        {
+            get { return m_padding; }
+            set { m_padding = value; }
+        }
+
+        public override uint LayoutStretch
+        {
+            get
+            {
+                return base.LayoutStretch;
+            }
+            set
+            {
+                if (value == 0 && Layout == LayoutType.None)
+                    Layout = LayoutType.Horizontal;
+
+                base.LayoutStretch = value;
+            }
+        }
 
         internal override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix parentTransform) 
         {
@@ -170,6 +223,29 @@
 
             foreach (var v in Children)
                 total += v.LayoutStretch;
+
+            if (LayoutStretch == 0)
+            {
+                float width = 0;
+                float height = 0;
+                foreach (var v in Children)
+                {
+                    switch(Layout)
+                    {
+                        case LayoutType.Horizontal:
+                            width += v.StaticWidth + Padding*2;
+                            height = Math.Max(height, v.StaticHeight);
+                            break;
+                        case LayoutType.Vertical:
+                            height += v.StaticHeight + Padding*2;
+                            width = Math.Max(width, v.StaticWidth);
+                            break;
+                    }
+                }
+
+                m_forcedSize.X = width;
+                m_forcedSize.Y = height;
+            }
 
             Vector2 dimensions = StaticSize;
 
@@ -209,6 +285,12 @@
             base.refreshItem();
 
             m_lockRefresh = false;
+        }
+
+        public override void Reset(bool isFocus)
+        {
+            refreshItem();
+            base.Reset(isFocus);
         }
 
         #endregion

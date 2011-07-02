@@ -39,10 +39,10 @@
             btn = new Button(stack, Item.ButtonTexture, "four");
             btn.TextLabel.FontFocusColor = Color.White;
 
-            stack.OnLeft = delegate() { stack.KeepFocus = true; stack.CurrentIndex--; };
+            stack.OnLeft  = delegate() { stack.KeepFocus = true; stack.CurrentIndex--; };
             stack.OnRight = delegate() { stack.KeepFocus = true; stack.CurrentIndex++; };
-            stack.OnUp = delegate() { stack.KeepFocus = true; stack.Scale += Vector2.One * .1f; };
-            stack.OnDown = delegate() { stack.KeepFocus = true; stack.Scale -= Vector2.One * .1f; };
+            stack.OnUp    = delegate() { stack.KeepFocus = true; stack.Scale *= 1.1f; };
+            stack.OnDown  = delegate() { stack.KeepFocus = true; stack.Scale *= 0.9f; };
 
             Reset();
         }

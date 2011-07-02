@@ -83,8 +83,8 @@
         /// Width of the item. Layout space is not included. Scale is not included.
         /// </summary>
         internal override float StaticWidth 
-        { 
-            get 
+        {
+            get
             { 
                 Item current = CurrentItem();
 
@@ -92,7 +92,7 @@
                     return current.MeasureWidth;
 
                 return Width;
-            } 
+            }
         }
 
         public override bool Focus

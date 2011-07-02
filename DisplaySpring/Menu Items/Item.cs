@@ -115,7 +115,7 @@
         /// </summary>
         public static Texture2D DefaultArrowRightHighlight;
 
-        private float m_width;
+        internal float m_width;
         private float m_height;
 
         internal Vector2 m_pos = Vector2.Zero;
@@ -274,7 +274,7 @@
         /// Example: a layout of two items with stretch 1 and 2 would receive 33% and 66%
         /// of the space respectively
         /// </summary>
-        public uint LayoutStretch 
+        public virtual uint LayoutStretch 
         { 
             get { return m_layoutStretch; } 
             set 
@@ -490,10 +490,7 @@
         /// </summary>
         public virtual float Width 
         { 
-            get 
-            {
-                return m_width; 
-            } 
+            get { return m_width; } 
 
             internal set 
             {

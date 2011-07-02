@@ -25,7 +25,7 @@
         /// <summary>
         /// Defines if the arrows for the option button are outside the items boundaries
         /// </summary>
-        public bool ArrowsOut { get { return m_arrowsOut; } set { m_arrowsOut = value; } }
+        public bool ArrowsOut { get { return m_arrowsOut; } set { m_arrowsOut = value; refreshArrows(); } }
 
         #endregion
 
@@ -141,40 +141,36 @@
             }
         }
 
-        public override void Reset(bool isFocus)
+        internal void refreshArrows()
         {
-            Item cur = CurrentItem();
-            if (cur != null)
+            Item item = CurrentItem();
+            if (item != null)
             {
-                m_leftArrow.Width = cur.StaticWidth;
-                m_leftArrow.Height = cur.StaticHeight;
+                m_leftArrow.Parent = item;
+                m_leftArrow.Width = item.StaticWidth;
+                m_leftArrow.Height = item.StaticHeight;
 
-                m_rightArrow.Height = cur.StaticHeight;
-                m_rightArrow.Width = cur.StaticWidth;
+                m_rightArrow.Parent = item;
+                m_rightArrow.Height = item.StaticHeight;
+                m_rightArrow.Width = item.StaticWidth;
             }
 
+            if (ArrowsOut)
+            {
+                m_leftArrow.LayoutPosition = new Vector2(-m_leftArrow.StaticWidth * 1.08f, 0);
+                m_rightArrow.LayoutPosition = new Vector2(m_rightArrow.StaticWidth * 1.08f, 0);
+            }
+        }
+
+        public override void Reset(bool isFocus)
+        {
+            refreshArrows();
             base.Reset(isFocus);
         }
 
         public override void SetCurrentItem(Item item)
         {
-            m_leftArrow.Parent = item;
-            m_leftArrow.Width = item.StaticWidth;
-            m_leftArrow.Height = item.StaticHeight;
-
-            if (ArrowsOut)
-            {
-                m_leftArrow.LayoutPosition = new Vector2(-m_leftArrow.StaticWidth * 1.08f, 0);
-            }
-
-            m_rightArrow.Parent = item;
-            m_rightArrow.Width = item.StaticWidth;
-            m_rightArrow.Height = item.StaticHeight;
-
-            if (ArrowsOut)
-            {
-                m_rightArrow.LayoutPosition = new Vector2(m_rightArrow.StaticWidth * 1.08f, 0);
-            }
+            refreshArrows();
 
             base.SetCurrentItem(item);
         }

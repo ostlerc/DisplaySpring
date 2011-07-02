@@ -46,7 +46,7 @@
             btn.HorizontalAlignment = HAlign.Left;
 
             btn = new Button(horizontalFrame, Item.ButtonTexture, "Four");
-            btn.VerticalAlignment = VAlign.Top;
+            btn.VerticalAlignment = VAlign.Bottom;
             btn.HorizontalAlignment = HAlign.Right;
 
             horizontalFrame = new Frame(BaseFrame);

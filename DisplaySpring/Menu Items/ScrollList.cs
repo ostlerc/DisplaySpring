@@ -417,7 +417,12 @@
             {
                 m_scroll.Width = StaticWidth;
                 m_scroll.Height = 20;
-                m_scroll.LayoutPosition = new Vector2(0, StaticHeight/2 - 10);
+                float offset = 0;
+
+                if (ScrollPosition == ScrollBarPosition.Left)
+                    offset = -20;
+
+                m_scroll.LayoutPosition = new Vector2(0, StaticHeight/2 + offset);
             }
             else
             {

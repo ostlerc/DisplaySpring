@@ -20,6 +20,7 @@
         public MultiTextureMenu(MultiController controllers, List<Controller> allControllers, Rectangle bounds)
             : base(controllers, bounds)
         {
+            BaseFrame.Layout = Layout.Vertical;
             multiFrame = new Frame(BaseFrame, new Vector2(400, 200));
             multiFrame.Animation = AnimateType.Size;
 
@@ -32,10 +33,18 @@
             lbl = new Label(multiFrame, "right");
             lbl.HorizontalAlignment = HAlign.Right;
 
-            multiFrame = new Frame(BaseFrame);
-            multiFrame.Layout = Layout.Horizontal;
-            b = new Button(multiFrame, Item.ButtonTexture, "text");
-            b = new Button(multiFrame, Item.ButtonTexture, "text2");
+            Frame parent = new Frame(BaseFrame);
+            Frame f = new Frame(parent);
+            f.LayoutStretch = 0;
+            new Button(f, Item.ButtonTexture, "one");
+            new Button(f, Item.ButtonTexture, "two");
+
+            parent = new Frame(BaseFrame);
+            f = new Frame(parent);
+            f.Layout = Layout.Vertical;
+            f.LayoutStretch = 0;
+            new Button(f, Item.ButtonTexture, "one");
+            new Button(f, Item.ButtonTexture, "two");
 
             Reset();
         }

@@ -21,40 +21,36 @@
             : base(controllers, bounds)
         {
             BaseFrame.Layout = Layout.Vertical;
-            Label lbl = new Label(BaseFrame, "Left, Right controls index of OptionButton");
-            lbl.VerticalAlignment = VAlign.Bottom;
 
-            sl = new ScrollList(BaseFrame);
-            sl.LayoutStretch = 3;
+            new Label(BaseFrame, "Left, Right controls index of OptionButton") 
+            { VerticalAlignment = VAlign.Bottom };
 
-            OptionButton options = new OptionButton(sl);
+            sl = new ScrollList(BaseFrame)
+            { LayoutStretch = 3 };
+
+            OptionButton options = createOptionButton(sl, "Arrows Out");
             options.ArrowsOut = true;
-
-            Button btn = new Button(options, Item.ButtonTexture, "Arrows Out");
-            btn.TextLabel.FontFocusColor = Color.White;
-            btn = new Button(options, Item.ButtonTexture, "two");
-            btn.TextLabel.FontFocusColor = Color.White;
-            btn.Scale *= 2;
-            btn = new Button(options, Item.ButtonTexture, "three");
-            btn.TextLabel.FontFocusColor = Color.White;
-            btn = new Button(options, Item.ButtonTexture, "four");
-            btn.TextLabel.FontFocusColor = Color.White;
-            lbl = new Label(options, "a long text");
-
-            options = new OptionButton(sl);
-
-            btn = new Button(options, Item.ButtonTexture, "Arrows In");
-            btn.TextLabel.FontFocusColor = Color.White;
-            btn = new Button(options, Item.ButtonTexture, "two");
-            btn.TextLabel.FontFocusColor = Color.White;
-            btn.Scale *= 2;
-            btn = new Button(options, Item.ButtonTexture, "three");
-            btn.TextLabel.FontFocusColor = Color.White;
-            btn = new Button(options, Item.ButtonTexture, "four");
-            btn.TextLabel.FontFocusColor = Color.White;
-            lbl = new Label(options, "a long text");
+            createOptionButton(sl, "Arrows In");
 
             Reset();
+        }
+
+        OptionButton createOptionButton(Item parent, string text)
+        {
+            OptionButton options = new OptionButton(parent);
+
+            Button btn = new Button(options, Item.ButtonTexture, "One, " + text);
+            btn.TextLabel.FontFocusColor = Color.White;
+            btn = new Button(options, Item.ButtonTexture, "Two");
+            btn.TextLabel.FontFocusColor = Color.White;
+            btn.Scale *= 2;
+            btn = new Button(options, Item.ButtonTexture, "Three");
+            btn.TextLabel.FontFocusColor = Color.White;
+            btn = new Button(options, Item.ButtonTexture, "Four");
+            btn.TextLabel.FontFocusColor = Color.White;
+            new Label(options, "a long text");
+
+            return options;
         }
 
         /// <summary>
