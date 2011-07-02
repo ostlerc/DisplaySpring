@@ -471,7 +471,13 @@
         /// </summary>
         public virtual float Height 
         { 
-            get { return m_height; } 
+            get 
+            {
+                if (m_height == 0)
+                    return StaticHeight;
+
+                return m_height;
+            } 
             internal set 
             {
                 if (m_height != value)
@@ -487,7 +493,14 @@
         /// </summary>
         public virtual float Width 
         { 
-            get { return m_width; } 
+            get 
+            {
+                if (m_width == 0)
+                    return StaticWidth;
+
+                return m_width; 
+            } 
+
             internal set 
             {
                 if (m_width != value)

@@ -32,6 +32,11 @@
             lbl = new Label(multiFrame, "right");
             lbl.HorizontalAlignment = HAlign.Right;
 
+            multiFrame = new Frame(BaseFrame);
+            multiFrame.Layout = Layout.Horizontal;
+            b = new Button(multiFrame, Item.ButtonTexture, "text");
+            b = new Button(multiFrame, Item.ButtonTexture, "text2");
+
             Reset();
         }
 

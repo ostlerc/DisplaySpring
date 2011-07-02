@@ -55,6 +55,7 @@
 
             ScrollList _sl2 = new ScrollList(sl);
             _sl2.ViewCount = 2;
+            _sl2.Scale *= 1.25f;
 
             btn = new Button(_sl2, App.Button, "Button texture");
             btn = new Button(_sl2, App.Button, App.menuButtonHighlighted, "Highlight texture");
@@ -75,7 +76,6 @@
 
             ScrollList _sl3 = new ScrollList(sl);
             _sl3.ViewCount = 2;
-            _sl3.Scale *= 1.5f;
 
             btn = new Button(_sl3, App.Button, "Button texture");
             btn = new Button(_sl3, App.Button, App.menuButtonHighlighted, "Highlight texture");
@@ -93,8 +93,6 @@
                 else
                     _sl3.ScrollPosition = ScrollList.ScrollBarPosition.Left;
             };
-
-            sl.ScaleImageToWidth(BaseFrame.Width);
 
             Reset();
         }

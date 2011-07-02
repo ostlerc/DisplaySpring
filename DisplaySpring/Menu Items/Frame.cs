@@ -16,6 +16,7 @@
 
         private LayoutType m_layout = LayoutType.None;
         private bool m_lockRefresh = false;
+        private Vector2 m_forcedSize = Vector2.Zero;
 
         #endregion
 
@@ -33,6 +34,12 @@
                 m_layout = value;
                 forceRefresh();
             }
+        }
+
+        internal Vector2 ForcedSize
+        {
+            get { return m_forcedSize; }
+            set { m_forcedSize = value; }
         }
 
         /// <summary>
@@ -61,12 +68,30 @@
         /// <summary>
         /// Height of the item. Layout space is not included. Scale is not included.
         /// </summary>
-        internal override float StaticHeight { get { return Height; } } 
+        internal override float StaticHeight 
+        { 
+            get 
+            {
+                if (m_forcedSize != Vector2.Zero)
+                    return m_forcedSize.Y;
+
+                return Height;
+            }
+        } 
 
         /// <summary>
         /// Width of the item. Layout space is not included. Scale is not included.
         /// </summary>
-        internal override float StaticWidth { get { return Width; } }
+        internal override float StaticWidth 
+        {
+            get 
+            {
+                if (m_forcedSize != Vector2.Zero)
+                    return m_forcedSize.X;
+
+                return Width;
+            }
+        }
 
         /// <summary>
         /// Position of the object. Default is Vector2.Zero, which is center based.
@@ -101,8 +126,7 @@
         public Frame(Item parent, Vector2 size) 
             : base(parent)
         {
-            Width = size.X;
-            Height = size.Y;
+            m_forcedSize = size;
         }
 
         /// <summary>
@@ -112,8 +136,8 @@
         internal Frame(Rectangle bounds)
             : base(null)
         {
-            Width = bounds.Width;
-            Height = bounds.Height;
+            m_forcedSize.X = bounds.Width;
+            m_forcedSize.Y = bounds.Height;
             Position = new Vector2(bounds.Center.X, bounds.Center.Y);
         }
 
@@ -147,7 +171,7 @@
             foreach (var v in Children)
                 total += v.LayoutStretch;
 
-            Vector2 dimensions = Size;
+            Vector2 dimensions = StaticSize;
 
             foreach (var v in Children)
             {
