@@ -677,7 +677,7 @@
                         offset += item.MeasureWidth + Spacing;
                         break;
                     case Orientation.Vertical:
-                        item.Position = new Vector2(offset2 , offset + item.MeasureHeight/2);
+                        item.Position = new Vector2(offset2, offset + item.MeasureHeight/2);
                         offset += item.MeasureHeight + Spacing;
                         break;
                 }

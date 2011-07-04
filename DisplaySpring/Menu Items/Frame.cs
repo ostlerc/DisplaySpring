@@ -276,6 +276,10 @@
 
                         pos += height;
                         break;
+                    case LayoutType.None:
+                        v.Width = dimensions.X;
+                        v.Height = dimensions.Y;
+                        break;
                 }
 
                 v.refreshItem();

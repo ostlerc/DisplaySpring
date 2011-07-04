@@ -63,10 +63,6 @@
         /// </summary>
         internal List<Sprite> m_bgs;
         internal SoundEffect m_closeSound;
-        /// <summary>
-        /// Represents the middle position of the menu 
-        /// </summary>
-        internal Vector2 m_position;
         internal Rectangle m_bounds;
         internal Animation m_alpha;
         private bool m_isAlive = true;
@@ -202,7 +198,6 @@
 
             m_closeSound = DefaultCloseSound;
             m_bgs = new List<Sprite>();
-            m_position = new Vector2(bounds.Center.X, bounds.Center.Y);
             m_bounds = bounds;
             m_controllers = c;
             m_alpha = new Animation(0, 1, DefaultFadeTime);
