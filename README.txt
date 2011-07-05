@@ -87,4 +87,4 @@ IV. - Help
 
 IV. - License
 ---------------------
-  DisplaySpring is released under the LGPL License.
+  DisplaySpring is released under the Ms-PL License.
