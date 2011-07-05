@@ -26,16 +26,13 @@
         internal static SpriteFont m_font;
         private static float m_ItemDrawDepth = 0.3f;
         private static float m_menuBackgroundDrawDepth = 0.4f;
+        private static int m_defaultFadeTime = 750;
 
         /// <summary>
         /// Default sound played when a menu is closed
         /// </summary>
         public static SoundEffect DefaultCloseSound;
 
-        /// <summary>
-        /// Amount of time in milliseconds the menu will fade from StartAlpha to EndAlpha
-        /// </summary>
-        public const int DefaultFadeTime = 750;
         internal bool m_stayAlive = false;
         internal bool m_keepState = true;
         internal int m_framesRun = 0;
@@ -44,12 +41,22 @@
         private Frame m_baseFrame;
 
         /// <summary>
-        /// The main frame of the menu that spans the boudns of the menu.
+        /// The main frame of the menu that spans the bounds of the menu.
         /// </summary>
         public Frame BaseFrame
         {
             get { return m_baseFrame; }
         }
+
+        /// <summary>
+        /// Amount of time in milliseconds the menu will fade from StartAlpha to EndAlpha
+        /// </summary>
+        public static int DefaultFadeTime
+        {
+            get { return m_defaultFadeTime; }
+            set { m_defaultFadeTime = value; }
+        }
+
         internal MenuAction m_cancelMenu;
         internal static GraphicsDevice m_graphicsDevice;
 
@@ -208,13 +215,6 @@
 
         #region Functions
 
-        /// <summary>
-        /// convert from Menu to Item
-        /// </summary>
-        public static implicit operator Item(Menu m)
-        {
-            return m.m_baseFrame;
-        }
         /// <summary>
         /// Loads default content for All Menus and Items
         /// </summary>

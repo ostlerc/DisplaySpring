@@ -31,6 +31,9 @@ namespace DisplaySpring
             return new MultiController(c);
         }
 
+        /// <summary>
+        /// Returns the multicontroller as a list of Controllers
+        /// </summary>
         public List<Controller> ToList()
         {
             return m_controllers;

@@ -466,7 +466,10 @@
 
         private Vector2 m_layoutPosition = Vector2.Zero;
 
-        public virtual Vector2 LayoutPosition { get { return m_layoutPosition; } set { m_layoutPosition = value; } }
+        /// <summary>
+        /// Secondary position used for layouts. This is applied in conjunctionwith alignments.
+        /// </summary>
+        internal virtual Vector2 LayoutPosition { get { return m_layoutPosition; } set { m_layoutPosition = value; } }
 
         /// <summary>
         /// Animation type of the item

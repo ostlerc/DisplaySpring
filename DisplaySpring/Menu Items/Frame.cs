@@ -93,6 +93,9 @@
             }
         }
 
+        /// <summary>
+        /// Height of the item. Layout space is included. Scale is not included.
+        /// </summary>
         public override float Height
         {
             get
@@ -108,6 +111,9 @@
             }
         }
 
+        /// <summary>
+        /// Width of the item. Layout space is included. Scale is not included.
+        /// </summary>
         public override float Width
         {
             get
@@ -177,12 +183,22 @@
 
         private float m_padding = 5;
 
+        /// <summary>
+        /// When layout stretch is zero, this changes the spacing in pixels between items
+        /// </summary>
         public virtual float Padding
         {
             get { return m_padding; }
             set { m_padding = value; }
         }
 
+        /// <summary>
+        /// Used to know the stretch percentage of a Item.
+        /// Default is 1. This number is taken relative to other Items in a layout.
+        /// It determines the percentage of space given to the item.
+        /// Example: a layout of two items with stretch 1 and 2 would receive 33% and 66%
+        /// of the space respectively
+        /// </summary>
         public override uint LayoutStretch
         {
             get
@@ -291,6 +307,9 @@
             m_lockRefresh = false;
         }
 
+        /// <summary>
+        /// Reset the Item to a fresh state
+        /// </summary>
         public override void Reset(bool isFocus)
         {
             refreshItem();

@@ -13,7 +13,6 @@
     public class OptionButton : StackedItem
     {
         #region Member Variables
-        private int m_currentIndex = -1;
         private Button m_leftArrow;
         private Button m_rightArrow;
         private float m_highlightTimer = -1;
@@ -67,6 +66,9 @@
 
         #region Class Functions
 
+        /// <summary>
+        /// Updates the Item
+        /// </summary>
         public override void Update(GameTime gameTime)
         {
             if (m_highlightTimer == 0)
@@ -162,12 +164,18 @@
             }
         }
 
+        /// <summary>
+        /// Reset the Item to a fresh state
+        /// </summary>
         public override void Reset(bool isFocus)
         {
             refreshArrows();
             base.Reset(isFocus);
         }
 
+        /// <summary>
+        /// Sets the current item for the stack
+        /// </summary>
         public override void SetCurrentItem(Item item)
         {
             refreshArrows();

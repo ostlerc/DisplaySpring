@@ -336,6 +336,11 @@
             Position of the object. Default is Vector2.Zero, which is center based.
             </summary>
         </member>
+        <member name="P:DisplaySpring.Item.LayoutPosition">
+            <summary>
+            Secondary position used for layouts. This is applied in conjunctionwith alignments.
+            </summary>
+        </member>
         <member name="P:DisplaySpring.Item.Animation">
             <summary>
             Animation type of the item
@@ -532,6 +537,11 @@
             The object will animate on its size. Growing and Shrinking over a period of time
             </summary>
         </member>
+        <member name="T:DisplaySpring.Sprite">
+            <summary>
+            A static image that can change its size
+            </summary>
+        </member>
         <member name="F:DisplaySpring.Sprite.m_texture">
             <summary>
             Texture for the sprite
@@ -541,6 +551,27 @@
             <summary>
             pos of this Sprite. This value should be used not as an absolute pos
             but as an offset value from its container class
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Sprite.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Create a Sprite with a texture and position.
+            Size will initially be set to the texture size.
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Sprite.Width">
+            <summary>
+            Width of the Sprite
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Sprite.Height">
+            <summary>
+            Height of the Sprite
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Sprite.Size">
+            <summary>
+            Returns the Vector2(Width,Height). Can be set.
             </summary>
         </member>
         <member name="P:DisplaySpring.Animation.TimeoutMS">
@@ -557,11 +588,6 @@
             <summary>
             Base class for a Menu.
             Helps provide easy interfacing with submenus and user input
-            </summary>
-        </member>
-        <member name="F:DisplaySpring.Menu.DefaultFadeTime">
-            <summary>
-            Amount of time in milliseconds the menu will fade from StartAlpha to EndAlpha
             </summary>
         </member>
         <member name="F:DisplaySpring.Menu.DefaultCloseSound">
@@ -586,11 +612,6 @@
             </summary>
             <param name="c">Controllers that the menu receives input from</param>
             <param name="bounds">Bounds the menu will reside in</param>
-        </member>
-        <member name="M:DisplaySpring.Menu.op_Implicit(DisplaySpring.Menu)~DisplaySpring.Item">
-            <summary>
-            convert from Menu to Item
-            </summary>
         </member>
         <member name="M:DisplaySpring.Menu.LoadContent(Microsoft.Xna.Framework.Graphics.GraphicsDevice,Microsoft.Xna.Framework.Graphics.SpriteFont)">
             <summary>
@@ -646,7 +667,12 @@
         </member>
         <member name="P:DisplaySpring.Menu.BaseFrame">
             <summary>
-            The main frame of the menu that spans the boudns of the menu.
+            The main frame of the menu that spans the bounds of the menu.
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Menu.DefaultFadeTime">
+            <summary>
+            Amount of time in milliseconds the menu will fade from StartAlpha to EndAlpha
             </summary>
         </member>
         <member name="P:DisplaySpring.Menu.Font">
@@ -873,6 +899,11 @@
             code to convert from Controller to MultiController
             </summary>
         </member>
+        <member name="M:DisplaySpring.MultiController.ToList">
+            <summary>
+            Returns the multicontroller as a list of Controllers
+            </summary>
+        </member>
         <member name="T:DisplaySpring.Frame">
             <summary>
             A collection of Items that can be handled layouts
@@ -894,6 +925,11 @@
             This is only for the menu class to use as the super parent of a Menu
             </summary>
         </member>
+        <member name="M:DisplaySpring.Frame.Reset(System.Boolean)">
+            <summary>
+            Reset the Item to a fresh state
+            </summary>
+        </member>
         <member name="P:DisplaySpring.Frame.Layout">
             <summary>
             Defines the LayoutType of the frame.
@@ -910,9 +946,33 @@
             Width of the item. Layout space is not included. Scale is not included.
             </summary>
         </member>
+        <member name="P:DisplaySpring.Frame.Height">
+            <summary>
+            Height of the item. Layout space is included. Scale is not included.
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Frame.Width">
+            <summary>
+            Width of the item. Layout space is included. Scale is not included.
+            </summary>
+        </member>
         <member name="P:DisplaySpring.Frame.Position">
             <summary>
             Position of the object. Default is Vector2.Zero, which is center based.
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Frame.Padding">
+            <summary>
+            When layout stretch is zero, this changes the spacing in pixels between items
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Frame.LayoutStretch">
+            <summary>
+            Used to know the stretch percentage of a Item.
+            Default is 1. This number is taken relative to other Items in a layout.
+            It determines the percentage of space given to the item.
+            Example: a layout of two items with stretch 1 and 2 would receive 33% and 66%
+            of the space respectively
             </summary>
         </member>
         <member name="T:DisplaySpring.Frame.LayoutType">
@@ -1004,6 +1064,11 @@
             Create menu button with specific background, focus background and label text
             </summary>
         </member>
+        <member name="M:DisplaySpring.Button.Reset(System.Boolean)">
+            <summary>
+            Reset the Item to a fresh state
+            </summary>
+        </member>
         <member name="P:DisplaySpring.Button.FocusTexture">
             <summary>
             The focus background of the button.
@@ -1025,6 +1090,13 @@
             <summary>
             Gets or sets the focus for the menu item
             On set to true the OnFocus delegate will be called and FocusSound will play
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Button.Enabled">
+            <summary>
+            A disabled button will not process in the update function
+            This is a simple way to set focus to false without any consequence
+            or side effect (like playing sounds, or causing delegates to be called)
             </summary>
         </member>
         <member name="P:DisplaySpring.Button.Depth">
@@ -1058,6 +1130,11 @@
             Get's the currently visible item
             </summary>
         </member>
+        <member name="M:DisplaySpring.StackedItem.Reset(System.Boolean)">
+            <summary>
+            Reset the Item to a fresh state
+            </summary>
+        </member>
         <member name="P:DisplaySpring.StackedItem.CurrentIndex">
             <summary>
             Height of the item. Layout space is not included. Scale is not included.
@@ -1076,6 +1153,24 @@
         <member name="P:DisplaySpring.StackedItem.StaticWidth">
             <summary>
             Width of the item. Layout space is not included. Scale is not included.
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.StackedItem.Focus">
+            <summary>
+            Gets or sets the focus for the menu item
+            On set to true the OnFocus delegate will be called and FocusSound will play
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.StackedItem.Enabled">
+            <summary>
+            A disabled button will not process in the update function
+            This is a simple way to set focus to false without any consequence
+            or side effect (like playing sounds, or causing delegates to be called)
+            </summary>
+        </member>
+        <member name="T:DisplaySpring.Controller">
+            <summary>
+            Utility class for interfacing with the keyboard and gamepad
             </summary>
         </member>
         <member name="M:DisplaySpring.Controller.#ctor(Microsoft.Xna.Framework.PlayerIndex,DisplaySpring.UpdateEvent)">
@@ -1168,6 +1263,11 @@
             True if the right trigger is being held down
             </summary>
         </member>
+        <member name="P:DisplaySpring.Controller.AnyInput">
+            <summary>
+            True if any mapped keyboard or gamepad button is pressed
+            </summary>
+        </member>
         <member name="P:DisplaySpring.Controller.AnyButton">
             <summary>
             True if any button is pressed
@@ -1246,6 +1346,21 @@
         <member name="M:DisplaySpring.OptionButton.#ctor(DisplaySpring.Item)">
             <summary>
             Create a StackedItem with parents size.
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.OptionButton.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the Item
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.OptionButton.Reset(System.Boolean)">
+            <summary>
+            Reset the Item to a fresh state
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.OptionButton.SetCurrentItem(DisplaySpring.Item)">
+            <summary>
+            Sets the current item for the stack
             </summary>
         </member>
         <member name="P:DisplaySpring.OptionButton.ArrowsOut">

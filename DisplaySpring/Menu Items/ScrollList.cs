@@ -394,7 +394,7 @@
             }
         }
 
-        protected void UpdateScrollBar()
+        internal void UpdateScrollBar()
         {
             if (m_items.Count < 1)
                 return;
@@ -670,18 +670,20 @@
 
             foreach (Item item in visibleItems())
             {
+                float length = 0;
                 switch (m_direction)
                 {
                     case Orientation.Horizontal:
-                        item.Position = new Vector2(offset + item.MeasureWidth / 2, offset2);
-                        offset += item.MeasureWidth + Spacing;
+                        length = item.MeasureWidth;
+                        item.Position = new Vector2(offset + length / 2f, offset2);
                         break;
                     case Orientation.Vertical:
-                        item.Position = new Vector2(offset2, offset + item.MeasureHeight/2);
-                        offset += item.MeasureHeight + Spacing;
+                        length = item.MeasureHeight;
+                        item.Position = new Vector2(offset2, offset + length / 2f);
                         break;
                 }
 
+                offset += length + Spacing;
                 item.Draw(gameTime, spriteBatch, local);
             }
 

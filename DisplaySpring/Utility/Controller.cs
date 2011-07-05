@@ -13,6 +13,9 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace DisplaySpring
 {
+    /// <summary>
+    /// Utility class for interfacing with the keyboard and gamepad
+    /// </summary>
     public class Controller
     {
         KeyboardState m_oldKeyboardState;
@@ -237,6 +240,9 @@ namespace DisplaySpring
             }
         }
 
+        /// <summary>
+        /// True if any mapped keyboard or gamepad button is pressed
+        /// </summary>
         public bool AnyInput
         {
             get

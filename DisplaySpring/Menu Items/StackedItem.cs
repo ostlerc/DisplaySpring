@@ -95,6 +95,10 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the focus for the menu item
+        /// On set to true the OnFocus delegate will be called and FocusSound will play
+        /// </summary>
         public override bool Focus
         {
             get { return base.Focus; }
@@ -109,6 +113,11 @@
             }
         }
 
+        /// <summary>
+        /// A disabled button will not process in the update function
+        /// This is a simple way to set focus to false without any consequence
+        /// or side effect (like playing sounds, or causing delegates to be called)
+        /// </summary>
         public override bool Enabled
         {
             get { return base.Enabled; }
@@ -206,6 +215,9 @@
             return null;
         }
 
+        /// <summary>
+        /// Reset the Item to a fresh state
+        /// </summary>
         public override void Reset(bool isFocus)
         {
             Item current = CurrentItem();

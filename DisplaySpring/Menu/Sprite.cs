@@ -10,7 +10,6 @@
     /// <summary>
     /// Standard menu animation types
     /// </summary>
-    [Flags]
     public enum AnimateType
     {
         /// <summary>
@@ -24,13 +23,27 @@
         Size
     }
 
+    /// <summary>
+    /// A static image that can change its size
+    /// </summary>
     public class Sprite
     {
         internal float m_width;
         internal float m_height;
 
+        /// <summary>
+        /// Width of the Sprite
+        /// </summary>
         public float Width { get { return m_texture.Width; } }
+
+        /// <summary>
+        /// Height of the Sprite
+        /// </summary>
         public float Height { get { return m_texture.Height; } }
+
+        /// <summary>
+        /// Returns the Vector2(Width,Height). Can be set.
+        /// </summary>
         public Vector2 Size
         {
             get { return new Vector2(m_width, m_height); }
@@ -48,6 +61,10 @@
         /// </summary>
         internal Vector2 pos;
 
+        /// <summary>
+        /// Create a Sprite with a texture and position.
+        /// Size will initially be set to the texture size.
+        /// </summary>
         public Sprite(Texture2D texture, Vector2 Pos)
         {
             m_texture = texture;

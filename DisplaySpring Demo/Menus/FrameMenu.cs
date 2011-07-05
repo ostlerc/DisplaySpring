@@ -12,7 +12,6 @@
 
     class FrameMenu : Menu
     {
-        Button btn;
         /// <summary>
         /// Sample Frame Menu
         /// </summary>
