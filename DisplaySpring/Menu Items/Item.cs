@@ -1019,36 +1019,8 @@
         /// All inside pixels are Color(0,0,0,0)
         /// </summary>
         public static Texture2D CreateRectangleBorder(int width, int height, int thickness, Color col)
-        {  
-            if ( width == 0 || height == 0 || thickness < 0 || col == null)
-                return null;
-
-            Color[] colors;
-            Texture2D border = new Texture2D(Menu.GraphicsDevice, width, height);
-            colors = new Color[width * height];
-
-            for (int i = 0; i < colors.Length; i++)
-                colors[i] = new Color(0, 0, 0, 0); //completely invisible
-
-            //top
-            for (int i = 0; i < width * thickness; i++)
-                colors[i] = col;
-
-            //sides
-            for (int i = 0; i < colors.Length; i += width)
-            {
-                for (int j = 0; j < thickness && j < width; j++) //left side
-                    colors[i + j] = col;
-                for (int j = width - 1; j >= width - thickness && j > 0; j--) //right side
-                    colors[i + j] = col;
-            }
-
-            //bottom
-            for (int i = width * (height - thickness); i < colors.Length; i++)
-                colors[i] = col;
-
-            border.SetData(colors);
-            return border;
+        {
+            return CreateBorderFilledRectangle(width, height, thickness, col, new Color(0, 0, 0, 0));
         }
 
         /// <summary>
