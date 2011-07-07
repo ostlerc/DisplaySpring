@@ -299,7 +299,6 @@
                 }
 
                 v.refreshItem();
-
             }
 
             base.refreshItem();

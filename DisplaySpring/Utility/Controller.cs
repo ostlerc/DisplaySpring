@@ -24,7 +24,74 @@ namespace DisplaySpring
         GamePadState m_GamePadState;
         PlayerIndex m_player;
 
-        //convert from MultiController to Controller
+        /// <summary>
+        /// List of keys associated with Dpad and Thumbstick Up
+        /// </summary>
+        public List<Keys> keyUp = new List<Keys>() { Keys.Up };
+        /// <summary>
+        /// List of keys associated with Dpad and Thumbstick Down
+        /// </summary>
+        public List<Keys> keyDown = new List<Keys>() { Keys.Down };
+        /// <summary>
+        /// List of keys associated with Dpad and Thumbstick Left
+        /// </summary>
+        public List<Keys> keyLeft = new List<Keys>() { Keys.Left };
+        /// <summary>
+        /// List of keys associated with Dpad and Thumbstick Right
+        /// </summary>
+        public List<Keys> keyRight = new List<Keys>() { Keys.Right };
+
+        /// <summary>
+        /// List of keys associated with Button A
+        /// </summary>
+        public List<Keys> keyA = new List<Keys>() { Keys.A, Keys.Enter };
+        /// <summary>
+        /// List of keys associated with Button B
+        /// </summary>
+        public List<Keys> keyB = new List<Keys>() { Keys.S, Keys.Back };
+        /// <summary>
+        /// List of keys associated with Button X
+        /// </summary>
+        public List<Keys> keyX = new List<Keys>() { Keys.Q };
+        /// <summary>
+        /// List of keys associated with Button Y
+        /// </summary>
+        public List<Keys> keyY = new List<Keys>() { Keys.W };
+
+
+        /// <summary>
+        /// List of keys associated with Button Start
+        /// </summary>
+        public List<Keys> keyStart = new List<Keys>() { Keys.Space };
+
+        /// <summary>
+        /// List of keys associated with Button Back (select)
+        /// </summary>
+        public List<Keys> keyBack  = new List<Keys>() { Keys.Escape };
+
+        /// <summary>
+        /// List of keys associated with the left shoulder
+        /// </summary>
+        public List<Keys> leftShoulder = new List<Keys>() { Keys.OemOpenBrackets };
+        /// <summary>
+        /// List of keys associated with the right shoulder
+        /// </summary>
+        public List<Keys> rightShoulder = new List<Keys>() { Keys.OemCloseBrackets };
+
+        /// <summary>
+        /// List of keys associated with the left trigger
+        /// </summary>
+        public List<Keys> leftTrigger = new List<Keys>() { Keys.OemSemicolon };
+
+        /// <summary>
+        /// List of keys associated with the right trigger
+        /// </summary>
+        public List<Keys> rightTrigger = new List<Keys>() { Keys.OemQuotes };
+
+
+        /// <summary>
+        /// convert from MultiController to Controller
+        /// </summary>
         public static implicit operator Controller(MultiController c)
         {
             List<Controller> l = new List<Controller>();
@@ -33,6 +100,47 @@ namespace DisplaySpring
         }
 
         #region Getters and Setters
+
+        /// <summary>
+        /// Returns true if button b has been pressed
+        /// </summary>
+        public bool Pressed(Buttons b)
+        {
+            return m_GamePadState.IsButtonDown(b) && !m_oldGamePadState.IsButtonDown(b);
+        }
+
+        /// <summary>
+        /// returns true if keybard key k has been pressed
+        /// </summary>
+        public bool Pressed(Keys k)
+        {
+            return m_KeyboardState.IsKeyDown(k) && !m_oldKeyboardState.IsKeyDown(k);
+        }
+
+        /// <summary>
+        /// Returns true if one of the buttons in bts has been pressed
+        /// </summary>
+        public bool Pressed(List<Buttons> bts)
+        {
+            foreach (var b in bts)
+                if (Pressed(b))
+                    return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// Returns true if one of the keys in keys has been pressed
+        /// </summary>
+        public bool Pressed(List<Keys> keys)
+        {
+            foreach (var k in keys)
+                if (Pressed(k))
+                    return true;
+
+            return false;
+        }
+
         /// <summary>
         /// True if the up key was pressed
         /// </summary>
@@ -40,9 +148,7 @@ namespace DisplaySpring
         {
             get
             {
-                return (m_KeyboardState.IsKeyDown(Keys.Up) && !m_oldKeyboardState.IsKeyDown(Keys.Up)) ||
-                        (m_GamePadState.IsButtonDown(Buttons.DPadUp) && !m_oldGamePadState.IsButtonDown(Buttons.DPadUp)) ||
-                        (m_GamePadState.IsButtonDown(Buttons.LeftThumbstickUp) && !m_oldGamePadState.IsButtonDown(Buttons.LeftThumbstickUp));
+                return Pressed(keyUp) || Pressed(Buttons.DPadUp) || Pressed(Buttons.LeftThumbstickUp);
             }
         }
 
@@ -53,9 +159,7 @@ namespace DisplaySpring
         {
             get
             {
-                return (m_KeyboardState.IsKeyDown(Keys.Down) && !m_oldKeyboardState.IsKeyDown(Keys.Down)) ||
-                        (m_GamePadState.IsButtonDown(Buttons.DPadDown) && !m_oldGamePadState.IsButtonDown(Buttons.DPadDown)) ||
-                        (m_GamePadState.IsButtonDown(Buttons.LeftThumbstickDown) && !m_oldGamePadState.IsButtonDown(Buttons.LeftThumbstickDown));
+                return Pressed(keyDown) || Pressed(Buttons.DPadDown) || Pressed(Buttons.LeftThumbstickDown);
             }
         }
 
@@ -66,9 +170,7 @@ namespace DisplaySpring
         {
             get
             {
-                return (m_KeyboardState.IsKeyDown(Keys.Left) && !m_oldKeyboardState.IsKeyDown(Keys.Left)) ||
-                        (m_GamePadState.IsButtonDown(Buttons.DPadLeft) && !m_oldGamePadState.IsButtonDown(Buttons.DPadLeft)) ||
-                        (m_GamePadState.IsButtonDown(Buttons.LeftThumbstickLeft) && !m_oldGamePadState.IsButtonDown(Buttons.LeftThumbstickLeft));
+                return Pressed(keyLeft) || Pressed(Buttons.DPadLeft) || Pressed(Buttons.LeftThumbstickLeft);
             }
         }
 
@@ -79,9 +181,7 @@ namespace DisplaySpring
         {
             get
             {
-                return (m_KeyboardState.IsKeyDown(Keys.Right) && !m_oldKeyboardState.IsKeyDown(Keys.Right)) ||
-                        (m_GamePadState.IsButtonDown(Buttons.DPadRight) && !m_oldGamePadState.IsButtonDown(Buttons.DPadRight)) ||
-                        (m_GamePadState.IsButtonDown(Buttons.LeftThumbstickRight) && !m_oldGamePadState.IsButtonDown(Buttons.LeftThumbstickRight));
+                return Pressed(keyRight) || Pressed(Buttons.DPadRight) || Pressed(Buttons.LeftThumbstickRight);
             }
         }
 
@@ -92,8 +192,7 @@ namespace DisplaySpring
         {
             get
             {
-                return (m_KeyboardState.IsKeyDown(Keys.Enter) && !m_oldKeyboardState.IsKeyDown(Keys.Enter)) ||
-                       (m_GamePadState.IsButtonDown(Buttons.A) && !m_oldGamePadState.IsButtonDown(Buttons.A));
+                return Pressed(keyA) || Pressed(Buttons.A);
             }
         }
 
@@ -104,8 +203,7 @@ namespace DisplaySpring
         {
             get
             {
-                return (m_KeyboardState.IsKeyDown(Keys.Back) && !m_oldKeyboardState.IsKeyDown(Keys.Back)) ||
-                        (m_GamePadState.IsButtonDown(Buttons.B) && !m_oldGamePadState.IsButtonDown(Buttons.B));
+                return Pressed(keyB) || Pressed(Buttons.B);
             }
         }
 
@@ -116,8 +214,7 @@ namespace DisplaySpring
         {
             get
             {
-                return (m_KeyboardState.IsKeyDown(Keys.Q) && !m_oldKeyboardState.IsKeyDown(Keys.Q)) ||
-                        (m_GamePadState.IsButtonDown(Buttons.X) && !m_oldGamePadState.IsButtonDown(Buttons.X));
+                return Pressed(keyX) || Pressed(Buttons.X);
             }
         }
 
@@ -128,19 +225,7 @@ namespace DisplaySpring
         {
             get
             {
-                return (m_KeyboardState.IsKeyDown(Keys.W) && !m_oldKeyboardState.IsKeyDown(Keys.W)) ||
-                        (m_GamePadState.IsButtonDown(Buttons.Y) && !m_oldGamePadState.IsButtonDown(Buttons.Y));
-            }
-        }
-
-        /// <summary>
-        /// True if the D key was pressed on the keyboard
-        /// </summary>
-        public bool KeyboardD
-        {
-            get
-            {
-                return (m_KeyboardState.IsKeyDown(Keys.D) && !m_oldKeyboardState.IsKeyDown(Keys.D));
+                return Pressed(keyY) || Pressed(Buttons.Y);
             }
         }
 
@@ -151,9 +236,7 @@ namespace DisplaySpring
         {
             get
             {
-                return ((m_GamePadState.IsButtonDown(Buttons.X) && !m_oldGamePadState.IsButtonDown(Buttons.X))
-                    && !(m_GamePadState.IsButtonDown(Buttons.Y)) && !(m_GamePadState.IsButtonDown(Buttons.A))
-                        && !(m_GamePadState.IsButtonDown(Buttons.B)));
+                return X && !Y && !A && !B;
             }
         }
 
@@ -164,9 +247,7 @@ namespace DisplaySpring
         {
             get
             {
-                return ((m_GamePadState.IsButtonDown(Buttons.Y) && !m_oldGamePadState.IsButtonDown(Buttons.Y))
-                    && !(m_GamePadState.IsButtonDown(Buttons.X)) && !(m_GamePadState.IsButtonDown(Buttons.A))
-                        && !(m_GamePadState.IsButtonDown(Buttons.B)));
+                return !X && Y && !A && !B;
             }
         }
 
@@ -177,9 +258,7 @@ namespace DisplaySpring
         {
             get
             {
-                return ((m_GamePadState.IsButtonDown(Buttons.A) && !m_oldGamePadState.IsButtonDown(Buttons.A))
-                    && !(m_GamePadState.IsButtonDown(Buttons.Y)) && !(m_GamePadState.IsButtonDown(Buttons.X))
-                        && !(m_GamePadState.IsButtonDown(Buttons.B)));
+                return !X && !Y && A && !B;
             }
         }
 
@@ -190,9 +269,7 @@ namespace DisplaySpring
         {
             get
             {
-                return ((m_GamePadState.IsButtonDown(Buttons.B) && !m_oldGamePadState.IsButtonDown(Buttons.B))
-                    && !(m_GamePadState.IsButtonDown(Buttons.Y)) && !(m_GamePadState.IsButtonDown(Buttons.A))
-                        && !(m_GamePadState.IsButtonDown(Buttons.X)));
+                return !X && !Y && !A && B;
             }
         }
 
@@ -203,7 +280,7 @@ namespace DisplaySpring
         {
             get
             {
-                return ((m_GamePadState.IsButtonDown(Buttons.LeftShoulder) && !m_oldGamePadState.IsButtonDown(Buttons.LeftShoulder)));
+                return Pressed(leftShoulder) || Pressed(Buttons.LeftShoulder);
             }
         }
 
@@ -214,29 +291,29 @@ namespace DisplaySpring
         {
             get
             {
-                return ((m_GamePadState.IsButtonDown(Buttons.RightShoulder) && !m_oldGamePadState.IsButtonDown(Buttons.RightShoulder)));
+                return Pressed(rightShoulder) || Pressed(Buttons.RightShoulder);
             }
         }
 
         /// <summary>
         /// True if the left trigger is being held down
         /// </summary>
-        public bool LeftTriggerPressed
+        public bool LeftTrigger
         {
             get
             {
-                return (m_GamePadState.IsButtonDown(Buttons.LeftTrigger) || m_KeyboardState.IsKeyDown(Keys.Z));
+                return Pressed(leftTrigger) || Pressed(Buttons.LeftTrigger);
             }
         }
 
         /// <summary>
         /// True if the right trigger is being held down
         /// </summary>
-        public bool RightTriggerPressed
+        public bool RightTrigger
         {
             get
             {
-                return (m_GamePadState.IsButtonDown(Buttons.RightTrigger) || m_KeyboardState.IsKeyDown(Keys.X));
+                return Pressed(rightTrigger) || Pressed(Buttons.RightTrigger);
             }
         }
 
@@ -258,11 +335,7 @@ namespace DisplaySpring
         {
             get
             {
-                return ((m_GamePadState.IsButtonDown(Buttons.B) && !m_oldGamePadState.IsButtonDown(Buttons.B)) ||
-                    (m_GamePadState.IsButtonDown(Buttons.A) && !m_oldGamePadState.IsButtonDown(Buttons.A)) ||
-                    (m_GamePadState.IsButtonDown(Buttons.X) && !m_oldGamePadState.IsButtonDown(Buttons.X)) ||
-                    (m_GamePadState.IsButtonDown(Buttons.Start) && !m_oldGamePadState.IsButtonDown(Buttons.Start)) ||
-                    (m_GamePadState.IsButtonDown(Buttons.Y) && !m_oldGamePadState.IsButtonDown(Buttons.Y)));
+                return A || B || X || Y || Start;
             }
         }
 
@@ -273,8 +346,7 @@ namespace DisplaySpring
         {
             get
             {
-                return (m_KeyboardState.IsKeyDown(Keys.Space) && !m_oldKeyboardState.IsKeyDown(Keys.Space)) ||
-                        (m_GamePadState.IsButtonDown(Buttons.Start) && !m_oldGamePadState.IsButtonDown(Buttons.Start));
+                return Pressed(keyStart) || Pressed(Buttons.Start);
             }
         }
 
@@ -288,7 +360,7 @@ namespace DisplaySpring
                 if (m_KeyboardState.IsKeyDown(Keys.Up))
                 {
                     if (m_KeyboardState.IsKeyDown(Keys.Left) || m_KeyboardState.IsKeyDown(Keys.Right))
-                        return -0.707105f;
+                        return -0.707105f; //WTF?
                     else
                         return -1;
                 }
@@ -369,22 +441,13 @@ namespace DisplaySpring
         {
             get
             {
-                return (m_KeyboardState.IsKeyDown(Keys.Escape) && !m_oldKeyboardState.IsKeyDown(Keys.Escape)) ||
-                        (m_GamePadState.IsButtonDown(Buttons.Back) && !m_oldGamePadState.IsButtonDown(Buttons.Back));
+                return Pressed(keyBack) || Pressed(Buttons.Back);
             }
         }
 
         /// <summary>
-        /// True if the D key on the keyboard is pressed (used for entering debug mode)
+        /// Returns the player index that the Controller references
         /// </summary>
-        public bool D
-        {
-            get
-            {
-                return (m_KeyboardState.IsKeyDown(Keys.D) && !m_oldKeyboardState.IsKeyDown(Keys.D));
-            }
-        }
-
         public PlayerIndex PlayerIndex
         {
             get
@@ -393,6 +456,9 @@ namespace DisplaySpring
             }
         }
 
+        /// <summary>
+        /// Returns if the controller is active
+        /// </summary>
         public bool IsActive()
         {
 #if DEBUG
@@ -422,11 +488,10 @@ namespace DisplaySpring
 
         private void Update()
         {
-            if (PlayerIndex.Two == m_player)
-            {
-                m_oldKeyboardState = m_KeyboardState;
-                m_KeyboardState = Keyboard.GetState();
-            }
+#if DEBUG   //keyboard states only in debug mode
+            m_oldKeyboardState = m_KeyboardState;
+            m_KeyboardState = Keyboard.GetState();
+#endif
             m_oldGamePadState = m_GamePadState;
             m_GamePadState = GamePad.GetState(m_player);
         }

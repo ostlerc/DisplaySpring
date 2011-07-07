@@ -1173,6 +1173,106 @@
             Utility class for interfacing with the keyboard and gamepad
             </summary>
         </member>
+        <member name="F:DisplaySpring.Controller.keyUp">
+            <summary>
+            List of keys associated with Dpad and Thumbstick Up
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Controller.keyDown">
+            <summary>
+            List of keys associated with Dpad and Thumbstick Down
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Controller.keyLeft">
+            <summary>
+            List of keys associated with Dpad and Thumbstick Left
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Controller.keyRight">
+            <summary>
+            List of keys associated with Dpad and Thumbstick Right
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Controller.keyA">
+            <summary>
+            List of keys associated with Button A
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Controller.keyB">
+            <summary>
+            List of keys associated with Button B
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Controller.keyX">
+            <summary>
+            List of keys associated with Button X
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Controller.keyY">
+            <summary>
+            List of keys associated with Button Y
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Controller.keyStart">
+            <summary>
+            List of keys associated with Button Start
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Controller.keyBack">
+            <summary>
+            List of keys associated with Button Back (select)
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Controller.leftShoulder">
+            <summary>
+            List of keys associated with the left shoulder
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Controller.rightShoulder">
+            <summary>
+            List of keys associated with the right shoulder
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Controller.leftTrigger">
+            <summary>
+            List of keys associated with the left trigger
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Controller.rightTrigger">
+            <summary>
+            List of keys associated with the right trigger
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.op_Implicit(DisplaySpring.MultiController)~DisplaySpring.Controller">
+            <summary>
+            convert from MultiController to Controller
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.Pressed(Microsoft.Xna.Framework.Input.Buttons)">
+            <summary>
+            Returns true if button b has been pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.Pressed(Microsoft.Xna.Framework.Input.Keys)">
+            <summary>
+            returns true if keybard key k has been pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.Pressed(System.Collections.Generic.List{Microsoft.Xna.Framework.Input.Buttons})">
+            <summary>
+            Returns true if one of the buttons in bts has been pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.Pressed(System.Collections.Generic.List{Microsoft.Xna.Framework.Input.Keys})">
+            <summary>
+            Returns true if one of the keys in keys has been pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.IsActive">
+            <summary>
+            Returns if the controller is active
+            </summary>
+        </member>
         <member name="M:DisplaySpring.Controller.#ctor(Microsoft.Xna.Framework.PlayerIndex,DisplaySpring.UpdateEvent)">
             <summary>
             Create a new controller class
@@ -1218,11 +1318,6 @@
             True if the Y key was pressed
             </summary>
         </member>
-        <member name="P:DisplaySpring.Controller.KeyboardD">
-            <summary>
-            True if the D key was pressed on the keyboard
-            </summary>
-        </member>
         <member name="P:DisplaySpring.Controller.ExclusiveX">
             <summary>
             True if X and ONLY X is pressed
@@ -1253,12 +1348,12 @@
             True if the right shoulder is pressed
             </summary>
         </member>
-        <member name="P:DisplaySpring.Controller.LeftTriggerPressed">
+        <member name="P:DisplaySpring.Controller.LeftTrigger">
             <summary>
             True if the left trigger is being held down
             </summary>
         </member>
-        <member name="P:DisplaySpring.Controller.RightTriggerPressed">
+        <member name="P:DisplaySpring.Controller.RightTrigger">
             <summary>
             True if the right trigger is being held down
             </summary>
@@ -1303,9 +1398,9 @@
             True if the Back button is pushed
             </summary>
         </member>
-        <member name="P:DisplaySpring.Controller.D">
+        <member name="P:DisplaySpring.Controller.PlayerIndex">
             <summary>
-            True if the D key on the keyboard is pressed (used for entering debug mode)
+            Returns the player index that the Controller references
             </summary>
         </member>
         <member name="T:DisplaySpring.ItemCollection">
