@@ -76,6 +76,7 @@
         private HorizontalAlignmentType m_horizontalAlignment = HAlign.Center;
         private VerticalAlignmentType m_verticalAlignment = VAlign.Center;
         private Vector2 m_center = Vector2.Zero;
+        private ButtonState m_buttonState = ButtonState.Pressed;
 
         /// <summary>
         /// Default SelectSound
@@ -213,6 +214,15 @@
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// State in which triggers the On delegates
+        /// </summary>
+        public ButtonState InputState
+        {
+            get { return m_buttonState; }
+            set { m_buttonState = value; }
+        }
 
         /// <summary>
         /// Will force a refresh on this item.
@@ -717,36 +727,36 @@
 
             if (m_controller != null)
             {
-                if (m_controller.State(ButtonSet.Up, ButtonState.Pressed))
+                if (m_controller.State(ButtonSet.Up, InputState))
                 {
                     Up();
                 }
-                else if (m_controller.State(ButtonSet.Down, ButtonState.Pressed))
+                else if (m_controller.State(ButtonSet.Down, InputState))
                 {
                     Down();
                 }
-                else if (m_controller.State(ButtonSet.Right, ButtonState.Pressed))
+                else if (m_controller.State(ButtonSet.Right, InputState))
                 {
                     Right();
                 }
-                else if (m_controller.State(ButtonSet.Left, ButtonState.Pressed))
+                else if (m_controller.State(ButtonSet.Left, InputState))
                 {
                     Left();
                 }
-                else if (m_controller.State(ButtonSet.A, ButtonState.Pressed))
+                else if (m_controller.State(ButtonSet.A, InputState))
                 {
                     if (A() && m_activateSound != null)
                         m_activateSound.Play(0.5f, 0f, 0f);
                 }
-                else if (m_controller.State(ButtonSet.Start, ButtonState.Pressed))
+                else if (m_controller.State(ButtonSet.Start, InputState))
                 {
                     Start();
                 }
-                else if (m_controller.State(ButtonSet.Back, ButtonState.Pressed))
+                else if (m_controller.State(ButtonSet.Back, InputState))
                 {
                     Back();
                 }
-                if(m_controller.State(ButtonSet.B, ButtonState.Pressed))
+                if(m_controller.State(ButtonSet.B, InputState))
                 {
                     B();
                     if ((Focus == false || ForceCancelSound) && m_cancelSound != null)
