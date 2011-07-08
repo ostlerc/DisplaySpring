@@ -32,7 +32,9 @@ namespace DisplaySpring
         ExclusiveA,
         ExclusiveB,
         ExclusiveX,
-        ExclusiveY
+        ExclusiveY,
+        AnyButton,
+        AnyInput
     }
 
     /// <summary>
@@ -45,6 +47,11 @@ namespace DisplaySpring
         GamePadState m_oldGamePadState;
         GamePadState m_GamePadState;
         PlayerIndex m_player;
+
+        public GamePadState GamePadState
+        {
+            get { return m_GamePadState; }
+        }
 
         /// <summary>
         /// List of keys associated with Dpad and Thumbstick Up
@@ -79,7 +86,6 @@ namespace DisplaySpring
         /// List of keys associated with Button Y
         /// </summary>
         public List<Keys> keyY = new List<Keys>() { Keys.W };
-
 
         /// <summary>
         /// List of keys associated with Button Start
@@ -124,9 +130,37 @@ namespace DisplaySpring
         #region Getters and Setters
 
         /// <summary>
+        /// Get the Vector2 representing the movement of the left thumb stick
+        /// </summary>
+        public Vector2 LeftThumbStick
+        {
+            get
+            {
+                if (m_GamePadState.ThumbSticks.Left != Vector2.Zero)
+                    return m_GamePadState.ThumbSticks.Left;
+
+                return new Vector2(Left(ButtonState.Pressed) || Right(ButtonState.Pressed) ? 1 : 0, Up(ButtonState.Pressed) || Down(ButtonState.Pressed) ? 1 : 0);
+            }
+        }
+
+        /// <summary>
+        /// Get the Vector2 representing the movement of the right thumb stick
+        /// </summary>
+        public Vector2 RightThumbStick
+        {
+            get
+            {
+                if (m_GamePadState.ThumbSticks.Right != Vector2.Zero)
+                    return m_GamePadState.ThumbSticks.Right;
+
+                return new Vector2(Left(ButtonState.Pressed) || Right(ButtonState.Pressed) ? 1 : 0, Up(ButtonState.Pressed) || Down(ButtonState.Pressed) ? 1 : 0);
+            }
+        }
+
+        /// <summary>
         /// Returns true if button b has been pressed
         /// </summary>
-        internal bool Pressed(Buttons b)
+        public bool Pressed(Buttons b)
         {
             return m_GamePadState.IsButtonDown(b) && !m_oldGamePadState.IsButtonDown(b);
         }
@@ -166,7 +200,7 @@ namespace DisplaySpring
         /// <summary>
         /// returns true if keybard key k has been pressed
         /// </summary>
-        internal bool Pressed(Keys k)
+        public bool Pressed(Keys k)
         {
             return m_KeyboardState.IsKeyDown(k) && !m_oldKeyboardState.IsKeyDown(k);
         }
@@ -198,7 +232,7 @@ namespace DisplaySpring
         /// <summary>
         /// Returns true if keyboard key k has been released
         /// </summary>
-        internal bool Released(Keys k)
+        public bool Released(Keys k)
         {
             return !m_KeyboardState.IsKeyDown(k) && m_oldKeyboardState.IsKeyDown(k);
         }
@@ -206,7 +240,7 @@ namespace DisplaySpring
         /// <summary>
         /// Returns true if Button btn has been released
         /// </summary>
-        internal bool Released(Buttons btn)
+        public bool Released(Buttons btn)
         {
             return !m_GamePadState.IsButtonDown(btn) && m_oldGamePadState.IsButtonDown(btn);
         }
@@ -272,6 +306,10 @@ namespace DisplaySpring
                     return LeftTrigger(state);
                 case ButtonSet.RightTrigger:
                     return RightTrigger(state);
+                case ButtonSet.AnyButton:
+                    return AnyButton(state);
+                case ButtonSet.AnyInput:
+                    return AnyInput(state);
             }
             return false;
         }

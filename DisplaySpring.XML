@@ -1414,6 +1414,16 @@
             Create a new controller class
             </summary>
         </member>
+        <member name="P:DisplaySpring.Controller.LeftThumbStick">
+            <summary>
+            Get the Vector2 representing the movement of the left thumb stick
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Controller.RightThumbStick">
+            <summary>
+            Get the Vector2 representing the movement of the right thumb stick
+            </summary>
+        </member>
         <member name="P:DisplaySpring.Controller.PlayerIndex">
             <summary>
             Returns the player index that the Controller references
