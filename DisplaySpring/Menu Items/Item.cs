@@ -11,6 +11,7 @@
     using VAlign = Item.VerticalAlignmentType;
     using HAlign = Item.HorizontalAlignmentType;
     using Layout = Frame.LayoutType;
+    using Microsoft.Xna.Framework.Input;
     /// <summary>
     /// An Item is any sub menu area that needs to interact with other menu parts.
     /// All items are shown in one menu
@@ -716,36 +717,36 @@
 
             if (m_controller != null)
             {
-                if (m_controller.Up)
+                if (m_controller.State(ButtonSet.Up, ButtonState.Pressed))
                 {
                     Up();
                 }
-                else if (m_controller.Down)
+                else if (m_controller.State(ButtonSet.Down, ButtonState.Pressed))
                 {
                     Down();
                 }
-                else if (m_controller.Right)
+                else if (m_controller.State(ButtonSet.Right, ButtonState.Pressed))
                 {
                     Right();
                 }
-                else if (m_controller.Left)
+                else if (m_controller.State(ButtonSet.Left, ButtonState.Pressed))
                 {
                     Left();
                 }
-                else if (m_controller.A)
+                else if (m_controller.State(ButtonSet.A, ButtonState.Pressed))
                 {
                     if (A() && m_activateSound != null)
                         m_activateSound.Play(0.5f, 0f, 0f);
                 }
-                else if (m_controller.Start)
+                else if (m_controller.State(ButtonSet.Start, ButtonState.Pressed))
                 {
                     Start();
                 }
-                else if (m_controller.Back)
+                else if (m_controller.State(ButtonSet.Back, ButtonState.Pressed))
                 {
                     Back();
                 }
-                if(m_controller.B)
+                if(m_controller.State(ButtonSet.B, ButtonState.Pressed))
                 {
                     B();
                     if ((Focus == false || ForceCancelSound) && m_cancelSound != null)

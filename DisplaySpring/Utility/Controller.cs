@@ -13,6 +13,28 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace DisplaySpring
 {
+    public enum ButtonSet
+    {
+        Up,
+        Down,
+        Left,
+        Right,
+        A,
+        B,
+        X,
+        Y,
+        Start,
+        Back,
+        LeftShoulder,
+        RightShoulder,
+        LeftTrigger,
+        RightTrigger,
+        ExclusiveA,
+        ExclusiveB,
+        ExclusiveX,
+        ExclusiveY
+    }
+
     /// <summary>
     /// Utility class for interfacing with the keyboard and gamepad
     /// </summary>
@@ -104,15 +126,47 @@ namespace DisplaySpring
         /// <summary>
         /// Returns true if button b has been pressed
         /// </summary>
-        public bool Pressed(Buttons b)
+        internal bool Pressed(Buttons b)
         {
             return m_GamePadState.IsButtonDown(b) && !m_oldGamePadState.IsButtonDown(b);
+        }
+
+        internal bool State(Buttons b, ButtonState state)
+        {
+            if (state == ButtonState.Pressed)
+                return Pressed(b);
+            else
+                return Released(b);
+        }
+
+        internal bool State(List<Buttons> bts, ButtonState state)
+        {
+            if (state == ButtonState.Pressed)
+                return Pressed(bts);
+            else
+                return Released(bts);
+        }
+
+        internal bool State(Keys b, ButtonState state)
+        {
+            if (state == ButtonState.Pressed)
+                return Pressed(b);
+            else
+                return Released(b);
+        }
+
+        internal bool State(List<Keys> keys, ButtonState state)
+        {
+            if (state == ButtonState.Pressed)
+                return Pressed(keys);
+            else
+                return Released(keys);
         }
 
         /// <summary>
         /// returns true if keybard key k has been pressed
         /// </summary>
-        public bool Pressed(Keys k)
+        internal bool Pressed(Keys k)
         {
             return m_KeyboardState.IsKeyDown(k) && !m_oldKeyboardState.IsKeyDown(k);
         }
@@ -120,7 +174,7 @@ namespace DisplaySpring
         /// <summary>
         /// Returns true if one of the buttons in bts has been pressed
         /// </summary>
-        public bool Pressed(List<Buttons> bts)
+        internal bool Pressed(List<Buttons> bts)
         {
             foreach (var b in bts)
                 if (Pressed(b))
@@ -142,307 +196,244 @@ namespace DisplaySpring
         }
 
         /// <summary>
+        /// Returns true if keyboard key k has been released
+        /// </summary>
+        internal bool Released(Keys k)
+        {
+            return !m_KeyboardState.IsKeyDown(k) && m_oldKeyboardState.IsKeyDown(k);
+        }
+
+        /// <summary>
+        /// Returns true if Button btn has been released
+        /// </summary>
+        internal bool Released(Buttons btn)
+        {
+            return !m_GamePadState.IsButtonDown(btn) && m_oldGamePadState.IsButtonDown(btn);
+        }
+
+        /// <summary>
+        /// Returns true if one of the Buttons btns has been released
+        /// </summary>
+        internal bool Released(List<Buttons> btns)
+        {
+            foreach (var b in btns)
+                if (Released(b))
+                    return true;
+
+            return false;
+        }
+
+        internal bool Released(List<Keys> keys)
+        {
+            foreach (var k in keys)
+                if (Released(k))
+                    return true;
+
+            return false;
+        }
+
+        public bool State(ButtonSet set, ButtonState state)
+        {
+            switch (set)
+            {
+                case ButtonSet.Up:
+                    return Up(state);
+                case ButtonSet.Down:
+                    return Down(state);
+                case ButtonSet.Left:
+                    return Left(state);
+                case ButtonSet.Right:
+                    return Right(state);
+                case ButtonSet.A:
+                    return A(state);
+                case ButtonSet.B:
+                    return B(state);
+                case ButtonSet.X:
+                    return X(state);
+                case ButtonSet.Y:
+                    return Y(state);
+                case ButtonSet.ExclusiveA:
+                    return ExclusiveA(state);
+                case ButtonSet.ExclusiveB:
+                    return ExclusiveB(state);
+                case ButtonSet.ExclusiveX:
+                    return ExclusiveX(state);
+                case ButtonSet.ExclusiveY:
+                    return ExclusiveY(state);
+                case ButtonSet.LeftShoulder:
+                    return LeftShoulder(state);
+                case ButtonSet.RightShoulder:
+                    return RightShoulder(state);
+                case ButtonSet.Start:
+                    return Start(state);
+                case ButtonSet.Back:
+                    return Back(state);
+                case ButtonSet.LeftTrigger:
+                    return LeftTrigger(state);
+                case ButtonSet.RightTrigger:
+                    return RightTrigger(state);
+            }
+            return false;
+        }
+
+        /// <summary>
         /// True if the up key was pressed
         /// </summary>
-        public bool Up
+        internal bool Up(ButtonState state)
         {
-            get
-            {
-                return Pressed(keyUp) || Pressed(Buttons.DPadUp) || Pressed(Buttons.LeftThumbstickUp);
-            }
+            return State(keyUp, state) || State(Buttons.DPadUp, state) || State(Buttons.LeftThumbstickUp, state);
         }
 
         /// <summary>
         /// True if the down key was pressed
         /// </summary>
-        public bool Down
+        internal bool Down(ButtonState state)
         {
-            get
-            {
-                return Pressed(keyDown) || Pressed(Buttons.DPadDown) || Pressed(Buttons.LeftThumbstickDown);
-            }
+            return Pressed(keyDown) || Pressed(Buttons.DPadDown) || Pressed(Buttons.LeftThumbstickDown);
         }
 
         /// <summary>
         /// True if the left key was pressed
         /// </summary>
-        public bool Left
+        internal bool Left(ButtonState state)
         {
-            get
-            {
-                return Pressed(keyLeft) || Pressed(Buttons.DPadLeft) || Pressed(Buttons.LeftThumbstickLeft);
-            }
+            return State(keyLeft, state) || State(Buttons.DPadLeft, state) || State(Buttons.LeftThumbstickLeft, state);
         }
 
         /// <summary>
         /// True if the right key was pressed
         /// </summary>
-        public bool Right
+        internal bool Right(ButtonState state)
         {
-            get
-            {
-                return Pressed(keyRight) || Pressed(Buttons.DPadRight) || Pressed(Buttons.LeftThumbstickRight);
-            }
+            return State(keyRight, state) || State(Buttons.DPadRight, state) || State(Buttons.LeftThumbstickRight, state);
         }
 
         /// <summary>
         /// True if the A key was pressed
         /// </summary>
-        public bool A
+        internal bool A(ButtonState state)
         {
-            get
-            {
-                return Pressed(keyA) || Pressed(Buttons.A);
-            }
+            return State(keyA, state) || State(Buttons.A, state);
         }
 
         /// <summary>
         /// True if the B key was pressed
         /// </summary>
-        public bool B
+        internal bool B(ButtonState state)
         {
-            get
-            {
-                return Pressed(keyB) || Pressed(Buttons.B);
-            }
+            return State(keyB, state) || State(Buttons.B, state);
         }
 
         /// <summary>
         /// True if the X key was pressed
         /// </summary>
-        public bool X
+        internal bool X(ButtonState state)
         {
-            get
-            {
-                return Pressed(keyX) || Pressed(Buttons.X);
-            }
+            return State(keyX, state) || State(Buttons.X, state);
         }
 
         /// <summary>
         /// True if the Y key was pressed
         /// </summary>
-        public bool Y
+        internal bool Y(ButtonState state)
         {
-            get
-            {
-                return Pressed(keyY) || Pressed(Buttons.Y);
-            }
+            return State(keyY, state) || State(Buttons.Y, state);
         }
 
         /// <summary>
         /// True if X and ONLY X is pressed
         /// </summary>
-        public bool ExclusiveX
+        internal bool ExclusiveX(ButtonState state)
         {
-            get
-            {
-                return X && !Y && !A && !B;
-            }
+            return X(state) && !Y(state) && !A(state) && !B(state);
         }
 
         /// <summary>
         /// True if Y and ONLY Y is pressed
         /// </summary>
-        public bool ExclusiveY
+        internal bool ExclusiveY(ButtonState state)
         {
-            get
-            {
-                return !X && Y && !A && !B;
-            }
+            return !X(state) && Y(state) && !A(state) && !B(state);
         }
 
         /// <summary>
         /// True if A and ONLY A is pressed
         /// </summary>
-        public bool ExclusiveA
+        internal bool ExclusiveA(ButtonState state)
         {
-            get
-            {
-                return !X && !Y && A && !B;
-            }
+            return !X(state) && !Y(state) && A(state) && !B(state);
         }
 
         /// <summary>
         /// True if B and ONLY B is pressed
         /// </summary>
-        public bool ExclusiveB
+        internal bool ExclusiveB(ButtonState state)
         {
-            get
-            {
-                return !X && !Y && !A && B;
-            }
+            return !X(state) && !Y(state) && !A(state) && B(state);
         }
 
         /// <summary>
         /// True if the LeftShoulder is pressed
         /// </summary>
-        public bool LeftShoulder
+        internal bool LeftShoulder(ButtonState state)
         {
-            get
-            {
-                return Pressed(leftShoulder) || Pressed(Buttons.LeftShoulder);
-            }
+            return State(leftShoulder, state) || State(Buttons.LeftShoulder, state);
         }
 
         /// <summary>
         /// True if the right shoulder is pressed
         /// </summary>
-        public bool RightShoulder
+        internal bool RightShoulder(ButtonState state)
         {
-            get
-            {
-                return Pressed(rightShoulder) || Pressed(Buttons.RightShoulder);
-            }
+            return State(rightShoulder, state) || State(Buttons.RightShoulder, state);
         }
 
         /// <summary>
         /// True if the left trigger is being held down
         /// </summary>
-        public bool LeftTrigger
+        internal bool LeftTrigger(ButtonState state)
         {
-            get
-            {
-                return Pressed(leftTrigger) || Pressed(Buttons.LeftTrigger);
-            }
+            return State(leftTrigger, state) || State(Buttons.LeftTrigger, state);
         }
 
         /// <summary>
         /// True if the right trigger is being held down
         /// </summary>
-        public bool RightTrigger
+        internal bool RightTrigger(ButtonState state)
         {
-            get
-            {
-                return Pressed(rightTrigger) || Pressed(Buttons.RightTrigger);
-            }
+            return State(rightTrigger, state) || State(Buttons.RightTrigger, state);
         }
 
         /// <summary>
         /// True if any mapped keyboard or gamepad button is pressed
         /// </summary>
-        public bool AnyInput
+        internal bool AnyInput(ButtonState state)
         {
-            get
-            {
-                return (AnyButton || A || B || X || Start || Y || Up || Down || Left || Right || LeftShoulder || RightShoulder);
-            }
+            return AnyButton(state) || A(state) || B(state) || X(state) || Start(state) || Y(state) || Up(state) || Down(state) || Left(state) || Right(state) || LeftShoulder(state) || RightShoulder(state);
         }
 
         /// <summary>
         /// True if any button is pressed
         /// </summary>
-        public bool AnyButton
+        internal bool AnyButton(ButtonState state)
         {
-            get
-            {
-                return A || B || X || Y || Start;
-            }
+            return A(state) || B(state) || X(state) || Y(state) || Start(state);
         }
 
         /// <summary>
         /// True if Start is pressed
         /// </summary>
-        public bool Start
+        internal bool Start(ButtonState state)
         {
-            get
-            {
-                return Pressed(keyStart) || Pressed(Buttons.Start);
-            }
-        }
-
-        /// <summary>
-        /// Float for how much the stick is pushed up (from -1 to 1)
-        /// </summary>
-        public float MoveUp
-        {
-            get
-            {
-                if (m_KeyboardState.IsKeyDown(Keys.Up))
-                {
-                    if (m_KeyboardState.IsKeyDown(Keys.Left) || m_KeyboardState.IsKeyDown(Keys.Right))
-                        return -0.707105f; //WTF?
-                    else
-                        return -1;
-                }
-                else
-                {
-                    return -m_GamePadState.ThumbSticks.Left.Y;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Float for how much the stick is pushed right (from -1 to 1)
-        /// </summary>
-        public float MoveRight
-        {
-            get
-            {
-                if (m_KeyboardState.IsKeyDown(Keys.Right))
-                {
-                    if (m_KeyboardState.IsKeyDown(Keys.Up) || m_KeyboardState.IsKeyDown(Keys.Down))
-                        return 0.707105f;
-                    else
-                        return 1;
-                }
-                else
-                {
-                    return m_GamePadState.ThumbSticks.Left.X;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Float for how much the stick is pushed down (from -1 to 1)
-        /// </summary>
-        public float MoveDown
-        {
-            get
-            {
-                if (m_KeyboardState.IsKeyDown(Keys.Down))
-                {
-                    if (m_KeyboardState.IsKeyDown(Keys.Left) || m_KeyboardState.IsKeyDown(Keys.Right))
-                        return 0.707105f;
-                    else
-                        return 1;
-                }
-                else
-                {
-                    return -m_GamePadState.ThumbSticks.Left.Y;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Float for how much the stick is pushed left (from -1 to 1)
-        /// </summary>
-        public float MoveLeft
-        {
-            get
-            {
-                if (m_KeyboardState.IsKeyDown(Keys.Left))
-                {
-                    if (m_KeyboardState.IsKeyDown(Keys.Up) || m_KeyboardState.IsKeyDown(Keys.Down))
-                        return -0.707105f;
-                    else
-                        return -1;
-                }
-                else
-                {
-                    return m_GamePadState.ThumbSticks.Left.X;
-                }
-            }
+            return State(keyStart, state) || State(Buttons.Start, state);
         }
 
         /// <summary>
         /// True if the Back button is pushed
         /// </summary>
-        public bool Back
+        internal bool Back(ButtonState state)
         {
-            get
-            {
-                return Pressed(keyBack) || Pressed(Buttons.Back);
-            }
+            return State(keyBack, state) || State(Buttons.Back, state);
         }
 
         /// <summary>

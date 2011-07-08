@@ -636,6 +636,11 @@
             Draws the menu
             </summary>
         </member>
+        <member name="M:DisplaySpring.Menu.StaticInvoke(DisplaySpring.MenuAction)">
+            <summary>
+            Activates the MenuAction if it is not null
+            </summary>
+        </member>
         <member name="M:DisplaySpring.Menu.AddBackground(DisplaySpring.Sprite)">
             <summary>
             Adds a background sprite to the menu.
@@ -673,6 +678,16 @@
         <member name="P:DisplaySpring.Menu.DefaultFadeTime">
             <summary>
             Amount of time in milliseconds the menu will fade from StartAlpha to EndAlpha
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Menu.Controllers">
+            <summary>
+            Controllers that control the menu
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Menu.Bounds">
+            <summary>
+            Get or Set the bounds for the Menu
             </summary>
         </member>
         <member name="P:DisplaySpring.Menu.Font">
@@ -902,6 +917,12 @@
         <member name="M:DisplaySpring.MultiController.ToList">
             <summary>
             Returns the multicontroller as a list of Controllers
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.MultiController.State(DisplaySpring.ButtonSet,Microsoft.Xna.Framework.Input.ButtonState)">
+            <summary>
+            Get a specific state out of the multi controller.
+            If any controller has the required state true is returned
             </summary>
         </member>
         <member name="T:DisplaySpring.Frame">
@@ -1268,6 +1289,121 @@
             Returns true if one of the keys in keys has been pressed
             </summary>
         </member>
+        <member name="M:DisplaySpring.Controller.Released(Microsoft.Xna.Framework.Input.Keys)">
+            <summary>
+            Returns true if keyboard key k has been released
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.Released(Microsoft.Xna.Framework.Input.Buttons)">
+            <summary>
+            Returns true if Button btn has been released
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.Released(System.Collections.Generic.List{Microsoft.Xna.Framework.Input.Buttons})">
+            <summary>
+            Returns true if one of the Buttons btns has been released
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.Up(Microsoft.Xna.Framework.Input.ButtonState)">
+            <summary>
+            True if the up key was pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.Down(Microsoft.Xna.Framework.Input.ButtonState)">
+            <summary>
+            True if the down key was pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.Left(Microsoft.Xna.Framework.Input.ButtonState)">
+            <summary>
+            True if the left key was pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.Right(Microsoft.Xna.Framework.Input.ButtonState)">
+            <summary>
+            True if the right key was pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.A(Microsoft.Xna.Framework.Input.ButtonState)">
+            <summary>
+            True if the A key was pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.B(Microsoft.Xna.Framework.Input.ButtonState)">
+            <summary>
+            True if the B key was pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.X(Microsoft.Xna.Framework.Input.ButtonState)">
+            <summary>
+            True if the X key was pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.Y(Microsoft.Xna.Framework.Input.ButtonState)">
+            <summary>
+            True if the Y key was pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.ExclusiveX(Microsoft.Xna.Framework.Input.ButtonState)">
+            <summary>
+            True if X and ONLY X is pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.ExclusiveY(Microsoft.Xna.Framework.Input.ButtonState)">
+            <summary>
+            True if Y and ONLY Y is pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.ExclusiveA(Microsoft.Xna.Framework.Input.ButtonState)">
+            <summary>
+            True if A and ONLY A is pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.ExclusiveB(Microsoft.Xna.Framework.Input.ButtonState)">
+            <summary>
+            True if B and ONLY B is pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.LeftShoulder(Microsoft.Xna.Framework.Input.ButtonState)">
+            <summary>
+            True if the LeftShoulder is pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.RightShoulder(Microsoft.Xna.Framework.Input.ButtonState)">
+            <summary>
+            True if the right shoulder is pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.LeftTrigger(Microsoft.Xna.Framework.Input.ButtonState)">
+            <summary>
+            True if the left trigger is being held down
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.RightTrigger(Microsoft.Xna.Framework.Input.ButtonState)">
+            <summary>
+            True if the right trigger is being held down
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.AnyInput(Microsoft.Xna.Framework.Input.ButtonState)">
+            <summary>
+            True if any mapped keyboard or gamepad button is pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.AnyButton(Microsoft.Xna.Framework.Input.ButtonState)">
+            <summary>
+            True if any button is pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.Start(Microsoft.Xna.Framework.Input.ButtonState)">
+            <summary>
+            True if Start is pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.Back(Microsoft.Xna.Framework.Input.ButtonState)">
+            <summary>
+            True if the Back button is pushed
+            </summary>
+        </member>
         <member name="M:DisplaySpring.Controller.IsActive">
             <summary>
             Returns if the controller is active
@@ -1276,126 +1412,6 @@
         <member name="M:DisplaySpring.Controller.#ctor(Microsoft.Xna.Framework.PlayerIndex,DisplaySpring.UpdateEvent)">
             <summary>
             Create a new controller class
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Controller.Up">
-            <summary>
-            True if the up key was pressed
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Controller.Down">
-            <summary>
-            True if the down key was pressed
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Controller.Left">
-            <summary>
-            True if the left key was pressed
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Controller.Right">
-            <summary>
-            True if the right key was pressed
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Controller.A">
-            <summary>
-            True if the A key was pressed
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Controller.B">
-            <summary>
-            True if the B key was pressed
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Controller.X">
-            <summary>
-            True if the X key was pressed
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Controller.Y">
-            <summary>
-            True if the Y key was pressed
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Controller.ExclusiveX">
-            <summary>
-            True if X and ONLY X is pressed
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Controller.ExclusiveY">
-            <summary>
-            True if Y and ONLY Y is pressed
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Controller.ExclusiveA">
-            <summary>
-            True if A and ONLY A is pressed
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Controller.ExclusiveB">
-            <summary>
-            True if B and ONLY B is pressed
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Controller.LeftShoulder">
-            <summary>
-            True if the LeftShoulder is pressed
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Controller.RightShoulder">
-            <summary>
-            True if the right shoulder is pressed
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Controller.LeftTrigger">
-            <summary>
-            True if the left trigger is being held down
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Controller.RightTrigger">
-            <summary>
-            True if the right trigger is being held down
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Controller.AnyInput">
-            <summary>
-            True if any mapped keyboard or gamepad button is pressed
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Controller.AnyButton">
-            <summary>
-            True if any button is pressed
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Controller.Start">
-            <summary>
-            True if Start is pressed
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Controller.MoveUp">
-            <summary>
-            Float for how much the stick is pushed up (from -1 to 1)
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Controller.MoveRight">
-            <summary>
-            Float for how much the stick is pushed right (from -1 to 1)
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Controller.MoveDown">
-            <summary>
-            Float for how much the stick is pushed down (from -1 to 1)
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Controller.MoveLeft">
-            <summary>
-            Float for how much the stick is pushed left (from -1 to 1)
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Controller.Back">
-            <summary>
-            True if the Back button is pushed
             </summary>
         </member>
         <member name="P:DisplaySpring.Controller.PlayerIndex">

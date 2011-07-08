@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Input;
 
 namespace DisplaySpring
 {
@@ -39,127 +40,17 @@ namespace DisplaySpring
             return m_controllers;
         }
 
-        #region input helpers
-        public bool Up 
-        { 
-            get
-            {
-                foreach (Controller c in m_controllers)
-                    if (c.Up)
-                        return true;
-
-                return false;
-            }
-        }
-
-        public bool Down 
-        { 
-            get
-            {
-                foreach (Controller c in m_controllers)
-                    if (c.Down)
-                        return true;
-
-                return false;
-            }
-        }
-
-        public bool Right 
+        /// <summary>
+        /// Get a specific state out of the multi controller.
+        /// If any controller has the required state true is returned
+        /// </summary>
+        public bool State(ButtonSet button, ButtonState state)
         {
-            get
-            {
-                foreach (Controller c in m_controllers)
-                    if (c.Right)
-                        return true;
+            foreach (var c in m_controllers)
+                if (c.State(button, state))
+                    return true;
 
-                return false;
-            }
+            return false;
         }
-
-        public bool Left 
-        {
-            get
-            {
-                foreach (Controller c in m_controllers)
-                    if (c.Left)
-                        return true;
-
-                return false;
-            }
-        }
-
-        public bool A 
-        {
-            get
-            {
-                foreach (Controller c in m_controllers)
-                    if (c.A)
-                        return true;
-
-                return false;
-            }
-        }
-
-        public bool Start 
-        {
-            get
-            {
-                foreach (Controller c in m_controllers)
-                    if (c.Start)
-                        return true;
-
-                return false;
-            }
-        }
-
-        public bool Back 
-        {
-            get
-            {
-                foreach (Controller c in m_controllers)
-                    if (c.Back)
-                        return true;
-
-                return false;
-            }
-        }
-
-        public bool B 
-        {
-            get
-            {
-                foreach (Controller c in m_controllers)
-                    if (c.B)
-                        return true;
-
-                return false;
-            }
-        }
-
-        public bool Y 
-        {
-            get
-            {
-                foreach (Controller c in m_controllers)
-                    if (c.Y)
-                        return true;
-
-                return false;
-            }
-        }
-
-        public bool X
-        {
-            get
-            {
-                foreach (Controller c in m_controllers)
-                    if (c.X)
-                        return true;
-
-                return false;
-            }
-        }
-        #endregion
-
     }
 }

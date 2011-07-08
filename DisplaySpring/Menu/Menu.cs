@@ -10,6 +10,7 @@
     using Microsoft.Xna.Framework.Content;
     using System.Reflection;
     using System.IO;
+    using Microsoft.Xna.Framework.Input;
 
     /// <summary>
     /// A Delegate to represent specific callback events in a menu
@@ -64,6 +65,14 @@
         /// List of controllers the menu uses for input
         /// </summary>
         internal MultiController m_controllers;
+
+        /// <summary>
+        /// Controllers that control the menu
+        /// </summary>
+        public MultiController Controllers
+        {
+            get { return m_controllers; }
+        }
         /// <summary>
         /// List of sprites to draw for the background. These are static
         /// images, no interactions or animations. Draws in order given in list
@@ -77,6 +86,16 @@
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Get or Set the bounds for the Menu
+        /// </summary>
+        public Rectangle Bounds
+        {
+            get { return m_bounds; }
+            set { m_bounds = value; }
+        }
+
         /// <summary>
         /// Default text to use for Menu Items that have text
         /// </summary>
@@ -286,7 +305,7 @@
 
             if ( m_controllers != null)
             {
-                if (m_controllers.Back || m_controllers.B)
+                if (m_controllers.State(ButtonSet.Back, ButtonState.Pressed) || m_controllers.State(ButtonSet.B, ButtonState.Pressed))
                     Close();
             }
 
@@ -340,7 +359,10 @@
             }
         }
 
-        internal static void StaticInvoke(MenuAction action)
+        /// <summary>
+        /// Activates the MenuAction if it is not null
+        /// </summary>
+        public static void StaticInvoke(MenuAction action)
         {
             if (action != null)
                 action();
