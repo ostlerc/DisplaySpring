@@ -29,7 +29,6 @@
             sl = new ScrollList(BaseFrame, 4);
             sl.Focus = true;
             sl.LayoutStretch = 4;
-            sl.InputState = ButtonState.Released;
 
             lbl = new Label(sl, "Frames - Layout example");
             lbl.OnA = delegate() { ActiveSubMenu = new FrameMenu(controllers, allControllers, bounds); };
