@@ -1,6 +1,7 @@
 ﻿namespace DisplaySpring
 {
     using System.Collections.Generic;
+using Microsoft.Xna.Framework;
     /// <summary>
     /// List of delegates to invoke on an update loop
     /// </summary>
@@ -9,7 +10,7 @@
         /// <summary>
         /// Delegates for running in an update event
         /// </summary>
-        public delegate void UpdateDelegate();
+        public delegate void UpdateDelegate(GameTime gameTime);
 
         private List<UpdateDelegate> m_updates;
 
@@ -32,11 +33,11 @@
         /// <summary>
         /// Invoke event for all delegates registered with the event
         /// </summary>
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             foreach (UpdateDelegate d in m_updates)
             {
-                d.Invoke();
+                d.Invoke(gameTime);
             }
         }
     }

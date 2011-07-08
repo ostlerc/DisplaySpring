@@ -72,7 +72,7 @@ namespace DisplaySpringDemo
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            updates.Update();
+            updates.Update(gameTime);
             mainMenu.Update(gameTime);
             // Allows the game to exit
             if (mainMenu.IsAlive == false)

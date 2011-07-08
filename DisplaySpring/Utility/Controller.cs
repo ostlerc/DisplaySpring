@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -37,6 +36,13 @@ namespace DisplaySpring
         AnyInput
     }
 
+    public enum ButtonState
+    {
+        Pressed,
+        Released,
+        Held
+    }
+
     /// <summary>
     /// Utility class for interfacing with the keyboard and gamepad
     /// </summary>
@@ -47,10 +53,26 @@ namespace DisplaySpring
         GamePadState m_oldGamePadState;
         GamePadState m_GamePadState;
         PlayerIndex m_player;
+        float m_heldInterval = 100;
+        Dictionary<Buttons, float> m_heldButtons = new Dictionary<Buttons,float>();
+        Dictionary<Keys, float> m_heldKeys = new Dictionary<Keys,float>();
 
+        /// <summary>
+        /// Gets the game pad state of the controller
+        /// </summary>
         public GamePadState GamePadState
         {
             get { return m_GamePadState; }
+        }
+
+        /// <summary>
+        /// The Held Interval is the interval of how often the Held will return true for
+        /// how long a button has been held down
+        /// </summary>
+        public float HeldInterval
+        {
+            get { return m_heldInterval; }
+            set { m_heldInterval = value; }
         }
 
         /// <summary>
@@ -139,7 +161,7 @@ namespace DisplaySpring
                 if (m_GamePadState.ThumbSticks.Left != Vector2.Zero)
                     return m_GamePadState.ThumbSticks.Left;
 
-                return new Vector2(Left(ButtonState.Pressed) || Right(ButtonState.Pressed) ? 1 : 0, Up(ButtonState.Pressed) || Down(ButtonState.Pressed) ? 1 : 0);
+                return new Vector2(Left(ButtonState.Held) ? -1 : Right(ButtonState.Held) ? 1 : 0, Up(ButtonState.Held) ? -1 : Down(ButtonState.Held) ? 1 : 0);
             }
         }
 
@@ -153,48 +175,57 @@ namespace DisplaySpring
                 if (m_GamePadState.ThumbSticks.Right != Vector2.Zero)
                     return m_GamePadState.ThumbSticks.Right;
 
-                return new Vector2(Left(ButtonState.Pressed) || Right(ButtonState.Pressed) ? 1 : 0, Up(ButtonState.Pressed) || Down(ButtonState.Pressed) ? 1 : 0);
+                return new Vector2(Left(ButtonState.Held) ? -1 : Right(ButtonState.Held) ? 1 : 0, Up(ButtonState.Held) ? -1 : Down(ButtonState.Held) ? 1 : 0);
             }
-        }
-
-        /// <summary>
-        /// Returns true if button b has been pressed
-        /// </summary>
-        public bool Pressed(Buttons b)
-        {
-            return m_GamePadState.IsButtonDown(b) && !m_oldGamePadState.IsButtonDown(b);
         }
 
         internal bool State(Buttons b, ButtonState state)
         {
             if (state == ButtonState.Pressed)
                 return Pressed(b);
-            else
+            else if (state == ButtonState.Released)
                 return Released(b);
+            else
+                return Held(b);
         }
 
         internal bool State(List<Buttons> bts, ButtonState state)
         {
             if (state == ButtonState.Pressed)
                 return Pressed(bts);
-            else
+            else if (state == ButtonState.Released)
                 return Released(bts);
+            else
+                return Held(bts);
         }
 
         internal bool State(Keys b, ButtonState state)
         {
             if (state == ButtonState.Pressed)
                 return Pressed(b);
-            else
+            else if (state == ButtonState.Released)
                 return Released(b);
+            else
+                return Held(b);
         }
 
         internal bool State(List<Keys> keys, ButtonState state)
         {
             if (state == ButtonState.Pressed)
                 return Pressed(keys);
-            else
+            else if (state == ButtonState.Released)
                 return Released(keys);
+            else
+                return Held(keys);
+        }
+
+        #region Pressed
+        /// <summary>
+        /// Returns true if button b has been pressed
+        /// </summary>
+        public bool Pressed(Buttons b)
+        {
+            return m_GamePadState.IsButtonDown(b) && !m_oldGamePadState.IsButtonDown(b);
         }
 
         /// <summary>
@@ -228,7 +259,8 @@ namespace DisplaySpring
 
             return false;
         }
-
+        #endregion
+        #region Released
         /// <summary>
         /// Returns true if keyboard key k has been released
         /// </summary>
@@ -265,7 +297,68 @@ namespace DisplaySpring
 
             return false;
         }
+        #endregion
 
+        /// <summary>
+        /// Returns true if keyboard key k has been held. Only returns true once every HeldInterval
+        /// </summary>
+        public bool Held(Keys k)
+        {
+            if (!m_heldKeys.ContainsKey(k))
+            {
+                if (m_KeyboardState.IsKeyDown(k))
+                {
+                    m_heldKeys[k] = 0;
+                    return true;
+                }
+
+                return false;
+            }
+
+            return m_heldKeys[k] == 0;
+        }
+
+        /// <summary>
+        /// Returns true if Button btn has been Held
+        /// </summary>
+        public bool Held(Buttons btn)
+        {
+            if(!m_heldButtons.ContainsKey(btn))
+            {
+                if (m_GamePadState.IsButtonDown(btn))
+                {
+                    m_heldButtons[btn] = 0;
+                    return true;
+                }
+
+                return false;
+            }
+
+            return m_heldButtons[btn] == 0;
+        }
+
+        /// <summary>
+        /// Returns true if one of the Buttons btns has been Held
+        /// </summary>
+        internal bool Held(List<Buttons> btns)
+        {
+            bool ret = false;
+            foreach (var b in btns)
+                if (Held(b))
+                    ret =  true;
+
+            return ret;
+        }
+
+        internal bool Held(List<Keys> keys)
+        {
+            bool ret = false;
+            foreach (var k in keys)
+                if (Held(k))
+                    ret =  true;
+
+            return ret;
+        }
         public bool State(ButtonSet set, ButtonState state)
         {
             switch (set)
@@ -327,7 +420,7 @@ namespace DisplaySpring
         /// </summary>
         internal bool Down(ButtonState state)
         {
-            return Pressed(keyDown) || Pressed(Buttons.DPadDown) || Pressed(Buttons.LeftThumbstickDown);
+            return State(keyDown, state) || State(Buttons.DPadDown, state) || State(Buttons.LeftThumbstickDown, state);
         }
 
         /// <summary>
@@ -515,12 +608,47 @@ namespace DisplaySpring
         }
         #endregion
 
-        private void Update()
+        private void Update(GameTime gameTime)
         {
 #if DEBUG   //keyboard states only in debug mode
             m_oldKeyboardState = m_KeyboardState;
             m_KeyboardState = Keyboard.GetState();
+            List<Keys> toRemoveKeys = new List<Keys>();
+            List<Keys> toUpdateKeys = new List<Keys>();
+            foreach (var v in m_heldKeys.Keys)
+            {
+                if (m_heldKeys[v] + gameTime.ElapsedGameTime.Milliseconds >= m_heldInterval)
+                    toRemoveKeys.Add(v);
+                else if(!m_KeyboardState.IsKeyDown(v))
+                    toRemoveKeys.Add(v);
+                else
+                    toUpdateKeys.Add(v);
+            }
+
+            foreach (var v in toRemoveKeys)
+                m_heldKeys.Remove(v);
+
+            foreach (var v in toUpdateKeys)
+                m_heldKeys[v] += gameTime.ElapsedGameTime.Milliseconds;
 #endif
+            List<Buttons> toRemoveBtns = new List<Buttons>();
+            List<Buttons> toUpdateBtns = new List<Buttons>();
+            foreach (var v in m_heldButtons.Keys)
+            {
+                if (m_heldButtons[v] + gameTime.ElapsedGameTime.Milliseconds >= m_heldInterval)
+                    toRemoveBtns.Add(v);
+                else if(!m_GamePadState.IsButtonDown(v))
+                    toRemoveBtns.Add(v);
+                else
+                    toUpdateBtns.Add(v);
+            }
+
+            foreach (var v in toRemoveBtns)
+                m_heldButtons.Remove(v);
+
+            foreach (var v in toUpdateBtns)
+                m_heldButtons[v] += gameTime.ElapsedGameTime.Milliseconds;
+
             m_oldGamePadState = m_GamePadState;
             m_GamePadState = GamePad.GetState(m_player);
         }
