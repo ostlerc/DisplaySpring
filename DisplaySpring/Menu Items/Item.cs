@@ -122,7 +122,7 @@
 
         internal Vector2 m_pos = Vector2.Zero;
         internal AnimateType m_animation = AnimateType.None;
-        internal bool m_fade = true;
+        internal bool m_fade = false;
         internal Animation m_alpha;
         internal SoundEffect m_focusSound;
         internal SoundEffect m_cancelSound;
@@ -651,7 +651,13 @@
         public virtual float EndAlpha
         {
             get { return m_alpha.EndVal; }
-            set { m_alpha.EndVal = value; }
+            set 
+            { 
+                m_alpha.EndVal = value;
+
+                if (!Fade)
+                    m_alpha.Val = value;
+            }
         }
 
         /// <summary>
@@ -706,6 +712,7 @@
             m_cancelSound = DefaultCancelSound;
             m_focusSound = DefaultFocusSound;
             m_alpha = new Animation(0, 1, FadeTime);
+            m_alpha.Val = 1;
             Parent = parent;
         }
         #endregion
@@ -717,7 +724,8 @@
         /// </summary>
         public virtual void Update(GameTime gameTime)
         {
-            m_alpha.Update(gameTime);
+            if(Fade)
+                m_alpha.Update(gameTime);
 
             foreach (var child in Children)
                 child.Update(gameTime);
@@ -839,7 +847,8 @@
         /// </summary>
         public virtual void Reset(bool isFocus)
         {
-            m_alpha.Reset();
+            if(Fade)
+                m_alpha.Reset();
 
             if (isFocus) //don't play initial focus sound
             {

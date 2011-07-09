@@ -603,7 +603,6 @@
             <summary>
             Resets the menu. 
             Removes focus from every menu item but the given item
-            Alpha is reset to StartAlpha
             All sub menus are reset
             </summary>
         </member>
@@ -611,7 +610,6 @@
             <summary>
             Resets the menu. 
             Removes focus from every menu item but the first item in the list.
-            Alpha is reset to StartAlpha
             All sub menus are reset
             </summary>
         </member>
@@ -661,16 +659,6 @@
             <summary>
             The sub menu to recieve updates.
             When there is a sub menu, the parent menu will not recieve updates
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Menu.StartAlpha">
-            <summary>
-            When Fade is set to true, this is the starting alpha value
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Menu.EndAlpha">
-            <summary>
-            When Fade is set to true, this is the ending alpha value
             </summary>
         </member>
         <member name="P:DisplaySpring.Menu.OnClosing">

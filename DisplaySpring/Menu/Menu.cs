@@ -38,7 +38,6 @@
         internal bool m_keepState = true;
         internal int m_framesRun = 0;
         internal int m_framesToActivate = 10;
-        internal float m_startAlpha = 0;
         private Frame m_baseFrame;
 
         /// <summary>
@@ -79,7 +78,6 @@
         /// </summary>
         internal SoundEffect m_closeSound;
         internal Rectangle m_bounds;
-        internal Animation m_alpha;
         private bool m_isAlive = true;
         private Menu m_activeSubMenu;
         #endregion
@@ -169,22 +167,6 @@
             }
         }
         /// <summary>
-        /// When Fade is set to true, this is the starting alpha value
-        /// </summary>
-        public virtual float StartAlpha
-        {
-            get { return m_alpha.StartVal; }
-            set { m_alpha.StartVal = value; }
-        }
-        /// <summary>
-        /// When Fade is set to true, this is the ending alpha value
-        /// </summary>
-        public virtual float EndAlpha
-        {
-            get { return m_alpha.EndVal; }
-            set { m_alpha.EndVal = value; }
-        }
-        /// <summary>
         /// Delegate called when the menu is about to close
         /// </summary>
         public MenuAction OnClosing { get { return m_cancelMenu; } set { m_cancelMenu = value; } }
@@ -224,7 +206,6 @@
             m_closeSound = DefaultCloseSound;
             m_bounds = bounds;
             m_controllers = c;
-            m_alpha = new Animation(0, 1, DefaultFadeTime);
             m_baseFrame = new Frame(m_bounds);
             m_baseFrame.ItemController = m_controllers;
         }
@@ -278,8 +259,6 @@
         /// </summary>
         public virtual void Update(GameTime gameTime)
         {
-            m_alpha.Update(gameTime);
-
             if (m_framesRun < m_framesToActivate)
             {
                 m_framesRun++;
@@ -291,8 +270,6 @@
                 if (!ActiveSubMenu.IsAlive)
                 {
                     ActiveSubMenu = null;
-
-                    m_alpha.Reset();
                 }
                 else
                 {
@@ -363,13 +340,11 @@
         /// <summary>
         /// Resets the menu. 
         /// Removes focus from every menu item but the given item
-        /// Alpha is reset to StartAlpha
         /// All sub menus are reset
         /// </summary>
         public virtual void Reset(Item item)
         {
             m_framesRun = 0;
-            m_alpha.Reset();
 
             m_baseFrame.Reset(false);
 
@@ -385,7 +360,6 @@
         /// <summary>
         /// Resets the menu. 
         /// Removes focus from every menu item but the first item in the list.
-        /// Alpha is reset to StartAlpha
         /// All sub menus are reset
         /// </summary>
         public virtual void Reset()

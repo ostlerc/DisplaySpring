@@ -38,6 +38,19 @@
             }
         }
 
+        public override Color Tint
+        {
+            get { return base.Tint; }
+            set
+            {
+                if (m_bg != null)
+                    m_bg.Tint = value;
+                if (m_focused != null)
+                    m_focused.Tint = value;
+                base.Tint = value;
+            }
+        }
+
         /// <summary>
         /// The main background of the button.
         /// This texture is shown when the item does not have focus

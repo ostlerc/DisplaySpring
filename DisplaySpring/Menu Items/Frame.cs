@@ -268,7 +268,10 @@
             foreach (var v in Children)
             {
                 if (v.LayoutStretch == 0)
+                {
+                    v.LayoutPosition = Vector2.Zero;
                     continue;
+                }
 
                 float percentage = (float)v.LayoutStretch / (float)total;
 
