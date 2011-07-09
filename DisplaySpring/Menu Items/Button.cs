@@ -85,11 +85,11 @@
 
         internal override float StaticWidth
         {
-            get { return m_textureWidth; }
+            get { return Math.Max(m_textureWidth, m_label == null ? 0 : m_label.StaticWidth); }
         }
         internal override float StaticHeight
         {
-            get { return m_textureHeight; }
+            get { return Math.Max(m_textureHeight, m_label == null ? 0 : m_label.StaticHeight); }
         }
 
         /// <summary>

@@ -49,12 +49,12 @@
 
         internal override float StaticHeight
         {
-            get { if (m_bg != null) return m_bg.Height; return 0; }
+            get { return m_bg != null ? m_bg.Height : 0; }
         }
 
         internal override float StaticWidth
         {
-            get { if (m_bg != null) return m_bg.Width; return 0; }
+            get { return m_bg != null ? m_bg.Width : 0; }
         }
 
         /// <summary>

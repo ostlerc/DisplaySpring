@@ -476,11 +476,17 @@
         public virtual Vector2 Position { get { return m_pos; } set { m_pos = value; } }
 
         private Vector2 m_layoutPosition = Vector2.Zero;
+        private Vector2 m_offset = Vector2.Zero;
 
         /// <summary>
         /// Secondary position used for layouts. This is applied in conjunctionwith alignments.
         /// </summary>
         internal virtual Vector2 LayoutPosition { get { return m_layoutPosition; } set { m_layoutPosition = value; } }
+
+        /// <summary>
+        /// Secondary position used for layouts. This is applied in conjunctionwith alignments.
+        /// </summary>
+        public virtual Vector2 Offset { get { return m_offset; } set { m_offset = value; } }
 
         /// <summary>
         /// Animation type of the item
@@ -889,7 +895,7 @@
                     break;
             }
 
-            Position = pos;
+            Position = pos + Offset;
         }
         #endregion
 

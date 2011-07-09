@@ -218,7 +218,7 @@
 
 
                 if (m_direction == Orientation.Horizontal)
-                    h += ScrollSpacing + 20;
+                    h += ScrollSpacing + m_scroll.StaticHeight;
                 else
                     h += Spacing * (vb.Count-1);
 
@@ -245,7 +245,7 @@
                 }
 
                 if (m_direction == Orientation.Vertical)
-                    w += ScrollSpacing + 20;
+                    w += ScrollSpacing + m_scroll.StaticWidth;
                 else
                     w += Spacing * (vb.Count-1);
 
@@ -417,18 +417,13 @@
             {
                 m_scroll.Width = StaticWidth;
                 m_scroll.Height = 20;
-                float offset = 0;
-
-                if (ScrollPosition == ScrollBarPosition.Left)
-                    offset = -20;
-
-                m_scroll.LayoutPosition = new Vector2(0, StaticHeight/2 + offset);
+                m_scroll.LayoutPosition = new Vector2(0, StaticHeight/2 - m_scroll.Height/2);
             }
             else
             {
                 m_scroll.Height = StaticHeight;
                 m_scroll.Width = 20;
-                m_scroll.LayoutPosition = new Vector2(StaticWidth/2 - 10, 0);
+                m_scroll.LayoutPosition = new Vector2(StaticWidth/2 - m_scroll.Width/2, 0);
             }
 
             if (m_scrollPosition == ScrollBarPosition.Left)
@@ -657,7 +652,7 @@
                 return;
 
             float offset;
-            float offset2 = 0;
+            float offset2 = (ScrollSpacing + Math.Min(m_scroll.StaticWidth, m_scroll.StaticHeight)) / 2;
             Matrix local = Item.CombineMatrix(AnimationTransform(gameTime), ref parentTransform);
 
             if (m_direction == Orientation.Horizontal)
@@ -665,8 +660,8 @@
             else
                 offset = -StaticHeight / 2f;
 
-            if (m_scrollPosition == ScrollBarPosition.Left)
-                offset2 = (ScrollSpacing + 20);
+            if (m_scrollPosition == ScrollBarPosition.Right)
+                offset2 *= -1;
 
             foreach (Item item in visibleItems())
             {

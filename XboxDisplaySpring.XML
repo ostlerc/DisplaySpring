@@ -346,6 +346,11 @@
             Secondary position used for layouts. This is applied in conjunctionwith alignments.
             </summary>
         </member>
+        <member name="P:DisplaySpring.Item.Offset">
+            <summary>
+            Secondary position used for layouts. This is applied in conjunctionwith alignments.
+            </summary>
+        </member>
         <member name="P:DisplaySpring.Item.Animation">
             <summary>
             Animation type of the item
