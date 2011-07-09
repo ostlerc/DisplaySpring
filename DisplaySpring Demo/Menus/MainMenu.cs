@@ -24,11 +24,12 @@
 
             Label lbl = new Label(BaseFrame, "Display Spring Demo");
             lbl.Scale = new Vector2(2, 2);
-            lbl.FontColor = Color.Black;
+            lbl.FontColor = Color.White;
 
-            sl = new ScrollList(BaseFrame, 4);
+            sl = new ScrollList(BaseFrame);
             sl.Focus = true;
             sl.LayoutStretch = 4;
+            sl.Scale = new Vector2(2,2);
 
             lbl = new Label(sl, "Frames - Layout example");
             lbl.OnA = delegate() { ActiveSubMenu = new FrameMenu(controllers, allControllers, bounds); };

@@ -52,7 +52,7 @@
         internal int m_viewCount;
         internal int m_selectedIndex = -1;
         internal int m_startIndex = 0;
-        internal float m_spacing = 10f;
+        internal float m_spacing = 0;
         internal float m_scrollSpacing = 5f;
         internal bool m_wrap = true;
         internal bool m_ignoreEvents = false; 

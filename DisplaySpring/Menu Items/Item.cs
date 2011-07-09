@@ -276,7 +276,7 @@
                 forceRefresh();
             }
         }
-        internal ItemCollection Children { get { return m_ItemCollection; } private set { m_ItemCollection = value; } }
+        internal virtual ItemCollection Children { get { return m_ItemCollection; } set { m_ItemCollection = value; } }
 
         /// <summary>
         /// Used to know the stretch percentage of a Item.
@@ -426,7 +426,7 @@
         /// Toggles the fading behavior of the Item. If set to true the item will fade in
         /// Default is true
         /// </summary>
-        public bool Fade
+        public virtual bool Fade
         {
             get { return m_fade; } 
             set

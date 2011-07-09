@@ -98,6 +98,7 @@
   <ItemGroup>
     <Compile Include="Menu Items\OptionButton.cs" />
     <Compile Include="Menu Items\ScrollList.cs" />
+    <Compile Include="Menu Items\Sprite.cs" />
     <Compile Include="Menu Items\StackedItem.cs" />
     <Compile Include="Utility\Animation.cs" />
     <Compile Include="Utility\Controller.cs" />
@@ -114,7 +115,6 @@
     <Compile Include="Menu Items\ScrollBar.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Menu\Sprite.cs" />
     <Compile Include="Utility\UpdateEvent.cs" />
   </ItemGroup>
   <ItemGroup>

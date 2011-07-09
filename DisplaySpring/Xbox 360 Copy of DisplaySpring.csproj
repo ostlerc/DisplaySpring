@@ -49,9 +49,9 @@
     <Compile Include="Menu Items\OptionButton.cs" />
     <Compile Include="Menu Items\ScrollBar.cs" />
     <Compile Include="Menu Items\ScrollList.cs" />
+    <Compile Include="Menu Items\Sprite.cs" />
     <Compile Include="Menu Items\StackedItem.cs" />
     <Compile Include="Menu\Menu.cs" />
-    <Compile Include="Menu\Sprite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\Animation.cs" />
     <Compile Include="Utility\Controller.cs" />

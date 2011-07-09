@@ -15,10 +15,8 @@
     public class Button : Item
     {
         #region Member Variables
-        internal Texture2D m_bg;
-        internal Texture2D m_focused;
-        internal float m_textureHeight;
-        internal float m_textureWidth;
+        internal Sprite m_bg;
+        internal Sprite m_focused;
         internal Label m_label;
 
         /// <summary>
@@ -27,8 +25,17 @@
         /// </summary>
         public Texture2D FocusTexture
         {
-            get { return m_focused; }
-            set { m_focused = value; }
+            get { return m_focused != null ? m_focused.Texture : null; }
+            set 
+            {
+                if (m_focused != null)
+                    m_focused.Texture = value;
+                else
+                {
+                    m_focused = new Sprite(this, value);
+                    m_focused.Fade = false;
+                }
+            }
         }
 
         /// <summary>
@@ -37,8 +44,17 @@
         /// </summary>
         public Texture2D Background
         {
-            get { return m_bg; }
-            set { m_bg = value; }
+            get { return m_bg.Texture; }
+            set 
+            {
+                if (m_bg != null)
+                    m_bg.Texture = value;
+                else
+                {
+                    m_bg = new Sprite(this, value);
+                    m_bg.Fade = false;
+                }
+            }
         }
 
         /// <summary>
@@ -61,6 +77,10 @@
             {
                 if(m_label != null)
                     m_label.Enabled = value;
+                if (m_bg != null)
+                    m_bg.Enabled = value;
+                if (m_focused != null)
+                    m_focused.Enabled = value;
 
                 base.Focus = value;
             }
@@ -78,6 +98,10 @@
             {
                 if(m_label != null)
                     m_label.Enabled = value;
+                if (m_bg != null)
+                    m_bg.Enabled = value;
+                if (m_focused != null)
+                    m_focused.Enabled = value;
 
                 base.Enabled = value;
             }
@@ -85,11 +109,30 @@
 
         internal override float StaticWidth
         {
-            get { return Math.Max(m_textureWidth, m_label == null ? 0 : m_label.StaticWidth); }
+            get 
+            {
+                float w = 0;
+
+                if (Focus && m_focused != null)
+                    w = m_focused.StaticWidth;
+                else if (m_bg != null)
+                    w = m_bg.StaticWidth;
+
+                return Math.Max(w, m_label != null ? m_label.StaticWidth : 0); 
+            }
         }
         internal override float StaticHeight
         {
-            get { return Math.Max(m_textureHeight, m_label == null ? 0 : m_label.StaticHeight); }
+            get
+            {
+                float h = 0;
+                if (Focus && m_focused != null)
+                    h = m_focused.StaticHeight;
+                else if (m_bg != null)
+                    h = m_bg.StaticHeight;
+
+                return Math.Max(h, m_label != null ? m_label.StaticHeight : 0); 
+            }
         }
 
         /// <summary>
@@ -105,6 +148,10 @@
 
                 if (m_label != null)
                     m_label.Depth = value - .01f;
+                if (m_bg != null)
+                    m_bg.Depth = value;
+                if (m_focused != null)
+                    m_focused.Depth = value;
             }
         }
         #endregion
@@ -190,28 +237,28 @@
             if (background == null && focused == null)
                 throw new Exception("Cannot create a button with no background or focus background");
 
-            m_bg = background;
-            m_focused = focused;
+            if (background != null)
+            {
+                m_bg = new Sprite(this, background);
+                m_bg.Fade = false;
+            }
+            if (focused != null)
+            {
+                m_focused = new Sprite(this, focused);
+                m_focused.Fade = false;
+            }
 
             if (Background != null)
             {
-                m_textureWidth = Background.Width;
-                m_textureHeight = Background.Height;
-
                 if (FocusTexture != null && (FocusTexture.Height != Background.Height || FocusTexture.Width != Background.Width))
                     Console.WriteLine("Warning: The background and highlighed textures should be the same size");
-            }
-            else
-            {
-                m_textureWidth = 0;
-                m_textureHeight = 0;
             }
 
             //TODO: make sure height and width of button are correct with label
             m_label = new Label(this, text);
-            m_label.Depth = Depth - .01f;
             m_label.Animation = AnimateType.None;
             m_label.FocusSound = null;
+            m_label.Fade = false;
 
             Animation = AnimateType.Size;
 
@@ -224,6 +271,10 @@
         public override void Reset(bool isFocus)
         {
             m_label.Reset(isFocus);
+            if(m_bg != null)
+                m_bg.Reset(isFocus);
+            if(m_focused != null)
+                m_focused.Reset(isFocus);
             base.Reset(isFocus);
         }
         #endregion
@@ -244,20 +295,19 @@
             float rotation;
             DecomposeMatrix(ref local, out position, out rotation, out scale);
 
-            Vector2 center = new Vector2(m_textureWidth, m_textureHeight) / 2f;
+            Vector2 center = new Vector2(StaticWidth, StaticHeight) / 2f;
 
-            Texture2D tempTexture = null;
+            Sprite curSprite = null;
 
             if (Background != null && (!Enabled || FocusTexture == null))//regular background
-                tempTexture = Background;
+                curSprite = m_bg;
             else if (Enabled && FocusTexture != null)//focused background
-                tempTexture = FocusTexture;
+                curSprite = m_focused;
 
-            if(tempTexture != null)//draw background
-                spriteBatch.Draw(tempTexture, position, null, Tint * ScreenAlpha, rotation, center, scale, SpriteEffects.None, Depth);
+            curSprite.Draw(gameTime, spriteBatch, local);
 
-            foreach (Item child in Children)
-                child.Draw(gameTime, spriteBatch, local);
+            if (m_label != null)
+                m_label.Draw(gameTime, spriteBatch, local);
         }
 
         #endregion

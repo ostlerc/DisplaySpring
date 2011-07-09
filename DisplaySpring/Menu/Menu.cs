@@ -77,7 +77,6 @@
         /// List of sprites to draw for the background. These are static
         /// images, no interactions or animations. Draws in order given in list
         /// </summary>
-        internal List<Sprite> m_bgs;
         internal SoundEffect m_closeSound;
         internal Rectangle m_bounds;
         internal Animation m_alpha;
@@ -223,7 +222,6 @@
                 throw new Exception("Error: Cannot construct a menu without calling Menu.LoadContent()");
 
             m_closeSound = DefaultCloseSound;
-            m_bgs = new List<Sprite>();
             m_bounds = bounds;
             m_controllers = c;
             m_alpha = new Animation(0, 1, DefaultFadeTime);
@@ -340,12 +338,6 @@
                 return;
             }
 
-            foreach (var s in m_bgs)
-            {
-                Rectangle rect = s.destRect();
-                spriteBatch.Draw(s.m_texture, rect, null, Color.White * m_alpha.Val, 0f, new Vector2(s.Width / 2, s.Height / 2), SpriteEffects.None, MenuBackgroundDrawDepth);
-            }
-
             m_baseFrame.Draw(gameTime, spriteBatch);
         }
 
@@ -366,25 +358,6 @@
         {
             if (action != null)
                 action();
-        }
-
-        /// <summary>
-        /// Adds a background sprite to the menu.
-        /// Backgrounds are special in that they recieve no
-        /// updates, and are faded in by the menus fade
-        /// </summary>
-        /// <param name="background"></param>
-        public virtual void AddBackground(Sprite background)
-        {
-            m_bgs.Add(background);
-        }
-
-        /// <summary>
-        /// Clear all background sprites for this Menu
-        /// </summary>
-        public virtual void ClearBackgrounds()
-        {
-            m_bgs.Clear();
         }
 
         /// <summary>

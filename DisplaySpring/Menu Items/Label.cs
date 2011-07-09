@@ -33,8 +33,15 @@
             Initialize(text);
         }
 
+        internal override ItemCollection Children
+        {
+            get { return base.Children; }
+            set { throw new Exception("Cannot add children to a Label"); }
+        }
+
         private void Initialize(string text)
         {
+            Depth -= .001f; //by default let labels be closer to front
             Font = Menu.Font;
             if (Font == null)
                 throw new Exception("You must call Menu.LoadContent() to use a Button");

@@ -532,58 +532,6 @@
             Get's or sets the font value for the object
             </summary>
         </member>
-        <member name="T:DisplaySpring.AnimateType">
-            <summary>
-            Standard menu animation types
-            </summary>
-        </member>
-        <member name="F:DisplaySpring.AnimateType.None">
-            <summary>
-            No Animation Type
-            </summary>
-        </member>
-        <member name="F:DisplaySpring.AnimateType.Size">
-            <summary>
-            The object will animate on its size. Growing and Shrinking over a period of time
-            </summary>
-        </member>
-        <member name="T:DisplaySpring.Sprite">
-            <summary>
-            A static image that can change its size
-            </summary>
-        </member>
-        <member name="F:DisplaySpring.Sprite.m_texture">
-            <summary>
-            Texture for the sprite
-            </summary>
-        </member>
-        <member name="F:DisplaySpring.Sprite.pos">
-            <summary>
-            pos of this Sprite. This value should be used not as an absolute pos
-            but as an offset value from its container class
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Sprite.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2)">
-            <summary>
-            Create a Sprite with a texture and position.
-            Size will initially be set to the texture size.
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Sprite.Width">
-            <summary>
-            Width of the Sprite
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Sprite.Height">
-            <summary>
-            Height of the Sprite
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Sprite.Size">
-            <summary>
-            Returns the Vector2(Width,Height). Can be set.
-            </summary>
-        </member>
         <member name="P:DisplaySpring.Animation.TimeoutMS">
             <summary>
             Time in MS animation will last
@@ -610,7 +558,7 @@
             List of controllers the menu uses for input
             </summary>
         </member>
-        <member name="F:DisplaySpring.Menu.m_bgs">
+        <member name="F:DisplaySpring.Menu.m_closeSound">
             <summary>
             List of sprites to draw for the background. These are static
             images, no interactions or animations. Draws in order given in list
@@ -649,19 +597,6 @@
         <member name="M:DisplaySpring.Menu.StaticInvoke(DisplaySpring.MenuAction)">
             <summary>
             Activates the MenuAction if it is not null
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Menu.AddBackground(DisplaySpring.Sprite)">
-            <summary>
-            Adds a background sprite to the menu.
-            Backgrounds are special in that they recieve no
-            updates, and are faded in by the menus fade
-            </summary>
-            <param name="background"></param>
-        </member>
-        <member name="M:DisplaySpring.Menu.ClearBackgrounds">
-            <summary>
-            Clear all background sprites for this Menu
             </summary>
         </member>
         <member name="M:DisplaySpring.Menu.Reset(DisplaySpring.Item)">
@@ -1523,6 +1458,43 @@
         <member name="P:DisplaySpring.OptionButton.ArrowsOut">
             <summary>
             Defines if the arrows for the option button are outside the items boundaries
+            </summary>
+        </member>
+        <member name="T:DisplaySpring.AnimateType">
+            <summary>
+            Standard menu animation types
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.AnimateType.None">
+            <summary>
+            No Animation Type
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.AnimateType.Size">
+            <summary>
+            The object will animate on its size. Growing and Shrinking over a period of time
+            </summary>
+        </member>
+        <member name="T:DisplaySpring.Sprite">
+            <summary>
+            A static image that can change its size
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Sprite.m_texture">
+            <summary>
+            Texture for the sprite
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Sprite.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Graphics.Texture2D)">
+            <summary>
+            Create a Sprite with a texture
+            StaticSize of a Sprite is the texture size
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Sprite.Texture">
+            <summary>
+            The main background of the button.
+            This texture is shown when the item does not have focus
             </summary>
         </member>
     </members>
