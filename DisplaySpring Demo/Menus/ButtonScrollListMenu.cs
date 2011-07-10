@@ -29,19 +29,19 @@
                   FontColor = Color.Gold 
             };
 
-            sl = new ScrollList(BaseFrame)
+            sl = new ScrollList(BaseFrame, 3)
             {
                 Direction = ScrollList.Orientation.Horizontal,
                 LayoutStretch = 2,
-                ViewCount = 2,
-                ScrollPosition = ScrollList.ScrollBarPosition.Left //left means top for horizontal orientation
+                ScrollPosition = ScrollList.ScrollBarPosition.Left, //left means top for horizontal orientation
+                HorizontalAlignment = HAlign.Stretch
             };
 
-            ScrollList sl1 = createScrollList(sl);
-            ScrollList sl2 = createScrollList(sl); sl2.Scale *= 2f;
-            ScrollList sl3 = createScrollList(sl);
-
-            sl.ScaleImageToWidth(BaseFrame.Width);
+            createScrollList(sl);
+            ScrollList tsl = createScrollList(sl); tsl.Scale *= 2f;
+            tsl = createScrollList(sl); tsl.Scale *= 0.5f;
+            tsl = createScrollList(sl);
+            tsl = createScrollList(sl); tsl.Scale *= 2f;
 
             Reset();
         }
