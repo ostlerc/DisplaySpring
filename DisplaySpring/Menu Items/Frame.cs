@@ -136,8 +136,7 @@
         internal Frame(Rectangle bounds)
             : base(null)
         {
-            Width = bounds.Width;
-            Height = bounds.Height;
+            m_forcedSize = new Vector2(bounds.Width, bounds.Height);
             Position = new Vector2(bounds.Center.X, bounds.Center.Y);
         }
 
@@ -241,6 +240,8 @@
                 if (v.LayoutStretch == 0)
                 {
                     v.LayoutPosition = Vector2.Zero;
+                    v.Width = StaticWidth;
+                    v.Height = StaticHeight;
                     continue;
                 }
 

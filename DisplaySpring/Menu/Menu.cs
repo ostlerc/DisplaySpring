@@ -162,6 +162,7 @@
                         m_activeSubMenu.Reset();
                     }
 
+                    m_activeSubMenu.LayoutSize = LayoutSize;
                     m_activeSubMenu.IsAlive = true;
                 }
             }
@@ -192,7 +193,27 @@
         }
         #endregion
 
+        private Vector2 m_layoutSize;
+        /// <summary>
+        /// Sets the size of the base frame. The base frame will be
+        /// scaled to draw within the bounds given at menu initialization
+        /// </summary>
+        public Vector2 LayoutSize
+        {
+            get { return m_layoutSize; }
+            set { m_layoutSize = value; Init();  }
+        }
+
         #region Constructors
+
+        private void Init()
+        {
+            m_baseFrame.ForcedSize = LayoutSize;
+            m_baseFrame.Position = new Vector2(m_bounds.Center.X, m_bounds.Center.Y);
+            m_baseFrame.ScaleImageToWidth(m_bounds.Width);
+            m_baseFrame.ScaleImageToHeight(m_bounds.Height);
+        }
+
         /// <summary>
         /// default constructor for a menu
         /// </summary>
@@ -206,8 +227,10 @@
             m_closeSound = DefaultCloseSound;
             m_bounds = bounds;
             m_controllers = c;
-            m_baseFrame = new Frame(m_bounds);
+            m_baseFrame = new Frame(null);
             m_baseFrame.ItemController = m_controllers;
+            LayoutSize = new Vector2(bounds.Width, bounds.Height);
+            Init();
         }
         #endregion
 

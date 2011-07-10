@@ -315,19 +315,10 @@
             get { return m_horizontalAlignment; } 
             set 
             {
-                if (m_horizontalAlignment == HAlign.Stretch)
-                    m_scale.X = 1f;
-
                 if (m_horizontalAlignment == value)
                     return;
 
                 m_horizontalAlignment = value;
-
-                if ((value != HAlign.Center && Parent is Frame) || (Parent != null && !(Parent is Frame)))
-                {
-                    Width = Parent.StaticWidth;
-                    Height = Parent.StaticHeight;
-                }
 
                 forceRefresh();
             }
@@ -342,19 +333,10 @@
             get { return m_verticalAlignment; } 
             set 
             { 
-                if(m_verticalAlignment == VerticalAlignmentType.Stretch)
-                    m_scale.Y = 1f;
-
                 if (m_verticalAlignment == value)
                     return;
 
                 m_verticalAlignment = value;
-
-                if (value != VAlign.Center && Parent is Frame)
-                {
-                    Width = Parent.Width;
-                    Height = Parent.Height;
-                }
 
                 forceRefresh();
             }

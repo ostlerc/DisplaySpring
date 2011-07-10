@@ -681,6 +681,12 @@
             Default draw depth for backgrounds
             </summary>
         </member>
+        <member name="P:DisplaySpring.Menu.LayoutSize">
+            <summary>
+            Sets the size of the base frame. The base frame will be
+            scaled to draw within the bounds given at menu initialization
+            </summary>
+        </member>
         <member name="T:DisplaySpring.ScrollList">
             <summary>
             A class to make scrollable viewable lists of Items
@@ -1378,6 +1384,43 @@
             Returns the player index that the Controller references
             </summary>
         </member>
+        <member name="T:DisplaySpring.AnimateType">
+            <summary>
+            Standard menu animation types
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.AnimateType.None">
+            <summary>
+            No Animation Type
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.AnimateType.Size">
+            <summary>
+            The object will animate on its size. Growing and Shrinking over a period of time
+            </summary>
+        </member>
+        <member name="T:DisplaySpring.Sprite">
+            <summary>
+            A static image that can change its size
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Sprite.m_texture">
+            <summary>
+            Texture for the sprite
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Sprite.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Graphics.Texture2D)">
+            <summary>
+            Create a Sprite with a texture
+            StaticSize of a Sprite is the texture size
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Sprite.Texture">
+            <summary>
+            The main background of the button.
+            This texture is shown when the item does not have focus
+            </summary>
+        </member>
         <member name="T:DisplaySpring.ItemCollection">
             <summary>
             A ItemCollection is a list/collection of items that when added parents and children are handled for the user
@@ -1436,43 +1479,6 @@
         <member name="P:DisplaySpring.OptionButton.ArrowsOut">
             <summary>
             Defines if the arrows for the option button are outside the items boundaries
-            </summary>
-        </member>
-        <member name="T:DisplaySpring.AnimateType">
-            <summary>
-            Standard menu animation types
-            </summary>
-        </member>
-        <member name="F:DisplaySpring.AnimateType.None">
-            <summary>
-            No Animation Type
-            </summary>
-        </member>
-        <member name="F:DisplaySpring.AnimateType.Size">
-            <summary>
-            The object will animate on its size. Growing and Shrinking over a period of time
-            </summary>
-        </member>
-        <member name="T:DisplaySpring.Sprite">
-            <summary>
-            A static image that can change its size
-            </summary>
-        </member>
-        <member name="F:DisplaySpring.Sprite.m_texture">
-            <summary>
-            Texture for the sprite
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Sprite.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Graphics.Texture2D)">
-            <summary>
-            Create a Sprite with a texture
-            StaticSize of a Sprite is the texture size
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Sprite.Texture">
-            <summary>
-            The main background of the button.
-            This texture is shown when the item does not have focus
             </summary>
         </member>
     </members>
