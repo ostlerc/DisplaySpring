@@ -36,6 +36,7 @@
             Frame parent = new Frame(BaseFrame);
             Frame f = new Frame(parent);
             f.LayoutStretch = 0;
+            f.Layout = Layout.Horizontal;
             new Button(f, Item.ButtonTexture, "one");
             new Button(f, Item.ButtonTexture, "two");
 

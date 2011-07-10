@@ -842,13 +842,22 @@
         /// </summary>
         internal abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix transform);
 
+
+        private void recursiveReset()
+        {
+            if(Fade)
+                m_alpha.Reset();
+
+            foreach (var v in Children)
+                v.recursiveReset();
+        }
+
         /// <summary>
         /// Reset the Item to a fresh state
         /// </summary>
         public virtual void Reset(bool isFocus)
         {
-            if(Fade)
-                m_alpha.Reset();
+            recursiveReset();
 
             if (isFocus) //don't play initial focus sound
             {

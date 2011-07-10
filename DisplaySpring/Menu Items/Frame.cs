@@ -94,42 +94,6 @@
         }
 
         /// <summary>
-        /// Height of the item. Layout space is included. Scale is not included.
-        /// </summary>
-        public override float Height
-        {
-            get
-            {
-                if (m_forcedSize != Vector2.Zero)
-                    return m_forcedSize.Y;
-
-                return base.Height;
-            }
-            internal set
-            {
-                base.Height = value;
-            }
-        }
-
-        /// <summary>
-        /// Width of the item. Layout space is included. Scale is not included.
-        /// </summary>
-        public override float Width
-        {
-            get
-            {
-                if (m_forcedSize != Vector2.Zero)
-                    return m_forcedSize.X;
-
-                return base.Width;
-            }
-            internal set
-            {
-                base.Width = value;
-            }
-        }
-
-        /// <summary>
         /// Position of the object. Default is Vector2.Zero, which is center based.
         /// </summary>
         public override Vector2 Position 
@@ -207,9 +171,6 @@
             }
             set
             {
-                if (value == 0 && Layout == LayoutType.None)
-                    Layout = LayoutType.Horizontal;
-
                 base.LayoutStretch = value;
             }
         }
@@ -259,8 +220,11 @@
                     }
                 }
 
-                m_forcedSize.X = width;
-                m_forcedSize.Y = height;
+                if (Layout != LayoutType.None)
+                {
+                    m_forcedSize.X = width;
+                    m_forcedSize.Y = height;
+                }
             }
 
             Vector2 dimensions = StaticSize;

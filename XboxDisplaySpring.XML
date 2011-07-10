@@ -900,16 +900,6 @@
             Width of the item. Layout space is not included. Scale is not included.
             </summary>
         </member>
-        <member name="P:DisplaySpring.Frame.Height">
-            <summary>
-            Height of the item. Layout space is included. Scale is not included.
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Frame.Width">
-            <summary>
-            Width of the item. Layout space is included. Scale is not included.
-            </summary>
-        </member>
         <member name="P:DisplaySpring.Frame.Position">
             <summary>
             Position of the object. Default is Vector2.Zero, which is center based.
