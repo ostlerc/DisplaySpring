@@ -46,6 +46,14 @@
             Stretch
         };
 
+        public Vector2 Center
+        {
+            get
+            {
+                return new Vector2(StaticWidth, StaticHeight) / 2;
+            }
+        }
+
         /// <summary>
         /// Vertical alignment types
         /// </summary>

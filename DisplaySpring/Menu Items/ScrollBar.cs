@@ -124,9 +124,7 @@
             float rotation;
             DecomposeMatrix(ref local, out position, out rotation, out scale);
 
-            Vector2 center = new Vector2(StaticWidth, StaticHeight) / 2f;
-
-            spriteBatch.Draw(m_bg, position, null, Tint*Alpha, rotation, center, scale, SpriteEffects.None, Depth);
+            spriteBatch.Draw(m_bg, position, null, Tint*Alpha, rotation, Center, scale, SpriteEffects.None, Depth);
 
             int offset = m_unitLength * (m_selectedIndex);
             int len = m_unitLength * m_visibleCount;

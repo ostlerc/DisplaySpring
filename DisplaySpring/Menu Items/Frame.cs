@@ -205,6 +205,13 @@
             {
                 float width = 0;
                 float height = 0;
+
+                if (Parent != null)
+                {
+                    Width = Parent.StaticWidth;
+                    Height = Parent.StaticHeight;
+                }
+
                 foreach (var v in Children)
                 {
                     switch(Layout)
@@ -264,8 +271,6 @@
                         v.Height = dimensions.Y;
                         break;
                 }
-
-                v.refreshItem();
             }
 
             base.refreshItem();

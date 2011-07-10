@@ -35,12 +35,12 @@
 
         internal override float StaticWidth
         {
-            get { return m_texture.Width; }
+            get { return m_texture == null ? 0 : m_texture.Width; }
         }
 
         internal override float StaticHeight
         {
-            get { return m_texture.Height; }
+            get { return m_texture == null ? 0 : m_texture.Height; }
         }
 
         internal override ItemCollection Children
@@ -94,9 +94,7 @@
             float rotation;
             DecomposeMatrix(ref local, out position, out rotation, out scale);
 
-            Vector2 center = new Vector2(m_texture.Width, m_texture.Height) / 2f;
-
-            spriteBatch.Draw(m_texture, position, null, Tint * ScreenAlpha, rotation, center, scale, SpriteEffects.None, Depth);
+            spriteBatch.Draw(m_texture, position, null, Tint * ScreenAlpha, rotation, Center, scale, SpriteEffects.None, Depth);
         }
     }
 }

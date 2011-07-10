@@ -308,8 +308,6 @@
             float rotation;
             DecomposeMatrix(ref local, out position, out rotation, out scale);
 
-            Vector2 center = new Vector2(StaticWidth, StaticHeight) / 2f;
-
             Sprite curSprite = null;
 
             if (Background != null && (!Enabled || FocusTexture == null))//regular background
