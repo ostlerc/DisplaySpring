@@ -198,7 +198,7 @@
             }
         }
 
-        internal override float  StaticHeight
+        public override float StaticHeight
         {
             get 
             {
@@ -226,7 +226,7 @@
             }
         }
 
-        internal override float StaticWidth
+        public override float StaticWidth
         {
             get
             {

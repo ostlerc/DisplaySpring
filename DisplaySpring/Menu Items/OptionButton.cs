@@ -110,7 +110,7 @@
             return base.Right();
         }
 
-        internal override float StaticWidth
+        public override float StaticWidth
         {
             get
             {
@@ -127,7 +127,7 @@
             }
         }
 
-        internal override float StaticHeight
+        public override float StaticHeight
         {
             get
             {

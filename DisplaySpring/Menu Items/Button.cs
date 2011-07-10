@@ -120,7 +120,7 @@
             }
         }
 
-        internal override float StaticWidth
+        public override float StaticWidth
         {
             get 
             {
@@ -134,7 +134,7 @@
                 return Math.Max(w, m_label != null ? m_label.StaticWidth : 0); 
             }
         }
-        internal override float StaticHeight
+        public override float StaticHeight
         {
             get
             {

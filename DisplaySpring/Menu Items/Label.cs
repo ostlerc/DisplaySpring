@@ -54,12 +54,12 @@
 
         #region Properties
 
-        internal override float StaticWidth
+        public override float StaticWidth
         {
             get { return m_textSize.X; }
         }
 
-        internal override float StaticHeight
+        public override float StaticHeight
         {
             get { return m_textSize.Y; }
         }

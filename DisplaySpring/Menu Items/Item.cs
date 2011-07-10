@@ -494,7 +494,7 @@
         /// <summary>
         /// Secondary position used for layouts. This is applied in conjunctionwith alignments.
         /// </summary>
-        public virtual Vector2 Offset { get { return m_offset; } set { m_offset = value; } }
+        public virtual Vector2 Offset { get { return m_offset; } set { m_offset = value; refreshItem(); } }
 
         /// <summary>
         /// Animation type of the item
@@ -540,17 +540,17 @@
         /// <summary>
         /// Height of the item. Layout space is not included. Scale is not included.
         /// </summary>
-        internal abstract float StaticHeight { get; }
+        public abstract float StaticHeight { get; }
 
         /// <summary>
         /// Width of the item. Layout space is not included. Scale is not included.
         /// </summary>
-        internal abstract float StaticWidth { get; }
+        public abstract float StaticWidth { get; }
 
         /// <summary>
         /// Represents the Vector2(StaticWidth, StaticHeight) of the object
         /// </summary>
-        internal virtual Vector2 StaticSize { get { return new Vector2(StaticWidth, StaticHeight); } }
+        public virtual Vector2 StaticSize { get { return new Vector2(StaticWidth, StaticHeight); } }
 
         /// <summary>
         /// Measures the Width of the item. Layout space is not included. Scale is included.

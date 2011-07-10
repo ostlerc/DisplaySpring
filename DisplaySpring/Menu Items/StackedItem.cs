@@ -66,7 +66,7 @@
         /// <summary>
         /// Height of the item. Layout space is not included. Scale is not included.
         /// </summary>
-        internal override float StaticHeight 
+        public override float StaticHeight 
         { 
             get 
             {
@@ -82,7 +82,7 @@
         /// <summary>
         /// Width of the item. Layout space is not included. Scale is not included.
         /// </summary>
-        internal override float StaticWidth 
+        public override float StaticWidth 
         {
             get
             { 

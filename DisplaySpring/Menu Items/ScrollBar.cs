@@ -47,12 +47,12 @@
             set { m_selectedIndex = value; }
         }
 
-        internal override float StaticHeight
+        public override float StaticHeight
         {
             get { return m_bg != null ? m_bg.Height : 0; }
         }
 
-        internal override float StaticWidth
+        public override float StaticWidth
         {
             get { return m_bg != null ? m_bg.Width : 0; }
         }
