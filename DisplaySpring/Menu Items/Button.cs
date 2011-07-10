@@ -319,8 +319,12 @@
 
             curSprite.Draw(gameTime, spriteBatch, local);
 
-            if (m_label != null)
-                m_label.Draw(gameTime, spriteBatch, local);
+            foreach (var v in Children)
+            {
+                if (v == m_bg || v == m_focused)
+                    continue;
+                v.Draw(gameTime, spriteBatch, local);
+            }
         }
 
         #endregion
