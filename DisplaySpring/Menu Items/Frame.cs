@@ -247,16 +247,16 @@
                 switch (Layout)
                 {
                     case LayoutType.Horizontal:
-                        float tWidth = v.StaticWidth + Padding * 2;
+                        float tWidth = v.MeasureWidth + Padding * 2;
                         v.LayoutPosition = new Vector2(width + tWidth / 2, 0);
                         width += tWidth;
-                        height = Math.Max(height, v.StaticHeight);
+                        height = Math.Max(height, v.MeasureHeight);
                         break;
                     case LayoutType.Vertical:
-                        float tHeight = v.StaticHeight + Padding * 2;
+                        float tHeight = v.MeasureHeight + Padding * 2;
                         v.LayoutPosition = new Vector2(0, height + tHeight / 2);
                         height += tHeight;
-                        width = Math.Max(width, v.StaticWidth);
+                        width = Math.Max(width, v.MeasureWidth);
                         break;
                 }
             }
@@ -348,6 +348,10 @@
         public override void Reset(bool isFocus)
         {
             refreshItem();
+
+            foreach (var v in Children)
+                v.refreshItem();
+
             base.Reset(isFocus);
         }
 
