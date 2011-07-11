@@ -385,9 +385,6 @@ namespace DisplaySpring
 
             return ret;
         }
-        /// <summary>
-        /// Returns true if keyboard key k has been held. Only returns true once every HeldInterval
-        /// </summary>
         #endregion
         #region Continuous
 

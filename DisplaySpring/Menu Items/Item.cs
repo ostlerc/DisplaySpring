@@ -46,6 +46,9 @@
             Stretch
         };
 
+        /// <summary>
+        /// Center of the item. Cannot be changed
+        /// </summary>
         public Vector2 Center
         {
             get

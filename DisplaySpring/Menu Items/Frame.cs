@@ -32,12 +32,12 @@
         {
             get { return m_layout; }
             set 
-            {
-                m_layout = value;
-                forceRefresh();
-            }
+            { m_layout = value; forceRefresh(); }
         }
 
+        /// <summary>
+        /// Changes the SizeType for the Frame. Maximum is the default.
+        /// </summary>
         public SizeType SizePolicy
         {
             get { return m_sizePolicy; }

@@ -242,6 +242,11 @@
             Create a texture that has a border of 'thickness' with color 'borderCol' and filled with 'FillColor'
             </summary>
         </member>
+        <member name="P:DisplaySpring.Item.Center">
+            <summary>
+            Center of the item. Cannot be changed
+            </summary>
+        </member>
         <member name="P:DisplaySpring.Item.InputState">
             <summary>
             State in which triggers the On delegates
@@ -895,6 +900,11 @@
             Defines the LayoutType of the frame.
             </summary>
             <seealso cref="T:DisplaySpring.Frame.LayoutType"/>
+        </member>
+        <member name="P:DisplaySpring.Frame.SizePolicy">
+            <summary>
+            Changes the SizeType for the Frame. Maximum is the default.
+            </summary>
         </member>
         <member name="P:DisplaySpring.Frame.ForceSize">
             <summary>
