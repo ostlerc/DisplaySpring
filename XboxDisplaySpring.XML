@@ -1248,6 +1248,37 @@
             Returns true if one of the Buttons btns has been Held
             </summary>
         </member>
+        <member name="M:DisplaySpring.Controller.Continuous(Microsoft.Xna.Framework.Input.Keys)">
+            <summary>
+            Returns true if Key is down
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.Continuous(Microsoft.Xna.Framework.Input.Buttons)">
+            <summary>
+            Returns true if Button btn is down
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.Continuous(System.Collections.Generic.List{Microsoft.Xna.Framework.Input.Buttons})">
+            <summary>
+            Returns true if one of the Buttons btns is down
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.Continuous(System.Collections.Generic.List{Microsoft.Xna.Framework.Input.Keys})">
+            <summary>
+            Returns true if one of the Keys keys is down
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.State(DisplaySpring.ButtonSet)">
+            <summary>
+            Does a State, with ButtonState.Pressed for default
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.State(DisplaySpring.ButtonSet,DisplaySpring.ButtonState)">
+            <summary>
+            Get a specific state out of the controller.
+            If any controller has the required state true is returned
+            </summary>
+        </member>
         <member name="M:DisplaySpring.Controller.Up(DisplaySpring.ButtonState)">
             <summary>
             True if the up key was pressed
@@ -1371,7 +1402,7 @@
         </member>
         <member name="P:DisplaySpring.Controller.LeftThumbStick">
             <summary>
-            Get the Vector2 representing the movement of the left thumb stick
+            Get the Vector2 representing the the left thumb stick
             </summary>
         </member>
         <member name="P:DisplaySpring.Controller.RightThumbStick">

@@ -40,7 +40,8 @@ namespace DisplaySpring
     {
         Pressed,
         Released,
-        Held
+        Held,
+        Continuous
     }
 
     /// <summary>
@@ -152,7 +153,7 @@ namespace DisplaySpring
         #region Getters and Setters
 
         /// <summary>
-        /// Get the Vector2 representing the movement of the left thumb stick
+        /// Get the Vector2 representing the the left thumb stick
         /// </summary>
         public Vector2 LeftThumbStick
         {
@@ -161,7 +162,7 @@ namespace DisplaySpring
                 if (m_GamePadState.ThumbSticks.Left != Vector2.Zero)
                     return m_GamePadState.ThumbSticks.Left;
 
-                return new Vector2(Left(ButtonState.Held) ? -1 : Right(ButtonState.Held) ? 1 : 0, Up(ButtonState.Held) ? -1 : Down(ButtonState.Held) ? 1 : 0);
+                return new Vector2(Left(ButtonState.Continuous) ? -1 : Right(ButtonState.Continuous) ? 1 : 0, Up(ButtonState.Continuous) ? -1 : Down(ButtonState.Continuous) ? 1 : 0);
             }
         }
 
@@ -175,48 +176,72 @@ namespace DisplaySpring
                 if (m_GamePadState.ThumbSticks.Right != Vector2.Zero)
                     return m_GamePadState.ThumbSticks.Right;
 
-                return new Vector2(Left(ButtonState.Held) ? -1 : Right(ButtonState.Held) ? 1 : 0, Up(ButtonState.Held) ? -1 : Down(ButtonState.Held) ? 1 : 0);
+                return new Vector2(Left(ButtonState.Continuous) ? -1 : Right(ButtonState.Continuous) ? 1 : 0, Up(ButtonState.Continuous) ? -1 : Down(ButtonState.Continuous) ? 1 : 0);
             }
         }
 
         internal bool State(Buttons b, ButtonState state)
         {
-            if (state == ButtonState.Pressed)
-                return Pressed(b);
-            else if (state == ButtonState.Released)
-                return Released(b);
-            else
-                return Held(b);
+            switch (state)
+            {
+                case ButtonState.Pressed:
+                    return Pressed(b);
+                case ButtonState.Released:
+                    return Released(b);
+                case ButtonState.Held:
+                    return Held(b);
+                case ButtonState.Continuous:
+                default:
+                    return Continuous(b);
+            }
         }
 
         internal bool State(List<Buttons> bts, ButtonState state)
         {
-            if (state == ButtonState.Pressed)
-                return Pressed(bts);
-            else if (state == ButtonState.Released)
-                return Released(bts);
-            else
-                return Held(bts);
+            switch (state)
+            {
+                case ButtonState.Pressed:
+                    return Pressed(bts);
+                case ButtonState.Released:
+                    return Released(bts);
+                case ButtonState.Held:
+                    return Held(bts);
+                case ButtonState.Continuous:
+                default:
+                    return Continuous(bts);
+            }
         }
 
-        internal bool State(Keys b, ButtonState state)
+        internal bool State(Keys k, ButtonState state)
         {
-            if (state == ButtonState.Pressed)
-                return Pressed(b);
-            else if (state == ButtonState.Released)
-                return Released(b);
-            else
-                return Held(b);
+            switch (state)
+            {
+                case ButtonState.Pressed:
+                    return Pressed(k);
+                case ButtonState.Released:
+                    return Released(k);
+                case ButtonState.Held:
+                    return Held(k);
+                case ButtonState.Continuous:
+                default:
+                    return Continuous(k);
+            }
         }
 
         internal bool State(List<Keys> keys, ButtonState state)
         {
-            if (state == ButtonState.Pressed)
-                return Pressed(keys);
-            else if (state == ButtonState.Released)
-                return Released(keys);
-            else
-                return Held(keys);
+            switch (state)
+            {
+                case ButtonState.Pressed:
+                    return Pressed(keys);
+                case ButtonState.Released:
+                    return Released(keys);
+                case ButtonState.Held:
+                    return Held(keys);
+                case ButtonState.Continuous:
+                default:
+                    return Continuous(keys);
+            }
         }
 
         #region Pressed
@@ -299,6 +324,7 @@ namespace DisplaySpring
         }
         #endregion
 
+        #region Held
         /// <summary>
         /// Returns true if keyboard key k has been held. Only returns true once every HeldInterval
         /// </summary>
@@ -359,6 +385,67 @@ namespace DisplaySpring
 
             return ret;
         }
+        /// <summary>
+        /// Returns true if keyboard key k has been held. Only returns true once every HeldInterval
+        /// </summary>
+        #endregion
+        #region Continuous
+
+        /// <summary>
+        /// Returns true if Key is down
+        /// </summary>
+        public bool Continuous(Keys k)
+        {
+            return m_KeyboardState.IsKeyDown(k);
+        }
+
+        /// <summary>
+        /// Returns true if Button btn is down
+        /// </summary>
+        public bool Continuous(Buttons btn)
+        {
+            return m_GamePadState.IsButtonDown(btn);
+        }
+
+        /// <summary>
+        /// Returns true if one of the Buttons btns is down
+        /// </summary>
+        internal bool Continuous(List<Buttons> btns)
+        {
+            bool ret = false;
+            foreach (var b in btns)
+                if (Continuous(b))
+                    ret =  true;
+
+            return ret;
+        }
+
+        /// <summary>
+        /// Returns true if one of the Keys keys is down
+        /// </summary>
+        internal bool Continuous(List<Keys> keys)
+        {
+            bool ret = false;
+            foreach (var k in keys)
+                if (Continuous(k))
+                    ret =  true;
+
+            return ret;
+        }
+        #endregion
+
+        /// <summary>
+        /// Does a State, with ButtonState.Pressed for default
+        /// </summary>
+        public bool State(ButtonSet set)
+        {
+            return State(set, ButtonState.Pressed);
+        }
+
+        /// <summary>
+        /// Get a specific state out of the controller.
+        /// If any controller has the required state true is returned
+        /// </summary>
         public bool State(ButtonSet set, ButtonState state)
         {
             switch (set)

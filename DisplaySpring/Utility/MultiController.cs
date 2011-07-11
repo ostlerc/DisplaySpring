@@ -40,6 +40,15 @@ namespace DisplaySpring
             return m_controllers;
         }
 
+        public bool State(ButtonSet button)
+        {
+            foreach (var c in m_controllers)
+                if (c.State(button))
+                    return true;
+
+            return false;
+        }
+
         /// <summary>
         /// Get a specific state out of the multi controller.
         /// If any controller has the required state true is returned
