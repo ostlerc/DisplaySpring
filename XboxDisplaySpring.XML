@@ -254,7 +254,7 @@
         </member>
         <member name="P:DisplaySpring.Item.LayoutStretch">
             <summary>
-            Used to know the stretch percentage of a Item.
+            Used to know the stretch percentage of a Item when SizeType is Maximum.
             Default is 1. This number is taken relative to other Items in a layout.
             It determines the percentage of space given to the item.
             Example: a layout of two items with stretch 1 and 2 would receive 33% and 66%
@@ -871,12 +871,12 @@
         </member>
         <member name="M:DisplaySpring.Frame.#ctor(DisplaySpring.Item)">
             <summary>
-            Create a Frame with parents size.
+            Create an empty frame
             </summary>
         </member>
         <member name="M:DisplaySpring.Frame.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Vector2)">
             <summary>
-            Create a Frame with given size.
+            Create a Frame with given fixed size.
             </summary>
         </member>
         <member name="M:DisplaySpring.Frame.#ctor(Microsoft.Xna.Framework.Rectangle)">
@@ -895,6 +895,16 @@
             Defines the LayoutType of the frame.
             </summary>
             <seealso cref="T:DisplaySpring.Frame.LayoutType"/>
+        </member>
+        <member name="P:DisplaySpring.Frame.ForceSize">
+            <summary>
+            Sets the fixed size for the Frame.
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Frame.FixedSize">
+            <summary>
+            Sets the fixed size for the Frame.
+            </summary>
         </member>
         <member name="P:DisplaySpring.Frame.StaticHeight">
             <summary>
@@ -916,15 +926,6 @@
             When layout stretch is zero, this changes the spacing in pixels between items
             </summary>
         </member>
-        <member name="P:DisplaySpring.Frame.LayoutStretch">
-            <summary>
-            Used to know the stretch percentage of a Item.
-            Default is 1. This number is taken relative to other Items in a layout.
-            It determines the percentage of space given to the item.
-            Example: a layout of two items with stretch 1 and 2 would receive 33% and 66%
-            of the space respectively
-            </summary>
-        </member>
         <member name="T:DisplaySpring.Frame.LayoutType">
             <summary>
             The layout type represents how the Children will be
@@ -939,12 +940,30 @@
         </member>
         <member name="F:DisplaySpring.Frame.LayoutType.Horizontal">
             <summary>
-            Horizontally layout Children
+            Horizontally layout Children using layoutstretch for guidance
             </summary>
         </member>
         <member name="F:DisplaySpring.Frame.LayoutType.Vertical">
             <summary>
             Vertically layout Children
+            </summary>
+        </member>
+        <member name="T:DisplaySpring.Frame.SizeType">
+            <summary>
+            Determines how much space to use when children are layed out.
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Frame.SizeType.Maximum">
+            <summary>
+            Use all space inside of Frame to lay out children.
+            LayoutStretch applies to this type.
+            Alignments do not work with this type.
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Frame.SizeType.Minimum">
+            <summary>
+            Use minimal space. This is calculated only by Width, Height, and Padding of Children.
+            Alignments work with This type.
             </summary>
         </member>
         <member name="T:DisplaySpring.ScrollBar">

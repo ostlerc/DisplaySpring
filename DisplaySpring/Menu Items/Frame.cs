@@ -15,8 +15,10 @@
         #region Member Variables
 
         private LayoutType m_layout = LayoutType.None;
+        private SizeType m_sizePolicy = SizeType.Maximum;
         private bool m_lockRefresh = false;
-        private Vector2 m_forcedSize = Vector2.Zero;
+        private Vector2 m_fixedSize = Vector2.Zero;
+        private Vector2 m_forceSize = Vector2.Zero;
 
         #endregion
 
@@ -36,10 +38,28 @@
             }
         }
 
-        internal Vector2 ForcedSize
+        public SizeType SizePolicy
         {
-            get { return m_forcedSize; }
-            set { m_forcedSize = value; }
+            get { return m_sizePolicy; }
+            set { m_sizePolicy = value; forceRefresh(); }
+        }
+
+        /// <summary>
+        /// Sets the fixed size for the Frame.
+        /// </summary>
+        internal Vector2 ForceSize
+        {
+            get { return m_forceSize; }
+            set { m_forceSize = value; }
+        }
+
+        /// <summary>
+        /// Sets the fixed size for the Frame.
+        /// </summary>
+        public Vector2 FixedSize
+        {
+            get { return m_fixedSize; }
+            set { m_fixedSize = value; }
         }
 
         /// <summary>
@@ -55,15 +75,34 @@
             None,
 
             /// <summary>
-            /// Horizontally layout Children
+            /// Horizontally layout Children using layoutstretch for guidance
             /// </summary>
             Horizontal,
 
             /// <summary>
             /// Vertically layout Children
             /// </summary>
-            Vertical
+            Vertical,
         };
+
+        /// <summary>
+        /// Determines how much space to use when children are layed out.
+        /// </summary>
+        public enum SizeType
+        {
+            /// <summary>
+            /// Use all space inside of Frame to lay out children.
+            /// LayoutStretch applies to this type.
+            /// Alignments do not work with this type.
+            /// </summary>
+            Maximum,
+
+            /// <summary>
+            /// Use minimal space. This is calculated only by Width, Height, and Padding of Children.
+            /// Alignments work with This type.
+            /// </summary>
+            Minimum
+        }
 
         /// <summary>
         /// Height of the item. Layout space is not included. Scale is not included.
@@ -72,8 +111,11 @@
         { 
             get 
             {
-                if (m_forcedSize != Vector2.Zero)
-                    return m_forcedSize.Y;
+                if (m_forceSize != Vector2.Zero)
+                    return m_forceSize.Y;
+
+                if (m_fixedSize != Vector2.Zero)
+                    return m_fixedSize.Y;
 
                 return Height;
             }
@@ -86,8 +128,11 @@
         {
             get 
             {
-                if (m_forcedSize != Vector2.Zero)
-                    return m_forcedSize.X;
+                if (m_forceSize != Vector2.Zero)
+                    return m_forceSize.X;
+
+                if (m_fixedSize != Vector2.Zero)
+                    return m_fixedSize.X;
 
                 return Width;
             }
@@ -114,19 +159,19 @@
         #region Constructors
 
         /// <summary>
-        /// Create a Frame with parents size.
+        /// Create an empty frame
         /// </summary>
         public Frame(Item parent) 
             : base(parent)
         { }
 
         /// <summary>
-        /// Create a Frame with given size.
+        /// Create a Frame with given fixed size.
         /// </summary>
         public Frame(Item parent, Vector2 size) 
             : base(parent)
         {
-            m_forcedSize = size;
+            m_fixedSize = size;
         }
 
         /// <summary>
@@ -136,7 +181,7 @@
         internal Frame(Rectangle bounds)
             : base(null)
         {
-            m_forcedSize = new Vector2(bounds.Width, bounds.Height);
+            m_forceSize = new Vector2(bounds.Width, bounds.Height);
             Position = new Vector2(bounds.Center.X, bounds.Center.Y);
         }
 
@@ -153,25 +198,6 @@
         {
             get { return m_padding; }
             set { m_padding = value; }
-        }
-
-        /// <summary>
-        /// Used to know the stretch percentage of a Item.
-        /// Default is 1. This number is taken relative to other Items in a layout.
-        /// It determines the percentage of space given to the item.
-        /// Example: a layout of two items with stretch 1 and 2 would receive 33% and 66%
-        /// of the space respectively
-        /// </summary>
-        public override uint LayoutStretch
-        {
-            get
-            {
-                return base.LayoutStretch;
-            }
-            set
-            {
-                base.LayoutStretch = value;
-            }
         }
 
         internal override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix parentTransform) 
@@ -194,46 +220,87 @@
                 return;
 
             m_lockRefresh = true;
-            uint total = 0;
-            float pos = 0;
+
+            switch (m_sizePolicy)
+            {
+                case SizeType.Minimum:
+                    if(Layout != LayoutType.None)
+                        layoutMinimum();
+                    break;
+                case SizeType.Maximum:
+                    layoutMaximum();
+                    break;
+            }
+
+            base.refreshItem();
+
+            m_lockRefresh = false;
+        }
+
+        private void layoutMinimum()
+        {
+            float width = 0;
+            float height = 0;
 
             foreach (var v in Children)
-                total += v.LayoutStretch;
-
-            if (LayoutStretch == 0)
             {
-                float width = 0;
-                float height = 0;
-
-                if (Parent != null)
+                switch (Layout)
                 {
-                    Width = Parent.StaticWidth;
-                    Height = Parent.StaticHeight;
-                }
-
-                foreach (var v in Children)
-                {
-                    switch(Layout)
-                    {
-                        case LayoutType.Horizontal:
-                            width += v.StaticWidth + Padding*2;
-                            height = Math.Max(height, v.StaticHeight);
-                            break;
-                        case LayoutType.Vertical:
-                            height += v.StaticHeight + Padding*2;
-                            width = Math.Max(width, v.StaticWidth);
-                            break;
-                    }
-                }
-
-                if (Layout != LayoutType.None)
-                {
-                    m_forcedSize.X = width;
-                    m_forcedSize.Y = height;
+                    case LayoutType.Horizontal:
+                        float tWidth = v.StaticWidth + Padding * 2;
+                        v.LayoutPosition = new Vector2(width + tWidth / 2, 0);
+                        width += tWidth;
+                        height = Math.Max(height, v.StaticHeight);
+                        break;
+                    case LayoutType.Vertical:
+                        float tHeight = v.StaticHeight + Padding * 2;
+                        v.LayoutPosition = new Vector2(0, height + tHeight / 2);
+                        height += tHeight;
+                        width = Math.Max(width, v.StaticWidth);
+                        break;
                 }
             }
 
+            switch (Layout)
+            {
+                case LayoutType.Horizontal:
+                    width -= Padding * 2;
+                    break;
+                case LayoutType.Vertical:
+                    height -= Padding * 2;
+                    break;
+            }
+
+            if (Parent != null)
+            {
+                m_fixedSize.X = width;
+                m_fixedSize.Y = height;
+            }
+
+            foreach (var v in Children)
+            {
+                v.Height = StaticHeight;
+                v.Width = StaticWidth;
+                switch(Layout)
+                {
+                    case LayoutType.Horizontal:
+                        v.LayoutPosition -= new Vector2(width/2 + Padding, 0);
+                        break;
+                    case LayoutType.Vertical:
+                        v.LayoutPosition -= new Vector2(0, height/2 + Padding);
+                        break;
+                }
+            }
+        }
+
+        private void layoutMaximum()
+        {
+            uint total = 0;
+            float pos = 0;
             Vector2 dimensions = StaticSize;
+
+            foreach (var v in Children)
+                total += v.LayoutStretch;
 
             foreach (var v in Children)
             {
@@ -273,10 +340,6 @@
                         break;
                 }
             }
-
-            base.refreshItem();
-
-            m_lockRefresh = false;
         }
 
         /// <summary>

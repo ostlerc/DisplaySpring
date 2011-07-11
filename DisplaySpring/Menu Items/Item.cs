@@ -287,7 +287,7 @@
         internal virtual ItemCollection Children { get { return m_ItemCollection; } set { m_ItemCollection = value; } }
 
         /// <summary>
-        /// Used to know the stretch percentage of a Item.
+        /// Used to know the stretch percentage of a Item when SizeType is Maximum.
         /// Default is 1. This number is taken relative to other Items in a layout.
         /// It determines the percentage of space given to the item.
         /// Example: a layout of two items with stretch 1 and 2 would receive 33% and 66%

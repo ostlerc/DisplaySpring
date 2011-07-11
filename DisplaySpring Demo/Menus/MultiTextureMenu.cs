@@ -21,8 +21,10 @@
             : base(controllers, bounds)
         {
             BaseFrame.Layout = Layout.Vertical;
-            multiFrame = new Frame(BaseFrame, new Vector2(400, 200));
+            multiFrame = new Frame(BaseFrame, new Vector2(400, 200));// { HorizontalAlignment = HAlign.Left, VerticalAlignment = VAlign.Top };
             multiFrame.Animation = AnimateType.Size;
+            multiFrame.HorizontalAlignment = HAlign.Left;
+            multiFrame.VerticalAlignment = VAlign.Top;
 
             Button b = new Button(multiFrame, Item.ButtonTexture);
             b.Depth += .1f;
@@ -34,18 +36,22 @@
             lbl.HorizontalAlignment = HAlign.Right;
 
             Frame parent = new Frame(BaseFrame);
-            Frame f = new Frame(parent);
-            f.LayoutStretch = 0;
-            f.Layout = Layout.Horizontal;
-            new Button(f, Item.ButtonTexture, "one");
-            new Button(f, Item.ButtonTexture, "two");
+            parent.SizePolicy = Frame.SizeType.Minimum;
+            parent.Layout = Layout.Horizontal;
+            parent.HorizontalAlignment = HAlign.Right;
+            parent.VerticalAlignment = VAlign.Bottom;
+            new Button(parent, Item.ButtonTexture, "one");
+            new Button(parent, Item.ButtonTexture, "two");
+            new Button(parent, Item.ButtonTexture, "three");
 
             parent = new Frame(BaseFrame);
-            f = new Frame(parent);
-            f.Layout = Layout.Vertical;
-            f.LayoutStretch = 0;
-            new Button(f, Item.ButtonTexture, "one");
-            new Button(f, Item.ButtonTexture, "two");
+            parent.SizePolicy = Frame.SizeType.Minimum;
+            parent.Layout = Layout.Vertical;
+            parent.HorizontalAlignment = HAlign.Right;
+            parent.VerticalAlignment = VAlign.Top;
+            new Button(parent, Item.ButtonTexture, "one");
+            new Button(parent, Item.ButtonTexture, "two");
+            new Button(parent, Item.ButtonTexture, "three");
 
             Reset();
         }
@@ -56,7 +62,7 @@
         /// </summary>
         public override void Reset()
         {
-            base.Reset(multiFrame);
+            base.Reset();
         }
     }
 }

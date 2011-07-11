@@ -208,7 +208,7 @@
 
         private void Init()
         {
-            m_baseFrame.ForcedSize = LayoutSize;
+            m_baseFrame.ForceSize = LayoutSize;
             m_baseFrame.Position = new Vector2(m_bounds.Center.X, m_bounds.Center.Y);
             m_baseFrame.ScaleImageToWidth(m_bounds.Width);
             m_baseFrame.ScaleImageToHeight(m_bounds.Height);
