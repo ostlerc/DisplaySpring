@@ -307,7 +307,7 @@
         <member name="P:DisplaySpring.Item.Fade">
             <summary>
             Toggles the fading behavior of the Item. If set to true the item will fade in
-            Default is true
+            Default is false
             </summary>
         </member>
         <member name="P:DisplaySpring.Item.FadeTime">
@@ -348,7 +348,7 @@
         </member>
         <member name="P:DisplaySpring.Item.Offset">
             <summary>
-            Secondary position used for layouts. This is applied in conjunctionwith alignments.
+            Primary way to 'offset' a position of an item with alignments. This is because position is reset when alignments are set.
             </summary>
         </member>
         <member name="P:DisplaySpring.Item.Animation">

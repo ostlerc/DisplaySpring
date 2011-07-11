@@ -414,7 +414,7 @@
 
         /// <summary>
         /// Toggles the fading behavior of the Item. If set to true the item will fade in
-        /// Default is true
+        /// Default is false
         /// </summary>
         public virtual bool Fade
         {
@@ -474,7 +474,7 @@
         internal virtual Vector2 LayoutPosition { get { return m_layoutPosition; } set { m_layoutPosition = value; } }
 
         /// <summary>
-        /// Secondary position used for layouts. This is applied in conjunctionwith alignments.
+        /// Primary way to 'offset' a position of an item with alignments. This is because position is reset when alignments are set.
         /// </summary>
         public virtual Vector2 Offset { get { return m_offset; } set { m_offset = value; refreshItem(); } }
 
