@@ -135,7 +135,7 @@
         /// </summary>
         public Frame(Item parent) 
             : base(parent)
-        { refreshItem(); }
+        { }
 
         /// <summary>
         /// Create a Frame with given fixed size.
@@ -189,17 +189,17 @@
             switch (m_sizePolicy)
             {
                 case SizeType.Greedy:
-                    layoutMinimum();
+                    layoutGreedy();
                     break;
                 case SizeType.Shared:
-                    layoutMaximum();
+                    layoutShared();
                     break;
             }
 
             base.refreshItem();
         }
 
-        private void layoutMinimum()
+        private void layoutGreedy()
         {
             float width = 0;
             float height = 0;
@@ -260,11 +260,12 @@
             }
         }
 
-        private void layoutMaximum()
+        private void layoutShared()
         {
             uint total = 0;
             float pos = 0;
             Vector2 dimensions = StaticSize;
+            float widthOrHeight = 0;
 
             foreach (var v in Children)
                 total += v.LayoutStretch;
@@ -289,11 +290,13 @@
                         v.LayoutPosition = new Vector2((width - dimensions.X) / 2 + pos, 0);
                         v.Width = width;
                         v.Height = dimensions.Y;
+                        widthOrHeight = Math.Max(widthOrHeight, v.StaticHeight);
 
                         pos += width;
                         break;
                     case LayoutType.Vertical:
                         float height = percentage * dimensions.Y;
+                        widthOrHeight = Math.Max(widthOrHeight, v.StaticWidth);
 
                         v.LayoutPosition = new Vector2(0, (height - dimensions.Y) / 2 + pos);
                         v.Width = dimensions.X;
@@ -306,6 +309,16 @@
                         v.Height = dimensions.Y;
                         break;
                 }
+            }
+
+            switch (Layout)
+            {
+                case LayoutType.Horizontal:
+                    m_fixedSize.Y = widthOrHeight;
+                    break;
+                case LayoutType.Vertical:
+                    m_fixedSize.X = widthOrHeight;
+                    break;
             }
         }
 

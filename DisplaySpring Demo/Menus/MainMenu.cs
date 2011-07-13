@@ -31,7 +31,7 @@
             sl.LayoutStretch = 4;
             sl.Scale = new Vector2(2,2);
 
-            lbl = new Label(sl, "Frames - Layout example");
+            lbl = new Label(sl, "Frames Menu");
             lbl.OnA = delegate() { ActiveSubMenu = new FrameMenu(controllers, allControllers, bounds); };
             lbl = new Label(sl, "Open submenu of this menu (recursion!)");
             lbl.OnA = delegate() { ActiveSubMenu = new MainMenu(controllers, allControllers, bounds); };
