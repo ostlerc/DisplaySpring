@@ -15,8 +15,7 @@
         #region Member Variables
 
         private LayoutType m_layout = LayoutType.None;
-        private SizeType m_sizePolicy = SizeType.Maximum;
-        private bool m_lockRefresh = false;
+        private SizeType m_sizePolicy = SizeType.Shared;
         private Vector2 m_fixedSize = Vector2.Zero;
         private Vector2 m_forceSize = Vector2.Zero;
 
@@ -47,19 +46,10 @@
         /// <summary>
         /// Sets the fixed size for the Frame.
         /// </summary>
-        internal Vector2 ForceSize
-        {
-            get { return m_forceSize; }
-            set { m_forceSize = value; }
-        }
-
-        /// <summary>
-        /// Sets the fixed size for the Frame.
-        /// </summary>
         public Vector2 FixedSize
         {
-            get { return m_fixedSize; }
-            set { m_fixedSize = value; }
+            get { return m_forceSize; }
+            set { m_forceSize = value; refreshItem(); }
         }
 
         /// <summary>
@@ -91,17 +81,15 @@
         public enum SizeType
         {
             /// <summary>
-            /// Use all space inside of Frame to lay out children.
-            /// LayoutStretch applies to this type.
-            /// Alignments do not work with this type.
+            /// Evenly distribute Frame boundaries between children
+            /// LayoutStretch defines distribution ratios
             /// </summary>
-            Maximum,
+            Shared,
 
             /// <summary>
-            /// Use minimal space. This is calculated only by Width, Height, and Padding of Children.
-            /// Alignments work with This type.
+            /// Give children as much space as they want to claim
             /// </summary>
-            Minimum
+            Greedy
         }
 
         /// <summary>
@@ -114,7 +102,7 @@
                 if (m_forceSize != Vector2.Zero)
                     return m_forceSize.Y;
 
-                if (m_fixedSize != Vector2.Zero)
+                if (m_fixedSize.Y != 0)
                     return m_fixedSize.Y;
 
                 return Height;
@@ -131,26 +119,10 @@
                 if (m_forceSize != Vector2.Zero)
                     return m_forceSize.X;
 
-                if (m_fixedSize != Vector2.Zero)
+                if (m_fixedSize.X != 0)
                     return m_fixedSize.X;
 
                 return Width;
-            }
-        }
-
-        /// <summary>
-        /// Position of the object. Default is Vector2.Zero, which is center based.
-        /// </summary>
-        public override Vector2 Position 
-        { 
-            get { return base.Position; } 
-            set
-            {
-                base.Position = value;
-
-                //This stops the frame from being able to change its position when in a layout.
-                if (Layout != LayoutType.None)
-                    forceRefresh();
             }
         }
 
@@ -163,7 +135,7 @@
         /// </summary>
         public Frame(Item parent) 
             : base(parent)
-        { }
+        { refreshItem(); }
 
         /// <summary>
         /// Create a Frame with given fixed size.
@@ -171,7 +143,7 @@
         public Frame(Item parent, Vector2 size) 
             : base(parent)
         {
-            m_fixedSize = size;
+            m_forceSize = size;
         }
 
         /// <summary>
@@ -182,7 +154,7 @@
             : base(null)
         {
             m_forceSize = new Vector2(bounds.Width, bounds.Height);
-            Position = new Vector2(bounds.Center.X, bounds.Center.Y);
+            LayoutPosition = new Vector2(bounds.Center.X, bounds.Center.Y);
         }
 
         #endregion
@@ -214,27 +186,17 @@
         #region Layout Helpers
         internal override void refreshItem()
         {
-            //refreshItem can be called from within this function to this object again.
-            //Don't allow this
-            if (m_lockRefresh)
-                return;
-
-            m_lockRefresh = true;
-
             switch (m_sizePolicy)
             {
-                case SizeType.Minimum:
-                    if(Layout != LayoutType.None)
-                        layoutMinimum();
+                case SizeType.Greedy:
+                    layoutMinimum();
                     break;
-                case SizeType.Maximum:
+                case SizeType.Shared:
                     layoutMaximum();
                     break;
             }
 
             base.refreshItem();
-
-            m_lockRefresh = false;
         }
 
         private void layoutMinimum()
@@ -257,6 +219,10 @@
                         v.LayoutPosition = new Vector2(0, height + tHeight / 2);
                         height += tHeight;
                         width = Math.Max(width, v.MeasureWidth);
+                        break;
+                    case LayoutType.None:
+                        width = Math.Max(width, v.MeasureWidth);
+                        height = Math.Max(height, v.MeasureHeight);
                         break;
                 }
             }
@@ -281,6 +247,7 @@
             {
                 v.Height = StaticHeight;
                 v.Width = StaticWidth;
+
                 switch(Layout)
                 {
                     case LayoutType.Horizontal:
@@ -340,19 +307,6 @@
                         break;
                 }
             }
-        }
-
-        /// <summary>
-        /// Reset the Item to a fresh state
-        /// </summary>
-        public override void Reset(bool isFocus)
-        {
-            refreshItem();
-
-            foreach (var v in Children)
-                v.refreshItem();
-
-            base.Reset(isFocus);
         }
 
         #endregion

@@ -18,74 +18,66 @@
         public FrameMenu(MultiController controllers, List<Controller> allControllers, Rectangle bounds)
             : base(controllers, bounds)
         {
-            //BaseFrame is a Menu Frame that inherits the size of the menu
-            //Set Baseframe properties
-            BaseFrame.Layout = Layout.Vertical;
+            new Button(BaseFrame, "Top left aligned") { HorizontalAlignment = HAlign.Left, VerticalAlignment = VAlign.Top };
+            new Button(BaseFrame, "Top right aligned") { HorizontalAlignment = HAlign.Right, VerticalAlignment = VAlign.Top };
+            new Button(BaseFrame, "Bot left aligned") { HorizontalAlignment = HAlign.Left, VerticalAlignment = VAlign.Bottom };
+            new Button(BaseFrame, "Bot right aligned") { HorizontalAlignment = HAlign.Right, VerticalAlignment = VAlign.Bottom };
+            new Button(BaseFrame, "Bot aligned") { VerticalAlignment = VAlign.Bottom };
+            new Button(BaseFrame, "Top aligned") { VerticalAlignment = VAlign.Top };
 
-            //Create a title, and scale the text so it is a little bigger
-            Label title = new Label(BaseFrame, "This menu was created through layouts and alignments");
-            title.FontColor = Color.Gold;
+            new Button(BaseFrame, Item.ArrowRight, "Alignment Stretch") { HorizontalAlignment = HAlign.Right, LabelStyle = Button.Style.LabelLeft };
+            new Button(BaseFrame, Item.ArrowLeft, "go left") { HorizontalAlignment = HAlign.Left, LabelStyle = Button.Style.LabelRight };
 
-            Frame horizontalFrame = new Frame(BaseFrame);
-            horizontalFrame.Layout = Layout.Horizontal;
+            new Label(BaseFrame, "BaseFrame Alignments");
 
-            Button btn = new Button(horizontalFrame, Item.ButtonTexture, "One");
-            btn.VerticalAlignment = VAlign.Top;
-            btn.HorizontalAlignment = HAlign.Left;
+            OnCloseSound = Item.DefaultFocusSound;
 
-            btn = new Button(horizontalFrame, Item.ButtonTexture, "Two");
-            btn.VerticalAlignment = VAlign.Top;
-            btn.HorizontalAlignment = HAlign.Right;
+            RightMenu rMenu = new RightMenu(controllers, allControllers, bounds);
+            rMenu.OnClosing = delegate() { BaseFrame.Visible = false;  OnCloseSound = Menu.DefaultCloseSound; IsAlive = false; };
 
-            horizontalFrame = new Frame(BaseFrame);
-            horizontalFrame.Layout = Layout.Horizontal;
+            BaseFrame.OnRight = delegate() { BaseFrame.KeepFocus = true; ActiveSubMenu = rMenu; };
+            BaseFrame.OnB = delegate() { OnCloseSound = Menu.DefaultCloseSound; };
+         //   BaseFrame.OnLeft = delegate() { };
+        }
+    }
 
-            btn = new Button(horizontalFrame, Item.ButtonTexture, "Three");
-            btn.VerticalAlignment = VAlign.Stretch;
-            btn.HorizontalAlignment = HAlign.Left;
+    class RightMenu : Menu
+    {
 
-            btn = new Button(horizontalFrame, Item.ButtonTexture, "Four");
-            btn.VerticalAlignment = VAlign.Bottom;
-            btn.HorizontalAlignment = HAlign.Right;
+        /// <summary>
+        /// Sample Frame Menu
+        /// </summary>
+        public RightMenu(MultiController controllers, List<Controller> allControllers, Rectangle bounds)
+            : base(controllers, bounds)
+        {
+            new Label(BaseFrame, "Alignment Stretch");
 
-            horizontalFrame = new Frame(BaseFrame);
-            horizontalFrame.Layout = Layout.Horizontal;
-
-            btn = new Button(horizontalFrame, Item.ButtonTexture, "Third");
-            btn.HorizontalAlignment = HAlign.Stretch;
-            btn.TextLabel.Scale = Vector2.One / btn.Scale;
-
-            horizontalFrame = new Frame(BaseFrame);
-            horizontalFrame.Layout = Layout.Horizontal;
-
-            Label lbl = new Label(horizontalFrame, "One");
-            lbl.HorizontalAlignment = HAlign.Stretch;
-
-            lbl = new Label(horizontalFrame, "Two");
-            lbl.VerticalAlignment = VAlign.Top;
-            lbl.HorizontalAlignment = HAlign.Right;
-
-            horizontalFrame = new Frame(BaseFrame);
-            horizontalFrame.Layout = Layout.Horizontal;
-
-            lbl = new Label(horizontalFrame, "Three");
-            lbl.VerticalAlignment = VAlign.Bottom;
-            lbl.HorizontalAlignment = HAlign.Left;
-
-            lbl = new Label(horizontalFrame, "Four");
-            lbl.VerticalAlignment = VAlign.Bottom;
-            lbl.HorizontalAlignment = HAlign.Right;
-
-            horizontalFrame = new Frame(BaseFrame);
-            horizontalFrame.Layout = Layout.Horizontal;
-            lbl = new Label(horizontalFrame, "third");
+            Button top = new Button(BaseFrame, "Top Horizontal Stretch (Baseframe Width)") { VerticalAlignment = VAlign.Top, HorizontalAlignment = HAlign.Stretch };
 
             Reset();
-        }
 
-        public override void Draw(GameTime gameTime, Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
-        {
-            base.Draw(gameTime, spriteBatch);
+            Frame constrainingFrame = new Frame(BaseFrame) 
+            { 
+                SizePolicy = Frame.SizeType.Greedy,
+                HorizontalAlignment = HAlign.Right
+            };
+
+            Button vertBtn = new Button(constrainingFrame, "Alignment Right\nV Stretch (500 px)") 
+            {
+                VerticalAlignment = VAlign.Stretch,
+                Animation = AnimateType.None
+            };
+
+            constrainingFrame.FixedSize = new Vector2(vertBtn.MeasureWidth, 500);
+
+            new Button(BaseFrame, Item.ArrowLeft, "Alignments") 
+            {
+                HorizontalAlignment = HAlign.Left,
+                LabelStyle = Button.Style.LabelRight 
+            };
+
+            OnCloseSound = Item.DefaultFocusSound;
+            BaseFrame.OnLeft = delegate() { IsAlive = false; };
         }
     }
 }

@@ -890,11 +890,6 @@
             This is only for the menu class to use as the super parent of a Menu
             </summary>
         </member>
-        <member name="M:DisplaySpring.Frame.Reset(System.Boolean)">
-            <summary>
-            Reset the Item to a fresh state
-            </summary>
-        </member>
         <member name="P:DisplaySpring.Frame.Layout">
             <summary>
             Defines the LayoutType of the frame.
@@ -904,11 +899,6 @@
         <member name="P:DisplaySpring.Frame.SizePolicy">
             <summary>
             Changes the SizeType for the Frame. Maximum is the default.
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Frame.ForceSize">
-            <summary>
-            Sets the fixed size for the Frame.
             </summary>
         </member>
         <member name="P:DisplaySpring.Frame.FixedSize">
@@ -924,11 +914,6 @@
         <member name="P:DisplaySpring.Frame.StaticWidth">
             <summary>
             Width of the item. Layout space is not included. Scale is not included.
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Frame.Position">
-            <summary>
-            Position of the object. Default is Vector2.Zero, which is center based.
             </summary>
         </member>
         <member name="P:DisplaySpring.Frame.Padding">
@@ -963,17 +948,15 @@
             Determines how much space to use when children are layed out.
             </summary>
         </member>
-        <member name="F:DisplaySpring.Frame.SizeType.Maximum">
+        <member name="F:DisplaySpring.Frame.SizeType.Shared">
             <summary>
-            Use all space inside of Frame to lay out children.
-            LayoutStretch applies to this type.
-            Alignments do not work with this type.
+            Evenly distribute Frame boundaries between children
+            LayoutStretch defines distribution ratios
             </summary>
         </member>
-        <member name="F:DisplaySpring.Frame.SizeType.Minimum">
+        <member name="F:DisplaySpring.Frame.SizeType.Greedy">
             <summary>
-            Use minimal space. This is calculated only by Width, Height, and Padding of Children.
-            Alignments work with This type.
+            Give children as much space as they want to claim
             </summary>
         </member>
         <member name="T:DisplaySpring.ScrollBar">
@@ -1003,9 +986,29 @@
             You can give the button no background and no foreground with just text
             </summary>
         </member>
+        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item)">
+            <summary>
+            Create a default button
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,System.String)">
+            <summary>
+            Create a default button with a label
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,DisplaySpring.MultiController)">
+            <summary>
+            Create a default button
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,DisplaySpring.MultiController,System.String)">
+            <summary>
+            Create a default button with a label
+            </summary>
+        </member>
         <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,DisplaySpring.MultiController,Microsoft.Xna.Framework.Graphics.Texture2D)">
             <summary>
-            Create a menu button with specific background
+            Create a button with specific background
             </summary>
         </member>
         <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,DisplaySpring.MultiController,Microsoft.Xna.Framework.Graphics.Texture2D,System.String)">
@@ -1030,22 +1033,27 @@
         </member>
         <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Graphics.Texture2D,System.String)">
             <summary>
-            Create menu button with specific background and label text
+            Create button with specific background and label text
             </summary>
         </member>
         <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Graphics.Texture2D)">
             <summary>
-            Create menu button with specific background and focus background
+            Create button with specific background and focus background
             </summary>
         </member>
         <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Graphics.Texture2D,System.String)">
             <summary>
-            Create menu button with specific background, focus background and label text
+            Create button with specific background, focus background and label text
             </summary>
         </member>
         <member name="M:DisplaySpring.Button.Reset(System.Boolean)">
             <summary>
             Reset the Item to a fresh state
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Button.LabelScaled">
+            <summary>
+            If true, the label will scale with the button. Otherwise the label will only use its scale value
             </summary>
         </member>
         <member name="P:DisplaySpring.Button.FocusTexture">

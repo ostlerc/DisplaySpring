@@ -36,7 +36,7 @@
             lbl.HorizontalAlignment = HAlign.Right;
 
             Frame parent = new Frame(BaseFrame);
-            parent.SizePolicy = Frame.SizeType.Minimum;
+            parent.SizePolicy = Frame.SizeType.Greedy;
             parent.Layout = Layout.Horizontal;
             parent.HorizontalAlignment = HAlign.Right;
             parent.VerticalAlignment = VAlign.Bottom;
@@ -45,7 +45,7 @@
             new Button(parent, Item.ButtonTexture, "three");
 
             parent = new Frame(BaseFrame);
-            parent.SizePolicy = Frame.SizeType.Minimum;
+            parent.SizePolicy = Frame.SizeType.Greedy;
             parent.Layout = Layout.Vertical;
             parent.HorizontalAlignment = HAlign.Right;
             parent.VerticalAlignment = VAlign.Top;

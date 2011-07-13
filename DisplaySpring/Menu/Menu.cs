@@ -130,7 +130,7 @@
         public virtual bool IsAlive 
         {
             get { return m_isAlive; }
-            set 
+            set
             {
                 m_isAlive = value;
                 if (!value)
@@ -208,8 +208,8 @@
 
         private void Init()
         {
-            m_baseFrame.ForceSize = LayoutSize;
-            m_baseFrame.Position = new Vector2(m_bounds.Center.X, m_bounds.Center.Y);
+            m_baseFrame.FixedSize = LayoutSize;
+            m_baseFrame.LayoutPosition = new Vector2(m_bounds.Center.X, m_bounds.Center.Y);
             m_baseFrame.ScaleImageToWidth(m_bounds.Width);
             m_baseFrame.ScaleImageToHeight(m_bounds.Height);
         }
@@ -301,13 +301,13 @@
                 }
             }
 
+            m_baseFrame.Update(gameTime);
+
             if ( m_controllers != null)
             {
                 if (m_controllers.State(ButtonSet.Back) || m_controllers.State(ButtonSet.B))
                     Close();
             }
-
-            m_baseFrame.Update(gameTime);
         }
 
         /// <summary>

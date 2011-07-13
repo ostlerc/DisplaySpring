@@ -88,6 +88,7 @@
         private VerticalAlignmentType m_verticalAlignment = VAlign.Center;
         private Vector2 m_center = Vector2.Zero;
         private ButtonState m_buttonState = ButtonState.Pressed;
+        internal bool m_dirty = true;
 
         /// <summary>
         /// Default SelectSound
@@ -242,10 +243,7 @@
         /// </summary>
         protected void forceRefresh()
         {
-            if(Parent != null)
-                Parent.refreshItem();
-            else
-                refreshItem();
+            m_dirty = true;
         }
 
         /// <summary>
@@ -323,7 +321,7 @@
 
                 m_horizontalAlignment = value;
 
-                forceRefresh();
+                refreshItem();
             }
         }
 
@@ -341,7 +339,7 @@
 
                 m_verticalAlignment = value;
 
-                forceRefresh();
+                refreshItem();
             }
         }
 
@@ -466,7 +464,7 @@
         /// <summary>
         /// Position of the object. Default is Vector2.Zero, which is center based.
         /// </summary>
-        public virtual Vector2 Position { get { return m_pos; } set { m_pos = value; } }
+        public virtual Vector2 Position { get { return m_pos; } internal set { m_pos = value; } }
 
         private Vector2 m_layoutPosition = Vector2.Zero;
         private Vector2 m_offset = Vector2.Zero;
@@ -474,7 +472,7 @@
         /// <summary>
         /// Secondary position used for layouts. This is applied in conjunctionwith alignments.
         /// </summary>
-        internal virtual Vector2 LayoutPosition { get { return m_layoutPosition; } set { m_layoutPosition = value; } }
+        internal virtual Vector2 LayoutPosition { get { return m_layoutPosition; } set { m_layoutPosition = value; refreshItem(); } }
 
         /// <summary>
         /// Primary way to 'offset' a position of an item with alignments. This is because position is reset when alignments are set.
@@ -500,7 +498,7 @@
                 if (m_height != value)
                 {
                     m_height = value;
-                    forceRefresh();
+                    refreshItem();
                 }
             } 
         }
@@ -517,7 +515,7 @@
                 if (m_width != value)
                 {
                     m_width = value;
-                    forceRefresh();
+                    refreshItem();
                 }
             } 
         }
@@ -717,6 +715,8 @@
         /// </summary>
         public virtual void Update(GameTime gameTime)
         {
+            cleanUp();
+
             if(Fade)
                 m_alpha.Update(gameTime);
 
@@ -824,6 +824,8 @@
         /// </summary>
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            cleanUp();
+
             if (!Visible)
                 return;
 
@@ -845,11 +847,25 @@
                 v.recursiveReset();
         }
 
+        internal void cleanUp()
+        {
+            if (m_dirty)
+            {
+                m_dirty = false;
+                refreshItem();
+
+                foreach (var v in Children)
+                    v.cleanUp();
+            }
+        }
+
         /// <summary>
         /// Reset the Item to a fresh state
         /// </summary>
         public virtual void Reset(bool isFocus)
         {
+            cleanUp();
+
             recursiveReset();
 
             if (isFocus) //don't play initial focus sound
@@ -876,7 +892,10 @@
                 v.refreshItem();
 
             if ((Width == 0 && Height == 0) || Parent == null)
+            {
+                Position = LayoutPosition + Offset;
                 return;
+            }
 
             Vector2 pos = LayoutPosition;
 

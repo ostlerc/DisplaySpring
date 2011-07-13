@@ -18,6 +18,30 @@
         internal Sprite m_bg;
         internal Sprite m_focused;
         internal Label m_label;
+        internal Style m_style = Style.LabelCenter;
+        internal bool m_scaleLabel = false;
+
+        public enum Style
+        {
+            LabelCenter,
+            LabelLeft,
+            LabelRight
+        }
+
+        /// <summary>
+        /// If true, the label will scale with the button. Otherwise the label will only use its scale value
+        /// </summary>
+        public bool LabelScaled
+        {
+            get { return m_scaleLabel; }
+            set { m_scaleLabel = value; }
+        }
+
+        public Style LabelStyle
+        {
+            get { return m_style; }
+            set { m_style = value; forceRefresh(); }
+        }
 
         /// <summary>
         /// The focus background of the button.
@@ -127,11 +151,24 @@
                 float w = 0;
 
                 if (Focus && m_focused != null)
-                    w = m_focused.StaticWidth;
+                    w = m_focused.MeasureWidth;
                 else if (m_bg != null)
-                    w = m_bg.StaticWidth;
+                    w = m_bg.MeasureWidth;
 
-                return Math.Max(w, m_label != null ? m_label.StaticWidth : 0); 
+                float labelWidth = 0;
+
+                if (m_label != null)
+                    labelWidth = m_label.MeasureWidth;
+
+                switch(LabelStyle)
+                {
+                    case Style.LabelLeft:
+                    case Style.LabelRight:
+                        return w + labelWidth;
+                    case Style.LabelCenter:
+                    default:
+                        return w;
+                }
             }
         }
         public override float StaticHeight
@@ -144,7 +181,16 @@
                 else if (m_bg != null)
                     h = m_bg.StaticHeight;
 
-                return Math.Max(h, m_label != null ? m_label.StaticHeight : 0); 
+                float labelHeight = m_label != null ? m_label.StaticHeight : 0;
+                switch(LabelStyle)
+                {
+                    case Style.LabelCenter:
+                    default:
+                        return h;
+                    case Style.LabelLeft:
+                    case Style.LabelRight:
+                        return h + labelHeight;
+                }
             }
         }
 
@@ -172,7 +218,42 @@
         #region Constructors
 
         /// <summary>
-        /// Create a menu button with specific background
+        /// Create a default button
+        /// </summary>
+        public Button(Item parent) 
+            : base(parent)
+        {
+            Initialize(Button.ButtonTexture, Button.ButtonHighlightTexture, "");
+        }
+
+        /// <summary>
+        /// Create a default button with a label
+        /// </summary>
+        public Button(Item parent, string label) 
+            : base(parent)
+        {
+            Initialize(Button.ButtonTexture, Button.ButtonHighlightTexture, label);
+        }
+        /// <summary>
+        /// Create a default button
+        /// </summary>
+        public Button(Item parent, MultiController c) 
+            : base(parent, c)
+        {
+            Initialize(Button.ButtonTexture, Button.ButtonHighlightTexture, "");
+        }
+
+        /// <summary>
+        /// Create a default button with a label
+        /// </summary>
+        public Button(Item parent, MultiController c, string label) 
+            : base(parent, c)
+        {
+            Initialize(Button.ButtonTexture, Button.ButtonHighlightTexture, label);
+        }
+
+        /// <summary>
+        /// Create a button with specific background
         /// </summary>
         public Button(Item parent, MultiController c, Texture2D background) 
             : base(parent, c)
@@ -217,7 +298,7 @@
         }
 
         /// <summary>
-        /// Create menu button with specific background and label text
+        /// Create button with specific background and label text
         /// </summary>
         public Button(Item parent, Texture2D background, string text) 
             : base(parent)
@@ -226,7 +307,7 @@
         }
 
         /// <summary>
-        /// Create menu button with specific background and focus background
+        /// Create button with specific background and focus background
         /// </summary>
         public Button(Item parent, Texture2D background, Texture2D focused) 
             : base(parent)
@@ -235,7 +316,7 @@
         }
 
         /// <summary>
-        /// Create menu button with specific background, focus background and label text
+        /// Create button with specific background, focus background and label text
         /// </summary>
         public Button(Item parent, Texture2D background, Texture2D focused, string text) 
             : base(parent)
@@ -275,7 +356,7 @@
 
             Animation = AnimateType.Size;
 
-            refreshItem();
+            forceRefresh();
         }
 
         /// <summary>
@@ -315,13 +396,33 @@
             else if (Enabled && FocusTexture != null)//focused background
                 curSprite = m_focused;
 
+            switch(LabelStyle)
+            {
+                case Style.LabelCenter:
+                default:
+                    m_label.LayoutPosition = Vector2.Zero;
+                    break;
+                case Style.LabelLeft:
+                    m_label.LayoutPosition = -new Vector2(StaticWidth - m_label.StaticWidth, 0) / 2;
+                    curSprite.LayoutPosition = new Vector2(StaticWidth - curSprite.StaticWidth, 0) / 2;
+                    break;
+                case Style.LabelRight:
+                    m_label.LayoutPosition = new Vector2(StaticWidth - m_label.StaticWidth, 0) / 2;
+                    curSprite.LayoutPosition = -new Vector2(StaticWidth - curSprite.StaticWidth, 0) / 2;
+                    break;
+            }
+
             curSprite.Draw(gameTime, spriteBatch, local);
 
             foreach (var v in Children)
             {
                 if (v == m_bg || v == m_focused)
                     continue;
-                v.Draw(gameTime, spriteBatch, local);
+
+                if(v == m_label && !LabelScaled)
+                    v.Draw(gameTime, spriteBatch, Matrix.Multiply(Matrix.CreateScale(1 / Scale.X, 1 / Scale.Y, 1), local));
+                else
+                    v.Draw(gameTime, spriteBatch, local);
             }
         }
 

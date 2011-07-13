@@ -193,15 +193,10 @@
                 v.Enabled = false;
             }
 
-            foreach (var v in Children)
-            {
-                v.refreshItem();
-            }
+            forceRefresh();
 
             item.Visible = true;
             item.Focus = Focus;
-
-            refreshItem();
         }
 
         /// <summary>
