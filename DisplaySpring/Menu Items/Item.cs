@@ -88,6 +88,7 @@
         private VerticalAlignmentType m_verticalAlignment = VAlign.Center;
         private Vector2 m_center = Vector2.Zero;
         private ButtonState m_buttonState = ButtonState.Pressed;
+        private bool m_exclusiveInput = true;
         internal bool m_dirty = true;
 
         /// <summary>
@@ -234,6 +235,16 @@
         {
             get { return m_buttonState; }
             set { m_buttonState = value; }
+        }
+
+        /// <summary>
+        /// If true, only one controller delegate can be called per update cycle
+        /// Else, all button delegates are handles simultaneously
+        /// </summary>
+        public bool ExclusiveInput
+        {
+            get { return m_exclusiveInput; }
+            set { m_exclusiveInput = value; }
         }
 
         /// <summary>
@@ -734,46 +745,67 @@
 
             if (m_controller != null)
             {
+                bool continueInput = true;
+
                 if (m_controller.State(ButtonSet.Up, InputState))
                 {
                     Up();
+
+                    if (ExclusiveInput)
+                        continueInput = false;
                 }
-                else if (m_controller.State(ButtonSet.Down, InputState))
+                if (continueInput && m_controller.State(ButtonSet.Down, InputState))
                 {
                     Down();
+
+                    if (ExclusiveInput)
+                        continueInput = false;
                 }
-                else if (m_controller.State(ButtonSet.Right, InputState))
+                if (continueInput && m_controller.State(ButtonSet.Right, InputState))
                 {
                     Right();
+
+                    if (ExclusiveInput)
+                        continueInput = false;
                 }
-                else if (m_controller.State(ButtonSet.Left, InputState))
+                if (continueInput && m_controller.State(ButtonSet.Left, InputState))
                 {
                     Left();
+
+                    if (ExclusiveInput)
+                        continueInput = false;
                 }
-                else if (m_controller.State(ButtonSet.A, InputState))
+                if (continueInput && m_controller.State(ButtonSet.A, InputState))
                 {
                     if (A() && m_activateSound != null)
                         m_activateSound.Play(0.5f, 0f, 0f);
+
+                    if (ExclusiveInput)
+                        continueInput = false;
                 }
-                else if (m_controller.State(ButtonSet.Start, InputState))
+                if (continueInput && m_controller.State(ButtonSet.Start, InputState))
                 {
                     Start();
+
+                    if (ExclusiveInput)
+                        continueInput = false;
                 }
-                else if (m_controller.State(ButtonSet.Back, InputState))
+                if (continueInput && m_controller.State(ButtonSet.Back, InputState))
                 {
                     Back();
+
+                    if (ExclusiveInput)
+                        continueInput = false;
                 }
-                if(m_controller.State(ButtonSet.B, InputState))
+                if(continueInput && m_controller.State(ButtonSet.B, InputState))
                 {
                     B();
                     if ((Focus == false || ForceCancelSound) && m_cancelSound != null)
                         m_cancelSound.Play(0.5f, 0f, 0f);
                 }
-                else
-                {
-                    return;
-                }
-                m_framesRun = 0;
+
+                if(!continueInput)
+                    m_framesRun = 0;
             }
         }
 

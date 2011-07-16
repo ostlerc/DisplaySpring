@@ -66,7 +66,7 @@
                 HorizontalAlignment = HAlign.Right
             };
 
-            Button vertBtn = new Button(constrainingFrame, "Alignment Right\nV Stretch (500 px)") 
+            Button vertBtn = new Button(constrainingFrame, "Alignment Right\nVertical Align Stretch\nFixed height (500 px)") 
             {
                 VerticalAlignment = VAlign.Stretch,
                 Animation = AnimateType.None,

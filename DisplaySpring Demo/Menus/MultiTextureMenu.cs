@@ -20,10 +20,15 @@
         public MultiTextureMenu(MultiController controllers, List<Controller> allControllers, Rectangle bounds)
             : base(controllers, bounds)
         {
-            Label lbl = new Label(BaseFrame, "Press A (Enter) to change alignment on Frame\nLeft Thumbstick (Arrow Keys) to move around\n+/- to scale\nStart or Space to reset");
+            Label lbl = new Label(BaseFrame, 
+                "Create MultiTextures by placing items in a Frame\n" +
+                "Press A (Enter) to change alignment on Frame\n" + 
+                "Left Thumbstick (Arrow Keys) to move around\n" + 
+                "+/- to scale\nStart or Space to reset");
             lbl.Depth += .11f;
 
-            BaseFrame.InputState = ButtonState.Held;
+            BaseFrame.InputState = ButtonState.Continuous;
+            BaseFrame.ExclusiveInput = false;
 
             multiFrame = new Frame(BaseFrame, new Vector2(400, 200)) 
             { 
@@ -49,9 +54,9 @@
             new Label(multiFrame, "400x200 frame\nTop Left Aligned");
 
             int at = 4;
-            BaseFrame.OnA = delegate() 
+            multiFrame.OnA = delegate() 
             {
-                BaseFrame.KeepFocus = true;
+                multiFrame.KeepFocus = true;
 
                 if (at == 0)
                 {
@@ -131,6 +136,7 @@
         public override void Reset()
         {
             base.Reset();
+            multiFrame.Enabled = true;
         }
     }
 }

@@ -20,7 +20,7 @@
         public ButtonScrollListMenu(MultiController controllers, List<Controller> allControllers, Rectangle bounds)
             : base(controllers, bounds)
         {
-            BaseFrame.Layout = Layout.Vertical;
+            BaseFrame.Layout = Layout.VerticalShared;
 
             //Create a title, and scale the text so it is a little bigger
             new Label(BaseFrame, "This menu shows a sample of buttons in a scroll list.") 

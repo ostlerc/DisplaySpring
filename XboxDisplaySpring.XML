@@ -252,6 +252,12 @@
             State in which triggers the On delegates
             </summary>
         </member>
+        <member name="P:DisplaySpring.Item.ExclusiveInput">
+            <summary>
+            If true, only one controller delegate can be called per update cycle
+            Else, all button delegates are handles simultaneously
+            </summary>
+        </member>
         <member name="P:DisplaySpring.Item.Parent">
             <summary>
             Parent item of the object. The highest parent will always be the BaseFrame of the Menu.

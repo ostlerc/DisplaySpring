@@ -224,11 +224,8 @@
             {
                 if (v.LayoutStretch == 0)
                 {
-                    if (Parent != null)
-                    {
-                        v.Width = Parent.Width;
-                        v.Height = Parent.Height;
-                    }
+                    v.Width = Width;
+                    v.Height = Height;
                     v.LayoutPosition = Vector2.Zero;
                     continue;
                 }
