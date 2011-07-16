@@ -11,65 +11,38 @@
     using Layout = DisplaySpring.Frame.LayoutType;
     using Microsoft.Xna.Framework.Input;
 
-    public class MainMenu : Menu
+    public static class MenuCreator
     {
-        ScrollList sl;
-
         /// <summary>
-        /// Sample Main Menu
+        /// Creates a Main Menu
         /// </summary>
-        public MainMenu(MultiController controllers, List<Controller> allControllers, Rectangle bounds)
-            : base(controllers, bounds)
+        public static Menu createMainMenu(MultiController controllers, List<Controller> allControllers, Rectangle bounds)
         {
-            BaseFrame.Layout = Layout.Vertical;
+            Menu MainMenu = new Menu(controllers, bounds);
+            MainMenu.BaseFrame.Layout = Layout.Vertical;
 
-            Label lbl = new Label(BaseFrame, "Display Spring Demo");
-            lbl.Scale = new Vector2(2, 2);
-            lbl.FontColor = Color.White;
+            new Label(MainMenu.BaseFrame, "Display Spring Demo") { Scale = new Vector2(2, 2), FontColor = Color.White };
 
-            sl = new ScrollList(BaseFrame);
+            ScrollList sl = new ScrollList(MainMenu.BaseFrame);
             sl.Focus = true;
             sl.LayoutStretch = 4;
             sl.Scale = new Vector2(2,2);
 
-            lbl = new Label(sl, "Frames Menu");
-            lbl.OnA = delegate() { ActiveSubMenu = new FrameMenu(controllers, allControllers, bounds); };
+            Label lbl = new Label(sl, "Frames Menu");
+            lbl.OnA = delegate() { MainMenu.ActiveSubMenu = new FrameMenu(controllers, allControllers, bounds); };
             lbl = new Label(sl, "Open submenu of this menu (recursion!)");
-            lbl.OnA = delegate() { ActiveSubMenu = new MainMenu(controllers, allControllers, bounds); };
+            lbl.OnA = delegate() { MainMenu.ActiveSubMenu = MenuCreator.createMainMenu(controllers, allControllers, bounds); };
             lbl = new Label(sl, "Scroll List Menu");
-            lbl.OnA = delegate() { ActiveSubMenu = new ButtonScrollListMenu(controllers, allControllers, bounds); };
+            lbl.OnA = delegate() { MainMenu.ActiveSubMenu = new ButtonScrollListMenu(controllers, allControllers, bounds); };
             lbl = new Label(sl, "Multi Texture Menu");
-            lbl.OnA = delegate() { ActiveSubMenu = new MultiTextureMenu(controllers, allControllers, bounds); };
+            lbl.OnA = delegate() { MainMenu.ActiveSubMenu = new MultiTextureMenu(controllers, allControllers, bounds); };
             lbl = new Label(sl, "Input Menu");
-            lbl.OnA = delegate() { ActiveSubMenu = new InputMenu(controllers, allControllers, bounds); };
+            lbl.OnA = delegate() { MainMenu.ActiveSubMenu = new InputMenu(controllers, allControllers, bounds); };
             lbl = new Label(sl, "Option Button Menu");
-            lbl.OnA = delegate() { ActiveSubMenu = new OptionButtonMenu(controllers, allControllers, bounds); };
+            lbl.OnA = delegate() { MainMenu.ActiveSubMenu = new OptionButtonMenu(controllers, allControllers, bounds); };
             lbl = new Label(sl, "Exit");
-            lbl.OnA = delegate() { Close(); };
-            Reset();
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            if(sl.ItemController.Pressed(Keys.F))
-            {
-                sl.SelectedIndex++;
-            }
-            else if (sl.ItemController.Pressed(Keys.R))
-            {
-                sl.SelectedIndex--;
-            }
-
-            base.Update(gameTime);
-        }
-
-        /// <summary>
-        /// The reset button will provide a way to set focus to a button when changing
-        /// to and from sub menus. It is best to override and implement this function
-        /// </summary>
-        public override void Reset()
-        {
-            base.Reset(sl);
+            lbl.OnA = delegate() { MainMenu.Close(); };
+            return MainMenu;
         }
     }
 }

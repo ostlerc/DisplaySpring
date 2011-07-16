@@ -20,7 +20,7 @@ namespace DisplaySpringDemo
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         UpdateEvent updates;
-        MainMenu mainMenu;
+        Menu mainMenu;
 
         public MenuDemo()
         {
@@ -53,7 +53,7 @@ namespace DisplaySpringDemo
             App.LoadContent(Content, GraphicsDevice);
 
             Menu.LoadContent(GraphicsDevice, App.MenuFont);
-            mainMenu = new MainMenu(App.PrimaryController, App.Controllers, App.TitleSafeArea);
+            mainMenu = MenuCreator.createMainMenu(App.PrimaryController, App.Controllers, App.TitleSafeArea);
         }
 
         /// <summary>

@@ -22,7 +22,7 @@
     /// Base class for a Menu.
     /// Helps provide easy interfacing with submenus and user input
     /// </summary>
-    public abstract class Menu
+    public class Menu
     {
         #region Member variables
         internal static SpriteFont m_font;
@@ -142,7 +142,7 @@
         /// The sub menu to recieve updates.
         /// When there is a sub menu, the parent menu will not recieve updates
         /// </summary>
-        protected virtual Menu ActiveSubMenu
+        public virtual Menu ActiveSubMenu
         {
             get { return m_activeSubMenu; }
             set 
