@@ -9,6 +9,7 @@
     using Microsoft.Xna.Framework.Graphics;
     using DisplaySpring;
     using Layout = DisplaySpring.Frame.LayoutType;
+    using Microsoft.Xna.Framework.Input;
 
     public class MainMenu : Menu
     {
@@ -46,6 +47,20 @@
             lbl = new Label(sl, "Exit");
             lbl.OnA = delegate() { Close(); };
             Reset();
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            if(sl.ItemController.Pressed(Keys.F))
+            {
+                sl.SelectedIndex++;
+            }
+            else if (sl.ItemController.Pressed(Keys.R))
+            {
+                sl.SelectedIndex--;
+            }
+
+            base.Update(gameTime);
         }
 
         /// <summary>

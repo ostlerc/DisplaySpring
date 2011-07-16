@@ -28,7 +28,6 @@
             lbl.Depth += .11f;
 
             BaseFrame.InputState = ButtonState.Continuous;
-            BaseFrame.ExclusiveInput = false;
 
             multiFrame = new Frame(BaseFrame, new Vector2(400, 200)) 
             { 

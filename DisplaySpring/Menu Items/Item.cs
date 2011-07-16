@@ -245,16 +245,6 @@
         }
 
         /// <summary>
-        /// If true, only one controller delegate can be called per update cycle
-        /// Else, all button delegates are handles simultaneously
-        /// </summary>
-        public bool ExclusiveInput
-        {
-            get { return m_exclusiveInput; }
-            set { m_exclusiveInput = value; }
-        }
-
-        /// <summary>
         /// Will force a refresh on this item.
         /// If it has a parent, the parent will
         /// be refreshed as well
@@ -723,6 +713,9 @@
             m_alpha = new Animation(0, 1, FadeTime);
             m_alpha.Val = 1;
             Parent = parent;
+
+            if (buttonSetList == null)
+                buttonSetList = GetValues<ButtonSet>();
         }
         #endregion
 
@@ -754,82 +747,50 @@
 
             if (m_controller != null)
             {
-                bool continueInput = true;
-
-                if (buttonSetList == null)
-                    buttonSetList = GetValues<ButtonSet>();
-
-                if(continueInput && onState != null)
+                if(onState != null)
                 {
                     foreach(ButtonSet set in buttonSetList)
                     {
-                        if (m_controller.State(set, InputState) && State(set))
-                            break;
+                        if (m_controller.State(set, InputState))
+                            State(set);
                     }
                 }
 
                 if (m_controller.State(ButtonSet.Up, InputState))
                 {
                     Up();
-
-                    if (ExclusiveInput)
-                        continueInput = false;
                 }
-                if (continueInput && m_controller.State(ButtonSet.Down, InputState))
+                if (m_controller.State(ButtonSet.Down, InputState))
                 {
                     Down();
-
-                    if (ExclusiveInput)
-                        continueInput = false;
                 }
-                if (continueInput && m_controller.State(ButtonSet.Right, InputState))
+                if (m_controller.State(ButtonSet.Right, InputState))
                 {
                     Right();
-
-                    if (ExclusiveInput)
-                        continueInput = false;
                 }
-                if (continueInput && m_controller.State(ButtonSet.Left, InputState))
+                if (m_controller.State(ButtonSet.Left, InputState))
                 {
                     Left();
-
-                    if (ExclusiveInput)
-                        continueInput = false;
                 }
-                if (continueInput && m_controller.State(ButtonSet.A, InputState))
+                if (m_controller.State(ButtonSet.A, InputState))
                 {
                     if (A() && m_activateSound != null)
                         m_activateSound.Play(0.5f, 0f, 0f);
-
-                    if (ExclusiveInput)
-                        continueInput = false;
                 }
-                if (continueInput && m_controller.State(ButtonSet.Start, InputState))
+                if (m_controller.State(ButtonSet.Start, InputState))
                 {
                     Start();
-
-                    if (ExclusiveInput)
-                        continueInput = false;
                 }
-                if (continueInput && m_controller.State(ButtonSet.Back, InputState))
+                if (m_controller.State(ButtonSet.Back, InputState))
                 {
                     Back();
-
-                    if (ExclusiveInput)
-                        continueInput = false;
                 }
-                if(continueInput && m_controller.State(ButtonSet.B, InputState))
+                if(m_controller.State(ButtonSet.B, InputState))
                 {
                     B();
                     if ((Focus == false || ForceCancelSound) && m_cancelSound != null)
                         m_cancelSound.Play(0.5f, 0f, 0f);
-
-                    if (ExclusiveInput)
-                        continueInput = false;
                 }
-
-                if(!continueInput)
-                    m_framesRun = 0;
             }
         }
 

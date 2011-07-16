@@ -106,7 +106,7 @@
         /// <summary>
         /// The currently selected index
         /// </summary>
-        public int SelectedIndex { get { return m_selectedIndex; } set { m_selectedIndex = value; } }
+        public int SelectedIndex { get { return m_selectedIndex; } set { selectIndex(value); } }
 
         internal int StartIndex { get { return m_startIndex; } }
 
@@ -589,6 +589,10 @@
         private void selectIndex(int index)
         {
             int oldIndex = m_selectedIndex;
+
+            if (index >= m_items.Count || index < 0)
+                return;
+
             if (index != m_selectedIndex)
             {
                 m_items[m_selectedIndex].Focus = false;
