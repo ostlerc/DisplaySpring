@@ -22,8 +22,8 @@
         {
             Label lbl = new Label(BaseFrame, 
                 "Create MultiTextures by placing items in a Frame\n" +
-                "Press A (Enter) to change alignment on Frame\n" + 
-                "Left Thumbstick (Arrow Keys) to move around\n" + 
+                "Press A (Enter) to change alignment on Frame\n" +
+                "Left Thumbstick (Arrow Keys) to move around\n" +
                 "+/- to scale\nStart or Space to reset");
             lbl.Depth += .11f;
 

@@ -193,10 +193,10 @@
                 v.Enabled = false;
             }
 
-            forceRefresh();
-
             item.Visible = true;
             item.Focus = Focus;
+
+            forceRefresh();
         }
 
         /// <summary>
@@ -218,7 +218,9 @@
             Item current = CurrentItem();
 
             if (current != null)
+            {
                 current.Reset(isFocus);
+            }
 
             base.Reset(isFocus);
         }

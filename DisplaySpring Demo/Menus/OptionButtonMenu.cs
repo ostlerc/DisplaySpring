@@ -12,32 +12,29 @@
 
     class OptionButtonMenu : Menu
     {
-        ScrollList sl;
-
         /// <summary>
         /// Sample Button Scroll List Menu
         /// </summary>
         public OptionButtonMenu(MultiController controllers, List<Controller> allControllers, Rectangle bounds)
             : base(controllers, bounds)
         {
-            BaseFrame.Layout = Layout.Vertical;
+            BaseFrame.Layout = Layout.VerticalShared;
 
             new Label(BaseFrame, "Left, Right controls index of OptionButton") 
             { VerticalAlignment = VAlign.Bottom };
 
-            sl = new ScrollList(BaseFrame)
+            ScrollList sl = new ScrollList(BaseFrame)
             { LayoutStretch = 3 };
 
-            OptionButton options = createOptionButton(sl, "Arrows Out");
+            OptionList options = createOptionButton(sl, "Arrows Out");
             options.ArrowsOut = true;
             createOptionButton(sl, "Arrows In");
-
-            Reset();
+            DefaultItem = sl;
         }
 
-        OptionButton createOptionButton(Item parent, string text)
+        OptionList createOptionButton(Item parent, string text)
         {
-            OptionButton options = new OptionButton(parent);
+            OptionList options = new OptionList(parent);
 
             Button btn = new Button(options, Item.ButtonTexture, "One, " + text);
             btn.TextLabel.FontFocusColor = Color.White;
@@ -51,15 +48,6 @@
             new Label(options, "a long text");
 
             return options;
-        }
-
-        /// <summary>
-        /// The reset button will provide a way to set focus to a button when changing
-        /// to and from sub menus. It is best to override and implement this function
-        /// </summary>
-        public override void Reset()
-        {
-            base.Reset(sl);
         }
     }
 }

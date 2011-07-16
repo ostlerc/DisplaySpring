@@ -29,6 +29,7 @@
         private static float m_ItemDrawDepth = 0.3f;
         private static float m_menuBackgroundDrawDepth = 0.4f;
         private static int m_defaultFadeTime = 750;
+        private Item m_defaultItem;
 
         /// <summary>
         /// Default sound played when a menu is closed
@@ -47,6 +48,16 @@
         public Frame BaseFrame
         {
             get { return m_baseFrame; }
+        }
+
+        /// <summary>
+        /// The item that will initially recieve focus on a Menu Reset.
+        /// This is the BaseFrame by default
+        /// </summary>
+        public Item DefaultItem
+        {
+            get { return m_defaultItem; }
+            set { m_defaultItem = value; }
         }
 
         /// <summary>
@@ -201,6 +212,7 @@
 
         private void Init()
         {
+            m_defaultItem = m_baseFrame;
             m_baseFrame.ForcedSize = LayoutSize;
             m_baseFrame.LayoutPosition = new Vector2(m_bounds.Center.X, m_bounds.Center.Y);
             m_baseFrame.ScaleImageToWidth(m_bounds.Width);
@@ -362,8 +374,6 @@
         {
             m_framesRun = 0;
 
-            m_baseFrame.Reset(false);
-
             item.Reset(true);
 
             if (ActiveSubMenu != null)
@@ -380,7 +390,7 @@
         /// </summary>
         public virtual void Reset()
         {
-            Reset(m_baseFrame);
+            Reset(m_defaultItem);
         }
         #endregion
     }

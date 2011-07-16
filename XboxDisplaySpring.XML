@@ -4,9 +4,9 @@
         <name>XBOXDisplaySpring</name>
     </assembly>
     <members>
-        <member name="T:DisplaySpring.Label">
+        <member name="T:DisplaySpring.Frame">
             <summary>
-            Class that draws a Item as a text object
+            A collection of Items that can be handled layouts
             </summary>
         </member>
         <member name="T:DisplaySpring.Item">
@@ -517,179 +517,304 @@
             Stretch contents Height to fit in given space
             </summary>
         </member>
-        <member name="M:DisplaySpring.Label.#ctor(DisplaySpring.Item,System.String)">
+        <member name="M:DisplaySpring.Frame.#ctor(DisplaySpring.Item)">
             <summary>
-            Create a label with text
+            Create an empty frame
             </summary>
         </member>
-        <member name="P:DisplaySpring.Label.Text">
+        <member name="M:DisplaySpring.Frame.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Vector2)">
             <summary>
-            Get's or sets the text for the object
+            Create a Frame with given fixed size.
             </summary>
         </member>
-        <member name="P:DisplaySpring.Label.FontColor">
+        <member name="M:DisplaySpring.Frame.#ctor(Microsoft.Xna.Framework.Rectangle)">
             <summary>
-            Get's or sets the default font color for the object, when object is not focused
+            Create a menu frame with specified bounds.
+            This is only for the menu class to use as the super parent of a Menu
             </summary>
         </member>
-        <member name="P:DisplaySpring.Label.FontFocusColor">
+        <member name="P:DisplaySpring.Frame.Layout">
             <summary>
-            Get's or sets the focused font color of the object
+            Defines the LayoutType of the frame.
+            </summary>
+            <seealso cref="T:DisplaySpring.Frame.LayoutType"/>
+        </member>
+        <member name="P:DisplaySpring.Frame.SizePolicy">
+            <summary>
+            Changes the SizeType for the Frame. Maximum is the default.
             </summary>
         </member>
-        <member name="P:DisplaySpring.Label.Font">
+        <member name="P:DisplaySpring.Frame.FixedSize">
             <summary>
-            Get's or sets the font value for the object
+            Sets the fixed size for the Frame.
             </summary>
         </member>
-        <member name="P:DisplaySpring.Animation.TimeoutMS">
+        <member name="P:DisplaySpring.Frame.Height">
             <summary>
-            Time in MS animation will last
+            Height of the item. Layout space is not included. Scale is not included.
             </summary>
         </member>
-        <member name="T:DisplaySpring.MenuAction">
+        <member name="P:DisplaySpring.Frame.Width">
             <summary>
-            A Delegate to represent specific callback events in a menu
+            Width of the item. Layout space is not included. Scale is not included.
             </summary>
         </member>
-        <member name="T:DisplaySpring.Menu">
+        <member name="P:DisplaySpring.Frame.Padding">
             <summary>
-            Base class for a Menu.
-            Helps provide easy interfacing with submenus and user input
+            When layout stretch is zero, this changes the spacing in pixels between items
             </summary>
         </member>
-        <member name="F:DisplaySpring.Menu.DefaultCloseSound">
+        <member name="T:DisplaySpring.Frame.LayoutType">
             <summary>
-            Default sound played when a menu is closed
+            The layout type represents how the Children will be
+            organized in the space the frame has.
+            None is the default type
             </summary>
         </member>
-        <member name="F:DisplaySpring.Menu.m_controllers">
+        <member name="F:DisplaySpring.Frame.LayoutType.None">
             <summary>
-            List of controllers the menu uses for input
+            No layout, Children will not be arranged. This is the default
             </summary>
         </member>
-        <member name="F:DisplaySpring.Menu.m_closeSound">
+        <member name="F:DisplaySpring.Frame.LayoutType.HorizontalShared">
             <summary>
-            List of sprites to draw for the background. These are static
-            images, no interactions or animations. Draws in order given in list
+            Horizontally layout Children by LayoutStretch
             </summary>
         </member>
-        <member name="M:DisplaySpring.Menu.#ctor(DisplaySpring.MultiController,Microsoft.Xna.Framework.Rectangle)">
+        <member name="F:DisplaySpring.Frame.LayoutType.VerticalShared">
             <summary>
-            default constructor for a menu
-            </summary>
-            <param name="c">Controllers that the menu receives input from</param>
-            <param name="bounds">Bounds the menu will reside in</param>
-        </member>
-        <member name="M:DisplaySpring.Menu.LoadContent(Microsoft.Xna.Framework.Graphics.GraphicsDevice,Microsoft.Xna.Framework.Graphics.SpriteFont)">
-            <summary>
-            Loads default content for All Menus and Items
-            </summary>
-            <param name="gd">Graphics Device of the Game</param>
-            <param name="DefaultFont">Default Font the menus will use for drawing text</param>
-        </member>
-        <member name="M:DisplaySpring.Menu.Update(Microsoft.Xna.Framework.GameTime)">
-            <summary>
-            Updates menu screen based on user input
+            Vertically layout Children by LayoutStretch
             </summary>
         </member>
-        <member name="M:DisplaySpring.Menu.Close">
+        <member name="F:DisplaySpring.Frame.LayoutType.Horizontal">
             <summary>
-            Exits the given menu.
-            Does nothing if StayAlive is true
+            Layout children Horizontally, centered in frame
             </summary>
         </member>
-        <member name="M:DisplaySpring.Menu.Draw(Microsoft.Xna.Framework.GameTime,Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+        <member name="F:DisplaySpring.Frame.LayoutType.Vertical">
             <summary>
-            Draws the menu
+            Layout children Vertically, centered in frame
             </summary>
         </member>
-        <member name="M:DisplaySpring.Menu.StaticInvoke(DisplaySpring.MenuAction)">
+        <member name="T:DisplaySpring.Frame.SizeType">
             <summary>
-            Activates the MenuAction if it is not null
+            Determines how much space to use when children are layed out.
             </summary>
         </member>
-        <member name="M:DisplaySpring.Menu.Reset(DisplaySpring.Item)">
+        <member name="F:DisplaySpring.Frame.SizeType.Minimum">
             <summary>
-            Resets the menu. 
-            Removes focus from every menu item but the given item
-            All sub menus are reset
+            Evenly distribute Frame boundaries between children
+            LayoutStretch defines distribution ratios
             </summary>
         </member>
-        <member name="M:DisplaySpring.Menu.Reset">
+        <member name="F:DisplaySpring.Frame.SizeType.Maximum">
             <summary>
-            Resets the menu. 
-            Removes focus from every menu item but the first item in the list.
-            All sub menus are reset
+            Give children as much space as they want to claim
             </summary>
         </member>
-        <member name="P:DisplaySpring.Menu.BaseFrame">
+        <member name="F:DisplaySpring.Frame.SizeType.Fixed">
             <summary>
-            The main frame of the menu that spans the bounds of the menu.
+            Use Fixed size
             </summary>
         </member>
-        <member name="P:DisplaySpring.Menu.DefaultFadeTime">
+        <member name="T:DisplaySpring.Button">
             <summary>
-            Amount of time in milliseconds the menu will fade from StartAlpha to EndAlpha
+            Button is basically a text button with callbacks
+            You can give the button no background and no foreground with just text
             </summary>
         </member>
-        <member name="P:DisplaySpring.Menu.Controllers">
+        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item)">
             <summary>
-            Controllers that control the menu
+            Create a default button
             </summary>
         </member>
-        <member name="P:DisplaySpring.Menu.Bounds">
+        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,System.String)">
             <summary>
-            Get or Set the bounds for the Menu
+            Create a default button with a label
             </summary>
         </member>
-        <member name="P:DisplaySpring.Menu.Font">
+        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,DisplaySpring.MultiController)">
             <summary>
-            Default text to use for Menu Items that have text
+            Create a default button
             </summary>
         </member>
-        <member name="P:DisplaySpring.Menu.KeepState">
+        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,DisplaySpring.MultiController,System.String)">
             <summary>
-            If true the menu will skip Reset() between sub menu calls
-            Default true
+            Create a default button with a label
             </summary>
         </member>
-        <member name="P:DisplaySpring.Menu.StayAlive">
+        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,DisplaySpring.MultiController,Microsoft.Xna.Framework.Graphics.Texture2D)">
             <summary>
-            If set to true, menu will not close/die 
+            Create a button with specific background
             </summary>
         </member>
-        <member name="P:DisplaySpring.Menu.IsAlive">
+        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,DisplaySpring.MultiController,Microsoft.Xna.Framework.Graphics.Texture2D,System.String)">
             <summary>
-            if set to false, will take the menu up one level in heirarchy - making this menu not the active menu anymore
-            The property is instantly reverted to true after menu has been popped off Menu stack
+            Create a menu item with specific background and text label
             </summary>
         </member>
-        <member name="P:DisplaySpring.Menu.ActiveSubMenu">
+        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,DisplaySpring.MultiController,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Graphics.Texture2D)">
             <summary>
-            The sub menu to recieve updates.
-            When there is a sub menu, the parent menu will not recieve updates
+            Create a menu item with specific background and highlight textures
             </summary>
         </member>
-        <member name="P:DisplaySpring.Menu.OnClosing">
+        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,DisplaySpring.MultiController,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Graphics.Texture2D,System.String)">
             <summary>
-            Delegate called when the menu is about to close
+            Create a menu item with specific background and focus background with text
             </summary>
         </member>
-        <member name="P:DisplaySpring.Menu.OnCloseSound">
+        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Graphics.Texture2D)">
             <summary>
-            Sound played when menu closes
+            Creates a static image element
             </summary>
         </member>
-        <member name="P:DisplaySpring.Menu.ItemDrawDepth">
+        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Graphics.Texture2D,System.String)">
             <summary>
-            Default draw depth for menu items
+            Create button with specific background and label text
             </summary>
         </member>
-        <member name="P:DisplaySpring.Menu.LayoutSize">
+        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Graphics.Texture2D)">
             <summary>
-            Sets the size of the base frame. The base frame will be
-            scaled to draw within the bounds given at menu initialization
+            Create button with specific background and focus background
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Graphics.Texture2D,System.String)">
+            <summary>
+            Create button with specific background, focus background and label text
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Button.Reset(System.Boolean)">
+            <summary>
+            Reset the Item to a fresh state
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Button.LabelScaled">
+            <summary>
+            If true, the label will scale with the button. Otherwise the label will only use its scale value
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Button.FocusTexture">
+            <summary>
+            The focus background of the button.
+            This texture is shown when the item has focus
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Button.Background">
+            <summary>
+            The main background of the button.
+            This texture is shown when the item does not have focus
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Button.TextLabel">
+            <summary>
+            Label of the Button
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Button.Focus">
+            <summary>
+            Gets or sets the focus for the menu item
+            On set to true the OnFocus delegate will be called and FocusSound will play
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Button.Enabled">
+            <summary>
+            A disabled button will not process in the update function
+            This is a simple way to set focus to false without any consequence
+            or side effect (like playing sounds, or causing delegates to be called)
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Button.Depth">
+            <summary>
+            Depth of the button. Default is Menu.ButtonDrawDepth
+            By default 0 = front -> 1 = back
+            </summary>
+        </member>
+        <member name="T:DisplaySpring.MultiController">
+            <summary>
+            A MultiController handles finding input from multiple controllers.
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.MultiController.op_Implicit(DisplaySpring.Controller)~DisplaySpring.MultiController">
+            <summary>
+            code to convert from Controller to MultiController
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.MultiController.Pressed(Microsoft.Xna.Framework.Input.Buttons)">
+            <summary>
+            Returns true if button b has been pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.MultiController.Pressed(Microsoft.Xna.Framework.Input.Keys)">
+            <summary>
+            returns true if keybard key k has been pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.MultiController.ToList">
+            <summary>
+            Returns the multicontroller as a list of Controllers
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.MultiController.State(DisplaySpring.ButtonSet,DisplaySpring.ButtonState)">
+            <summary>
+            Get a specific state out of the multi controller.
+            If any controller has the required state true is returned
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.MultiController.Pressed(DisplaySpring.ButtonSet)">
+            <summary>
+            Returns true if any button in the set in any controller is pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.MultiController.Released(DisplaySpring.ButtonSet)">
+            <summary>
+            Returns true if any button in the set in any controller is released
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.MultiController.Held(DisplaySpring.ButtonSet)">
+            <summary>
+            Returns true if any button in the set in any controller is held
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.MultiController.Continuous(DisplaySpring.ButtonSet)">
+            <summary>
+            Returns true if any button in the set in any controller is continuous
+            </summary>
+        </member>
+        <member name="T:DisplaySpring.AnimateType">
+            <summary>
+            Standard menu animation types
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.AnimateType.None">
+            <summary>
+            No Animation Type
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.AnimateType.Size">
+            <summary>
+            The object will animate on its size. Growing and Shrinking over a period of time
+            </summary>
+        </member>
+        <member name="T:DisplaySpring.Sprite">
+            <summary>
+            A static image that can change its size
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Sprite.m_texture">
+            <summary>
+            Texture for the sprite
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Sprite.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Graphics.Texture2D)">
+            <summary>
+            Create a Sprite with a texture
+            StaticSize of a Sprite is the texture size
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Sprite.Texture">
+            <summary>
+            The main background of the button.
+            This texture is shown when the item does not have focus
             </summary>
         </member>
         <member name="T:DisplaySpring.ScrollList">
@@ -823,318 +948,185 @@
             Delegate that comes with a index parameter
             </summary>
         </member>
-        <member name="T:DisplaySpring.UpdateEvent">
+        <member name="T:DisplaySpring.Label">
             <summary>
-            List of delegates to invoke on an update loop
+            Class that draws a Item as a text object
             </summary>
         </member>
-        <member name="M:DisplaySpring.UpdateEvent.#ctor">
+        <member name="M:DisplaySpring.Label.#ctor(DisplaySpring.Item,System.String)">
             <summary>
-            Default Constructor
+            Create a label with text
             </summary>
         </member>
-        <member name="M:DisplaySpring.UpdateEvent.AddEvent(DisplaySpring.UpdateEvent.UpdateDelegate)">
+        <member name="P:DisplaySpring.Label.Text">
             <summary>
-            Add an event to delegate
+            Get's or sets the text for the object
             </summary>
         </member>
-        <member name="M:DisplaySpring.UpdateEvent.Update(Microsoft.Xna.Framework.GameTime)">
+        <member name="P:DisplaySpring.Label.FontColor">
             <summary>
-            Invoke event for all delegates registered with the event
+            Get's or sets the default font color for the object, when object is not focused
             </summary>
         </member>
-        <member name="T:DisplaySpring.UpdateEvent.UpdateDelegate">
+        <member name="P:DisplaySpring.Label.FontFocusColor">
             <summary>
-            Delegates for running in an update event
+            Get's or sets the focused font color of the object
             </summary>
         </member>
-        <member name="T:DisplaySpring.MultiController">
+        <member name="P:DisplaySpring.Label.Font">
             <summary>
-            A MultiController handles finding input from multiple controllers.
+            Get's or sets the font value for the object
             </summary>
         </member>
-        <member name="M:DisplaySpring.MultiController.op_Implicit(DisplaySpring.Controller)~DisplaySpring.MultiController">
+        <member name="T:DisplaySpring.MenuAction">
             <summary>
-            code to convert from Controller to MultiController
+            A Delegate to represent specific callback events in a menu
             </summary>
         </member>
-        <member name="M:DisplaySpring.MultiController.Pressed(Microsoft.Xna.Framework.Input.Buttons)">
+        <member name="T:DisplaySpring.Menu">
             <summary>
-            Returns true if button b has been pressed
+            Base class for a Menu.
+            Helps provide easy interfacing with submenus and user input
             </summary>
         </member>
-        <member name="M:DisplaySpring.MultiController.Pressed(Microsoft.Xna.Framework.Input.Keys)">
+        <member name="F:DisplaySpring.Menu.DefaultCloseSound">
             <summary>
-            returns true if keybard key k has been pressed
+            Default sound played when a menu is closed
             </summary>
         </member>
-        <member name="M:DisplaySpring.MultiController.ToList">
+        <member name="F:DisplaySpring.Menu.m_controllers">
             <summary>
-            Returns the multicontroller as a list of Controllers
+            List of controllers the menu uses for input
             </summary>
         </member>
-        <member name="M:DisplaySpring.MultiController.State(DisplaySpring.ButtonSet,DisplaySpring.ButtonState)">
+        <member name="F:DisplaySpring.Menu.m_closeSound">
             <summary>
-            Get a specific state out of the multi controller.
-            If any controller has the required state true is returned
+            List of sprites to draw for the background. These are static
+            images, no interactions or animations. Draws in order given in list
             </summary>
         </member>
-        <member name="M:DisplaySpring.MultiController.Pressed(DisplaySpring.ButtonSet)">
+        <member name="M:DisplaySpring.Menu.#ctor(DisplaySpring.MultiController,Microsoft.Xna.Framework.Rectangle)">
             <summary>
-            Returns true if any button in the set in any controller is pressed
+            default constructor for a menu
+            </summary>
+            <param name="c">Controllers that the menu receives input from</param>
+            <param name="bounds">Bounds the menu will reside in</param>
+        </member>
+        <member name="M:DisplaySpring.Menu.LoadContent(Microsoft.Xna.Framework.Graphics.GraphicsDevice,Microsoft.Xna.Framework.Graphics.SpriteFont)">
+            <summary>
+            Loads default content for All Menus and Items
+            </summary>
+            <param name="gd">Graphics Device of the Game</param>
+            <param name="DefaultFont">Default Font the menus will use for drawing text</param>
+        </member>
+        <member name="M:DisplaySpring.Menu.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates menu screen based on user input
             </summary>
         </member>
-        <member name="M:DisplaySpring.MultiController.Released(DisplaySpring.ButtonSet)">
+        <member name="M:DisplaySpring.Menu.Close">
             <summary>
-            Returns true if any button in the set in any controller is released
+            Exits the given menu.
+            Does nothing if StayAlive is true
             </summary>
         </member>
-        <member name="M:DisplaySpring.MultiController.Held(DisplaySpring.ButtonSet)">
+        <member name="M:DisplaySpring.Menu.Draw(Microsoft.Xna.Framework.GameTime,Microsoft.Xna.Framework.Graphics.SpriteBatch)">
             <summary>
-            Returns true if any button in the set in any controller is held
+            Draws the menu
             </summary>
         </member>
-        <member name="M:DisplaySpring.MultiController.Continuous(DisplaySpring.ButtonSet)">
+        <member name="M:DisplaySpring.Menu.StaticInvoke(DisplaySpring.MenuAction)">
             <summary>
-            Returns true if any button in the set in any controller is continuous
+            Activates the MenuAction if it is not null
             </summary>
         </member>
-        <member name="T:DisplaySpring.Frame">
+        <member name="M:DisplaySpring.Menu.Reset(DisplaySpring.Item)">
             <summary>
-            A collection of Items that can be handled layouts
+            Resets the menu. 
+            Removes focus from every menu item but the given item
+            All sub menus are reset
             </summary>
         </member>
-        <member name="M:DisplaySpring.Frame.#ctor(DisplaySpring.Item)">
+        <member name="M:DisplaySpring.Menu.Reset">
             <summary>
-            Create an empty frame
+            Resets the menu. 
+            Removes focus from every menu item but the first item in the list.
+            All sub menus are reset
             </summary>
         </member>
-        <member name="M:DisplaySpring.Frame.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Vector2)">
+        <member name="P:DisplaySpring.Menu.BaseFrame">
             <summary>
-            Create a Frame with given fixed size.
+            The main frame of the menu that spans the bounds of the menu.
             </summary>
         </member>
-        <member name="M:DisplaySpring.Frame.#ctor(Microsoft.Xna.Framework.Rectangle)">
+        <member name="P:DisplaySpring.Menu.DefaultItem">
             <summary>
-            Create a menu frame with specified bounds.
-            This is only for the menu class to use as the super parent of a Menu
+            The item that will initially recieve focus on a Menu Reset.
+            This is the BaseFrame by default
             </summary>
         </member>
-        <member name="P:DisplaySpring.Frame.Layout">
+        <member name="P:DisplaySpring.Menu.DefaultFadeTime">
             <summary>
-            Defines the LayoutType of the frame.
-            </summary>
-            <seealso cref="T:DisplaySpring.Frame.LayoutType"/>
-        </member>
-        <member name="P:DisplaySpring.Frame.SizePolicy">
-            <summary>
-            Changes the SizeType for the Frame. Maximum is the default.
+            Amount of time in milliseconds the menu will fade from StartAlpha to EndAlpha
             </summary>
         </member>
-        <member name="P:DisplaySpring.Frame.FixedSize">
+        <member name="P:DisplaySpring.Menu.Controllers">
             <summary>
-            Sets the fixed size for the Frame.
+            Controllers that control the menu
             </summary>
         </member>
-        <member name="P:DisplaySpring.Frame.Height">
+        <member name="P:DisplaySpring.Menu.Bounds">
             <summary>
-            Height of the item. Layout space is not included. Scale is not included.
+            Get or Set the bounds for the Menu
             </summary>
         </member>
-        <member name="P:DisplaySpring.Frame.Width">
+        <member name="P:DisplaySpring.Menu.Font">
             <summary>
-            Width of the item. Layout space is not included. Scale is not included.
+            Default text to use for Menu Items that have text
             </summary>
         </member>
-        <member name="P:DisplaySpring.Frame.Padding">
+        <member name="P:DisplaySpring.Menu.KeepState">
             <summary>
-            When layout stretch is zero, this changes the spacing in pixels between items
+            If true the menu will skip Reset() between sub menu calls
+            Default true
             </summary>
         </member>
-        <member name="T:DisplaySpring.Frame.LayoutType">
+        <member name="P:DisplaySpring.Menu.StayAlive">
             <summary>
-            The layout type represents how the Children will be
-            organized in the space the frame has.
-            None is the default type
+            If set to true, menu will not close/die 
             </summary>
         </member>
-        <member name="F:DisplaySpring.Frame.LayoutType.None">
+        <member name="P:DisplaySpring.Menu.IsAlive">
             <summary>
-            No layout, Children will not be arranged. This is the default
+            if set to false, will take the menu up one level in heirarchy - making this menu not the active menu anymore
+            The property is instantly reverted to true after menu has been popped off Menu stack
             </summary>
         </member>
-        <member name="F:DisplaySpring.Frame.LayoutType.HorizontalShared">
+        <member name="P:DisplaySpring.Menu.ActiveSubMenu">
             <summary>
-            Horizontally layout Children by LayoutStretch
+            The sub menu to recieve updates.
+            When there is a sub menu, the parent menu will not recieve updates
             </summary>
         </member>
-        <member name="F:DisplaySpring.Frame.LayoutType.VerticalShared">
+        <member name="P:DisplaySpring.Menu.OnClosing">
             <summary>
-            Vertically layout Children by LayoutStretch
+            Delegate called when the menu is about to close
             </summary>
         </member>
-        <member name="F:DisplaySpring.Frame.LayoutType.Horizontal">
+        <member name="P:DisplaySpring.Menu.OnCloseSound">
             <summary>
-            Layout children Horizontally, centered in frame
+            Sound played when menu closes
             </summary>
         </member>
-        <member name="F:DisplaySpring.Frame.LayoutType.Vertical">
+        <member name="P:DisplaySpring.Menu.ItemDrawDepth">
             <summary>
-            Layout children Vertically, centered in frame
+            Default draw depth for menu items
             </summary>
         </member>
-        <member name="T:DisplaySpring.Frame.SizeType">
+        <member name="P:DisplaySpring.Menu.LayoutSize">
             <summary>
-            Determines how much space to use when children are layed out.
-            </summary>
-        </member>
-        <member name="F:DisplaySpring.Frame.SizeType.Minimum">
-            <summary>
-            Evenly distribute Frame boundaries between children
-            LayoutStretch defines distribution ratios
-            </summary>
-        </member>
-        <member name="F:DisplaySpring.Frame.SizeType.Maximum">
-            <summary>
-            Give children as much space as they want to claim
-            </summary>
-        </member>
-        <member name="F:DisplaySpring.Frame.SizeType.Fixed">
-            <summary>
-            Use Fixed size
-            </summary>
-        </member>
-        <member name="T:DisplaySpring.ScrollBar">
-            <summary>
-            Class that handles creating / using textures that represent a ScrollBar
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.ScrollBar.#ctor(DisplaySpring.Item,System.Single,System.Single,System.Int32,System.Int32)">
-            <summary>
-            A simple scrollbar that can be vertical or horizontal with a few custom options
-            </summary>
-            <param name="parent">parent of the scrollbar</param>
-            <param name="width">width of the scrollbar</param>
-            <param name="height">height of the scrollbar</param>
-            <param name="objCount">amount of items in the container</param>
-            <param name="visibleUnits">amount of items that can be seen before scrolling is necessary</param>
-        </member>
-        <member name="P:DisplaySpring.ScrollBar.SelectedIndex">
-            <summary>
-            This is the primary way to scroll the scrollbar
-            The SelectedIndex is 0 based
-            </summary>
-        </member>
-        <member name="T:DisplaySpring.Button">
-            <summary>
-            Button is basically a text button with callbacks
-            You can give the button no background and no foreground with just text
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item)">
-            <summary>
-            Create a default button
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,System.String)">
-            <summary>
-            Create a default button with a label
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,DisplaySpring.MultiController)">
-            <summary>
-            Create a default button
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,DisplaySpring.MultiController,System.String)">
-            <summary>
-            Create a default button with a label
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,DisplaySpring.MultiController,Microsoft.Xna.Framework.Graphics.Texture2D)">
-            <summary>
-            Create a button with specific background
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,DisplaySpring.MultiController,Microsoft.Xna.Framework.Graphics.Texture2D,System.String)">
-            <summary>
-            Create a menu item with specific background and text label
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,DisplaySpring.MultiController,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Graphics.Texture2D)">
-            <summary>
-            Create a menu item with specific background and highlight textures
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,DisplaySpring.MultiController,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Graphics.Texture2D,System.String)">
-            <summary>
-            Create a menu item with specific background and focus background with text
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Graphics.Texture2D)">
-            <summary>
-            Creates a static image element
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Graphics.Texture2D,System.String)">
-            <summary>
-            Create button with specific background and label text
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Graphics.Texture2D)">
-            <summary>
-            Create button with specific background and focus background
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Button.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Graphics.Texture2D,System.String)">
-            <summary>
-            Create button with specific background, focus background and label text
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Button.Reset(System.Boolean)">
-            <summary>
-            Reset the Item to a fresh state
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Button.LabelScaled">
-            <summary>
-            If true, the label will scale with the button. Otherwise the label will only use its scale value
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Button.FocusTexture">
-            <summary>
-            The focus background of the button.
-            This texture is shown when the item has focus
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Button.Background">
-            <summary>
-            The main background of the button.
-            This texture is shown when the item does not have focus
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Button.TextLabel">
-            <summary>
-            Label of the Button
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Button.Focus">
-            <summary>
-            Gets or sets the focus for the menu item
-            On set to true the OnFocus delegate will be called and FocusSound will play
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Button.Enabled">
-            <summary>
-            A disabled button will not process in the update function
-            This is a simple way to set focus to false without any consequence
-            or side effect (like playing sounds, or causing delegates to be called)
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Button.Depth">
-            <summary>
-            Depth of the button. Default is Menu.ButtonDrawDepth
-            By default 0 = front -> 1 = back
+            Sets the size of the base frame. The base frame will be
+            scaled to draw within the bounds given at menu initialization
             </summary>
         </member>
         <member name="T:DisplaySpring.StackedItem">
@@ -1198,6 +1190,46 @@
             A disabled button will not process in the update function
             This is a simple way to set focus to false without any consequence
             or side effect (like playing sounds, or causing delegates to be called)
+            </summary>
+        </member>
+        <member name="T:DisplaySpring.OptionList">
+            <summary>
+            A collection of Items, with only one visible or in focus at a time
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.OptionList.#ctor(DisplaySpring.Item,DisplaySpring.MultiController)">
+            <summary>
+            Create a StackedItem with parents size.
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.OptionList.#ctor(DisplaySpring.Item)">
+            <summary>
+            Create a StackedItem with parents size.
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.OptionList.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the Item
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.OptionList.Reset(System.Boolean)">
+            <summary>
+            Reset the Item to a fresh state
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.OptionList.SetCurrentItem(DisplaySpring.Item)">
+            <summary>
+            Sets the current item for the stack
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.OptionList.ArrowsOut">
+            <summary>
+            Defines if the arrows for the option button are outside the items boundaries
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.Animation.TimeoutMS">
+            <summary>
+            Time in MS animation will last
             </summary>
         </member>
         <member name="T:DisplaySpring.Controller">
@@ -1526,41 +1558,50 @@
             Returns the player index that the Controller references
             </summary>
         </member>
-        <member name="T:DisplaySpring.AnimateType">
+        <member name="T:DisplaySpring.ScrollBar">
             <summary>
-            Standard menu animation types
+            Class that handles creating / using textures that represent a ScrollBar
             </summary>
         </member>
-        <member name="F:DisplaySpring.AnimateType.None">
+        <member name="M:DisplaySpring.ScrollBar.#ctor(DisplaySpring.Item,System.Single,System.Single,System.Int32,System.Int32)">
             <summary>
-            No Animation Type
+            A simple scrollbar that can be vertical or horizontal with a few custom options
+            </summary>
+            <param name="parent">parent of the scrollbar</param>
+            <param name="width">width of the scrollbar</param>
+            <param name="height">height of the scrollbar</param>
+            <param name="objCount">amount of items in the container</param>
+            <param name="visibleUnits">amount of items that can be seen before scrolling is necessary</param>
+        </member>
+        <member name="P:DisplaySpring.ScrollBar.SelectedIndex">
+            <summary>
+            This is the primary way to scroll the scrollbar
+            The SelectedIndex is 0 based
             </summary>
         </member>
-        <member name="F:DisplaySpring.AnimateType.Size">
+        <member name="T:DisplaySpring.UpdateEvent">
             <summary>
-            The object will animate on its size. Growing and Shrinking over a period of time
+            List of delegates to invoke on an update loop
             </summary>
         </member>
-        <member name="T:DisplaySpring.Sprite">
+        <member name="M:DisplaySpring.UpdateEvent.#ctor">
             <summary>
-            A static image that can change its size
+            Default Constructor
             </summary>
         </member>
-        <member name="F:DisplaySpring.Sprite.m_texture">
+        <member name="M:DisplaySpring.UpdateEvent.AddEvent(DisplaySpring.UpdateEvent.UpdateDelegate)">
             <summary>
-            Texture for the sprite
+            Add an event to delegate
             </summary>
         </member>
-        <member name="M:DisplaySpring.Sprite.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Graphics.Texture2D)">
+        <member name="M:DisplaySpring.UpdateEvent.Update(Microsoft.Xna.Framework.GameTime)">
             <summary>
-            Create a Sprite with a texture
-            StaticSize of a Sprite is the texture size
+            Invoke event for all delegates registered with the event
             </summary>
         </member>
-        <member name="P:DisplaySpring.Sprite.Texture">
+        <member name="T:DisplaySpring.UpdateEvent.UpdateDelegate">
             <summary>
-            The main background of the button.
-            This texture is shown when the item does not have focus
+            Delegates for running in an update event
             </summary>
         </member>
         <member name="T:DisplaySpring.ItemCollection">
@@ -1586,41 +1627,6 @@
         <member name="M:DisplaySpring.ItemCollection.SetItem(System.Int32,DisplaySpring.Item)">
             <summary>
             Set the specific item in the list to a new value
-            </summary>
-        </member>
-        <member name="T:DisplaySpring.OptionButton">
-            <summary>
-            A collection of Items, with only one visible or in focus at a time
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.OptionButton.#ctor(DisplaySpring.Item,DisplaySpring.MultiController)">
-            <summary>
-            Create a StackedItem with parents size.
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.OptionButton.#ctor(DisplaySpring.Item)">
-            <summary>
-            Create a StackedItem with parents size.
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.OptionButton.Update(Microsoft.Xna.Framework.GameTime)">
-            <summary>
-            Updates the Item
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.OptionButton.Reset(System.Boolean)">
-            <summary>
-            Reset the Item to a fresh state
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.OptionButton.SetCurrentItem(DisplaySpring.Item)">
-            <summary>
-            Sets the current item for the stack
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.OptionButton.ArrowsOut">
-            <summary>
-            Defines if the arrows for the option button are outside the items boundaries
             </summary>
         </member>
     </members>

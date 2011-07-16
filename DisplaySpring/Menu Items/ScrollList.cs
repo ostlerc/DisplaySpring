@@ -352,7 +352,7 @@
             {
                 m_selectedIndex = nextVisible(-1);
                 m_startIndex = nextVisible(-1);
-                item.Enabled = true;
+                item.Enabled = Focus;
             }
 
             m_items.Insert(index, item);
@@ -453,9 +453,9 @@
                     break;
                 }
 
-            base.Reset(isFocus);
-
             UpdateScrollBar();
+
+            base.Reset(isFocus);
         }
 
         #region Movement functions
@@ -597,7 +597,7 @@
             {
                 m_items[m_selectedIndex].Focus = false;
                 m_selectedIndex = index;
-                m_items[index].Focus = true;
+                m_items[index].Focus = Focus;
             }
 
             if(IndexChanged != null)

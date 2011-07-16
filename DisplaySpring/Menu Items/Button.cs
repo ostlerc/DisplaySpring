@@ -53,7 +53,12 @@
             set 
             {
                 if (m_focused != null)
-                    m_focused.Texture = value;
+                {
+                    if (value == null)
+                        m_focused = null;
+                    else
+                        m_focused.Texture = value;
+                }
                 else
                 {
                     m_focused = new Sprite(this, value);
@@ -364,12 +369,16 @@
         /// </summary>
         public override void Reset(bool isFocus)
         {
+            base.Reset(isFocus);
+
             m_label.Reset(isFocus);
+
             if(m_bg != null)
                 m_bg.Reset(isFocus);
+
             if(m_focused != null)
                 m_focused.Reset(isFocus);
-            base.Reset(isFocus);
+
         }
         #endregion
         #endregion

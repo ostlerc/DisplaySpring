@@ -10,11 +10,11 @@
     /// <summary>
     /// A collection of Items, with only one visible or in focus at a time
     /// </summary>
-    public class OptionButton : StackedItem
+    public class OptionList : StackedItem
     {
         #region Member Variables
-        private Button m_leftArrow;
-        private Button m_rightArrow;
+        private Sprite m_leftArrow;
+        private Sprite m_rightArrow;
         private float m_highlightTimer = -1;
         private bool m_arrowsOut = false;
         #endregion
@@ -33,9 +33,10 @@
         /// <summary>
         /// Create a StackedItem with parents size.
         /// </summary>
-        public OptionButton(Item parent, MultiController controllers) 
+        public OptionList(Item parent, MultiController controllers) 
             : base(parent)
         {
+            Animation = AnimateType.None;
             ItemController = controllers;
             Initialize();
         }
@@ -43,7 +44,7 @@
         /// <summary>
         /// Create a StackedItem with parents size.
         /// </summary>
-        public OptionButton(Item parent) 
+        public OptionList(Item parent) 
             : base(parent)
         {
             Initialize();
@@ -51,14 +52,12 @@
 
         void Initialize()
         {
-            m_leftArrow = new Button(null, Item.ArrowLeft, Item.DefaultArrowLeftHighlight);
+            m_leftArrow = new Sprite(null, Item.ArrowLeft);
             m_leftArrow.HorizontalAlignment = HorizontalAlignmentType.Left;
-            m_leftArrow.Animation = AnimateType.None;
             m_leftArrow.Depth = Depth - .01f;
 
-            m_rightArrow = new Button(null, Item.ArrowRight, Item.DefaultArrowRightHighlight);
+            m_rightArrow = new Sprite(null, Item.ArrowRight);
             m_rightArrow.HorizontalAlignment = HorizontalAlignmentType.Right;
-            m_rightArrow.Animation = AnimateType.None;
             m_rightArrow.Depth = Depth - .01f;
         }
 
@@ -76,6 +75,8 @@
                 m_highlightTimer = -1;
                 m_leftArrow.Enabled = false;
                 m_rightArrow.Enabled = false;
+                m_leftArrow.Texture  = Item.ArrowLeft;
+                m_rightArrow.Texture = Item.ArrowRight;
             }
             else if (m_highlightTimer > 0)
             {
@@ -92,6 +93,7 @@
             if (oldIndex != CurrentIndex)
             {
                 m_leftArrow.Enabled = true;
+                m_leftArrow.Texture = Item.DefaultArrowLeftHighlight;
                 m_highlightTimer = 90;
             }
             return base.Left();
@@ -104,6 +106,7 @@
             if (oldIndex != CurrentIndex)
             {
                 m_rightArrow.Enabled = true;
+                m_rightArrow.Texture = Item.DefaultArrowRightHighlight;
                 m_highlightTimer = 90;
             }
 
@@ -155,12 +158,14 @@
                 m_rightArrow.Parent = item;
                 m_rightArrow.LayoutHeight = item.Height;
                 m_rightArrow.LayoutWidth = item.Width;
+                forceRefresh();
             }
 
             if (ArrowsOut)
             {
                 m_leftArrow.LayoutPosition = new Vector2(-m_leftArrow.Width * 1.08f, 0);
                 m_rightArrow.LayoutPosition = new Vector2(m_rightArrow.Width * 1.08f, 0);
+                forceRefresh();
             }
         }
 
@@ -169,8 +174,21 @@
         /// </summary>
         public override void Reset(bool isFocus)
         {
-            refreshArrows();
             base.Reset(isFocus);
+
+            refreshArrows();
+
+            if(m_leftArrow != null)
+                m_leftArrow.Reset(false);
+
+            if (m_rightArrow != null)
+                m_rightArrow.Reset(false);
+        }
+
+        internal override void childAdded(Item mi)
+        {
+            refreshArrows();
+            base.childAdded(mi);
         }
 
         /// <summary>

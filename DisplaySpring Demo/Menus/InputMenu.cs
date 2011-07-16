@@ -15,15 +15,28 @@
             BaseFrame.Layout = Frame.LayoutType.HorizontalShared;
 
             ScrollList leftList = new ScrollList(BaseFrame);
-            leftList.onState = delegate(ButtonSet set) 
+            ScrollList rightList = new ScrollList(BaseFrame);
+
+            OptionList options = new OptionList(leftList);
+
+            Button btn = new Button(options, "Pressed")
             {
-                switch (set)
+                Animation = AnimateType.None,
+                FocusTexture = null,
+                OnFocus = delegate()
                 {
                 }
             };
-            ScrollList rightList = new ScrollList(BaseFrame);
+            btn.TextLabel.FontFocusColor = Color.White;
 
+            btn = new Button(options, "Released") { FocusTexture = null, Animation = AnimateType.None };
+            btn.TextLabel.FontFocusColor = Color.White;
+            btn = new Button(options, "Held") { FocusTexture = null, Animation = AnimateType.None };
+            btn.TextLabel.FontFocusColor = Color.White;
+            btn = new Button(options, "Continuous") { FocusTexture = null, Animation = AnimateType.None };
+            btn.TextLabel.FontFocusColor = Color.White;
 
+            DefaultItem = options;
         }
     }
 }
