@@ -100,15 +100,6 @@ namespace DisplaySpring
             return m_controllers;
         }
 
-        public bool State(ButtonSet button)
-        {
-            foreach (var c in m_controllers)
-                if (c.State(button))
-                    return true;
-
-            return false;
-        }
-
         /// <summary>
         /// Get a specific state out of the multi controller.
         /// If any controller has the required state true is returned
@@ -120,6 +111,38 @@ namespace DisplaySpring
                     return true;
 
             return false;
+        }
+
+        /// <summary>
+        /// Returns true if any button in the set in any controller is pressed
+        /// </summary>
+        public bool Pressed(ButtonSet set)
+        {
+            return State(set, ButtonState.Released);
+        }
+
+        /// <summary>
+        /// Returns true if any button in the set in any controller is released
+        /// </summary>
+        public bool Released(ButtonSet set)
+        {
+            return State(set, ButtonState.Released);
+        }
+
+        /// <summary>
+        /// Returns true if any button in the set in any controller is held
+        /// </summary>
+        public bool Held(ButtonSet set)
+        {
+            return State(set, ButtonState.Held);
+        }
+
+        /// <summary>
+        /// Returns true if any button in the set in any controller is continuous
+        /// </summary>
+        public bool Continuous(ButtonSet set)
+        {
+            return State(set, ButtonState.Continuous);
         }
     }
 }

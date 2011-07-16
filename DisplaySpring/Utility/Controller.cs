@@ -245,6 +245,15 @@ namespace DisplaySpring
         }
 
         #region Pressed
+
+        /// <summary>
+        /// Returns true if any button in the set is pressed
+        /// </summary>
+        public bool Pressed(ButtonSet set)
+        {
+            return State(set, ButtonState.Pressed);
+        }
+
         /// <summary>
         /// Returns true if button b has been pressed
         /// </summary>
@@ -276,7 +285,7 @@ namespace DisplaySpring
         /// <summary>
         /// Returns true if one of the keys in keys has been pressed
         /// </summary>
-        public bool Pressed(List<Keys> keys)
+        internal bool Pressed(List<Keys> keys)
         {
             foreach (var k in keys)
                 if (Pressed(k))
@@ -286,6 +295,15 @@ namespace DisplaySpring
         }
         #endregion
         #region Released
+
+        /// <summary>
+        /// Returns true if any button in the set is released
+        /// </summary>
+        public bool Released(ButtonSet set)
+        {
+            return State(set, ButtonState.Released);
+        }
+
         /// <summary>
         /// Returns true if keyboard key k has been released
         /// </summary>
@@ -325,6 +343,14 @@ namespace DisplaySpring
         #endregion
 
         #region Held
+
+        /// <summary>
+        /// Returns true if any button in the set is held
+        /// </summary>
+        public bool Held(ButtonSet set)
+        {
+            return State(set, ButtonState.Held);
+        }
         /// <summary>
         /// Returns true if keyboard key k has been held. Only returns true once every HeldInterval
         /// </summary>
@@ -389,6 +415,14 @@ namespace DisplaySpring
         #region Continuous
 
         /// <summary>
+        /// Returns true if any button in the set is down
+        /// </summary>
+        public bool Continuous(ButtonSet set)
+        {
+            return State(set, ButtonState.Continuous);
+        }
+
+        /// <summary>
         /// Returns true if Key is down
         /// </summary>
         public bool Continuous(Keys k)
@@ -430,14 +464,6 @@ namespace DisplaySpring
             return ret;
         }
         #endregion
-
-        /// <summary>
-        /// Does a State, with ButtonState.Pressed for default
-        /// </summary>
-        public bool State(ButtonSet set)
-        {
-            return State(set, ButtonState.Pressed);
-        }
 
         /// <summary>
         /// Get a specific state out of the controller.

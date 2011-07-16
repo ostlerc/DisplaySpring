@@ -224,6 +224,11 @@
             {
                 if (v.LayoutStretch == 0)
                 {
+                    if (Parent != null)
+                    {
+                        v.Width = Parent.Width;
+                        v.Height = Parent.Height;
+                    }
                     v.LayoutPosition = Vector2.Zero;
                     continue;
                 }
@@ -307,6 +312,9 @@
 
             foreach (var v in Children)
             {
+                if (v.LayoutStretch == 0)
+                    continue;
+
                 switch (Layout)
                 {
                     case LayoutType.Horizontal:
@@ -332,23 +340,6 @@
             }
 
             base.refreshItem();
-        }
-
-        private void layoutGreedy()
-        {
-            foreach (var v in Children)
-            {
-                v.Height = StaticHeight;
-                v.Width = StaticWidth;
-
-                switch(Layout)
-                {
-                    case LayoutType.Horizontal:
-                        break;
-                    case LayoutType.Vertical:
-                        break;
-                }
-            }
         }
 
         #endregion

@@ -297,7 +297,7 @@
 
             if ( m_controllers != null)
             {
-                if (m_controllers.State(ButtonSet.Back) || m_controllers.State(ButtonSet.B))
+                if (m_controllers.Pressed(ButtonSet.Back) || m_controllers.Pressed(ButtonSet.B))
                     Close();
             }
         }

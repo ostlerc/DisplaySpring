@@ -97,10 +97,10 @@
             new Label(BaseFrame, "Size policies") { Offset = new Vector2(0, -250) };
 
             Frame topSharedFrame = new Frame(BaseFrame) { Layout = Frame.LayoutType.HorizontalShared, VerticalAlignment = VAlign.Top };
-            new Button(topSharedFrame, "Top Aligned"){ Animation = AnimateType.None };
+            new Button(topSharedFrame, "Top Aligned"){ Animation = AnimateType.None, HorizontalAlignment = HAlign.Left };
             new Button(topSharedFrame, "Horizontal Layout"){ Animation = AnimateType.None };
             new Button(topSharedFrame, "Sharing"){ Animation = AnimateType.None };
-            new Button(topSharedFrame, "Screen Width"){ Animation = AnimateType.None };
+            new Button(topSharedFrame, "Screen Width"){ Animation = AnimateType.None, HorizontalAlignment = HAlign.Right };
 
             Frame leftSharedFrame = new Frame(BaseFrame) { Layout = Frame.LayoutType.VerticalShared, HorizontalAlignment = HAlign.Left };
             new Button(leftSharedFrame, "Left Aligned"){ Animation = AnimateType.None };
@@ -118,7 +118,7 @@
             Button temp = new Button(greedyBottomFrame, "Bottom Aligned") { Animation = AnimateType.None, HorizontalAlignment = HAlign.Left };
             new Button(greedyBottomFrame, "Horizontal Layout") { Animation = AnimateType.None };
             new Button(greedyBottomFrame, "Sharing") { Animation = AnimateType.None };
-            new Button(greedyBottomFrame, "Screen Width") { Animation = AnimateType.None };
+            new Button(greedyBottomFrame, "Screen Width") { Animation = AnimateType.None, HorizontalAlignment = HAlign.Right };
 
             new Button(BaseFrame, Item.ArrowRight, "Alignments") { HorizontalAlignment = HAlign.Right, LabelStyle = Button.Style.LabelLeft };
 

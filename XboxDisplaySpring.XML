@@ -874,6 +874,26 @@
             If any controller has the required state true is returned
             </summary>
         </member>
+        <member name="M:DisplaySpring.MultiController.Pressed(DisplaySpring.ButtonSet)">
+            <summary>
+            Returns true if any button in the set in any controller is pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.MultiController.Released(DisplaySpring.ButtonSet)">
+            <summary>
+            Returns true if any button in the set in any controller is released
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.MultiController.Held(DisplaySpring.ButtonSet)">
+            <summary>
+            Returns true if any button in the set in any controller is held
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.MultiController.Continuous(DisplaySpring.ButtonSet)">
+            <summary>
+            Returns true if any button in the set in any controller is continuous
+            </summary>
+        </member>
         <member name="T:DisplaySpring.Frame">
             <summary>
             A collection of Items that can be handled layouts
@@ -1255,6 +1275,11 @@
             convert from MultiController to Controller
             </summary>
         </member>
+        <member name="M:DisplaySpring.Controller.Pressed(DisplaySpring.ButtonSet)">
+            <summary>
+            Returns true if any button in the set is pressed
+            </summary>
+        </member>
         <member name="M:DisplaySpring.Controller.Pressed(Microsoft.Xna.Framework.Input.Buttons)">
             <summary>
             Returns true if button b has been pressed
@@ -1275,6 +1300,11 @@
             Returns true if one of the keys in keys has been pressed
             </summary>
         </member>
+        <member name="M:DisplaySpring.Controller.Released(DisplaySpring.ButtonSet)">
+            <summary>
+            Returns true if any button in the set is released
+            </summary>
+        </member>
         <member name="M:DisplaySpring.Controller.Released(Microsoft.Xna.Framework.Input.Keys)">
             <summary>
             Returns true if keyboard key k has been released
@@ -1290,6 +1320,11 @@
             Returns true if one of the Buttons btns has been released
             </summary>
         </member>
+        <member name="M:DisplaySpring.Controller.Held(DisplaySpring.ButtonSet)">
+            <summary>
+            Returns true if any button in the set is held
+            </summary>
+        </member>
         <member name="M:DisplaySpring.Controller.Held(Microsoft.Xna.Framework.Input.Keys)">
             <summary>
             Returns true if keyboard key k has been held. Only returns true once every HeldInterval
@@ -1303,6 +1338,11 @@
         <member name="M:DisplaySpring.Controller.Held(System.Collections.Generic.List{Microsoft.Xna.Framework.Input.Buttons})">
             <summary>
             Returns true if one of the Buttons btns has been Held
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.Controller.Continuous(DisplaySpring.ButtonSet)">
+            <summary>
+            Returns true if any button in the set is down
             </summary>
         </member>
         <member name="M:DisplaySpring.Controller.Continuous(Microsoft.Xna.Framework.Input.Keys)">
@@ -1323,11 +1363,6 @@
         <member name="M:DisplaySpring.Controller.Continuous(System.Collections.Generic.List{Microsoft.Xna.Framework.Input.Keys})">
             <summary>
             Returns true if one of the Keys keys is down
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.Controller.State(DisplaySpring.ButtonSet)">
-            <summary>
-            Does a State, with ButtonState.Pressed for default
             </summary>
         </member>
         <member name="M:DisplaySpring.Controller.State(DisplaySpring.ButtonSet,DisplaySpring.ButtonState)">
