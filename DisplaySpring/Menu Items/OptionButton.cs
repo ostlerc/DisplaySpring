@@ -110,7 +110,7 @@
             return base.Right();
         }
 
-        public override float StaticWidth
+        public override float Width
         {
             get
             {
@@ -123,11 +123,11 @@
                     if (m_rightArrow != null)
                         arrowWidth += m_rightArrow.MeasureWidth;
                 }
-                return base.StaticWidth + arrowWidth;
+                return base.Width + arrowWidth;
             }
         }
 
-        public override float StaticHeight
+        public override float Height
         {
             get
             {
@@ -139,7 +139,7 @@
                 if (m_rightArrow != null)
                     height = Math.Max(m_rightArrow.MeasureHeight, height);
 
-                return Math.Max(base.StaticHeight, height);
+                return Math.Max(base.Height, height);
             }
         }
 
@@ -149,18 +149,18 @@
             if (item != null)
             {
                 m_leftArrow.Parent = item;
-                m_leftArrow.Width = item.StaticWidth;
-                m_leftArrow.Height = item.StaticHeight;
+                m_leftArrow.LayoutWidth = item.Width;
+                m_leftArrow.LayoutHeight = item.Height;
 
                 m_rightArrow.Parent = item;
-                m_rightArrow.Height = item.StaticHeight;
-                m_rightArrow.Width = item.StaticWidth;
+                m_rightArrow.LayoutHeight = item.Height;
+                m_rightArrow.LayoutWidth = item.Width;
             }
 
             if (ArrowsOut)
             {
-                m_leftArrow.LayoutPosition = new Vector2(-m_leftArrow.StaticWidth * 1.08f, 0);
-                m_rightArrow.LayoutPosition = new Vector2(m_rightArrow.StaticWidth * 1.08f, 0);
+                m_leftArrow.LayoutPosition = new Vector2(-m_leftArrow.Width * 1.08f, 0);
+                m_rightArrow.LayoutPosition = new Vector2(m_rightArrow.Width * 1.08f, 0);
             }
         }
 

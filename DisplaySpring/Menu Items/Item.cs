@@ -53,7 +53,7 @@
         {
             get
             {
-                return new Vector2(StaticWidth, StaticHeight) / 2;
+                return new Vector2(Width, Height) / 2;
             }
         }
 
@@ -498,7 +498,7 @@
         /// <summary>
         /// Height of the item. Layout space is included. Scale is not included.
         /// </summary>
-        public virtual float Height 
+        public virtual float LayoutHeight 
         { 
             get 
             {
@@ -517,7 +517,7 @@
         /// <summary>
         /// Width of the item. Layout space is included. Scale is not included.
         /// </summary>
-        public virtual float Width 
+        public virtual float LayoutWidth 
         { 
             get { return m_width; } 
 
@@ -534,17 +534,17 @@
         /// <summary>
         /// Height of the item. Layout space is not included. Scale is not included.
         /// </summary>
-        public abstract float StaticHeight { get; }
+        public abstract float Height { get; }
 
         /// <summary>
         /// Width of the item. Layout space is not included. Scale is not included.
         /// </summary>
-        public abstract float StaticWidth { get; }
+        public abstract float Width { get; }
 
         /// <summary>
-        /// Represents the Vector2(StaticWidth, StaticHeight) of the object
+        /// Represents the Vector2(Width, Height) of the object
         /// </summary>
-        public virtual Vector2 StaticSize { get { return new Vector2(StaticWidth, StaticHeight); } }
+        public virtual Vector2 Size { get { return new Vector2(Width, Height); } }
 
         /// <summary>
         /// Measures the Width of the item. Layout space is not included. Scale is included.
@@ -554,9 +554,9 @@
             get 
             {
                 if (Animation == AnimateType.Size)
-                    return StaticWidth * Scale.X * 1.18f;
+                    return Width * Scale.X * 1.18f;
 
-                return StaticWidth * Scale.X;
+                return Width * Scale.X;
             }
         }
 
@@ -568,9 +568,9 @@
             get 
             {
                 if (Animation == AnimateType.Size)
-                    return StaticHeight * Scale.Y * 1.18f;
+                    return Height * Scale.Y * 1.18f;
 
-                return StaticHeight * Scale.Y;
+                return Height * Scale.Y;
             }
         }
 
@@ -601,7 +601,7 @@
         /// <summary>
         /// Returns the Vector2(Width, Height) of the item. Layout space is not included. Scale is included.
         /// </summary>
-        public virtual Vector2 Size { get { return new Vector2(Width, Height); } }
+        public virtual Vector2 LayoutSize { get { return new Vector2(LayoutWidth, LayoutHeight); } }
 
         /// <summary>
         /// Visibility determines if item will be drawn.
@@ -923,7 +923,7 @@
             foreach (var v in Children)
                 v.refreshItem();
 
-            if ((Width == 0 && Height == 0) || Parent == null)
+            if ((LayoutWidth == 0 && LayoutHeight == 0) || Parent == null)
             {
                 Position = LayoutPosition + Offset;
                 return;
@@ -934,26 +934,26 @@
             switch (HorizontalAlignment)
             {
                 case HAlign.Left:
-                    pos.X += (StaticWidth - Width) / 2;
+                    pos.X += (Width - LayoutWidth) / 2;
                     break;
                 case HAlign.Right:
-                    pos.X += (Width - StaticWidth) / 2;
+                    pos.X += (LayoutWidth - Width) / 2;
                     break;
                 case HAlign.Stretch:
-                    ScaleImageToWidth(Width);
+                    ScaleImageToWidth(LayoutWidth);
                     break;
             }
 
             switch (VerticalAlignment)
             {
                 case VAlign.Top:
-                    pos.Y += (StaticHeight - Height) / 2;
+                    pos.Y += (Height - LayoutHeight) / 2;
                     break;
                 case VAlign.Bottom:
-                    pos.Y += (Height - StaticHeight) / 2;
+                    pos.Y += (LayoutHeight - Height) / 2;
                     break;
                 case VAlign.Stretch:
-                    ScaleImageToHeight(Height);
+                    ScaleImageToHeight(LayoutHeight);
                     break;
             }
 
@@ -1050,8 +1050,8 @@
         /// </summary>
         public virtual void ScaleImageToWidth(float width)
         {
-            if(StaticWidth != 0)
-                Scale = new Vector2(width / StaticWidth, Scale.Y);
+            if(Width != 0)
+                Scale = new Vector2(width / Width, Scale.Y);
         }
 
         /// <summary>
@@ -1059,8 +1059,8 @@
         /// </summary>
         public virtual void ScaleImageToHeight(float height)
         {
-            if(StaticHeight != 0)
-                Scale = new Vector2(Scale.X, height / StaticHeight);
+            if(Height != 0)
+                Scale = new Vector2(Scale.X, height / Height);
         }
 
         /// <summary>

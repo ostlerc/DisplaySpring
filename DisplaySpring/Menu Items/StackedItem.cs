@@ -66,7 +66,7 @@
         /// <summary>
         /// Height of the item. Layout space is not included. Scale is not included.
         /// </summary>
-        public override float StaticHeight 
+        public override float Height 
         { 
             get 
             {
@@ -75,14 +75,14 @@
                 if (current != null)
                     return current.MeasureHeight;
 
-                return Height;
+                return LayoutHeight;
             }
         }
 
         /// <summary>
         /// Width of the item. Layout space is not included. Scale is not included.
         /// </summary>
-        public override float StaticWidth 
+        public override float Width 
         {
             get
             { 
@@ -91,7 +91,7 @@
                 if (current != null)
                     return current.MeasureWidth;
 
-                return Width;
+                return LayoutWidth;
             }
         }
 
@@ -151,8 +151,8 @@
         public StackedItem(Item parent, Vector2 size) 
             : base(parent)
         {
-            Width = size.X;
-            Height = size.Y;
+            LayoutWidth = size.X;
+            LayoutHeight = size.Y;
             Initialize();
         }
 
@@ -184,8 +184,8 @@
 
             m_currentIndex = Items.IndexOf(item);
 
-            Width = item.StaticWidth;
-            Height = item.StaticHeight;
+            LayoutWidth = item.Width;
+            LayoutHeight = item.Height;
 
             foreach (var v in Items)
             {

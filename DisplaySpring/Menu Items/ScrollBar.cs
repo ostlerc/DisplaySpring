@@ -47,12 +47,12 @@
             set { m_selectedIndex = value; }
         }
 
-        public override float StaticHeight
+        public override float Height
         {
             get { return m_bg != null ? m_bg.Height : 0; }
         }
 
-        public override float StaticWidth
+        public override float Width
         {
             get { return m_bg != null ? m_bg.Width : 0; }
         }
@@ -68,8 +68,8 @@
         public ScrollBar(Item parent, float width, float height, int objCount, int visibleUnits) : base(parent) //TODO fix this base call with a parent
         {
             m_objectCount = objCount;
-            Width = width;
-            Height = height;
+            LayoutWidth = width;
+            LayoutHeight = height;
             m_visibleCount = visibleUnits;
 
             forceRefresh();
@@ -84,10 +84,10 @@
 
             lockRefresh = true;
 
-            if (Height > Width)
-                m_unitLength = (int)(Height / m_objectCount);
+            if (LayoutHeight > LayoutWidth)
+                m_unitLength = (int)(LayoutHeight / m_objectCount);
             else
-                m_unitLength = (int)(Width / m_objectCount);
+                m_unitLength = (int)(LayoutWidth / m_objectCount);
 
             m_length = m_unitLength * m_visibleCount;
 
@@ -129,7 +129,7 @@
             int offset = m_unitLength * (m_selectedIndex);
             int len = m_unitLength * m_visibleCount;
 
-            if (Width > Height) //horizontal
+            if (LayoutWidth > LayoutHeight) //horizontal
             {
                 m_slider.Position = Vector2.UnitX * ((len - m_bg.Width) / 2 + offset);
             }
@@ -143,29 +143,29 @@
 
         private Texture2D CreateBackgroundTexture()
         {
-            if ( Width == 0 || Height == 0)
+            if ( LayoutWidth == 0 || LayoutHeight == 0)
                 return null;
 
-            return CreateRectangleBorder((int)Width, (int)Height, 2, m_borderColor);
+            return CreateRectangleBorder((int)LayoutWidth, (int)LayoutHeight, 2, m_borderColor);
         }
 
         private Texture2D CreateSliderTexture()
         {
-            if (Width == 0 || Height == 0)
+            if (LayoutWidth == 0 || LayoutHeight == 0)
                 return null;
 
             Color[] colors;
             Texture2D sliderTexture;
 
-            if (Width > Height) //horizontal
+            if (LayoutWidth > LayoutHeight) //horizontal
             {
-                sliderTexture = new Texture2D(Menu.GraphicsDevice, m_length, (int)Height);
-                colors = new Color[(int)(m_length * Height)];
+                sliderTexture = new Texture2D(Menu.GraphicsDevice, m_length, (int)LayoutHeight);
+                colors = new Color[(int)(m_length * LayoutHeight)];
             }
             else //vertical
             {
-                sliderTexture = new Texture2D(Menu.GraphicsDevice, (int)Width, m_length);
-                colors = new Color[(int)(Width * m_length)];
+                sliderTexture = new Texture2D(Menu.GraphicsDevice, (int)LayoutWidth, m_length);
+                colors = new Color[(int)(LayoutWidth * m_length)];
             }
 
             for (int i = 0; i < colors.Length; i++)

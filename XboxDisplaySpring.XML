@@ -367,29 +367,29 @@
             Animation type of the item
             </summary>
         </member>
-        <member name="P:DisplaySpring.Item.Height">
+        <member name="P:DisplaySpring.Item.LayoutHeight">
             <summary>
             Height of the item. Layout space is included. Scale is not included.
             </summary>
         </member>
-        <member name="P:DisplaySpring.Item.Width">
+        <member name="P:DisplaySpring.Item.LayoutWidth">
             <summary>
             Width of the item. Layout space is included. Scale is not included.
             </summary>
         </member>
-        <member name="P:DisplaySpring.Item.StaticHeight">
+        <member name="P:DisplaySpring.Item.Height">
             <summary>
             Height of the item. Layout space is not included. Scale is not included.
             </summary>
         </member>
-        <member name="P:DisplaySpring.Item.StaticWidth">
+        <member name="P:DisplaySpring.Item.Width">
             <summary>
             Width of the item. Layout space is not included. Scale is not included.
             </summary>
         </member>
-        <member name="P:DisplaySpring.Item.StaticSize">
+        <member name="P:DisplaySpring.Item.Size">
             <summary>
-            Represents the Vector2(StaticWidth, StaticHeight) of the object
+            Represents the Vector2(Width, Height) of the object
             </summary>
         </member>
         <member name="P:DisplaySpring.Item.MeasureWidth">
@@ -412,7 +412,7 @@
             Returns the Vector2(MeasuredWidth, MeasureHeight)of the item. Layout space is not included. Scale is included.
             </summary>
         </member>
-        <member name="P:DisplaySpring.Item.Size">
+        <member name="P:DisplaySpring.Item.LayoutSize">
             <summary>
             Returns the Vector2(Width, Height) of the item. Layout space is not included. Scale is included.
             </summary>
@@ -937,12 +937,12 @@
             Sets the fixed size for the Frame.
             </summary>
         </member>
-        <member name="P:DisplaySpring.Frame.StaticHeight">
+        <member name="P:DisplaySpring.Frame.Height">
             <summary>
             Height of the item. Layout space is not included. Scale is not included.
             </summary>
         </member>
-        <member name="P:DisplaySpring.Frame.StaticWidth">
+        <member name="P:DisplaySpring.Frame.Width">
             <summary>
             Width of the item. Layout space is not included. Scale is not included.
             </summary>
@@ -1178,12 +1178,12 @@
             Gets or sets the current Item list of the stack
             </summary>
         </member>
-        <member name="P:DisplaySpring.StackedItem.StaticHeight">
+        <member name="P:DisplaySpring.StackedItem.Height">
             <summary>
             Height of the item. Layout space is not included. Scale is not included.
             </summary>
         </member>
-        <member name="P:DisplaySpring.StackedItem.StaticWidth">
+        <member name="P:DisplaySpring.StackedItem.Width">
             <summary>
             Width of the item. Layout space is not included. Scale is not included.
             </summary>

@@ -33,12 +33,12 @@
         /// </summary>
         internal Texture2D m_texture;
 
-        public override float StaticWidth
+        public override float Width
         {
             get { return m_texture == null ? 0 : m_texture.Width; }
         }
 
-        public override float StaticHeight
+        public override float Height
         {
             get { return m_texture == null ? 0 : m_texture.Height; }
         }

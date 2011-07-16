@@ -55,7 +55,7 @@
         internal Vector2 ForcedSize
         {
             get { return m_forceSize; }
-            set { m_forceSize = value; Width = value.X; Height = value.Y; refreshItem(); }
+            set { m_forceSize = value; LayoutWidth = value.X; LayoutHeight = value.Y; refreshItem(); }
         }
 
         /// <summary>
@@ -116,7 +116,7 @@
         /// <summary>
         /// Height of the item. Layout space is not included. Scale is not included.
         /// </summary>
-        public override float StaticHeight 
+        public override float Height 
         { 
             get 
             {
@@ -126,14 +126,14 @@
                 if (m_fixedSize.Y != 0)
                     return m_fixedSize.Y;
 
-                return Height;
+                return LayoutHeight;
             }
         } 
 
         /// <summary>
         /// Width of the item. Layout space is not included. Scale is not included.
         /// </summary>
-        public override float StaticWidth 
+        public override float Width 
         {
             get 
             {
@@ -143,7 +143,7 @@
                 if (m_fixedSize.X != 0)
                     return m_fixedSize.X;
 
-                return Width;
+                return LayoutWidth;
             }
         }
 
@@ -213,7 +213,7 @@
             Vector2 dimensions = Vector2.Zero;
 
             if(Layout == LayoutType.HorizontalShared || Layout == LayoutType.VerticalShared )
-                dimensions = Size;
+                dimensions = LayoutSize;
 
             float widthOrHeight = 0;
 
@@ -224,8 +224,8 @@
             {
                 if (v.LayoutStretch == 0)
                 {
-                    v.Width = Width;
-                    v.Height = Height;
+                    v.LayoutWidth = LayoutWidth;
+                    v.LayoutHeight = LayoutHeight;
                     v.LayoutPosition = Vector2.Zero;
                     continue;
                 }
@@ -250,27 +250,27 @@
                         float width = percentage * dimensions.X;
 
                         v.LayoutPosition = new Vector2((width - dimensions.X) / 2 + pos, 0);
-                        v.Width = width;
-                        v.Height = dimensions.Y;
-                        widthOrHeight = Math.Max(widthOrHeight, v.StaticHeight);
+                        v.LayoutWidth = width;
+                        v.LayoutHeight = dimensions.Y;
+                        widthOrHeight = Math.Max(widthOrHeight, v.Height);
 
                         pos += width;
                         break;
                     case LayoutType.VerticalShared:
                         float height = percentage * dimensions.Y;
-                        widthOrHeight = Math.Max(widthOrHeight, v.StaticWidth);
+                        widthOrHeight = Math.Max(widthOrHeight, v.Width);
 
                         v.LayoutPosition = new Vector2(0, (height - dimensions.Y) / 2 + pos);
-                        v.Width = dimensions.X;
-                        v.Height = height;
+                        v.LayoutWidth = dimensions.X;
+                        v.LayoutHeight = height;
 
                         pos += height;
                         break;
                     case LayoutType.None:
                         if (SizePolicy != SizeType.Fixed)
                         {
-                            v.Width = Width;
-                            v.Height = Height;
+                            v.LayoutWidth = LayoutWidth;
+                            v.LayoutHeight = LayoutHeight;
                         }
                         break;
                 }
@@ -301,8 +301,8 @@
                 case SizeType.Maximum:
                     if (Parent != null)
                     {
-                        m_fixedSize.X = Parent.Width;
-                        m_fixedSize.Y = Parent.Height;
+                        m_fixedSize.X = Parent.LayoutWidth;
+                        m_fixedSize.Y = Parent.LayoutHeight;
                     }
                     break;
             }
@@ -315,22 +315,22 @@
                 switch (Layout)
                 {
                     case LayoutType.Horizontal:
-                        v.Width = StaticWidth;
-                        v.Height = StaticHeight;
+                        v.LayoutWidth = Width;
+                        v.LayoutHeight = Height;
                         v.LayoutPosition -= new Vector2(dimensions.X/2 + Padding, 0);
                         break;
 
                     case LayoutType.Vertical:
-                        v.Width = StaticWidth;
-                        v.Height = StaticHeight;
+                        v.LayoutWidth = Width;
+                        v.LayoutHeight = Height;
                         v.LayoutPosition -= new Vector2(0, dimensions.Y/2 + Padding);
                         break;
                     case LayoutType.None:
                         v.LayoutPosition = Vector2.Zero;
                         if(SizePolicy == SizeType.Fixed)
                         {
-                            v.Width = m_fixedSize.X;
-                            v.Height = m_fixedSize.Y;
+                            v.LayoutWidth = m_fixedSize.X;
+                            v.LayoutHeight = m_fixedSize.Y;
                         }
                         break;
                 }

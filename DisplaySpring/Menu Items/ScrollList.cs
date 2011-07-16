@@ -145,11 +145,11 @@
             m_ignoreEvents = true;
             if (m_direction == Orientation.Horizontal)
             {
-                m_scroll = new ScrollBar(this, StaticWidth, 20, 0, 0);
+                m_scroll = new ScrollBar(this, Width, 20, 0, 0);
             }
             else
             {
-                m_scroll = new ScrollBar(this, 20, StaticHeight, 0, 0);
+                m_scroll = new ScrollBar(this, 20, Height, 0, 0);
             }
             m_ignoreEvents = false;
 
@@ -198,7 +198,7 @@
             }
         }
 
-        public override float StaticHeight
+        public override float Height
         {
             get 
             {
@@ -218,7 +218,7 @@
 
 
                 if (m_direction == Orientation.Horizontal)
-                    h += ScrollSpacing + m_scroll.StaticHeight;
+                    h += ScrollSpacing + m_scroll.Height;
                 else
                     h += Spacing * (vb.Count-1);
 
@@ -226,7 +226,7 @@
             }
         }
 
-        public override float StaticWidth
+        public override float Width
         {
             get
             {
@@ -245,7 +245,7 @@
                 }
 
                 if (m_direction == Orientation.Vertical)
-                    w += ScrollSpacing + m_scroll.StaticWidth;
+                    w += ScrollSpacing + m_scroll.Width;
                 else
                     w += Spacing * (vb.Count-1);
 
@@ -415,15 +415,15 @@
 
             if (Direction == Orientation.Horizontal)
             {
-                m_scroll.Width = StaticWidth;
-                m_scroll.Height = 20;
-                m_scroll.LayoutPosition = new Vector2(0, StaticHeight/2 - m_scroll.Height/2);
+                m_scroll.LayoutWidth = Width;
+                m_scroll.LayoutHeight = 20;
+                m_scroll.LayoutPosition = new Vector2(0, Height/2 - m_scroll.LayoutHeight/2);
             }
             else
             {
-                m_scroll.Height = StaticHeight;
-                m_scroll.Width = 20;
-                m_scroll.LayoutPosition = new Vector2(StaticWidth/2 - m_scroll.Width/2, 0);
+                m_scroll.LayoutHeight = Height;
+                m_scroll.LayoutWidth = 20;
+                m_scroll.LayoutPosition = new Vector2(Width/2 - m_scroll.LayoutWidth/2, 0);
             }
 
             if (m_scrollPosition == ScrollBarPosition.Left)
@@ -652,13 +652,13 @@
                 return;
 
             float offset;
-            float offset2 = (ScrollSpacing + Math.Min(m_scroll.StaticWidth, m_scroll.StaticHeight)) / 2;
+            float offset2 = (ScrollSpacing + Math.Min(m_scroll.Width, m_scroll.Height)) / 2;
             Matrix local = Item.CombineMatrix(AnimationTransform(gameTime), ref parentTransform);
 
             if (m_direction == Orientation.Horizontal)
-                offset = -StaticWidth / 2f;
+                offset = -Width / 2f;
             else
-                offset = -StaticHeight / 2f;
+                offset = -Height / 2f;
 
             if (m_scrollPosition == ScrollBarPosition.Right)
                 offset2 *= -1;

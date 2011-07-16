@@ -144,7 +144,7 @@
             }
         }
 
-        public override float StaticWidth
+        public override float Width
         {
             get 
             {
@@ -171,17 +171,17 @@
                 }
             }
         }
-        public override float StaticHeight
+        public override float Height
         {
             get
             {
                 float h = 0;
                 if (Focus && m_focused != null)
-                    h = m_focused.StaticHeight;
+                    h = m_focused.Height;
                 else if (m_bg != null)
-                    h = m_bg.StaticHeight;
+                    h = m_bg.Height;
 
-                float labelHeight = m_label != null ? m_label.StaticHeight : 0;
+                float labelHeight = m_label != null ? m_label.Height : 0;
                 switch(LabelStyle)
                 {
                     case Style.LabelCenter:
@@ -403,12 +403,12 @@
                     m_label.LayoutPosition = Vector2.Zero;
                     break;
                 case Style.LabelLeft:
-                    m_label.LayoutPosition = -new Vector2(StaticWidth - m_label.StaticWidth, 0) / 2;
-                    curSprite.LayoutPosition = new Vector2(StaticWidth - curSprite.StaticWidth, 0) / 2;
+                    m_label.LayoutPosition = -new Vector2(Width - m_label.Width, 0) / 2;
+                    curSprite.LayoutPosition = new Vector2(Width - curSprite.Width, 0) / 2;
                     break;
                 case Style.LabelRight:
-                    m_label.LayoutPosition = new Vector2(StaticWidth - m_label.StaticWidth, 0) / 2;
-                    curSprite.LayoutPosition = -new Vector2(StaticWidth - curSprite.StaticWidth, 0) / 2;
+                    m_label.LayoutPosition = new Vector2(Width - m_label.Width, 0) / 2;
+                    curSprite.LayoutPosition = -new Vector2(Width - curSprite.Width, 0) / 2;
                     break;
             }
 
