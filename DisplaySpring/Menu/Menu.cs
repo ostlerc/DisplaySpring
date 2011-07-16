@@ -16,6 +16,7 @@
     /// A Delegate to represent specific callback events in a menu
     /// </summary>
     public delegate void MenuAction();
+    public delegate void InputAction(ButtonSet set);
 
     /// <summary>
     /// Base class for a Menu.

@@ -39,7 +39,7 @@
             new Button(menu_mid, Item.ArrowRight, "Alignment Stretch") { HorizontalAlignment = HAlign.Right, LabelStyle = Button.Style.LabelLeft };
             new Button(menu_mid, Item.ArrowLeft, "Size policies") { HorizontalAlignment = HAlign.Left, LabelStyle = Button.Style.LabelRight };
 
-            new Label(menu_mid, "Buttons with Alignments");
+            new Label(menu_mid, "Buttons with Alignments\nThese menus are in a stacked item.\nThis allows the left and right to\nswitch menus easily");
 
             new Label(menu_right, "Alignment Stretch");
 

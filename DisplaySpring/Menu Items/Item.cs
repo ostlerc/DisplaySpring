@@ -12,6 +12,7 @@
     using HAlign = Item.HorizontalAlignmentType;
     using Layout = Frame.LayoutType;
     using Microsoft.Xna.Framework.Input;
+    using System.Reflection;
     /// <summary>
     /// An Item is any sub menu area that needs to interact with other menu parts.
     /// All items are shown in one menu
@@ -164,6 +165,12 @@
         #endregion
 
         #region Delegates
+
+        /// <summary>
+        /// This delegate is called when the Item with Focus is true for the InputState of any given ButtonSet
+        /// </summary>
+        public InputAction onState;
+
         /// <summary>
         /// This delegate is called when the Item with Focus receives a 'Right' motion
         /// </summary>
@@ -721,6 +728,8 @@
 
         #region methods
 
+        static IEnumerable<ButtonSet> buttonSetList = null;
+
         /// <summary>
         /// Updates the Item
         /// </summary>
@@ -746,6 +755,18 @@
             if (m_controller != null)
             {
                 bool continueInput = true;
+
+                if (buttonSetList == null)
+                    buttonSetList = GetValues<ButtonSet>();
+
+                if(continueInput && onState != null)
+                {
+                    foreach(ButtonSet set in buttonSetList)
+                    {
+                        if (m_controller.State(set, InputState) && State(set))
+                            break;
+                    }
+                }
 
                 if (m_controller.State(ButtonSet.Up, InputState))
                 {
@@ -802,11 +823,19 @@
                     B();
                     if ((Focus == false || ForceCancelSound) && m_cancelSound != null)
                         m_cancelSound.Play(0.5f, 0f, 0f);
+
+                    if (ExclusiveInput)
+                        continueInput = false;
                 }
 
                 if(!continueInput)
                     m_framesRun = 0;
             }
+        }
+
+        internal IEnumerable<T> GetValues<T>()
+        {
+            return typeof(T).GetFields(BindingFlags.Static | BindingFlags.Public).Select(x => (T)x.GetValue(null));
         }
 
         #region Delegate Extraction Layer
@@ -833,6 +862,11 @@
         internal virtual bool A()
         {
             return Invoke(OnA);
+        }
+
+        internal virtual bool State(ButtonSet set)
+        {
+            return Invoke(onState, set);
         }
 
         internal virtual bool B()
@@ -987,6 +1021,21 @@
             if ( action != null )
             {
                 action();
+
+                if (KeepFocus)
+                    KeepFocus = false;
+                else
+                    Focus = false;
+            }
+
+            return action != null;
+        }
+
+        internal virtual bool Invoke(InputAction action, ButtonSet set)
+        {
+            if ( action != null )
+            {
+                action(set);
 
                 if (KeepFocus)
                     KeepFocus = false;

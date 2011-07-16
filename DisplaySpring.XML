@@ -67,6 +67,11 @@
             Failure to do so will result in undefined focus behavior
             </summary>
         </member>
+        <member name="F:DisplaySpring.Item.onState">
+            <summary>
+            This delegate is called when the Item with Focus is true for the InputState of any given ButtonSet
+            </summary>
+        </member>
         <member name="F:DisplaySpring.Item.OnRight">
             <summary>
             This delegate is called when the Item with Focus receives a 'Right' motion
@@ -1208,72 +1213,86 @@
         </member>
         <member name="F:DisplaySpring.Controller.keyUp">
             <summary>
-            List of keys associated with Dpad and Thumbstick Up
+            List of keys associated with Dpad and Thumbstick Up.
+            Default Keys { 'Up' }
             </summary>
         </member>
         <member name="F:DisplaySpring.Controller.keyDown">
             <summary>
             List of keys associated with Dpad and Thumbstick Down
+            Default Keys { 'Down' }
             </summary>
         </member>
         <member name="F:DisplaySpring.Controller.keyLeft">
             <summary>
             List of keys associated with Dpad and Thumbstick Left
+            Default Keys { 'Left' }
             </summary>
         </member>
         <member name="F:DisplaySpring.Controller.keyRight">
             <summary>
             List of keys associated with Dpad and Thumbstick Right
+            Default Keys { 'Right' }
             </summary>
         </member>
         <member name="F:DisplaySpring.Controller.keyA">
             <summary>
             List of keys associated with Button A
+            Default Keys { 'A', 'Enter' }
             </summary>
         </member>
         <member name="F:DisplaySpring.Controller.keyB">
             <summary>
             List of keys associated with Button B
+            Default Keys { 'S', 'Back' }
             </summary>
         </member>
         <member name="F:DisplaySpring.Controller.keyX">
             <summary>
             List of keys associated with Button X
+            Default Keys { 'Q' }
             </summary>
         </member>
         <member name="F:DisplaySpring.Controller.keyY">
             <summary>
             List of keys associated with Button Y
+            Default Keys { 'W' }
             </summary>
         </member>
         <member name="F:DisplaySpring.Controller.keyStart">
             <summary>
             List of keys associated with Button Start
+            Default Keys { 'Space' }
             </summary>
         </member>
         <member name="F:DisplaySpring.Controller.keyBack">
             <summary>
             List of keys associated with Button Back (select)
+            Default Keys { 'Escape' }
             </summary>
         </member>
         <member name="F:DisplaySpring.Controller.leftShoulder">
             <summary>
             List of keys associated with the left shoulder
+            Default Keys { 'OemOpenBrackets' }
             </summary>
         </member>
         <member name="F:DisplaySpring.Controller.rightShoulder">
             <summary>
             List of keys associated with the right shoulder
+            Default Keys { 'OemCloseBrackets' }
             </summary>
         </member>
         <member name="F:DisplaySpring.Controller.leftTrigger">
             <summary>
             List of keys associated with the left trigger
+            Default Keys { 'OemSemicolon' }
             </summary>
         </member>
         <member name="F:DisplaySpring.Controller.rightTrigger">
             <summary>
             List of keys associated with the right trigger
+            Default Keys { 'OemQuotes' }
             </summary>
         </member>
         <member name="M:DisplaySpring.Controller.op_Implicit(DisplaySpring.MultiController)~DisplaySpring.Controller">

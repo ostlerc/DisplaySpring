@@ -39,8 +39,8 @@
             lbl.OnA = delegate() { ActiveSubMenu = new ButtonScrollListMenu(controllers, allControllers, bounds); };
             lbl = new Label(sl, "Multi Texture Menu");
             lbl.OnA = delegate() { ActiveSubMenu = new MultiTextureMenu(controllers, allControllers, bounds); };
-            lbl = new Label(sl, "Stacked Item Menu");
-            lbl.OnA = delegate() { ActiveSubMenu = new StackedItemMenu(controllers, allControllers, bounds); };
+            lbl = new Label(sl, "Input Menu");
+            lbl.OnA = delegate() { ActiveSubMenu = new InputMenu(controllers, allControllers, bounds); };
             lbl = new Label(sl, "Option Button Menu");
             lbl.OnA = delegate() { ActiveSubMenu = new OptionButtonMenu(controllers, allControllers, bounds); };
             lbl = new Label(sl, "Exit");

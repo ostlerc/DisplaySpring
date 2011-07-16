@@ -77,65 +77,79 @@ namespace DisplaySpring
         }
 
         /// <summary>
-        /// List of keys associated with Dpad and Thumbstick Up
+        /// List of keys associated with Dpad and Thumbstick Up.
+        /// Default Keys { 'Up' }
         /// </summary>
         public List<Keys> keyUp = new List<Keys>() { Keys.Up };
         /// <summary>
         /// List of keys associated with Dpad and Thumbstick Down
+        /// Default Keys { 'Down' }
         /// </summary>
         public List<Keys> keyDown = new List<Keys>() { Keys.Down };
         /// <summary>
         /// List of keys associated with Dpad and Thumbstick Left
+        /// Default Keys { 'Left' }
         /// </summary>
         public List<Keys> keyLeft = new List<Keys>() { Keys.Left };
         /// <summary>
         /// List of keys associated with Dpad and Thumbstick Right
+        /// Default Keys { 'Right' }
         /// </summary>
         public List<Keys> keyRight = new List<Keys>() { Keys.Right };
 
         /// <summary>
         /// List of keys associated with Button A
+        /// Default Keys { 'A', 'Enter' }
         /// </summary>
         public List<Keys> keyA = new List<Keys>() { Keys.A, Keys.Enter };
         /// <summary>
         /// List of keys associated with Button B
+        /// Default Keys { 'S', 'Back' }
         /// </summary>
         public List<Keys> keyB = new List<Keys>() { Keys.S, Keys.Back };
         /// <summary>
         /// List of keys associated with Button X
+        /// Default Keys { 'Q' }
         /// </summary>
         public List<Keys> keyX = new List<Keys>() { Keys.Q };
         /// <summary>
         /// List of keys associated with Button Y
+        /// Default Keys { 'W' }
         /// </summary>
         public List<Keys> keyY = new List<Keys>() { Keys.W };
 
         /// <summary>
         /// List of keys associated with Button Start
+        /// Default Keys { 'Space' }
         /// </summary>
         public List<Keys> keyStart = new List<Keys>() { Keys.Space };
 
         /// <summary>
         /// List of keys associated with Button Back (select)
+        /// Default Keys { 'Escape' }
         /// </summary>
         public List<Keys> keyBack  = new List<Keys>() { Keys.Escape };
 
         /// <summary>
         /// List of keys associated with the left shoulder
+        /// Default Keys { 'OemOpenBrackets' }
         /// </summary>
         public List<Keys> leftShoulder = new List<Keys>() { Keys.OemOpenBrackets };
         /// <summary>
         /// List of keys associated with the right shoulder
+        /// Default Keys { 'OemCloseBrackets' }
         /// </summary>
         public List<Keys> rightShoulder = new List<Keys>() { Keys.OemCloseBrackets };
 
         /// <summary>
         /// List of keys associated with the left trigger
+        /// Default Keys { 'OemSemicolon' }
         /// </summary>
         public List<Keys> leftTrigger = new List<Keys>() { Keys.OemSemicolon };
 
         /// <summary>
         /// List of keys associated with the right trigger
+        /// Default Keys { 'OemQuotes' }
         /// </summary>
         public List<Keys> rightTrigger = new List<Keys>() { Keys.OemQuotes };
 
