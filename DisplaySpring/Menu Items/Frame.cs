@@ -266,13 +266,6 @@
 
                         pos += height;
                         break;
-                    case LayoutType.None:
-                        if (SizePolicy != SizeType.Fixed)
-                        {
-                            v.LayoutWidth = LayoutWidth;
-                            v.LayoutHeight = LayoutHeight;
-                        }
-                        break;
                 }
             }
 
@@ -290,6 +283,9 @@
                 case LayoutType.VerticalShared:
                     dimensions.X = widthOrHeight;
                     break;
+                case LayoutType.None:
+                    dimensions = LayoutSize;
+                    break;
             }
 
             switch (SizePolicy)
@@ -304,6 +300,8 @@
                         m_fixedSize.X = Parent.LayoutWidth;
                         m_fixedSize.Y = Parent.LayoutHeight;
                     }
+                    else
+                        m_fixedSize = LayoutSize;
                     break;
             }
 
@@ -327,11 +325,8 @@
                         break;
                     case LayoutType.None:
                         v.LayoutPosition = Vector2.Zero;
-                        if(SizePolicy == SizeType.Fixed)
-                        {
-                            v.LayoutWidth = m_fixedSize.X;
-                            v.LayoutHeight = m_fixedSize.Y;
-                        }
+                        v.LayoutWidth = m_fixedSize.X;
+                        v.LayoutHeight = m_fixedSize.Y;
                         break;
                 }
             }

@@ -12,55 +12,41 @@
 
     class FrameMenu : Menu
     {
+        StackedItem stack;
         /// <summary>
         /// Sample Frame Menu
         /// </summary>
         public FrameMenu(MultiController controllers, List<Controller> allControllers, Rectangle bounds)
             : base(controllers, bounds)
         {
-            Vector2 b = BaseFrame.Center;
-            Button temp = new Button(BaseFrame, "Top left aligned") { HorizontalAlignment = HAlign.Left, VerticalAlignment = VAlign.Top };
-            Reset();
-            new Button(BaseFrame, "Top right aligned") { HorizontalAlignment = HAlign.Right, VerticalAlignment = VAlign.Top };
-            new Button(BaseFrame, "Bot left aligned") { HorizontalAlignment = HAlign.Left, VerticalAlignment = VAlign.Bottom };
-            new Button(BaseFrame, "Bot right aligned") { HorizontalAlignment = HAlign.Right, VerticalAlignment = VAlign.Bottom };
-            new Button(BaseFrame, "Bot aligned") { VerticalAlignment = VAlign.Bottom };
-            new Button(BaseFrame, "Top aligned") { VerticalAlignment = VAlign.Top };
+            stack = new StackedItem(BaseFrame);
 
-            new Button(BaseFrame, Item.ArrowRight, "Alignment Stretch") { HorizontalAlignment = HAlign.Right, LabelStyle = Button.Style.LabelLeft };
-            new Button(BaseFrame, Item.ArrowLeft, "Size policies") { HorizontalAlignment = HAlign.Left, LabelStyle = Button.Style.LabelRight };
+            Frame menu_left = new Frame(stack) { SizePolicy = Frame.SizeType.Maximum };
+            Frame menu_mid = new Frame(stack) { SizePolicy = Frame.SizeType.Maximum };
+            Frame menu_right = new Frame(stack) { SizePolicy = Frame.SizeType.Maximum };
 
-            new Label(BaseFrame, "Buttons with Alignments");
+            stack.CurrentIndex = 1;
+            stack.OnRight = delegate() { stack.KeepFocus = true; stack.CurrentIndex++; };
+            stack.OnLeft = delegate() { stack.KeepFocus = true; stack.CurrentIndex--; };
 
-            OnCloseSound = Item.DefaultFocusSound;
+            new Button(menu_mid, "Top left aligned") { HorizontalAlignment = HAlign.Left, VerticalAlignment = VAlign.Top };
+            new Button(menu_mid, "Top right aligned") { HorizontalAlignment = HAlign.Right, VerticalAlignment = VAlign.Top };
+            new Button(menu_mid, "Bot left aligned") { HorizontalAlignment = HAlign.Left, VerticalAlignment = VAlign.Bottom };
+            new Button(menu_mid, "Bot right aligned") { HorizontalAlignment = HAlign.Right, VerticalAlignment = VAlign.Bottom };
+            new Button(menu_mid, "Bot aligned") { VerticalAlignment = VAlign.Bottom };
+            new Button(menu_mid, "Top aligned") { VerticalAlignment = VAlign.Top };
 
-            RightMenu rMenu = new RightMenu(controllers, allControllers, bounds);
-            rMenu.OnClosing = delegate() { BaseFrame.Visible = false; OnCloseSound = Menu.DefaultCloseSound; Close(); };
+            new Button(menu_mid, Item.ArrowRight, "Alignment Stretch") { HorizontalAlignment = HAlign.Right, LabelStyle = Button.Style.LabelLeft };
+            new Button(menu_mid, Item.ArrowLeft, "Size policies") { HorizontalAlignment = HAlign.Left, LabelStyle = Button.Style.LabelRight };
 
-            LeftMenu lMenu = new LeftMenu(controllers, allControllers, bounds);
-            lMenu.OnClosing = delegate() { BaseFrame.Visible = false; OnCloseSound = Menu.DefaultCloseSound; Close(); };
+            new Label(menu_mid, "Buttons with Alignments");
 
-            BaseFrame.OnRight = delegate() { BaseFrame.KeepFocus = true; ActiveSubMenu = rMenu; };
-            BaseFrame.OnB = delegate() { OnCloseSound = Menu.DefaultCloseSound; };
-            BaseFrame.OnLeft = delegate() {  BaseFrame.KeepFocus = true; ActiveSubMenu = lMenu; };
-        }
-    }
+            new Label(menu_right, "Alignment Stretch");
 
-    class RightMenu : Menu
-    {
+            new Button(menu_right, "Top Horizontal Stretch (menuTwo Width)") { VerticalAlignment = VAlign.Top, HorizontalAlignment = HAlign.Stretch };
+            new Button(menu_right, "Bottom Horizontal Stretch (menuTwo Width)") { VerticalAlignment = VAlign.Bottom, HorizontalAlignment = HAlign.Stretch };
 
-        /// <summary>
-        /// Sample Frame Menu
-        /// </summary>
-        public RightMenu(MultiController controllers, List<Controller> allControllers, Rectangle bounds)
-            : base(controllers, bounds)
-        {
-            new Label(BaseFrame, "Alignment Stretch");
-
-            new Button(BaseFrame, "Top Horizontal Stretch (Baseframe Width)") { VerticalAlignment = VAlign.Top, HorizontalAlignment = HAlign.Stretch };
-            new Button(BaseFrame, "Bottom Horizontal Stretch (Baseframe Width)") { VerticalAlignment = VAlign.Bottom, HorizontalAlignment = HAlign.Stretch };
-
-            Frame constrainingFrame = new Frame(BaseFrame) 
+            Frame constrainingFrame = new Frame(menu_right) 
             { 
                 SizePolicy = Frame.SizeType.Fixed,
                 HorizontalAlignment = HAlign.Right
@@ -74,58 +60,46 @@
 
             constrainingFrame.FixedSize = new Vector2(vertBtn.MeasureWidth, 500);
 
-            new Button(BaseFrame, Item.ArrowLeft, "Alignments") 
+            new Button(menu_right, Item.ArrowLeft, "Alignments") 
             {
                 HorizontalAlignment = HAlign.Left,
                 LabelStyle = Button.Style.LabelRight 
             };
 
-            OnCloseSound = Item.DefaultFocusSound;
-            BaseFrame.OnLeft = delegate() { IsAlive = false; };
-        }
-    }
+            new Label(menu_left, "Size policies") { Offset = new Vector2(0, -250) };
 
-    class LeftMenu : Menu
-    {
-
-        /// <summary>
-        /// Sample Frame Menu
-        /// </summary>
-        public LeftMenu(MultiController controllers, List<Controller> allControllers, Rectangle bounds)
-            : base(controllers, bounds)
-        {
-            new Label(BaseFrame, "Size policies") { Offset = new Vector2(0, -250) };
-
-            Frame topSharedFrame = new Frame(BaseFrame) { Layout = Frame.LayoutType.HorizontalShared, VerticalAlignment = VAlign.Top };
+            Frame topSharedFrame = new Frame(menu_left) { Layout = Frame.LayoutType.HorizontalShared, VerticalAlignment = VAlign.Top };
             new Button(topSharedFrame, "Top Aligned"){ Animation = AnimateType.None, HorizontalAlignment = HAlign.Left };
             new Button(topSharedFrame, "Horizontal Layout"){ Animation = AnimateType.None };
             new Button(topSharedFrame, "Sharing"){ Animation = AnimateType.None };
             new Button(topSharedFrame, "Screen Width"){ Animation = AnimateType.None, HorizontalAlignment = HAlign.Right };
 
-            Frame leftSharedFrame = new Frame(BaseFrame) { Layout = Frame.LayoutType.VerticalShared, HorizontalAlignment = HAlign.Left };
+            Frame leftSharedFrame = new Frame(menu_left) { Layout = Frame.LayoutType.VerticalShared, HorizontalAlignment = HAlign.Left };
             new Button(leftSharedFrame, "Left Aligned"){ Animation = AnimateType.None };
             new Button(leftSharedFrame, "Vertical Layout"){ Animation = AnimateType.None };
             new Button(leftSharedFrame, "Sharing"){ Animation = AnimateType.None };
             new Button(leftSharedFrame, "Screen Height"){ Animation = AnimateType.None };
 
-            Frame greedyMiddleFrame = new Frame(BaseFrame) { Padding = 0, Layout = Frame.LayoutType.Vertical };
+            Frame greedyMiddleFrame = new Frame(menu_left) { Padding = 0, Layout = Frame.LayoutType.Vertical };
             new Button(greedyMiddleFrame, "Center Aligned") { Animation = AnimateType.None };
             new Button(greedyMiddleFrame, "Vertical Layout"){ Animation = AnimateType.None };
             new Button(greedyMiddleFrame, "Not Sharing"){ Animation = AnimateType.None };
             new Button(greedyMiddleFrame, "Screen Height"){ Animation = AnimateType.None };
 
-            Frame greedyBottomFrame = new Frame(BaseFrame) { Padding = 0, Layout = Frame.LayoutType.HorizontalShared, VerticalAlignment = VAlign.Bottom };
+            Frame greedyBottomFrame = new Frame(menu_left) { Padding = 0, Layout = Frame.LayoutType.HorizontalShared, VerticalAlignment = VAlign.Bottom };
             Button temp = new Button(greedyBottomFrame, "Bottom Aligned") { Animation = AnimateType.None, HorizontalAlignment = HAlign.Left };
             new Button(greedyBottomFrame, "Horizontal Layout") { Animation = AnimateType.None };
             new Button(greedyBottomFrame, "Sharing") { Animation = AnimateType.None };
             new Button(greedyBottomFrame, "Screen Width") { Animation = AnimateType.None, HorizontalAlignment = HAlign.Right };
 
-            new Button(BaseFrame, Item.ArrowRight, "Alignments") { HorizontalAlignment = HAlign.Right, LabelStyle = Button.Style.LabelLeft };
+            new Button(menu_left, Item.ArrowRight, "Alignments") { HorizontalAlignment = HAlign.Right, LabelStyle = Button.Style.LabelLeft };
 
             Reset();
+        }
 
-            OnCloseSound = Item.DefaultFocusSound;
-            BaseFrame.OnRight = delegate() { IsAlive = false; };
+        public override void Reset()
+        {
+            base.Reset(stack);
         }
     }
 }
