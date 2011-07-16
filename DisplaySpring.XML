@@ -681,11 +681,6 @@
             Default draw depth for menu items
             </summary>
         </member>
-        <member name="P:DisplaySpring.Menu.MenuBackgroundDrawDepth">
-            <summary>
-            Default draw depth for backgrounds
-            </summary>
-        </member>
         <member name="P:DisplaySpring.Menu.LayoutSize">
             <summary>
             Sets the size of the base frame. The base frame will be
@@ -858,6 +853,16 @@
             code to convert from Controller to MultiController
             </summary>
         </member>
+        <member name="M:DisplaySpring.MultiController.Pressed(Microsoft.Xna.Framework.Input.Buttons)">
+            <summary>
+            Returns true if button b has been pressed
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.MultiController.Pressed(Microsoft.Xna.Framework.Input.Keys)">
+            <summary>
+            returns true if keybard key k has been pressed
+            </summary>
+        </member>
         <member name="M:DisplaySpring.MultiController.ToList">
             <summary>
             Returns the multicontroller as a list of Controllers
@@ -933,14 +938,24 @@
             No layout, Children will not be arranged. This is the default
             </summary>
         </member>
+        <member name="F:DisplaySpring.Frame.LayoutType.HorizontalShared">
+            <summary>
+            Horizontally layout Children by LayoutStretch
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Frame.LayoutType.VerticalShared">
+            <summary>
+            Vertically layout Children by LayoutStretch
+            </summary>
+        </member>
         <member name="F:DisplaySpring.Frame.LayoutType.Horizontal">
             <summary>
-            Horizontally layout Children using layoutstretch for guidance
+            Layout children Horizontally, centered in frame
             </summary>
         </member>
         <member name="F:DisplaySpring.Frame.LayoutType.Vertical">
             <summary>
-            Vertically layout Children
+            Layout children Vertically, centered in frame
             </summary>
         </member>
         <member name="T:DisplaySpring.Frame.SizeType">
@@ -948,15 +963,20 @@
             Determines how much space to use when children are layed out.
             </summary>
         </member>
-        <member name="F:DisplaySpring.Frame.SizeType.Shared">
+        <member name="F:DisplaySpring.Frame.SizeType.Minimum">
             <summary>
             Evenly distribute Frame boundaries between children
             LayoutStretch defines distribution ratios
             </summary>
         </member>
-        <member name="F:DisplaySpring.Frame.SizeType.Greedy">
+        <member name="F:DisplaySpring.Frame.SizeType.Maximum">
             <summary>
             Give children as much space as they want to claim
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Frame.SizeType.Fixed">
+            <summary>
+            Use Fixed size
             </summary>
         </member>
         <member name="T:DisplaySpring.ScrollBar">

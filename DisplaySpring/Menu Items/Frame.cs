@@ -15,7 +15,7 @@
         #region Member Variables
 
         private LayoutType m_layout = LayoutType.None;
-        private SizeType m_sizePolicy = SizeType.Shared;
+        private SizeType m_sizePolicy = SizeType.Minimum;
         private Vector2 m_fixedSize = Vector2.Zero;
         private Vector2 m_forceSize = Vector2.Zero;
 
@@ -48,8 +48,14 @@
         /// </summary>
         public Vector2 FixedSize
         {
+            get { return m_fixedSize; }
+            set { m_fixedSize = value; refreshItem(); }
+        }
+
+        internal Vector2 ForcedSize
+        {
             get { return m_forceSize; }
-            set { m_forceSize = value; refreshItem(); }
+            set { m_forceSize = value; Width = value.X; Height = value.Y; refreshItem(); }
         }
 
         /// <summary>
@@ -65,14 +71,24 @@
             None,
 
             /// <summary>
-            /// Horizontally layout Children using layoutstretch for guidance
+            /// Horizontally layout Children by LayoutStretch
+            /// </summary>
+            HorizontalShared,
+
+            /// <summary>
+            /// Vertically layout Children by LayoutStretch
+            /// </summary>
+            VerticalShared,
+
+            /// <summary>
+            /// Layout children Horizontally, centered in frame
             /// </summary>
             Horizontal,
 
             /// <summary>
-            /// Vertically layout Children
+            /// Layout children Vertically, centered in frame
             /// </summary>
-            Vertical,
+            Vertical
         };
 
         /// <summary>
@@ -84,12 +100,17 @@
             /// Evenly distribute Frame boundaries between children
             /// LayoutStretch defines distribution ratios
             /// </summary>
-            Shared,
+            Minimum,
 
             /// <summary>
             /// Give children as much space as they want to claim
             /// </summary>
-            Greedy
+            Maximum,
+
+            /// <summary>
+            /// Use Fixed size
+            /// </summary>
+            Fixed
         }
 
         /// <summary>
@@ -143,7 +164,8 @@
         public Frame(Item parent, Vector2 size) 
             : base(parent)
         {
-            m_forceSize = size;
+            m_sizePolicy = SizeType.Fixed;
+            m_fixedSize = size;
         }
 
         /// <summary>
@@ -186,85 +208,13 @@
         #region Layout Helpers
         internal override void refreshItem()
         {
-            switch (m_sizePolicy)
-            {
-                case SizeType.Greedy:
-                    layoutGreedy();
-                    break;
-                case SizeType.Shared:
-                    layoutShared();
-                    break;
-            }
-
-            base.refreshItem();
-        }
-
-        private void layoutGreedy()
-        {
-            float width = 0;
-            float height = 0;
-
-            foreach (var v in Children)
-            {
-                switch (Layout)
-                {
-                    case LayoutType.Horizontal:
-                        float tWidth = v.MeasureWidth + Padding * 2;
-                        v.LayoutPosition = new Vector2(width + tWidth / 2, 0);
-                        width += tWidth;
-                        height = Math.Max(height, v.MeasureHeight);
-                        break;
-                    case LayoutType.Vertical:
-                        float tHeight = v.MeasureHeight + Padding * 2;
-                        v.LayoutPosition = new Vector2(0, height + tHeight / 2);
-                        height += tHeight;
-                        width = Math.Max(width, v.MeasureWidth);
-                        break;
-                    case LayoutType.None:
-                        width = Math.Max(width, v.MeasureWidth);
-                        height = Math.Max(height, v.MeasureHeight);
-                        break;
-                }
-            }
-
-            switch (Layout)
-            {
-                case LayoutType.Horizontal:
-                    width -= Padding * 2;
-                    break;
-                case LayoutType.Vertical:
-                    height -= Padding * 2;
-                    break;
-            }
-
-            if (Parent != null)
-            {
-                m_fixedSize.X = width;
-                m_fixedSize.Y = height;
-            }
-
-            foreach (var v in Children)
-            {
-                v.Height = StaticHeight;
-                v.Width = StaticWidth;
-
-                switch(Layout)
-                {
-                    case LayoutType.Horizontal:
-                        v.LayoutPosition -= new Vector2(width/2 + Padding, 0);
-                        break;
-                    case LayoutType.Vertical:
-                        v.LayoutPosition -= new Vector2(0, height/2 + Padding);
-                        break;
-                }
-            }
-        }
-
-        private void layoutShared()
-        {
             uint total = 0;
             float pos = 0;
-            Vector2 dimensions = StaticSize;
+            Vector2 dimensions = Vector2.Zero;
+
+            if(Layout == LayoutType.HorizontalShared || Layout == LayoutType.VerticalShared )
+                dimensions = Size;
+
             float widthOrHeight = 0;
 
             foreach (var v in Children)
@@ -275,8 +225,6 @@
                 if (v.LayoutStretch == 0)
                 {
                     v.LayoutPosition = Vector2.Zero;
-                    v.Width = StaticWidth;
-                    v.Height = StaticHeight;
                     continue;
                 }
 
@@ -285,6 +233,18 @@
                 switch (Layout)
                 {
                     case LayoutType.Horizontal:
+                        float tWidth = v.MeasureWidth + Padding * 2;
+                        v.LayoutPosition = new Vector2(dimensions.X + tWidth / 2, 0);
+                        dimensions.X += tWidth;
+                        dimensions.Y = Math.Max(dimensions.Y, v.MeasureHeight);
+                        break;
+                    case LayoutType.Vertical:
+                        float tHeight = v.MeasureHeight + Padding * 2;
+                        v.LayoutPosition = new Vector2(0, dimensions.Y + tHeight / 2);
+                        dimensions.Y += tHeight;
+                        dimensions.X = Math.Max(dimensions.X, v.MeasureWidth);
+                        break;
+                    case LayoutType.HorizontalShared:
                         float width = percentage * dimensions.X;
 
                         v.LayoutPosition = new Vector2((width - dimensions.X) / 2 + pos, 0);
@@ -294,7 +254,7 @@
 
                         pos += width;
                         break;
-                    case LayoutType.Vertical:
+                    case LayoutType.VerticalShared:
                         float height = percentage * dimensions.Y;
                         widthOrHeight = Math.Max(widthOrHeight, v.StaticWidth);
 
@@ -305,8 +265,11 @@
                         pos += height;
                         break;
                     case LayoutType.None:
-                        v.Width = dimensions.X;
-                        v.Height = dimensions.Y;
+                        if (SizePolicy != SizeType.Fixed)
+                        {
+                            v.Width = Width;
+                            v.Height = Height;
+                        }
                         break;
                 }
             }
@@ -314,11 +277,77 @@
             switch (Layout)
             {
                 case LayoutType.Horizontal:
-                    m_fixedSize.Y = widthOrHeight;
+                    dimensions.X -= Padding * 2;
                     break;
                 case LayoutType.Vertical:
-                    m_fixedSize.X = widthOrHeight;
+                    dimensions.Y -= Padding * 2;
                     break;
+                case LayoutType.HorizontalShared:
+                    dimensions.Y = widthOrHeight;
+                    break;
+                case LayoutType.VerticalShared:
+                    dimensions.X = widthOrHeight;
+                    break;
+            }
+
+            switch (SizePolicy)
+            {
+                case SizeType.Minimum:
+                    m_fixedSize.X = dimensions.X;
+                    m_fixedSize.Y = dimensions.Y;
+                    break;
+                case SizeType.Maximum:
+                    if (Parent != null)
+                    {
+                        m_fixedSize.X = Parent.Width;
+                        m_fixedSize.Y = Parent.Height;
+                    }
+                    break;
+            }
+
+            foreach (var v in Children)
+            {
+                switch (Layout)
+                {
+                    case LayoutType.Horizontal:
+                        v.Width = StaticWidth;
+                        v.Height = StaticHeight;
+                        v.LayoutPosition -= new Vector2(dimensions.X/2 + Padding, 0);
+                        break;
+
+                    case LayoutType.Vertical:
+                        v.Width = StaticWidth;
+                        v.Height = StaticHeight;
+                        v.LayoutPosition -= new Vector2(0, dimensions.Y/2 + Padding);
+                        break;
+                    case LayoutType.None:
+                        v.LayoutPosition = Vector2.Zero;
+                        if(SizePolicy == SizeType.Fixed)
+                        {
+                            v.Width = m_fixedSize.X;
+                            v.Height = m_fixedSize.Y;
+                        }
+                        break;
+                }
+            }
+
+            base.refreshItem();
+        }
+
+        private void layoutGreedy()
+        {
+            foreach (var v in Children)
+            {
+                v.Height = StaticHeight;
+                v.Width = StaticWidth;
+
+                switch(Layout)
+                {
+                    case LayoutType.Horizontal:
+                        break;
+                    case LayoutType.Vertical:
+                        break;
+                }
             }
         }
 

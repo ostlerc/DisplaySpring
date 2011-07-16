@@ -183,14 +183,6 @@
             get { return m_ItemDrawDepth; }
             set { m_ItemDrawDepth = value; }
         }
-        /// <summary>
-        /// Default draw depth for backgrounds
-        /// </summary>
-        public static float MenuBackgroundDrawDepth
-        {
-            get { return m_menuBackgroundDrawDepth; }
-            set { m_menuBackgroundDrawDepth = value; }
-        }
         #endregion
 
         private Vector2 m_layoutSize;
@@ -208,7 +200,7 @@
 
         private void Init()
         {
-            m_baseFrame.FixedSize = LayoutSize;
+            m_baseFrame.ForcedSize = LayoutSize;
             m_baseFrame.LayoutPosition = new Vector2(m_bounds.Center.X, m_bounds.Center.Y);
             m_baseFrame.ScaleImageToWidth(m_bounds.Width);
             m_baseFrame.ScaleImageToHeight(m_bounds.Height);

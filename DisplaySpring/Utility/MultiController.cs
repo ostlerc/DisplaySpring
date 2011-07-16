@@ -32,6 +32,66 @@ namespace DisplaySpring
             return new MultiController(c);
         }
 
+        public bool Continuous(Buttons b)
+        {
+            foreach (var c in m_controllers)
+                if (c.Continuous(b))
+                    return true;
+
+            return false;
+        }
+
+        public bool Continuous(Keys k)
+        {
+            foreach (var c in m_controllers)
+                if (c.Continuous(k))
+                    return true;
+
+            return false;
+        }
+
+        public bool Held(Buttons b)
+        {
+            foreach (var c in m_controllers)
+                if (c.Held(b))
+                    return true;
+
+            return false;
+        }
+
+        public bool Held(Keys k)
+        {
+            foreach (var c in m_controllers)
+                if (c.Held(k))
+                    return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// Returns true if button b has been pressed
+        /// </summary>
+        public bool Pressed(Buttons b)
+        {
+            foreach (var c in m_controllers)
+                if (c.Pressed(b))
+                    return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// returns true if keybard key k has been pressed
+        /// </summary>
+        public bool Pressed(Keys k)
+        {
+            foreach (var c in m_controllers)
+                if (c.Pressed(k))
+                    return true;
+
+            return false;
+        }
+
         /// <summary>
         /// Returns the multicontroller as a list of Controllers
         /// </summary>
