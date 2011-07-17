@@ -369,8 +369,6 @@
         /// </summary>
         public override void Reset(bool isFocus)
         {
-            base.Reset(isFocus);
-
             m_label.Reset(isFocus);
 
             if(m_bg != null)
@@ -379,6 +377,7 @@
             if(m_focused != null)
                 m_focused.Reset(isFocus);
 
+            base.Reset(isFocus);
         }
         #endregion
         #endregion

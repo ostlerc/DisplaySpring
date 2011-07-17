@@ -880,10 +880,10 @@
             {
                 m_dirty = false;
                 refreshItem();
-            }
 
-            foreach (var v in Children)
-                v.cleanUp();
+                foreach (var v in Children)
+                    v.cleanUp();
+            }
         }
 
         /// <summary>
