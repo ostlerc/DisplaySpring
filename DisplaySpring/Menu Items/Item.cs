@@ -864,7 +864,6 @@
         /// </summary>
         internal abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix transform);
 
-
         private void recursiveReset()
         {
             if(Fade)

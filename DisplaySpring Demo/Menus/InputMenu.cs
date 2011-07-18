@@ -15,13 +15,19 @@
             BaseFrame.Layout = Frame.LayoutType.HorizontalShared;
 
             ScrollList leftList = new ScrollList(BaseFrame);
+            Frame statusFrame = new Frame(BaseFrame) { Layout = Frame.LayoutType.Vertical };
+
+            new Label(statusFrame, "Using ButtonState " + leftList.InputState.ToString());
+            new Label(statusFrame, "Using ButtonState " + leftList.InputState.ToString());
             ScrollList rightList = new ScrollList(BaseFrame);
+
+            leftList.OnRight = delegate() { rightList.Focus = true; };
+            rightList.OnLeft = delegate() { leftList.Focus = true; };
 
             OptionList options = new OptionList(leftList);
 
             Button btn = new Button(options, "Pressed")
             {
-                Animation = AnimateType.None,
                 FocusTexture = null,
                 OnFocus = delegate()
                 {
@@ -29,14 +35,14 @@
             };
             btn.TextLabel.FontFocusColor = Color.White;
 
-            btn = new Button(options, "Released") { FocusTexture = null, Animation = AnimateType.None };
+            btn = new Button(options, "Released") { FocusTexture = null };
             btn.TextLabel.FontFocusColor = Color.White;
-            btn = new Button(options, "Held") { FocusTexture = null, Animation = AnimateType.None };
+            btn = new Button(options, "Held") { FocusTexture = null };
             btn.TextLabel.FontFocusColor = Color.White;
-            btn = new Button(options, "Continuous") { FocusTexture = null, Animation = AnimateType.None };
+            btn = new Button(options, "Continuous") { FocusTexture = null };
             btn.TextLabel.FontFocusColor = Color.White;
 
-            DefaultItem = options;
+            DefaultItem = leftList;
         }
     }
 }
