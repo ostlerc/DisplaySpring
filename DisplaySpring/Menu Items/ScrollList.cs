@@ -103,6 +103,16 @@
             }
         }
 
+        public override bool Enabled
+        {
+            get { return base.Enabled; }
+            set
+            {
+                SelectedItem.Enabled = value;
+                base.Enabled = value;
+            }
+        }
+
         /// <summary>
         /// The currently selected index
         /// </summary>
