@@ -6,6 +6,7 @@
     using System.Text;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using System.ComponentModel;
 
     /// <summary>
     /// A collection of Items that can be handled layouts
@@ -18,6 +19,7 @@
         private SizeType m_sizePolicy = SizeType.Minimum;
         private Vector2 m_fixedSize = Vector2.Zero;
         private Vector2 m_forceSize = Vector2.Zero;
+        private float m_padding = 5;
 
         #endregion
 
@@ -27,6 +29,8 @@
         /// Defines the LayoutType of the frame.
         /// </summary>
         /// <seealso cref="LayoutType"/>
+        [Category("Undefined")]
+        [Description("")]
         public LayoutType Layout
         {
             get { return m_layout; }
@@ -37,6 +41,8 @@
         /// <summary>
         /// Changes the SizeType for the Frame. Maximum is the default.
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public SizeType SizePolicy
         {
             get { return m_sizePolicy; }
@@ -44,8 +50,22 @@
         }
 
         /// <summary>
+        /// When layout stretch is zero, this changes the spacing in pixels between items
+        /// </summary>
+        [Category("Undefined")]
+        [Description("")]
+        public virtual float Padding
+        {
+            get { return m_padding; }
+            set { m_padding = value; }
+        }
+
+
+        /// <summary>
         /// Sets the fixed size for the Frame.
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public Vector2 FixedSize
         {
             get { return m_fixedSize; }
@@ -183,17 +203,6 @@
 
         #region Class Functions
 
-        private float m_padding = 5;
-
-        /// <summary>
-        /// When layout stretch is zero, this changes the spacing in pixels between items
-        /// </summary>
-        public virtual float Padding
-        {
-            get { return m_padding; }
-            set { m_padding = value; }
-        }
-
         internal override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix parentTransform) 
         {
             if (!Visible)
@@ -218,7 +227,13 @@
             float widthOrHeight = 0;
 
             foreach (var v in Children)
+            {
                 total += v.LayoutStretch;
+                if (v.LayoutStretch == 2)
+                {
+                    int a = 2;
+                }
+            }
 
             foreach (var v in Children)
             {

@@ -73,9 +73,33 @@
                 Item current = CurrentItem();
 
                 if (current != null)
-                    return current.MeasureHeight;
+                    return current.Height;
 
                 return LayoutHeight;
+            }
+        }
+
+        public override float LayoutHeight
+        {
+            get { return base.LayoutHeight; }
+            internal set
+            {
+                foreach(var v in Items)
+                    v.LayoutHeight = value;
+
+                base.LayoutHeight = value;
+            }
+        }
+
+        public override float LayoutWidth
+        {
+            get { return base.LayoutWidth; }
+            internal set
+            {
+                foreach(var v in Items)
+                    v.LayoutWidth = value;
+
+                base.LayoutWidth = value;
             }
         }
 
@@ -89,7 +113,7 @@
                 Item current = CurrentItem();
 
                 if (current != null)
-                    return current.MeasureWidth;
+                    return current.Width;
 
                 return LayoutWidth;
             }
@@ -143,6 +167,11 @@
             : base(parent)
         {
             Initialize();
+            if (Parent != null)
+            {
+                LayoutHeight = Parent.LayoutHeight;
+                LayoutWidth = Parent.LayoutWidth;
+            }
         }
 
         /// <summary>
@@ -151,8 +180,6 @@
         public StackedItem(Item parent, Vector2 size) 
             : base(parent)
         {
-            LayoutWidth = size.X;
-            LayoutHeight = size.Y;
             Initialize();
         }
 

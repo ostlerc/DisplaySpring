@@ -316,7 +316,7 @@
         </member>
         <member name="P:DisplaySpring.Item.Fade">
             <summary>
-            Toggles the fading behavior of the Item. If set to true the item will fade in
+            Sets a value that determines if the Item will fade in<para/>
             Default is false
             </summary>
         </member>
@@ -937,6 +937,11 @@
             Changes the SizeType for the Frame. Maximum is the default.
             </summary>
         </member>
+        <member name="P:DisplaySpring.Frame.Padding">
+            <summary>
+            When layout stretch is zero, this changes the spacing in pixels between items
+            </summary>
+        </member>
         <member name="P:DisplaySpring.Frame.FixedSize">
             <summary>
             Sets the fixed size for the Frame.
@@ -950,11 +955,6 @@
         <member name="P:DisplaySpring.Frame.Width">
             <summary>
             Width of the item. Layout space is not included. Scale is not included.
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.Frame.Padding">
-            <summary>
-            When layout stretch is zero, this changes the spacing in pixels between items
             </summary>
         </member>
         <member name="T:DisplaySpring.Frame.LayoutType">

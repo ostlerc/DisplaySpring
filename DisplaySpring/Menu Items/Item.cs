@@ -13,6 +13,7 @@
     using Layout = Frame.LayoutType;
     using Microsoft.Xna.Framework.Input;
     using System.Reflection;
+    using System.ComponentModel;
     /// <summary>
     /// An Item is any sub menu area that needs to interact with other menu parts.
     /// All items are shown in one menu
@@ -50,6 +51,8 @@
         /// <summary>
         /// Center of the item. Cannot be changed
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public Vector2 Center
         {
             get
@@ -238,6 +241,8 @@
         /// <summary>
         /// State in which triggers the On delegates
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public ButtonState InputState
         {
             get { return m_buttonState; }
@@ -262,6 +267,8 @@
         /// <summary>
         /// Parent item of the object. The highest parent will always be the BaseFrame of the Menu.
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public Item Parent
         {
             get { return m_parent; }
@@ -293,6 +300,9 @@
                 forceRefresh();
             }
         }
+
+        [Category("Undefined")]
+        [Description("")]
         internal virtual ItemCollection Children { get { return m_ItemCollection; } set { m_ItemCollection = value; } }
 
         /// <summary>
@@ -302,6 +312,8 @@
         /// Example: a layout of two items with stretch 1 and 2 would receive 33% and 66%
         /// of the space respectively
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public virtual uint LayoutStretch 
         { 
             get { return m_layoutStretch; } 
@@ -319,6 +331,8 @@
         /// Get or Set the horizontal alignment for this item. Center is default
         /// Setting this might reset Scale value
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public HorizontalAlignmentType HorizontalAlignment 
         { 
             get { return m_horizontalAlignment; } 
@@ -337,6 +351,8 @@
         /// Get or Set the vertical alignment for this item. Center is default
         /// Setting this might reset Scale value
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public VerticalAlignmentType VerticalAlignment 
         { 
             get { return m_verticalAlignment; } 
@@ -355,6 +371,8 @@
         /// If set to true, object will keep Focus in an invoke cycle
         /// This property resets itself to false at the end of the cycle
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public virtual bool KeepFocus
         {
             get { return m_keepFocus; }
@@ -364,6 +382,8 @@
         /// <summary>
         /// This is true if the item is ready for user input
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         protected bool ReadyInput { get { return m_framesRun >= m_framesToActivate; } }
 
         /// <summary>
@@ -371,6 +391,8 @@
         /// This is mostly to be used in association with KeepFocus
         /// This property resets itself to false after being used up
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public bool ForceCancelSound 
         { 
             get { return m_forceCancelSound; }
@@ -381,6 +403,8 @@
         /// Gets or sets the focus for the menu item
         /// On set to true the OnFocus delegate will be called and FocusSound will play
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public virtual bool Focus 
         { 
             get { return m_Focus; } 
@@ -407,6 +431,8 @@
         /// This is a simple way to set focus to false without any consequence
         /// or side effect (like playing sounds, or causing delegates to be called)
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public virtual bool Enabled
         {
             get { return m_Focus; }
@@ -422,9 +448,11 @@
         }
 
         /// <summary>
-        /// Toggles the fading behavior of the Item. If set to true the item will fade in
+        /// Sets a value that determines if the Item will fade in<para/>
         /// Default is false
         /// </summary>
+        [Category("Behavior")]
+        [Description("Determines if the item will fade in")]
         public virtual bool Fade
         {
             get { return m_fade; } 
@@ -442,6 +470,8 @@
         /// <summary>
         /// Time item will fade in milliseconds if Fade is true
         /// </summary>
+        [Category("Behavior")]
+        [Description("Determines the length of time the Item will fade")]
         public int FadeTime
         {
             get { if (m_alpha != null) return m_alpha.TimeoutMS; return Menu.DefaultFadeTime; }
@@ -452,26 +482,36 @@
         /// Scale of the object
         /// Default of 1
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public virtual Vector2 Scale { get { return m_scale; } set { m_scale = value; } }
 
         /// <summary>
         /// Rotation of the object in radians
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public virtual float Rotation { get { return m_rotation; } set { m_rotation = value; } }
 
         /// <summary>
         /// Transparency of the object. 0 -> 1 = transparent -> visible
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public virtual float Alpha { get { return m_alpha.Val; } set { m_alpha.Val = value; } }
 
         /// <summary>
         /// Transparency of the object with parents alpha taken into account
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public virtual float ScreenAlpha { get { return m_alpha.Val * (Parent == null ? 1 : Parent.ScreenAlpha); } }
 
         /// <summary>
         /// Position of the object. Default is Vector2.Zero, which is center based.
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public virtual Vector2 Position { get { return m_pos; } internal set { m_pos = value; } }
 
         private Vector2 m_layoutPosition = Vector2.Zero;
@@ -480,21 +520,29 @@
         /// <summary>
         /// Secondary position used for layouts. This is applied in conjunctionwith alignments.
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         internal virtual Vector2 LayoutPosition { get { return m_layoutPosition; } set { m_layoutPosition = value; refreshItem(); } }
 
         /// <summary>
         /// Primary way to 'offset' a position of an item with alignments. This is because position is reset when alignments are set.
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public virtual Vector2 Offset { get { return m_offset; } set { m_offset = value; refreshItem(); } }
 
         /// <summary>
         /// Animation type of the item
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public virtual AnimateType Animation { get { return m_animation; } set { m_animation = value; } }
 
         /// <summary>
         /// Height of the item. Layout space is included. Scale is not included.
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public virtual float LayoutHeight 
         { 
             get 
@@ -514,6 +562,8 @@
         /// <summary>
         /// Width of the item. Layout space is included. Scale is not included.
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public virtual float LayoutWidth 
         { 
             get { return m_width; } 
@@ -531,21 +581,29 @@
         /// <summary>
         /// Height of the item. Layout space is not included. Scale is not included.
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public abstract float Height { get; }
 
         /// <summary>
         /// Width of the item. Layout space is not included. Scale is not included.
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public abstract float Width { get; }
 
         /// <summary>
         /// Represents the Vector2(Width, Height) of the object
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public virtual Vector2 Size { get { return new Vector2(Width, Height); } }
 
         /// <summary>
         /// Measures the Width of the item. Layout space is not included. Scale is included.
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public float MeasureWidth 
         { 
             get 
@@ -560,6 +618,8 @@
         /// <summary>
         /// Measures the Height of the item. Layout space is not included. Scale is included.
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public float MeasureHeight 
         { 
             get 
@@ -574,6 +634,8 @@
         /// <summary>
         /// The matrix transform of the item.
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         internal virtual Matrix ItemTransform
         {
             get
@@ -593,36 +655,50 @@
         /// <summary>
         /// Returns the Vector2(MeasuredWidth, MeasureHeight)of the item. Layout space is not included. Scale is included.
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public virtual Vector2 Measure { get { return new Vector2(MeasureWidth, MeasureHeight); } }
 
         /// <summary>
         /// Returns the Vector2(Width, Height) of the item. Layout space is not included. Scale is included.
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public virtual Vector2 LayoutSize { get { return new Vector2(LayoutWidth, LayoutHeight); } }
 
         /// <summary>
         /// Visibility determines if item will be drawn.
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public virtual bool Visible { get { return m_visible && (Parent == null || Parent.Visible); } set { m_visible = value; } }
 
         /// <summary>
         /// Sound played when item receives focus
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public SoundEffect FocusSound { get { return m_focusSound; } set {m_focusSound = value; } }
 
         /// <summary>
         /// Sound played when item loses focus.
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public SoundEffect CancelSound { get { return m_cancelSound; } set {m_cancelSound = value; } }
 
         /// <summary>
         /// Sound played when item recieves an 'A' press.
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public SoundEffect ActivateSound { get { return m_activateSound; } set { m_activateSound = value; } }
 
         /// <summary>
         /// The item will listen for input on this controller
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public virtual MultiController ItemController 
         { 
             get { return m_controller; }
@@ -638,6 +714,8 @@
         /// <summary>
         /// Starting alpha value. Default value of 0
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public virtual float StartAlpha
         {
             get { return m_alpha.StartVal; }
@@ -647,6 +725,8 @@
         /// <summary>
         /// Ending alpha value. Default value of 1
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public virtual float EndAlpha
         {
             get { return m_alpha.EndVal; }
@@ -662,17 +742,23 @@
         /// <summary>
         /// Tint of the item. Default value of Color.White
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public virtual Color Tint { get { return m_tint; } set { m_tint = value; } }
 
         /// <summary>
         /// User defined data
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public object Tag { get { return m_tag; } set { m_tag = value; } }
 
         /// <summary>
         /// Depth of the Item. Default is Menu.ItemDrawDepth
         /// By default 0 = front -> 1 = back
         /// </summary>
+        [Category("Undefined")]
+        [Description("")]
         public virtual float Depth
         {
             get { return m_depth; }
