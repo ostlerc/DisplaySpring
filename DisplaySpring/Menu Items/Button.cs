@@ -420,6 +420,9 @@
                     break;
             }
 
+            m_label.refreshItem(); //changing layoutpositions on the fly should be changed here. Draw functions should not do logic
+            curSprite.refreshItem();
+
             curSprite.Draw(gameTime, spriteBatch, local);
 
             foreach (var v in Children)

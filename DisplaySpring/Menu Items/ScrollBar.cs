@@ -77,7 +77,7 @@
 
         bool lockRefresh = false;
 
-        internal override void  refreshItem()
+        public override void  refreshItem()
         {
             if (m_objectCount < 1 || m_visibleCount < 1 || lockRefresh)
                 return;

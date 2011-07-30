@@ -79,9 +79,20 @@
             }
         }
 
+        /// <summary>
+        /// Height of the item. Layout space is included. Scale is not included.
+        /// </summary>
         public override float LayoutHeight
         {
-            get { return base.LayoutHeight; }
+            get 
+            { 
+                Item current = CurrentItem();
+
+                if (current != null)
+                    return current.LayoutHeight;
+
+                return base.LayoutHeight;
+            }
             internal set
             {
                 foreach(var v in Items)
@@ -91,9 +102,20 @@
             }
         }
 
+        /// <summary>
+        /// Width of the item. Layout space is included. Scale is not included.
+        /// </summary>
         public override float LayoutWidth
         {
-            get { return base.LayoutWidth; }
+            get 
+            { 
+                Item current = CurrentItem();
+
+                if (current != null)
+                    return current.LayoutWidth;
+
+                return base.LayoutWidth;
+            }
             internal set
             {
                 foreach(var v in Items)
@@ -211,9 +233,6 @@
 
             m_currentIndex = Items.IndexOf(item);
 
-            LayoutWidth = item.Width;
-            LayoutHeight = item.Height;
-
             foreach (var v in Items)
             {
                 v.Visible = false;
@@ -222,8 +241,6 @@
 
             item.Visible = true;
             item.Focus = Focus;
-
-            forceRefresh();
         }
 
         /// <summary>

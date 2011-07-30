@@ -19,7 +19,7 @@
         public static Menu createMainMenu(MultiController controllers, List<Controller> allControllers, Rectangle bounds)
         {
             Menu MainMenu = new Menu(controllers, bounds);
-            MainMenu.BaseFrame.Layout = Layout.Vertical;
+            MainMenu.BaseFrame.Layout = Layout.VerticalShared;
 
             new Label(MainMenu.BaseFrame, "Display Spring Demo") { Scale = new Vector2(2, 2), FontColor = Color.White };
 

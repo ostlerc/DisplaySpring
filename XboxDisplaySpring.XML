@@ -140,6 +140,11 @@
             be refreshed as well
             </summary>
         </member>
+        <member name="M:DisplaySpring.Item.resetFade">
+            <summary>
+            Resets the items fade animation.
+            </summary>
+        </member>
         <member name="F:DisplaySpring.Item.m_parent">
             <summary>
             Used in association with Parent
@@ -492,6 +497,11 @@
             Stretch contents Width to fit in given space
             </summary>
         </member>
+        <member name="F:DisplaySpring.Item.HorizontalAlignmentType.MinimalStretch">
+            <summary>
+            Stretch contents to fit Width of Item
+            </summary>
+        </member>
         <member name="T:DisplaySpring.Item.VerticalAlignmentType">
             <summary>
             Vertical alignment types
@@ -514,7 +524,12 @@
         </member>
         <member name="F:DisplaySpring.Item.VerticalAlignmentType.Stretch">
             <summary>
-            Stretch contents Height to fit in given space
+            Stretch contents Height to fit in given layout space
+            </summary>
+        </member>
+        <member name="F:DisplaySpring.Item.VerticalAlignmentType.MinimalStretch">
+            <summary>
+            Stretch contents to fit Height of Item
             </summary>
         </member>
         <member name="M:DisplaySpring.Label.#ctor(DisplaySpring.Item,System.String)">
@@ -741,6 +756,18 @@
             This is a scrolling functionality
             </summary>
         </member>
+        <member name="P:DisplaySpring.ScrollList.ScrollVisible">
+            <summary>
+            Sets the visiblity of the scroll bar
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.ScrollList.Enabled">
+            <summary>
+            A disabled button will not process in the update function
+            This is a simple way to set focus to false without any consequence
+            or side effect (like playing sounds, or causing delegates to be called)
+            </summary>
+        </member>
         <member name="P:DisplaySpring.ScrollList.SelectedIndex">
             <summary>
             The currently selected index
@@ -907,7 +934,7 @@
         </member>
         <member name="T:DisplaySpring.Frame">
             <summary>
-            A collection of Items that can be handled layouts
+            A collection of Items that can be handled through layouts
             </summary>
         </member>
         <member name="M:DisplaySpring.Frame.#ctor(DisplaySpring.Item)">
@@ -1186,6 +1213,16 @@
         <member name="P:DisplaySpring.StackedItem.Height">
             <summary>
             Height of the item. Layout space is not included. Scale is not included.
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.StackedItem.LayoutHeight">
+            <summary>
+            Height of the item. Layout space is included. Scale is not included.
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.StackedItem.LayoutWidth">
+            <summary>
+            Width of the item. Layout space is included. Scale is not included.
             </summary>
         </member>
         <member name="P:DisplaySpring.StackedItem.Width">

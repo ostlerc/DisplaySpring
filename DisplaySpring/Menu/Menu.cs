@@ -29,6 +29,7 @@
         private static float m_ItemDrawDepth = 0.3f;
         private static float m_menuBackgroundDrawDepth = 0.4f;
         private static int m_defaultFadeTime = 750;
+        private static bool m_initialized = false;
         private Item m_defaultItem;
 
         /// <summary>
@@ -212,7 +213,6 @@
 
         private void Init()
         {
-            m_defaultItem = m_baseFrame;
             m_baseFrame.ForcedSize = LayoutSize;
             m_baseFrame.LayoutPosition = new Vector2(m_bounds.Center.X, m_bounds.Center.Y);
             m_baseFrame.ScaleImageToWidth(m_bounds.Width);
@@ -229,6 +229,7 @@
             if(m_font == null)
                 throw new Exception("Error: Cannot construct a menu without calling Menu.LoadContent()");
 
+            m_defaultItem = m_baseFrame;
             m_closeSound = DefaultCloseSound;
             m_bounds = bounds;
             m_controllers = c;
@@ -289,6 +290,8 @@
         {
             if (m_framesRun < m_framesToActivate)
             {
+                if (!m_initialized)
+                    Reset();
                 m_framesRun++;
                 return;
             }
@@ -327,7 +330,6 @@
                     m_closeSound.Play(0.5f, 0f, 0f);
 
                 Invoke(OnClosing);
-
                 IsAlive = false;
             }
         }
@@ -390,7 +392,13 @@
         /// </summary>
         public virtual void Reset()
         {
-            Reset(m_defaultItem);
+            m_initialized = true;
+
+            if(m_defaultItem != null)
+                Reset(m_defaultItem);
+
+            if (m_defaultItem != m_baseFrame)
+                Reset(m_baseFrame);
         }
         #endregion
     }

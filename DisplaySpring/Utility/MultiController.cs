@@ -118,7 +118,7 @@ namespace DisplaySpring
         /// </summary>
         public bool Pressed(ButtonSet set)
         {
-            return State(set, ButtonState.Released);
+            return State(set, ButtonState.Pressed);
         }
 
         /// <summary>

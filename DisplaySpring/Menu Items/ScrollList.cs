@@ -103,12 +103,27 @@
             }
         }
 
+        /// <summary>
+        /// Sets the visiblity of the scroll bar
+        /// </summary>
+        public bool ScrollVisible
+        {
+            get { return m_scroll.Visible; }
+            set { m_scroll.Visible = value; }
+        }
+
+        /// <summary>
+        /// A disabled button will not process in the update function
+        /// This is a simple way to set focus to false without any consequence
+        /// or side effect (like playing sounds, or causing delegates to be called)
+        /// </summary>
         public override bool Enabled
         {
             get { return base.Enabled; }
             set
             {
-                SelectedItem.Enabled = value;
+                if(SelectedItem != null)
+                    SelectedItem.Enabled = value;
                 base.Enabled = value;
             }
         }
@@ -228,9 +243,12 @@
 
 
                 if (m_direction == Orientation.Horizontal)
-                    h += ScrollSpacing + m_scroll.Height;
+                {
+                    if (m_scroll.Visible)
+                        h += ScrollSpacing + m_scroll.Height;
+                }
                 else
-                    h += Spacing * (vb.Count-1);
+                    h += Spacing * (vb.Count - 1);
 
                 return Math.Max(h,0);
             }
@@ -255,9 +273,12 @@
                 }
 
                 if (m_direction == Orientation.Vertical)
-                    w += ScrollSpacing + m_scroll.Width;
+                {
+                    if (m_scroll.Visible)
+                        w += ScrollSpacing + m_scroll.Width;
+                }
                 else
-                    w += Spacing * (vb.Count-1);
+                    w += Spacing * (vb.Count - 1);
 
                 return Math.Max(w,0);
             }
@@ -281,7 +302,7 @@
         /// Spacing between the scrollbar and the items in the list
         /// </summary>
         public float ScrollSpacing 
-        { 
+        {
             get { return m_scrollSpacing; }
             set 
             { 
@@ -666,7 +687,10 @@
                 return;
 
             float offset;
-            float offset2 = (ScrollSpacing + Math.Min(m_scroll.Width, m_scroll.Height)) / 2;
+            float offset2 = 0;
+
+            if(m_scroll.Visible)
+                offset2 = (ScrollSpacing + Math.Min(m_scroll.Width, m_scroll.Height)) / 2;
             Matrix local = Item.CombineMatrix(AnimationTransform(gameTime), ref parentTransform);
 
             if (m_direction == Orientation.Horizontal)

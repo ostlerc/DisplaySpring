@@ -61,7 +61,7 @@ namespace DisplaySpring
 
             float dx = m_endVal - m_startVal;
             float ratio = m_totalElapsedTime / m_timeoutMS;
-            m_val = dx * ratio;
+            m_val = dx * ratio + m_startVal;
         }
 
         public void Reset()

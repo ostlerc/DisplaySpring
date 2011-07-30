@@ -9,7 +9,7 @@
     using System.ComponentModel;
 
     /// <summary>
-    /// A collection of Items that can be handled layouts
+    /// A collection of Items that can be handled through layouts
     /// </summary>
     public class Frame : Item
     {
@@ -69,13 +69,13 @@
         public Vector2 FixedSize
         {
             get { return m_fixedSize; }
-            set { m_fixedSize = value; refreshItem(); }
+            set { m_fixedSize = value; forceRefresh(); }
         }
 
         internal Vector2 ForcedSize
         {
             get { return m_forceSize; }
-            set { m_forceSize = value; LayoutWidth = value.X; LayoutHeight = value.Y; refreshItem(); }
+            set { m_forceSize = value; LayoutWidth = value.X; LayoutHeight = value.Y; forceRefresh(); }
         }
 
         /// <summary>
@@ -215,25 +215,19 @@
         #endregion
 
         #region Layout Helpers
-        internal override void refreshItem()
+        public override void refreshItem()
         {
             uint total = 0;
             float pos = 0;
-            Vector2 dimensions = Vector2.Zero;
+            Vector2 dimensions = new Vector2(Padding, Padding);
 
-            if(Layout == LayoutType.HorizontalShared || Layout == LayoutType.VerticalShared )
+            if (Layout == LayoutType.HorizontalShared || Layout == LayoutType.VerticalShared)
                 dimensions = LayoutSize;
 
             float widthOrHeight = 0;
 
             foreach (var v in Children)
-            {
                 total += v.LayoutStretch;
-                if (v.LayoutStretch == 2)
-                {
-                    int a = 2;
-                }
-            }
 
             foreach (var v in Children)
             {
@@ -250,16 +244,16 @@
                 switch (Layout)
                 {
                     case LayoutType.Horizontal:
-                        float tWidth = v.MeasureWidth + Padding * 2;
+                        float tWidth = v.Width + Padding;
                         v.LayoutPosition = new Vector2(dimensions.X + tWidth / 2, 0);
-                        dimensions.X += tWidth;
-                        dimensions.Y = Math.Max(dimensions.Y, v.MeasureHeight);
+                        dimensions.X += tWidth + Padding;
+                        dimensions.Y = Math.Max(dimensions.Y, v.Height);
                         break;
                     case LayoutType.Vertical:
-                        float tHeight = v.MeasureHeight + Padding * 2;
+                        float tHeight = v.Height + Padding;
                         v.LayoutPosition = new Vector2(0, dimensions.Y + tHeight / 2);
-                        dimensions.Y += tHeight;
-                        dimensions.X = Math.Max(dimensions.X, v.MeasureWidth);
+                        dimensions.Y += tHeight + Padding;
+                        dimensions.X = Math.Max(dimensions.X, v.Width);
                         break;
                     case LayoutType.HorizontalShared:
                         float width = percentage * dimensions.X;
@@ -287,9 +281,11 @@
             switch (Layout)
             {
                 case LayoutType.Horizontal:
+                    dimensions.Y += Padding * 2;
                     dimensions.X -= Padding * 2;
                     break;
                 case LayoutType.Vertical:
+                    dimensions.X += Padding * 2;
                     dimensions.Y -= Padding * 2;
                     break;
                 case LayoutType.HorizontalShared:

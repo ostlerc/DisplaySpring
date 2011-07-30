@@ -45,7 +45,12 @@
             /// <summary>
             /// Stretch contents Width to fit in given space
             /// </summary>
-            Stretch
+            Stretch,
+
+            /// <summary>
+            /// Stretch contents to fit Width of Item
+            /// </summary>
+            MinimalStretch
         };
 
         /// <summary>
@@ -82,9 +87,14 @@
             Center,
 
             /// <summary>
-            /// Stretch contents Height to fit in given space
+            /// Stretch contents Height to fit in given layout space
             /// </summary>
-            Stretch
+            Stretch,
+
+            /// <summary>
+            /// Stretch contents to fit Height of Item
+            /// </summary>
+            MinimalStretch
         };
 
         private uint m_layoutStretch = 1;
@@ -260,6 +270,14 @@
         }
 
         /// <summary>
+        /// Resets the items fade animation.
+        /// </summary>
+        public void resetFade()
+        {
+            recursiveReset();
+        }
+
+        /// <summary>
         /// Used in association with Parent
         /// </summary>
         private Item m_parent;
@@ -343,7 +361,7 @@
 
                 m_horizontalAlignment = value;
 
-                refreshItem();
+                forceRefresh();
             }
         }
 
@@ -363,7 +381,7 @@
 
                 m_verticalAlignment = value;
 
-                refreshItem();
+                forceRefresh();
             }
         }
 
@@ -522,14 +540,14 @@
         /// </summary>
         [Category("Undefined")]
         [Description("")]
-        internal virtual Vector2 LayoutPosition { get { return m_layoutPosition; } set { m_layoutPosition = value; refreshItem(); } }
+        internal virtual Vector2 LayoutPosition { get { return m_layoutPosition; } set { m_layoutPosition = value; forceRefresh(); } }
 
         /// <summary>
         /// Primary way to 'offset' a position of an item with alignments. This is because position is reset when alignments are set.
         /// </summary>
         [Category("Undefined")]
         [Description("")]
-        public virtual Vector2 Offset { get { return m_offset; } set { m_offset = value; refreshItem(); } }
+        public virtual Vector2 Offset { get { return m_offset; } set { m_offset = value; forceRefresh(); } }
 
         /// <summary>
         /// Animation type of the item
@@ -554,7 +572,7 @@
                 if (m_height != value)
                 {
                     m_height = value;
-                    refreshItem();
+                    forceRefresh();
                 }
             } 
         }
@@ -573,7 +591,7 @@
                 if (m_width != value)
                 {
                     m_width = value;
-                    refreshItem();
+                    forceRefresh();
                 }
             } 
         }
@@ -863,6 +881,14 @@
                     if (A() && m_activateSound != null)
                         m_activateSound.Play(0.5f, 0f, 0f);
                 }
+                if (m_controller.State(ButtonSet.X, InputState))
+                {
+                    X();
+                }
+                if (m_controller.State(ButtonSet.Y, InputState))
+                {
+                    Y();
+                }
                 if (m_controller.State(ButtonSet.Start, InputState))
                 {
                     Start();
@@ -921,6 +947,16 @@
             return Invoke(OnB);
         }
 
+        internal virtual bool X()
+        {
+            return Invoke(OnX);
+        }
+
+        internal virtual bool Y()
+        {
+            return Invoke(OnY);
+        }
+
         internal virtual bool Start()
         {
             return Invoke(OnStart);
@@ -955,6 +991,8 @@
             if(Fade)
                 m_alpha.Reset();
 
+            m_framesRun = 0;
+
             foreach (var v in Children)
                 v.recursiveReset();
         }
@@ -986,8 +1024,6 @@
 
                 if (OnFocus != null) //intentionally not using Invoke to not lose focus of item
                     OnFocus();
-
-                m_framesRun = 0;
             }
             else
                 m_Focus = false;
@@ -998,7 +1034,7 @@
         /// This is to be called when specific child properties change
         /// that cause content alignment to change
         /// </summary>
-        internal virtual void refreshItem()
+        public virtual void refreshItem()
         {
             foreach (var v in Children)
                 v.refreshItem();
@@ -1022,6 +1058,10 @@
                 case HAlign.Stretch:
                     ScaleImageToWidth(LayoutWidth);
                     break;
+                case HAlign.MinimalStretch:
+                    if(Parent != null)
+                        ScaleImageToWidth(Parent.MeasureWidth);
+                    break;
             }
 
             switch (VerticalAlignment)
@@ -1034,6 +1074,10 @@
                     break;
                 case VAlign.Stretch:
                     ScaleImageToHeight(LayoutHeight);
+                    break;
+                case VAlign.MinimalStretch:
+                    if(Parent != null)
+                        ScaleImageToHeight(Parent.Height);
                     break;
             }
 
