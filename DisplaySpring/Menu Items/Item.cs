@@ -264,8 +264,14 @@
         /// If it has a parent, the parent will
         /// be refreshed as well
         /// </summary>
-        protected void forceRefresh()
+        internal void forceRefresh()
         {
+            if (Children != null)
+            {
+                foreach (var v in Children)
+                    v.forceRefresh();
+            }
+
             m_dirty = true;
         }
 
@@ -689,7 +695,7 @@
         /// </summary>
         [Category("Undefined")]
         [Description("")]
-        public virtual bool Visible { get { return m_visible && (Parent == null || Parent.Visible); } set { m_visible = value; } }
+        public virtual bool Visible { get { return m_visible; } set { m_visible = value; } }
 
         /// <summary>
         /// Sound played when item receives focus
@@ -1000,13 +1006,12 @@
         internal void cleanUp()
         {
             if (m_dirty)
-            {
-                m_dirty = false;
                 refreshItem();
 
-                foreach (var v in Children)
-                    v.cleanUp();
-            }
+            m_dirty = false;
+
+            foreach (var v in Children)
+                v.cleanUp();
         }
 
         /// <summary>

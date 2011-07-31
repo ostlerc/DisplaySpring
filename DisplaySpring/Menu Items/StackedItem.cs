@@ -261,7 +261,7 @@
         {
             Item current = CurrentItem();
 
-            if (current != null)
+            if(current != null)
             {
                 current.Reset(isFocus);
             }
