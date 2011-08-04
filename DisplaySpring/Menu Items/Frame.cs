@@ -244,13 +244,13 @@
                 switch (Layout)
                 {
                     case LayoutType.Horizontal:
-                        float tWidth = v.Width + Padding;
+                        float tWidth = v.MeasureWidth + Padding;
                         v.LayoutPosition = new Vector2(dimensions.X + tWidth / 2, 0);
                         dimensions.X += tWidth + Padding;
                         dimensions.Y = Math.Max(dimensions.Y, v.Height);
                         break;
                     case LayoutType.Vertical:
-                        float tHeight = v.Height + Padding;
+                        float tHeight = v.MeasureHeight + Padding;
                         v.LayoutPosition = new Vector2(0, dimensions.Y + tHeight / 2);
                         dimensions.Y += tHeight + Padding;
                         dimensions.X = Math.Max(dimensions.X, v.Width);
@@ -324,13 +324,13 @@
                 switch (Layout)
                 {
                     case LayoutType.Horizontal:
-                        v.LayoutWidth = Width;
+                        v.LayoutWidth = MeasureWidth;
                         v.LayoutHeight = Height;
                         v.LayoutPosition -= new Vector2(dimensions.X/2 + Padding, 0);
                         break;
 
                     case LayoutType.Vertical:
-                        v.LayoutWidth = Width;
+                        v.LayoutWidth = MeasureWidth;
                         v.LayoutHeight = Height;
                         v.LayoutPosition -= new Vector2(0, dimensions.Y/2 + Padding);
                         break;

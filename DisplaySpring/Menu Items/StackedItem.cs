@@ -153,9 +153,9 @@
                 Item current = CurrentItem();
 
                 if (current != null)
-                    current.Enabled = value;
+                    current.Focus = value;
 
-                base.Focus = value;
+                base.Enabled = value;
             }
         }
 

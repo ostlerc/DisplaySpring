@@ -315,8 +315,7 @@
         <member name="P:DisplaySpring.Item.Enabled">
             <summary>
             A disabled button will not process in the update function
-            This is a simple way to set focus to false without any consequence
-            or side effect (like playing sounds, or causing delegates to be called)
+            This is a simple way to set focus to false without any cancel or focus sounds played
             </summary>
         </member>
         <member name="P:DisplaySpring.Item.Fade">

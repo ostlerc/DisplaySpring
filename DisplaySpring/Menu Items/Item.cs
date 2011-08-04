@@ -452,8 +452,7 @@
 
         /// <summary>
         /// A disabled button will not process in the update function
-        /// This is a simple way to set focus to false without any consequence
-        /// or side effect (like playing sounds, or causing delegates to be called)
+        /// This is a simple way to set focus to false without any cancel or focus sounds played
         /// </summary>
         [Category("Undefined")]
         [Description("")]
@@ -462,12 +461,15 @@
             get { return m_Focus; }
             set 
             { 
-                m_Focus = value;
                 if (value && OnFocus != null)
                 {
                     OnFocus();
                     m_framesRun = 0;
                 }
+                else if (m_Focus && !value && OnLoseFocus != null) //losing focus
+                    OnLoseFocus();
+
+                m_Focus = value;
             }
         }
 
