@@ -262,6 +262,11 @@
             State in which triggers the On delegates
             </summary>
         </member>
+        <member name="P:DisplaySpring.Item.Volume">
+            <summary>
+            Volume of all SoundEffects played
+            </summary>
+        </member>
         <member name="P:DisplaySpring.Item.Parent">
             <summary>
             Parent item of the object. The highest parent will always be the BaseFrame of the Menu.

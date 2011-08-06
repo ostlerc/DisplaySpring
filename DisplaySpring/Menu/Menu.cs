@@ -327,7 +327,7 @@
             if (!StayAlive)
             {
                 if (m_closeSound != null)
-                    m_closeSound.Play(0.5f, 0f, 0f);
+                    m_closeSound.Play(Item.Volume, 0f, 0f);
 
                 Invoke(OnClosing);
                 IsAlive = false;
