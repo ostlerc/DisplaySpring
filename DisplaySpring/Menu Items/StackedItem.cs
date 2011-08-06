@@ -64,6 +64,38 @@
         }
 
         /// <summary>
+        /// Measures the Height of the item. Layout space is not included. Scale is included.
+        /// </summary>
+        public override float MeasureHeight
+        {
+            get
+            {
+                Item current = CurrentItem();
+
+                if (current != null)
+                    return current.MeasureHeight;
+
+                return base.MeasureHeight;
+            }
+        }
+
+        /// <summary>
+        /// Measures the Width of the item. Layout space is not included. Scale is included.
+        /// </summary>
+        public override float MeasureWidth
+        {
+            get
+            {
+                Item current = CurrentItem();
+
+                if (current != null)
+                    return current.MeasureWidth;
+
+                return base.MeasureWidth;
+            }
+        }
+
+        /// <summary>
         /// Height of the item. Layout space is not included. Scale is not included.
         /// </summary>
         public override float Height 

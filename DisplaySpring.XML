@@ -1209,6 +1209,16 @@
             Gets or sets the current Item list of the stack
             </summary>
         </member>
+        <member name="P:DisplaySpring.StackedItem.MeasureHeight">
+            <summary>
+            Measures the Height of the item. Layout space is not included. Scale is included.
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.StackedItem.MeasureWidth">
+            <summary>
+            Measures the Width of the item. Layout space is not included. Scale is included.
+            </summary>
+        </member>
         <member name="P:DisplaySpring.StackedItem.Height">
             <summary>
             Height of the item. Layout space is not included. Scale is not included.

@@ -630,7 +630,7 @@
         /// </summary>
         [Category("Undefined")]
         [Description("")]
-        public float MeasureWidth 
+        public virtual float MeasureWidth 
         { 
             get 
             {
@@ -646,7 +646,7 @@
         /// </summary>
         [Category("Undefined")]
         [Description("")]
-        public float MeasureHeight 
+        public virtual float MeasureHeight 
         { 
             get 
             {
