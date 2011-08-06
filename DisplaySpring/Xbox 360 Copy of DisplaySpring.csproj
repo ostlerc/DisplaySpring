@@ -46,7 +46,7 @@
     <Compile Include="Menu Items\Frame.cs" />
     <Compile Include="Menu Items\Item.cs" />
     <Compile Include="Menu Items\Label.cs" />
-    <Compile Include="Menu Items\OptionButton.cs" />
+    <Compile Include="Menu Items\OptionList.cs" />
     <Compile Include="Menu Items\ScrollBar.cs" />
     <Compile Include="Menu Items\ScrollList.cs" />
     <Compile Include="Menu Items\Sprite.cs" />
