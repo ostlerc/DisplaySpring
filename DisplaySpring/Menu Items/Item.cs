@@ -103,7 +103,7 @@
         private Vector2 m_center = Vector2.Zero;
         private ButtonState m_buttonState = ButtonState.Pressed;
         private bool m_exclusiveInput = true;
-        private static float m_volume = 1.0f;
+        private static float m_volume = 0.5f;
         internal bool m_dirty = true;
 
         /// <summary>
