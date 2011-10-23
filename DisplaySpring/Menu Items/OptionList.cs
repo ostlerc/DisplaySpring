@@ -117,16 +117,17 @@
         {
             get
             {
-                float arrowWidth = 0;
+                float width = 0;
+
                 if (ArrowsOut)
                 {
                     if (m_leftArrow != null)
-                        arrowWidth += m_leftArrow.MeasureWidth;
+                        width += m_leftArrow.MeasureWidth;
 
                     if (m_rightArrow != null)
-                        arrowWidth += m_rightArrow.MeasureWidth;
+                        width += m_rightArrow.MeasureWidth;
                 }
-                return base.Width + arrowWidth;
+                return Math.Max(base.Width + width, 0);
             }
         }
 
@@ -143,28 +144,6 @@
                     height = Math.Max(m_rightArrow.MeasureHeight, height);
 
                 return Math.Max(base.Height, height);
-            }
-        }
-
-        public override float MeasureHeight
-        {
-            get
-            {
-                if (Animation == AnimateType.Size)
-                    return Height * Scale.Y * 1.18f;
-
-                return Height * Scale.Y;
-            }
-        }
-
-        public override float MeasureWidth
-        {
-            get
-            {
-                if (Animation == AnimateType.Size)
-                    return Width * Scale.X * 1.18f;
-
-                return Width * Scale.X;
             }
         }
 
