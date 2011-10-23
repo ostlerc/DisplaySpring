@@ -146,6 +146,28 @@
             }
         }
 
+        public override float MeasureHeight
+        {
+            get
+            {
+                if (Animation == AnimateType.Size)
+                    return Height * Scale.Y * 1.18f;
+
+                return Height * Scale.Y;
+            }
+        }
+
+        public override float MeasureWidth
+        {
+            get
+            {
+                if (Animation == AnimateType.Size)
+                    return Width * Scale.X * 1.18f;
+
+                return Width * Scale.X;
+            }
+        }
+
         internal void refreshArrows()
         {
             Item item = CurrentItem();

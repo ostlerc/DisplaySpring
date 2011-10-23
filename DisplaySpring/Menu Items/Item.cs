@@ -263,7 +263,7 @@
         /// <summary>
         /// Volume of all SoundEffects played
         /// </summary>
-        public static float Volume
+        public static float MasterVolume
         {
             get { return m_volume; }
             set { m_volume = value; }
@@ -447,7 +447,7 @@
                 if (!m_Focus && value)
                 {
                     if (FocusSound != null)
-                        FocusSound.Play(Item.Volume, 0.0f, 0.0f);
+                        FocusSound.Play(Item.MasterVolume, 0.0f, 0.0f);
                     if (OnFocus != null) //intentionally not using Invoke to not lose focus of item
                         OnFocus();
 
@@ -897,7 +897,7 @@
                 if (m_controller.State(ButtonSet.A, InputState))
                 {
                     if (A() && m_activateSound != null)
-                        m_activateSound.Play(Volume, 0f, 0f);
+                        m_activateSound.Play(MasterVolume, 0f, 0f);
                 }
                 if (m_controller.State(ButtonSet.X, InputState))
                 {
@@ -919,7 +919,7 @@
                 {
                     B();
                     if ((Focus == false || ForceCancelSound) && m_cancelSound != null)
-                        m_cancelSound.Play(Item.Volume, 0f, 0f);
+                        m_cancelSound.Play(Item.MasterVolume, 0f, 0f);
                 }
             }
         }

@@ -262,7 +262,7 @@
             State in which triggers the On delegates
             </summary>
         </member>
-        <member name="P:DisplaySpring.Item.Volume">
+        <member name="P:DisplaySpring.Item.MasterVolume">
             <summary>
             Volume of all SoundEffects played
             </summary>
@@ -860,6 +860,124 @@
             Delegate that comes with a index parameter
             </summary>
         </member>
+        <member name="T:DisplaySpring.OptionList">
+            <summary>
+            A collection of Items, with only one visible or in focus at a time
+            </summary>
+        </member>
+        <member name="T:DisplaySpring.StackedItem">
+            <summary>
+            A collection of Items, with only one visible or in focus at a time
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.StackedItem.#ctor(DisplaySpring.Item)">
+            <summary>
+            Create a StackedItem with parents size.
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.StackedItem.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Create a StackedItem with given size.
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.StackedItem.SetCurrentItem(DisplaySpring.Item)">
+            <summary>
+            Sets the current item for the stack
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.StackedItem.CurrentItem">
+            <summary>
+            Get's the currently visible item
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.StackedItem.Reset(System.Boolean)">
+            <summary>
+            Reset the Item to a fresh state
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.StackedItem.CurrentIndex">
+            <summary>
+            Height of the item. Layout space is not included. Scale is not included.
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.StackedItem.Items">
+            <summary>
+            Gets or sets the current Item list of the stack
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.StackedItem.MeasureHeight">
+            <summary>
+            Measures the Height of the item. Layout space is not included. Scale is included.
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.StackedItem.MeasureWidth">
+            <summary>
+            Measures the Width of the item. Layout space is not included. Scale is included.
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.StackedItem.Height">
+            <summary>
+            Height of the item. Layout space is not included. Scale is not included.
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.StackedItem.LayoutHeight">
+            <summary>
+            Height of the item. Layout space is included. Scale is not included.
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.StackedItem.LayoutWidth">
+            <summary>
+            Width of the item. Layout space is included. Scale is not included.
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.StackedItem.Width">
+            <summary>
+            Width of the item. Layout space is not included. Scale is not included.
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.StackedItem.Focus">
+            <summary>
+            Gets or sets the focus for the menu item
+            On set to true the OnFocus delegate will be called and FocusSound will play
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.StackedItem.Enabled">
+            <summary>
+            A disabled button will not process in the update function
+            This is a simple way to set focus to false without any consequence
+            or side effect (like playing sounds, or causing delegates to be called)
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.OptionList.#ctor(DisplaySpring.Item,DisplaySpring.MultiController)">
+            <summary>
+            Create a StackedItem with parents size.
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.OptionList.#ctor(DisplaySpring.Item)">
+            <summary>
+            Create a StackedItem with parents size.
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.OptionList.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the Item
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.OptionList.Reset(System.Boolean)">
+            <summary>
+            Reset the Item to a fresh state
+            </summary>
+        </member>
+        <member name="M:DisplaySpring.OptionList.SetCurrentItem(DisplaySpring.Item)">
+            <summary>
+            Sets the current item for the stack
+            </summary>
+        </member>
+        <member name="P:DisplaySpring.OptionList.ArrowsOut">
+            <summary>
+            Defines if the arrows for the option button are outside the items boundaries
+            </summary>
+        </member>
         <member name="T:DisplaySpring.UpdateEvent">
             <summary>
             List of delegates to invoke on an update loop
@@ -1172,89 +1290,6 @@
             <summary>
             Depth of the button. Default is Menu.ButtonDrawDepth
             By default 0 = front -> 1 = back
-            </summary>
-        </member>
-        <member name="T:DisplaySpring.StackedItem">
-            <summary>
-            A collection of Items, with only one visible or in focus at a time
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.StackedItem.#ctor(DisplaySpring.Item)">
-            <summary>
-            Create a StackedItem with parents size.
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.StackedItem.#ctor(DisplaySpring.Item,Microsoft.Xna.Framework.Vector2)">
-            <summary>
-            Create a StackedItem with given size.
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.StackedItem.SetCurrentItem(DisplaySpring.Item)">
-            <summary>
-            Sets the current item for the stack
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.StackedItem.CurrentItem">
-            <summary>
-            Get's the currently visible item
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.StackedItem.Reset(System.Boolean)">
-            <summary>
-            Reset the Item to a fresh state
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.StackedItem.CurrentIndex">
-            <summary>
-            Height of the item. Layout space is not included. Scale is not included.
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.StackedItem.Items">
-            <summary>
-            Gets or sets the current Item list of the stack
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.StackedItem.MeasureHeight">
-            <summary>
-            Measures the Height of the item. Layout space is not included. Scale is included.
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.StackedItem.MeasureWidth">
-            <summary>
-            Measures the Width of the item. Layout space is not included. Scale is included.
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.StackedItem.Height">
-            <summary>
-            Height of the item. Layout space is not included. Scale is not included.
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.StackedItem.LayoutHeight">
-            <summary>
-            Height of the item. Layout space is included. Scale is not included.
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.StackedItem.LayoutWidth">
-            <summary>
-            Width of the item. Layout space is included. Scale is not included.
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.StackedItem.Width">
-            <summary>
-            Width of the item. Layout space is not included. Scale is not included.
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.StackedItem.Focus">
-            <summary>
-            Gets or sets the focus for the menu item
-            On set to true the OnFocus delegate will be called and FocusSound will play
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.StackedItem.Enabled">
-            <summary>
-            A disabled button will not process in the update function
-            This is a simple way to set focus to false without any consequence
-            or side effect (like playing sounds, or causing delegates to be called)
             </summary>
         </member>
         <member name="T:DisplaySpring.Controller">
@@ -1643,41 +1678,6 @@
         <member name="M:DisplaySpring.ItemCollection.SetItem(System.Int32,DisplaySpring.Item)">
             <summary>
             Set the specific item in the list to a new value
-            </summary>
-        </member>
-        <member name="T:DisplaySpring.OptionList">
-            <summary>
-            A collection of Items, with only one visible or in focus at a time
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.OptionList.#ctor(DisplaySpring.Item,DisplaySpring.MultiController)">
-            <summary>
-            Create a StackedItem with parents size.
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.OptionList.#ctor(DisplaySpring.Item)">
-            <summary>
-            Create a StackedItem with parents size.
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.OptionList.Update(Microsoft.Xna.Framework.GameTime)">
-            <summary>
-            Updates the Item
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.OptionList.Reset(System.Boolean)">
-            <summary>
-            Reset the Item to a fresh state
-            </summary>
-        </member>
-        <member name="M:DisplaySpring.OptionList.SetCurrentItem(DisplaySpring.Item)">
-            <summary>
-            Sets the current item for the stack
-            </summary>
-        </member>
-        <member name="P:DisplaySpring.OptionList.ArrowsOut">
-            <summary>
-            Defines if the arrows for the option button are outside the items boundaries
             </summary>
         </member>
     </members>
