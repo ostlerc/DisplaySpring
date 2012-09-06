@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Displayspring : DisplaySpring is an open source XNA Menu creator. The focus of the project is to create simple and easy to use API, but to allow highly customizable menus." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Displayspring</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/ostlerc/DisplaySpring">View on GitHub</a>
+
+          <h1 id="project_title">Displayspring</h1>
+          <h2 id="project_tagline">DisplaySpring is an open source XNA Menu creator. The focus of the project is to create simple and easy to use API, but to allow highly customizable menus.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/ostlerc/DisplaySpring/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/ostlerc/DisplaySpring/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p>DisplaySpring - XNA Menu Creator Library</p>
+
+<p>Display Spring was created by Chad Ostler.
+  The purpose of Display Spring is to provide
+  simple API to create flexible and complex menus.</p>
+
+<p>Please send all bug reports to <a href="mailto:ostler.c@gmail.com">ostler.c@gmail.com</a></p>
+
+<p>Contents 
+  I.   Getting started
+  II.  Installation
+  III. Examples
+  IV.  Help 
+  V.   License</p>
+
+<h2>I - Getting started</h2>
+
+<p>a. Required setup
+  b. Optional Setup
+  c. Creating a Menu</p>
+
+<p>a. Required Setup</p>
+
+<hr><pre><code>1. call Menu.LoadContent(GraphicsDevice, Font) (In LoadContent)
+    ex. Menu.LoadContent(GraphicsDevice, MyFont);
+
+2. In LoadContent() Instantiate your menu
+    ex. MyMenu newMenu = new MyMenu(...);
+
+3. In the Update() function, add yourMenu.Update()
+    ex. newMenu.Update(gameTime);
+
+4. In the Draw() function, add yourMenu.Draw()
+    ex. newMenu.Draw(gameTime, spriteBatch);
+</code></pre>
+
+<p>b. Optional Setup</p>
+
+<hr><pre><code>Also in the LoadContent (wherever you want really,
+but load content is a good place to override these)
+
+Menu.DefaultCloseSound
+Item.DefaultCancelSound
+Item.DefaultFocusSound
+Item.DefaultSelectSound
+
+NOTE: a null value means no sound will play
+</code></pre>
+
+<p>c. Creating a Menu</p>
+
+<hr><pre><code>1. Create a new class and inherit from DisplaySpring.Menu
+2. In your constructor create and add Items to BaseFrame
+3. Override functions such as Draw, Update, Reset for 
+   more customization
+</code></pre>
+
+<h2>II - Installation</h2>
+
+<ol>
+<li>
+<p>Add DisplaySpring.dll as a reference</p>
+
+<ul>
+<li> Do this by right click on your project, and add reference</li>
+</ul>
+<p>Note: you will also want to copy the DisplaySpring.XML with your .dll<br>
+      This is so you get the documentation with the library</p>
+</li>
+<li><p>That's it!</p></li>
+</ol><h2>III - Examples</h2>
+
+<p>For examples reference the example project 'Display Spring Demo'
+  Also you can go to <a href="http://www.displayspring.com">www.displayspring.com</a></p>
+
+<h2>IV. - Help</h2>
+
+<p>For help you can go online to displayspring.com 
+  and see if anyone else has had the same
+  problems as you.</p>
+
+<p>Or, you can email me!
+  <a href="mailto:ostler.c@gmail.com">ostler.c@gmail.com</a></p>
+
+<p>Please explain in detail your problem. It is
+  always helpful to provide a code sample.</p>
+
+<h2>IV. - License</h2>
+
+<p>DisplaySpring is released under the Ms-PL License, as outlined below.</p>
+
+<p>Microsoft Public License (MS-PL)</p>
+
+<p>This license governs use of the accompanying software. If you use the software, you
+accept this license. If you do not accept the license, do not use the software.</p>
+
+<ol>
+<li><p>Definitions
+The terms "reproduce," "reproduction," "derivative works," and "distribution" have the
+same meaning here as under U.S. copyright law.
+A "contribution" is the original software, or any additions or changes to the software.
+A "contributor" is any person that distributes its contribution under this license.
+"Licensed patents" are a contributor's patent claims that read directly on its contribution.</p></li>
+<li><p>Grant of Rights
+(A) Copyright Grant- Subject to the terms of this license, including the license conditions and limitations in section 3, each contributor grants you a non-exclusive, worldwide, royalty-free copyright license to reproduce its contribution, prepare derivative works of its contribution, and distribute its contribution or any derivative works that you create.
+(B) Patent Grant- Subject to the terms of this license, including the license conditions and limitations in section 3, each contributor grants you a non-exclusive, worldwide, royalty-free license under its licensed patents to make, have made, use, sell, offer for sale, import, and/or otherwise dispose of its contribution in the software or derivative works of the contribution in the software.</p></li>
+<li><p>Conditions and Limitations
+(A) No Trademark License- This license does not grant you rights to use any contributors' name, logo, or trademarks.
+(B) If you bring a patent claim against any contributor over patents that you claim are infringed by the software, your patent license from such contributor to the software ends automatically.
+(C) If you distribute any portion of the software, you must retain all copyright, patent, trademark, and attribution notices that are present in the software.
+(D) If you distribute any portion of the software in source code form, you may do so only under this license by including a complete copy of this license with your distribution. If you distribute any portion of the software in compiled or object code form, you may only do so under a license that complies with this license.
+(E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.</p></li>
+</ol>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Displayspring maintained by <a href="https://github.com/ostlerc">ostlerc</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
